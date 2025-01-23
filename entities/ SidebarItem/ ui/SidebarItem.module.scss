@@ -1,0 +1,43 @@
+.item {
+    width: fit-content;
+    text-transform: capitalize;
+    &:not(:last-child) {
+        margin-bottom: 16px;
+    }
+}
+
+.icon {
+    margin-right: 15px;
+    width: 24px;
+    height: 24px;
+    background-color: currentColor;
+    mask-size: contain;
+    transition: background-color 0.3s ease;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    border: 2px solid transparent;
+    border-radius: 2px;
+    color: var(--light-100);
+
+    &:hover {
+        color: var(--accent-100);
+    }
+
+    &:focus {
+        border-color: var(--accent-700);
+    }
+}
+
+.active {
+    color: var(--accent-500);
+}
+.disabled {
+    color: var(--dark-100);
+}
