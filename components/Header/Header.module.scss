@@ -1,7 +1,8 @@
 .header {
   display: flex;
-  margin: 20px;
   justify-content: center;
+  border-bottom: 1px solid var(--dark-100);
+  align-items: center;
 }
 
 .content {
@@ -11,20 +12,27 @@
   height: 60px;
 }
 
+.text {
+  margin-top: 12px;
+  font-weight: 600;
+  font-size: 26px;
+}
 .navigate {
   display: flex;
   gap: 34px;
 }
 
 .select {
+  margin-top: 12px;
   width: 163px;
   height: 36px;
   color: white;
-  background-color: black;
+  background-color: var(--dark-900);
   text-align: center;
 }
 
 .btn {
+  margin-top: 12px;
   width: 100px;
   height: 36px;
   margin-right: 22px;

@@ -1,10 +1,9 @@
+import styles from '../page.module.css';
 import React from 'react';
-import { Sidebar, sidebarItems } from '@/components/Sidebar/Sidebar';
 
 const Create = () => {
   return (
-    <div>
-      <Sidebar elements={sidebarItems} />
+    <div className={styles.page}>
       <h1>Create</h1>
     </div>
   );

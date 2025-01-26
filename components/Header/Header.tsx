@@ -1,20 +1,30 @@
+'use client';
+
+import { redirect } from 'next/navigation';
 import { Button } from '../Button/Button';
 import s from './Header.module.scss';
 
 export const Header = () => {
+  const loginForm = () => {
+    redirect('/login');
+  };
+  const SignUpForm = () => {
+    redirect('/sign-up');
+  };
+
   return (
     <div className={s.header}>
       <div className={s.content}>
-        <h2>Shairy</h2>
+        <h2 className={s.text}>Shairy</h2>
         <div className={s.navigate}>
           <select className={s.select}>
             <option>English</option>
           </select>
           <div>
-            <Button variant={'secondary'} className={s.btn}>
+            <Button variant={'textButton'} className={s.btn} onClick={loginForm}>
               Log in
             </Button>
-            <Button variant={'primary'} className={s.btn}>
+            <Button variant={'primary'} className={s.btn} onClick={SignUpForm}>
               Sign up
             </Button>
           </div>
