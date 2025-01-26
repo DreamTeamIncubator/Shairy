@@ -47,7 +47,6 @@
   --light-900: #8d9094;
 }
 
-
 body {
   background-color: var(--dark-900);
   color: var(--light-100);
@@ -65,5 +64,3 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
-

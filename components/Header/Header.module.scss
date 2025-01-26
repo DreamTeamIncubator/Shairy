@@ -1,0 +1,31 @@
+.header {
+  display: flex;
+  margin: 20px;
+  justify-content: center;
+}
+
+.content {
+  display: flex;
+  width: 1280px;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.navigate {
+  display: flex;
+  gap: 34px;
+}
+
+.select {
+  width: 163px;
+  height: 36px;
+  color: white;
+  background-color: black;
+  text-align: center;
+}
+
+.btn {
+  width: 100px;
+  height: 36px;
+  margin-right: 22px;
+}
