@@ -2,12 +2,13 @@
   display: flex;
   justify-content: center;
   border-bottom: 1px solid var(--dark-100);
-  align-items: center;
+  width: 100%;
+  max-width: 1280px;
 }
 
 .content {
   display: flex;
-  width: 1280px;
+  width: 100%;
   justify-content: space-between;
   height: 60px;
 }
@@ -35,5 +36,7 @@
   margin-top: 12px;
   width: 100px;
   height: 36px;
-  margin-right: 22px;
+  &:first-child {
+    margin-right: 22px;
+  }
 }
