@@ -1,0 +1,60 @@
+.Root {
+    all: unset;
+    border: 2px solid var(--light-100, #ffffff);
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.Root:not(:disabled):hover::after {
+    content: '';
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    background-color: var(--Dark-100, #4C4C4C);
+    border-radius: 50%;
+    z-index: -1;
+    
+}
+
+.Root[data-state="checked"]:not(:disabled):hover::after{
+    content: '';
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    background-color: var(--Dark-100, #4C4C4C);
+    border-radius: 50%;
+    z-index: -1;
+    
+}
+
+.Root[data-state="checked"] {
+    background-color: var(--light-100, #ffffff);
+}
+
+.Root:disabled {
+    opacity: 0.5;
+}
+
+.Indicator {
+    color: var(--Dark-900, #000000);
+}
+
+.DisabledIndicator {
+    color: var(--Dark-100, #4C4C4C);
+}
+
+.Label {
+    color: var(--light-100, #ffffff);
+    padding-left: 15px;
+    font-size: 15px;
+    line-height: 1;
+}
+
+.DisabledLabel {
+    color: var(--Dark-100, #4C4C4C);
+}
