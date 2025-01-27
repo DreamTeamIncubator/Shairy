@@ -28,6 +28,10 @@
     &[data-placeholder] {
         color: var(--light-100, #ffffff);
     }
+
+    &[data-state="open"] {
+        background-color: var(--Dark-500, #171717);
+    }
 }
 
 .Icon {
@@ -43,6 +47,7 @@
     width: 242px; 
     border-radius: 6px;
     border: 1px solid var(--light-100, #ffffff);  
+    background-color: var(--Dark-500, #171717);
 }
 
 .Viewport {
