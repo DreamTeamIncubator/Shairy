@@ -1,12 +1,12 @@
 import styles from '../page.module.css';
 import React from 'react';
 
-const Home = () => {
+const Statistics = () => {
   return (
     <div className={styles.page}>
-      <h1>Home</h1>
+      <h1>Statistics</h1>
     </div>
   );
 };
 
-export default Home;
+export default Statistics;

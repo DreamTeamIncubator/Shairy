@@ -11,7 +11,7 @@ export const sidebarItems = {
 };
 
 type SidebarProps = {
-  elements: typeof sidebarItems
+  elements: typeof sidebarItems;
 };
 export const Sidebar = ({ elements }: SidebarProps) => {
   const pathname = usePathname();
