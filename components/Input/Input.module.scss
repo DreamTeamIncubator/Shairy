@@ -1,0 +1,62 @@
+.inputWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  color: var(--light-100);
+
+  & svg {
+    position: absolute;
+    top: 6px;
+  }
+}
+
+.input {
+  min-width: 280px;
+  height: 35px;
+  background-color: transparent;
+  padding: 6px 0 6px 12px;
+  color: var(--light-900);
+  border-radius: 2px;
+  border: 1px solid var(--dark-100);
+  outline: none;
+  transition: all 0.2s ease;
+
+  &:focus {
+    border: 1px solid var(--accent-500);
+    color: var(--light-100);
+  }
+
+  &:focus::placeholder {
+    color: transparent;
+  }
+
+  &::placeholder {
+    transition: all 0.2s ease;
+  }
+
+  &.search {
+    padding-left: 40px;
+  }
+
+  &.errorInput {
+    border: 1px solid var(--danger-500);
+  }
+
+  &:disabled + svg {
+    color: var(--dark-100);
+  }
+}
+
+.error {
+  color: var(--danger-500);
+  font-size: 14px;
+}
+
+.iconEmail {
+  right: 12px;
+}
+
+.iconSearch {
+  left: 12px;
+  color: var(--light-900);
+}
