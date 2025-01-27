@@ -4,7 +4,7 @@ import React from 'react';
 const MyProfile = () => {
   return (
     <div className={styles.page}>
-      <h1>My Profile</h1>
+      <h1>My profile</h1>
     </div>
   );
 };
