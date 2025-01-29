@@ -1,0 +1,120 @@
+.pagination {
+  display: flex;//
+  align-items: center;//
+  gap: 12px;//
+}
+
+.paginationButton {
+  background: transparent;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:focus {
+    outline: 2px solid #2F68CC;
+  }
+
+  &:hover {
+    background: #171717;
+  }
+
+  &.active {
+    background: white;
+    color: black;
+    font-weight: bold;
+    opacity: 1;
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &.nav {
+    padding: 0
+  }
+}
+
+.paginationDots {
+  color: white;
+}
+
+.paginationSelect {
+  padding-left: 12px; //
+  display: flex;
+  align-items: center;
+  color: white;
+  gap: 5px;
+
+  &:focus {
+    outline: 2px solid #2F68CC;
+  }
+}
+
+.selectTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 52px;
+  height: 24px;
+  background: #171717;
+  color: white;
+  border: solid 1px #333333;
+
+  &:focus {
+    outline: 2px solid #2F68CC;
+  }
+
+}
+
+.triggerIcon {
+  width: 11px;
+  height: 6px;
+  background-color: white;
+  mask-size: contain;
+
+}
+
+.selectContent {
+  width: var(--radix-select-trigger-width);
+  background: #171717;
+  color: white;
+  border: solid 1px #333333;
+}
+
+
+.selectItem {
+  padding-left: 6px;
+
+  &:hover {
+    background: #4C4C4C;
+    border: none;
+  }
+
+  &:focus {
+    background: #4C4C4C;
+    border: none;
+    outline: none;
+  }
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  mask-size: contain;
+}
+
+.navButton {
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}

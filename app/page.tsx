@@ -1,8 +1,15 @@
+'use client';
+
 import styles from './page.module.css';
 import { Button } from '@/components/Button/Button';
 import {Input} from '@/components/Input/Input';
+import { DropdownItems, Pagination } from '@/components/Pagination/Pagination';
+import { useState } from 'react';
 
 export default function Home() {
+  const [page, setPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState<DropdownItems>(50);
+
   return (
     <>
       {/* <h1 style={{ marginBottom: '30px', textAlign: 'center' }}>DreamTeam - Летим</h1> */}
@@ -22,6 +29,15 @@ export default function Home() {
           <Input  variant={'search'} />
           <Input  variant={'search'} disabled/>
           <Input  variant={'search'} error={'Error text'} className={'error'}/>
+
+          <Pagination
+            totalPages={15}
+            currentPage={page}
+            onPageChangeAction={(page) => setPage(page)}
+            itemsPerPage={itemsPerPage}
+            onItemsPerPageChangeAction={(itemsPerPage) => setItemsPerPage(itemsPerPage)}
+          />
+
         </div>
       </div>
     </>
