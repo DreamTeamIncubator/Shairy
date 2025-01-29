@@ -5,15 +5,15 @@ import clsx from "clsx"
 import { ComponentPropsWithoutRef } from "react";
 
 type Props = {
-  disabled: boolean
+  disabled?: boolean
   showLabel?: boolean
-  textLabel: string
+  textLabel?: string
 } & ComponentPropsWithoutRef<typeof Checkbox.Root>;
 
 export const RadixCheckbox = ({ disabled, showLabel, textLabel, ...rest }: Props) => (
   <form>
     <div style={{ display: "flex", alignItems: "center" }}>
-      <Checkbox.Root className={s.Root} defaultChecked id="c1" disabled={disabled} {...rest}>
+      <Checkbox.Root className={s.Root} disabled={disabled} {...rest}>
         <Checkbox.Indicator className={clsx(s.Indicator, {[s.DisabledIndicator]: disabled })}>
           <CheckIcon />
         </Checkbox.Indicator>

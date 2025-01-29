@@ -4,7 +4,7 @@ import s from "./RadixRadiogroup.module.scss";
 import { ComponentPropsWithoutRef } from "react";
 
 type Props = {
-    textLabel: string;
+    textLabel?: string;
     disabled?: boolean;
 }& ComponentPropsWithoutRef<typeof RadioGroup.Root>
 
