@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { ComponentPropsWithoutRef } from "react";
-import s from "./Selectbox.module.scss";
+import s from "./RadixSelect.module.scss";
 import * as Select from "@radix-ui/react-select";
 
 type Props = {
