@@ -18,7 +18,9 @@ export const Header = () => {
       <div className={s.content}>
         <h2 className={s.text}>Shairy</h2>
         <div className={s.navigate}>
+          <div className={s.select}>
           <LanguageSelect/>
+          </div>
           <div>
             <Button variant={'textButton'} className={s.btn} onClick={loginForm}>
               Log in
