@@ -1,6 +1,6 @@
 import * as Checkbox from "@radix-ui/react-checkbox";
 import { CheckIcon } from "@radix-ui/react-icons";
-import s from "./Checkbox.module.scss";
+import s from "./RadixCheckbox.module.scss";
 import clsx from "clsx"
 import { ComponentPropsWithoutRef } from "react";
 

@@ -1,6 +1,6 @@
 import * as RadioGroup from "@radix-ui/react-radio-group";
 import clsx from 'clsx';
-import s from "./Radiogroup.module.scss";
+import s from "./RadixRadiogroup.module.scss";
 import { ComponentPropsWithoutRef } from "react";
 
 type Props = {
