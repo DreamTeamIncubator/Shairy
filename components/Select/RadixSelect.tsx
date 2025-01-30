@@ -14,10 +14,10 @@ type Props = {
   onValueChange: (value: string) => void
   placeholder: string
   value: string
-  label: string
-  disabled: boolean
-  showPlaceholderLabel: boolean
-  placeholderLabel: string
+  label?: string
+  disabled?: boolean
+  showPlaceholderLabel?: boolean
+  placeholderLabel?: string
 } & ComponentPropsWithoutRef<typeof Select.Root>;
 
 export const RadixSelect = ({
