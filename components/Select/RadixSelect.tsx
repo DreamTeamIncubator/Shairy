@@ -1,53 +1,66 @@
-'use client'
+'use client';
 
 import * as Select from '@radix-ui/react-select';
 import { ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import s from './RadixSelect.module.scss';
-import { ComponentPropsWithoutRef, useState } from 'react';
+import { ComponentPropsWithoutRef, useState} from 'react';
 import { SelectItem } from './SelectItem';
 import clsx from 'clsx';
 
 type Option = {
   value: string;
   label: string;
+  icon?: string;
 };
 
 type Props = {
   className?: string;
   options: Option[];
+  value?: string;
   onValueChange?: (value: string) => void;
   placeholder?: string;
-  value?: string;
-  label?: string;
   disabled?: boolean;
   showPlaceholderLabel?: boolean;
   placeholderLabel?: string;
+  renderItem?: (option: Option) => React.ReactNode;
+  renderValue?: (option: Option) => React.ReactNode; 
 } & ComponentPropsWithoutRef<typeof Select.Root>;
 
 export const RadixSelect = ({
   className,
   placeholder,
+  value,
   options,
   disabled,
   placeholderLabel,
   showPlaceholderLabel,
   onValueChange,
+  renderItem,
+  renderValue,
   ...rest
 }: Props) => {
   const [open, setOpen] = useState(false);
 
+  const selectedOption = options.find(option => option.value === value);
+
+
   return (
-    <div className={clsx(s.SelectContainer, className)}>
+    <div>
       {showPlaceholderLabel && <label className={s.PlaceholderLabel}>{placeholderLabel}</label>}
 
       <Select.Root
+        value={value}
         onValueChange={onValueChange}
         disabled={disabled}
         open={open}
         onOpenChange={setOpen}
         {...rest}>
         <Select.Trigger className={clsx(s.Trigger, { [s.Open]: open }, className)} aria-label="Select">
-          <Select.Value placeholder={placeholder} />
+          {selectedOption ? (
+            renderValue ? renderValue(selectedOption) : selectedOption.label
+          ) : (
+            <Select.Value placeholder={placeholder} />
+          )}
           <Select.Icon className={clsx(s.Icon, className)}>
             {open ? <ChevronUpIcon /> : <ChevronDownIcon />}
           </Select.Icon>
@@ -56,11 +69,13 @@ export const RadixSelect = ({
           <Select.Content className={clsx(s.Content, className)} position="popper">
             <Select.Viewport className={clsx(s.Viewport, className)}>
               <Select.Group>
-                {options.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
-                    {option.label}
-                  </SelectItem>
-                ))}
+                {options
+                  .filter(option => option.value !== value) 
+                  .map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {renderItem ? renderItem(option) : option.label}
+                    </SelectItem>
+                  ))}
               </Select.Group>
             </Select.Viewport>
           </Select.Content>

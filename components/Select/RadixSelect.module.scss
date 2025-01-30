@@ -1,7 +1,3 @@
-.SelectContainer {
-    display: flex;
-    flex-direction: column;
-}
 
 .Trigger {
     all: unset;
@@ -13,7 +9,7 @@
     padding: 0 15px;
     font-size: 13px;
     line-height: 1;
-    width: 210px; 
+    width: 163px; 
     height: 36px;
     gap: 5px;
     color: var(--light-100, #ffffff);
@@ -45,7 +41,7 @@
 
 .Content {
     overflow: hidden;
-    width: 242px; 
+    width: 196px; 
     border-radius: 6px;
     border: 1px solid var(--light-100, #ffffff);  
     background-color: var(--Dark-500, #171717);
@@ -75,7 +71,6 @@
         color: var(--accent-500, #397DF6); 
     }
 }
-
 
 .PlaceholderLabel {
     color: var(--Light-900, #8D9094);
