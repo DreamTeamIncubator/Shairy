@@ -55,7 +55,6 @@ body {
   color: var(--light-100);
   font-family: Inter, Helvetica, sans-serif;
   overflow: hidden;
-  min-height: 100vh;
 }
 * {
   box-sizing: border-box;
