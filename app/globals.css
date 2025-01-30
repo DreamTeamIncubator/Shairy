@@ -54,8 +54,8 @@ body {
   background-color: var(--dark-900);
   color: var(--light-100);
   font-family: Inter, Helvetica, sans-serif;
-  min-height: 100vh; /* Минимальная высота на весь экран */
-  margin: 0; /* Удаление стандартных отступов для body */
+  overflow: hidden;
+  min-height: 100vh;
 }
 * {
   box-sizing: border-box;
