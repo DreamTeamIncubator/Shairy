@@ -11,10 +11,10 @@
   width: 100%;
   justify-content: space-between;
   height: 60px;
+  align-items: center;
 }
 
 .text {
-  margin-top: 12px;
   font-weight: 600;
   font-size: 26px;
 }
@@ -24,11 +24,9 @@
 }
 
 .select {
-  margin-top: 12px;
 }
 
 .btn {
-  margin-top: 12px;
   width: 100px;
   height: 36px;
   &:first-child {
