@@ -5,7 +5,6 @@ import { Button } from '../Button/Button';
 import s from './Header.module.scss';
 import { LanguageSelect } from '../Select/LanguageSelect/LanguageSelect';
 
-
 export const Header = () => {
   const loginForm = () => {
     redirect('/login');
@@ -19,9 +18,7 @@ export const Header = () => {
       <div className={s.content}>
         <h2 className={s.text}>Shairy</h2>
         <div className={s.navigate}>
-          <div className={s.select}>
-          <LanguageSelect/>
-          </div>
+          <LanguageSelect />
           <div>
             <Button variant={'textButton'} className={s.btn} onClick={loginForm}>
               Log in

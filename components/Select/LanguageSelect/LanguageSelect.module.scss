@@ -1,111 +1,110 @@
 .SelectContainer {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  width: 200px;
 }
 
 .Trigger {
-    all: unset;
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 4px;
-    border: 1px solid var(--Dark-100, #4C4C4C); 
-    padding: 0 15px;
-    font-size: 16px;
-    line-height: 1;
-    width: 163px; 
-    height: 36px;
-    gap: 5px;
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 4px;
+  border: 1px solid var(--Dark-100, #4c4c4c);
+  padding: 0 15px;
+  font-size: 16px;
+  line-height: 1;
+  width: 163px;
+  height: 36px;
+  gap: 5px;
+  color: var(--light-100, #ffffff);
+  &:hover {
+    border: 1px solid var(--Primary-500, #397df6);
+  }
+  &:disabled {
+    color: var(--Dark-100, #4c4c4c);
+    border-color: var(--Dark-100, #4c4c4c);
+  }
+
+  &[data-placeholder] {
     color: var(--light-100, #ffffff);
-    &:hover {
-        border: 1px solid var(--Primary-500, #397DF6); 
-    }
-    &:disabled {
-        color: var(--Dark-100, #4C4C4C);
-        border-color: var(--Dark-100, #4C4C4C);
-    }
+  }
 
-    &[data-placeholder] {
-        color: var(--light-100, #ffffff);
-    }
-
-    &[data-state="open"] {
-        background-color: var(--Dark-500, #171717);
-    }
+  &[data-state='open'] {
+    background-color: var(--Dark-500, #171717);
+  }
 }
 
 .SelectedValue {
-    display: flex;
-    align-items: center;
-    gap: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .LanguageLabel {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 5px;
-    font-size: 16px; 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
+  font-size: 16px;
 }
 
 .Icon {
-    color: var(--light-100, #ffffff);
+  color: var(--light-100, #ffffff);
 }
 
 .Open {
-    border-color: var(--light-100, #ffffff); 
+  border-color: var(--light-100, #ffffff);
 }
 
 .Content {
-    display: flex; 
-    overflow: hidden;
-    width: 195px; 
-    border-radius: 6px;
-    border: 1px solid var(--light-100, #ffffff);  
-    background-color: var(--Dark-500, #171717);
-   
+  display: flex;
+  overflow: hidden;
+  width: 195px;
+  border-radius: 6px;
+  border: 1px solid var(--light-100, #ffffff);
+  background-color: var(--Dark-500, #171717);
 }
 
 .Viewport {
-    padding: 5px; 
-    padding-left: 0px;
+  padding: 5px;
+  padding-left: 0px;
 }
 
 .ItemContent {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    font-size: 16px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 16px;
 }
 
 .Item {
-    font-size: 16px;
-    line-height: 1;
-    color: var(--light-100, #ffffff);
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    height: 25px;
-    padding: 0 35px 0 25px;
-    position: relative;
-    user-select: none;
-    &[data-disabled] {
-        color:  var(--Dark-100, #4C4C4C);
-        pointer-events: none;
-    }
-    &[data-highlighted] {
-        outline: none;
-        background-color: var(--Dark-100, #4C4C4C);
-        color: var(--Primary-500, #397DF6); 
-    }
+  font-size: 16px;
+  line-height: 1;
+  color: var(--light-100, #ffffff);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  height: 25px;
+  padding: 0 35px 0 25px;
+  position: relative;
+  user-select: none;
+  &[data-disabled] {
+    color: var(--Dark-100, #4c4c4c);
+    pointer-events: none;
+  }
+  &[data-highlighted] {
+    outline: none;
+    background-color: var(--Dark-100, #4c4c4c);
+    color: var(--Primary-500, #397df6);
+  }
 }
 
 .PlaceholderLabel {
-    color: var(--Light-900, #8D9094);
-    font-family: Inter;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 24px; 
+  color: var(--Light-900, #8d9094);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
 }

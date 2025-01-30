@@ -1,10 +1,11 @@
 'use client';
-import { LanguageSelect} from "./LanguageSelect";
+import { LanguageSelect } from './LanguageSelect';
 
-
-export default {
+const languageSelectStory = {
   title: 'Components/LanguageSelect',
   component: LanguageSelect,
 };
 
-export const Default = () => < LanguageSelect/>;
+export default languageSelectStory;
+
+export const Default = () => <LanguageSelect />;

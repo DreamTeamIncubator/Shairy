@@ -54,8 +54,8 @@ body {
   background-color: var(--dark-900);
   color: var(--light-100);
   font-family: Inter, Helvetica, sans-serif;
+  overflow: hidden;
 }
-
 * {
   box-sizing: border-box;
   padding: 0;
