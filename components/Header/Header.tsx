@@ -12,7 +12,7 @@ export const Header = () => {
   const SignUpForm = () => {
     redirect('/sign-up');
   };
-
+  
   return (
     <div className={s.header}>
       <div className={s.content}>
