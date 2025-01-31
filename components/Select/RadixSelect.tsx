@@ -17,7 +17,7 @@ type Props = {
   className?: string;
   options: Option[];
   value?: string;
-  onValueChange?: (value: string) => void;
+  onValueChange: (value: string) => void;
   placeholder?: string;
   disabled?: boolean;
   showPlaceholderLabel?: boolean;
@@ -43,7 +43,6 @@ export const RadixSelect = ({
 
   const selectedOption = options.find(option => option.value === value);
 
-
   return (
     <div>
       {showPlaceholderLabel && <label className={s.PlaceholderLabel}>{placeholderLabel}</label>}
@@ -61,12 +60,12 @@ export const RadixSelect = ({
           ) : (
             <Select.Value placeholder={placeholder} />
           )}
-          <Select.Icon className={clsx(s.Icon, className)}>
+          <Select.Icon className={clsx(s.Icon, className)} >
             {open ? <ChevronUpIcon /> : <ChevronDownIcon />}
           </Select.Icon>
         </Select.Trigger>
         <Select.Portal>
-          <Select.Content className={clsx(s.Content, className)} position="popper">
+          <Select.Content className={clsx(s.Content, s.SelectContent, className)} position="popper" >
             <Select.Viewport className={clsx(s.Viewport, className)}>
               <Select.Group>
                 {options
