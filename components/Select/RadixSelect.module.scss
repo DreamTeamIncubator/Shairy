@@ -1,6 +1,6 @@
 
 
-.Trigger {
+.SelectTrigger {
     all: unset;
     display: inline-flex;
     align-items: center;
@@ -32,7 +32,8 @@
     }
 }
 
-.Icon {
+.Icon { 
+    padding-top: 8px; 
     color: var(--light-100, #ffffff);
 }
 
@@ -87,3 +88,12 @@
 	max-height: var(--radix-select-content-available-height);
 }
 
+.SelectTrigger {
+    width: var(--radix-select-trigger-width);
+    height: var(--radix-select-trigger-height);
+  }
+  
+  .SelectContent {
+    transform-origin: var(--radix-select-content-transform-origin);
+  }
+  

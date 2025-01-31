@@ -54,7 +54,7 @@ export const RadixSelect = ({
         open={open}
         onOpenChange={setOpen}
         {...rest}>
-        <Select.Trigger className={clsx(s.Trigger, { [s.Open]: open }, className)} aria-label="Select">
+        <Select.Trigger className={clsx(s.SelectTrigger, { [s.Open]: open }, className)} aria-label="Select">
           {selectedOption ? (
             renderValue ? renderValue(selectedOption) : selectedOption.label
           ) : (
