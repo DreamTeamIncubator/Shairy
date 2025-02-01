@@ -11,7 +11,7 @@ type Props = {
 export const SelectItem = ({ children, className, ...rest }: Props) => {
   return (
     <Select.Item
-      className={clsx(s.Item, className)} 
+      className={clsx(s.item, className)} 
       {...rest}
     >
       <Select.ItemText>{children}</Select.ItemText>

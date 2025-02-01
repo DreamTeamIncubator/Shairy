@@ -1,4 +1,4 @@
-.SelectTrigger {
+.selectTrigger {
   all: unset;
   display: inline-flex;
   align-items: center;
@@ -30,15 +30,15 @@
   }
 }
 
-.Icon {
+.icon {
   color: var(--light-100, #ffffff);
 }
 
-.Open {
+.open {
   border-color: var(--light-100, #ffffff); 
 }
 
-.SelectContent {
+.selectContent {
   overflow: hidden;
   border-radius: 6px;
   border: 1px solid var(--light-100, #ffffff);  
@@ -47,12 +47,12 @@
 	max-height: var(--radix-select-content-available-height);
 }
 
-.Viewport {
+.viewport {
   padding: 6px;
   margin-left: -12px;
 }
 
-.Item {
+.item {
   font-size: 13px;
   line-height: 1;
   color: var(--light-100, #ffffff);
@@ -73,7 +73,7 @@
   }
 }
 
-.PlaceholderLabel {
+.placeholderLabel {
   color: var(--Light-900, #8D9094);
   font-family: Inter;
   font-size: 14px;

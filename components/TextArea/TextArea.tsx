@@ -12,10 +12,10 @@ type Props = {
 
 export const TextArea = ({showError, label, placeholder, error, disabled}: Props) => {
   return (
-    <div className = {s.TextAreaContainer}>
-      <label className = {s.Label}>{label}</label>
-        <textarea className={`${s.TextArea} ${showError ? s.error: ''}`} placeholder={placeholder} disabled={disabled}/>
-        {showError && <span className={s.Error}>{error}</span>}
+    <div className = {s.textAreaContainer}>
+      <label className = {s.label}>{label}</label>
+        <textarea className={`${s.textArea} ${showError ? s.error: ''}`} placeholder={placeholder} disabled={disabled}/>
+        {showError && <span className={s.error}>{error}</span>}
     </div>
   );
 };

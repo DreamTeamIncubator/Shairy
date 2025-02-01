@@ -1,9 +1,9 @@
-.TextAreaContainer {
+.textAreaContainer {
     display: flex;
     flex-direction: column;
 }
 
-.Label {
+.label {
     color: var(--Light-900, #8D9094);
     font-family: Inter;
     font-size: 14px;
@@ -12,7 +12,7 @@
     line-height: 24px;
 }
 
-.TextArea {
+.textArea {
     width: 284px;
     height: 84px;
     flex-shrink: 0;
@@ -50,16 +50,14 @@
     }
 }
 
-.Error {
+.error {
     color: var(--Danger-500, #CC1439);
     font-family: Inter;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: 24px;
-}
 
-.error {
     border: 1px solid var(--Danger-500, #CC1439); 
 
     &:hover {
@@ -69,3 +67,4 @@
         border: 1px solid var(--Danger-500, #CC1439);  
     }
 }
+

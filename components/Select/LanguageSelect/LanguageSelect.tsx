@@ -23,14 +23,14 @@ export const LanguageSelect = () => {
   };
 
   return (
-    <div className={s.SelectedContainer}>
+    <div className={s.selectedContainer}>
       <RadixSelect 
         options={options}
         onValueChange={handleValueChange}
-        className={s.LanguageSelect}
+        className={s.languageSelect}
         value={selectedLanguage.value} 
         renderValue={(option) => ( 
-          <div className={s.SelectedValue}>
+          <div className={s.selectedValue}>
             {option.icon && (
               <Image 
                 src={option.icon}
@@ -44,7 +44,7 @@ export const LanguageSelect = () => {
           </div>
         )}
         renderItem={(option) => (
-          <div className={s.ItemContent}>
+          <div className={s.itemContent}>
             {option.icon && (
               <Image 
                 src={option.icon}

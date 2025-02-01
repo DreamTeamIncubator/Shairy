@@ -45,7 +45,7 @@ export const RadixSelect = ({
 
   return (
     <div>
-      {showPlaceholderLabel && <label className={s.PlaceholderLabel}>{placeholderLabel}</label>}
+      {showPlaceholderLabel && <label className={s.placeholderLabel}>{placeholderLabel}</label>}
 
       <Select.Root
         value={value}
@@ -54,19 +54,19 @@ export const RadixSelect = ({
         open={open}
         onOpenChange={setOpen}
         {...rest}>
-        <Select.Trigger className={clsx(s.SelectTrigger, { [s.Open]: open }, className)} aria-label="Select">
+        <Select.Trigger className={clsx(s.selectTrigger, { [s.open]: open }, className)} aria-label="Select">
           {selectedOption ? (
             renderValue ? renderValue(selectedOption) : selectedOption.label
           ) : (
             <Select.Value placeholder={placeholder} />
           )}
-          <Select.Icon className={clsx(s.Icon, className)} >
+          <Select.Icon className={clsx(s.icon, className)} >
             {open ? <ChevronUpIcon /> : <ChevronDownIcon />}
           </Select.Icon>
         </Select.Trigger>
         <Select.Portal>
-          <Select.Content className={clsx(s.SelectContent, className)} position = "popper">
-            <Select.Viewport className={clsx(s.Viewport, className)}>
+          <Select.Content className={clsx(s.selectContent, className)} position = "popper">
+            <Select.Viewport className={clsx(s.viewport, className)}>
               <Select.Group>
                 {options
                   .filter(option => option.value !== value) 

@@ -1,4 +1,4 @@
-.Root {
+.root {
     all: unset;
     border: 2px solid var(--light-100, #ffffff);
     width: 18px;
@@ -10,7 +10,7 @@
     position: relative;
 }
 
-.Root:not(:disabled):hover::after {
+.root:not(:disabled):hover::after {
     content: '';
     position: absolute;
     width: 36px;
@@ -21,7 +21,7 @@
     
 }
 
-.Root[data-state="checked"]:not(:disabled):hover::after{
+.root[data-state="checked"]:not(:disabled):hover::after{
     content: '';
     position: absolute;
     width: 36px;
@@ -32,30 +32,30 @@
     
 }
 
-.Root[data-state="checked"] {
+.root[data-state="checked"] {
     background-color:  var(--light-100, #ffffff);
 }
 
-.Root:disabled {
+.root:disabled {
     opacity: 0.5;
 }
 
-.Indicator {
+.indicator {
     color: var(--Dark-900, #000000);
 }
 
-.DisabledIndicator {
+.disabledIndicator {
     color: var(--Dark-100, #4C4C4C);
 }
 
-.Label {
+.label {
     color: var(--light-100, #ffffff);
     padding-left: 15px;
     font-size: 15px;
     line-height: 1;
 }
 
-.DisabledLabel {
+.disabledLabel {
     color: var(--Dark-100, #4C4C4C);
 }
 

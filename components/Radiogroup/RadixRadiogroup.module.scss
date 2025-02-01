@@ -1,10 +1,10 @@
-.Root {
+.root {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.Item {
+.item {
     all: unset;
     background-color: transparent;
     border: 2px solid var(--light-100, #ffffff);
@@ -16,7 +16,7 @@
 
 }
 
-.Item:not(:disabled):hover::after {
+.item:not(:disabled):hover::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -30,15 +30,15 @@
     z-index: -1;
 }
 
-.Item:focus {
+.item:focus {
     outline: none;
 }
 
-.Item:disabled {
+.item:disabled {
     border-color: var(--Dark-100, #4C4C4C);
 }
 
-.Indicator {
+.indicator {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,7 +54,7 @@
     transition: opacity 0.3s ease;
 }
 
-.Item:not(:disabled):active::after {
+.item:not(:disabled):active::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -69,16 +69,16 @@
     z-index: -1;
 }
 
-.Item:disabled .Indicator { 
+.item:disabled .Indicator { 
     background-color: var(--Dark-100, #4C4C4C);
     opacity: 0.5;
 }
 
-.Item[data-state="checked"] .Indicator {
+.item[data-state="checked"] .Indicator {
     opacity: 1;
 }
 
-.Label {
+.label {
     color: var(--light-100, #ffffff);
     font-size: 15px;
     line-height: 1;

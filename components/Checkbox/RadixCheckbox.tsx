@@ -13,13 +13,13 @@ type Props = {
 export const RadixCheckbox = ({ disabled, showLabel, textLabel, ...rest }: Props) => (
   <form>
     <div style={{ display: "flex", alignItems: "center" }}>
-      <Checkbox.Root className={s.Root} disabled={disabled} {...rest}>
-        <Checkbox.Indicator className={clsx(s.Indicator, {[s.DisabledIndicator]: disabled })}>
+      <Checkbox.Root className={s.root} disabled={disabled} {...rest}>
+        <Checkbox.Indicator className={clsx(s.indicator, {[s.disabledIndicator]: disabled })}>
           <CheckIcon />
         </Checkbox.Indicator>
       </Checkbox.Root>
       {showLabel && (
-        <label className={clsx(s.Label, {[s.DisabledLabel]: disabled })} htmlFor="c1">
+        <label className={clsx(s.label, {[s.disabledLabel]: disabled })} htmlFor="c1">
           {textLabel}
         </label>
       )}
