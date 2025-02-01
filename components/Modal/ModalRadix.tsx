@@ -34,8 +34,7 @@ export const ModalRadix = ({ modalTitle, className, onClose, open, children, siz
             </button>
           </Dialog.Close>
           <div className={s.ButtonContainer}>
-          <Button variant='outlined'>Yes</Button>
-          <Button variant='primary'>No</Button>
+          {children}
           </div>
         </Dialog.Content>
       </Dialog.Portal>
