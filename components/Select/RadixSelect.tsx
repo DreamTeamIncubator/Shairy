@@ -65,7 +65,7 @@ export const RadixSelect = ({
           </Select.Icon>
         </Select.Trigger>
         <Select.Portal>
-          <Select.Content className={clsx(s.Content, s.SelectContent, className)} position="popper" >
+          <Select.Content className={clsx(s.SelectContent, className)} position = "popper">
             <Select.Viewport className={clsx(s.Viewport, className)}>
               <Select.Group>
                 {options

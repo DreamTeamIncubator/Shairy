@@ -1,4 +1,3 @@
-
 .SelectTrigger {
   all: unset;
   display: inline-flex;
@@ -9,7 +8,7 @@
   padding: 0 15px;
   font-size: 13px;
   line-height: 1;
-  width: 210px; 
+  width: 210px;   
   height: 36px;
   gap: 5px; 
   color: var(--light-100, #ffffff);
@@ -31,7 +30,7 @@
   }
 }
 
-.Icon { 
+.Icon {
   color: var(--light-100, #ffffff);
 }
 
@@ -39,11 +38,13 @@
   border-color: var(--light-100, #ffffff); 
 }
 
-.Content {
+.SelectContent {
   overflow: hidden;
   border-radius: 6px;
   border: 1px solid var(--light-100, #ffffff);  
   background-color: var(--Dark-500, #171717);
+  width: var(--radix-select-trigger-width); 
+	max-height: var(--radix-select-content-available-height);
 }
 
 .Viewport {
@@ -79,16 +80,3 @@
   font-weight: 400;
   line-height: 24px; 
 }
-
-.SelectTrigger{
-  width: var(--radix-select-trigger-width);
-}
-
-.SelectContent {
-  width: var(--radix-select-trigger-width);
-  max-height: var(--radix-select-content-available-height);
-  max-width: var(--radix-select-content-available-width);
-  transform-origin: var(--radix-select-content-transform-origin);
-}
-
-
