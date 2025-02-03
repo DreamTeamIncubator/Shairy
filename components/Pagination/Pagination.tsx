@@ -4,6 +4,7 @@ import s from './Pagination.module.scss';
 import clsx from 'clsx';
 import KeyboardArrowLeft from '@/components/Pagination/keyboardArrows/KeyboardArrowLeft';
 import KeyboardArrowRight from '@/components/Pagination/keyboardArrows/KeyboardArrowRight';
+import {RadixSelect} from '@/components/Select/RadixSelect';
 
 type PaginationConditionals =
   | {
@@ -36,17 +37,17 @@ const classNames = {
     return clsx(this.item, selected && s.selected);
   },
   root: s.root,
-  select: s.select,
+  paginationSelect: s.paginationSelect,
   selectBox: s.selectBox,
 };
 
 export const Pagination: FC<PaginationProps> = ({
   count,
   onChange,
-  // onPerPageChange,
+  onPerPageChange,
   page,
-  // perPage = null,
-  // perPageOptions,
+  perPage = null,
+  perPageOptions,
   siblings,
 }) => {
   const {
@@ -63,7 +64,7 @@ export const Pagination: FC<PaginationProps> = ({
     siblings,
   });
 
-  // const showPerPageSelect = !!perPage && !!perPageOptions && !!onPerPageChange;
+  const showPerPageSelect = !!perPage && !!perPageOptions && !!onPerPageChange;
 
   return (
     <div className={classNames.root}>
@@ -82,15 +83,15 @@ export const Pagination: FC<PaginationProps> = ({
         <NextButton disabled={isLastPage} onClick={handleNextPageClicked} />
       </div>
 
-      {/*{showPerPageSelect && (*/}
-      {/*  <PerPageSelect*/}
-      {/*    {...{*/}
-      {/*      onPerPageChange,*/}
-      {/*      perPage,*/}
-      {/*      perPageOptions,*/}
-      {/*    }}*/}
-      {/*  />*/}
-      {/*)}*/}
+      {showPerPageSelect && (
+        <PerPageSelect
+          {...{
+            onPerPageChange,
+            perPage,
+            perPageOptions,
+          }}
+        />
+      )}
     </div>
   );
 };
@@ -189,33 +190,33 @@ const MainPaginationButtons: FC<MainPaginationButtonsProps> = ({
   );
 };
 
-// export type PerPageSelectProps = {
-//   onPerPageChange: (itemPerPage: number) => void;
-//   perPage: number;
-//   perPageOptions: number[];
-// };
-//
-// export const PerPageSelect: FC<PerPageSelectProps> = ({
-//   onPerPageChange,
-//   perPage,
-//   perPageOptions,
-// }) => {
-//   const selectOptions = perPageOptions.map((value) => ({
-//     label: value,
-//     value,
-//   }));
-//
-//   return (
-//     <div className={classNames.selectBox}>
-//       Показать
-//       <Select
-//         className={classNames.select}
-//         onChange={onPerPageChange}
-//         options={selectOptions}
-//         value={perPage}
-//         variant={'Pagination'}
-//       />
-//       на странице
-//     </div>
-//   );
-// };
+export type PerPageSelectProps = {
+  onPerPageChange: (itemPerPage: number) => void;
+  perPage: number;
+  perPageOptions: number[];
+};
+
+export const PerPageSelect: FC<PerPageSelectProps> = ({
+  onPerPageChange,
+  perPage,
+  perPageOptions,
+}) => {
+  const selectOptions = perPageOptions.map((value) => ({
+    label: String(value),
+    value: String(value),
+  }));
+
+  return (
+    <div className={classNames.selectBox}>
+      Show
+      <RadixSelect
+        className={s.paginationSelect}
+        contentClassName={s.customDropdown}
+        onValueChange={(value) => onPerPageChange(Number(value))}
+        options={selectOptions}
+        value={String(perPage)}
+      />
+      on page
+    </div>
+  );
+};

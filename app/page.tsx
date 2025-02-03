@@ -8,6 +8,7 @@ import {useState} from 'react';
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [perPage, setPerPageOptions] = useState<number>(50);
 
   return (
     <>
@@ -30,7 +31,15 @@ export default function Home() {
           <Input  variant={'search'} error={'Error text'} className={'error'}/>
         </div>
         <div>
-          <Pagination count={30} onChange={setCurrentPage} page={currentPage} siblings={1} />
+          <Pagination
+              count={30}
+              onChange={setCurrentPage}
+              page={currentPage}
+              siblings={1}
+              perPage={perPage}
+              perPageOptions={[10, 20, 30, 40, 50, 100]}
+              onPerPageChange={perPage => setPerPageOptions(perPage)}
+          />
         </div>
       </div>
     </>
