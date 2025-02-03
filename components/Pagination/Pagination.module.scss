@@ -2,6 +2,7 @@
   display: flex;
   gap: 25px;
   align-items: center;
+  margin-top: 30px;
 }
 
 .container {
@@ -68,16 +69,47 @@
   }
 }
 
-//.selectBox {
-//  display: flex;
-//  gap: 12px;
-//  align-items: center;
-//
-//  color: var(--color-text-primary);
-//  white-space: nowrap;
-//}
-//
-//.select {
-//  flex-shrink: 0;
-//  width: 52px;
-//}
+.selectBox {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 14px;
+
+  color: var(--color-text-primary);
+  white-space: nowrap;
+}
+
+.selectBox .paginationSelect {
+  box-sizing: border-box;
+  width: 52px;
+  padding: 0 2px;
+  font-size: 14px;
+  justify-content: flex-end;
+  gap: 2px;
+  background-color: var(--dark-500);
+  border: 1px solid var(--dark-300);
+  border-radius: 2px;
+
+  &:hover,
+  &:active {
+    border: 1px solid var(--dark-300);
+  }
+
+  & span {
+    width: 16px;
+    height: 16px;
+    margin-right: 1px;
+    border: none;
+
+    &:hover,
+    &:active {
+      border: none;
+    }
+  }
+}
+
+.customDropdown[data-state="open"] {
+  background-color: var(--dark-500);
+  border: 1px solid var(--dark-300);
+  border-radius: 2px;
+}

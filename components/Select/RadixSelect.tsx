@@ -15,6 +15,7 @@ type Option = {
 
 type Props = {
   className?: string;
+  contentClassName?: string
   options: Option[];
   value?: string;
   onValueChange: (value: string) => void;
@@ -28,6 +29,7 @@ type Props = {
 
 export const RadixSelect = ({
   className,
+  contentClassName,
   placeholder,
   value,
   options,
@@ -65,11 +67,11 @@ export const RadixSelect = ({
           </Select.Icon>
         </Select.Trigger>
         <Select.Portal>
-          <Select.Content className={clsx(s.selectContent, className)} position = "popper">
+          <Select.Content className={clsx(s.selectContent, className, contentClassName)} position = "popper">
             <Select.Viewport className={clsx(s.viewport, className)}>
               <Select.Group>
                 {options
-                  .filter(option => option.value !== value) 
+                  .filter(option => option.value !== value)
                   .map((option) => (
                     <SelectItem key={option.value} value={option.value}>
                       {renderItem ? renderItem(option) : option.label}
