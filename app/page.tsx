@@ -1,7 +1,7 @@
 import styles from './page.module.css';
 import { Sidebar, sidebarItems } from '@/components/Sidebar/Sidebar';
 import { Button } from '@/components/Button/Button';
-import {Input} from '@/components/Input/Input';
+import { Input } from '@/components/Input/Input';
 
 export default function Home() {
   return (
