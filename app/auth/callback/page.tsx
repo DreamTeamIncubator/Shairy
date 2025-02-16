@@ -39,7 +39,7 @@ const AuthCallback = () => {
           router.push("/login")
         })
     } 
-  }, [searchParams])
+  }, [searchParams, googleLogin, gitHubLogin, router])
 
   return <p>Авторизация...</p>
 }
