@@ -1,58 +1,58 @@
-'use client';
+'use client'
 
-import { SubmitHandler, useForm } from "react-hook-form";
-import s from "./Login.module.scss";
-import { Button } from "./../../components/Button/Button";
-import Image from "next/image";
-import { useState } from "react";
-import { useLoginMutation } from "@/store/services/auth/auth";
-import { useRedirectIfAuthorized } from "@/hooks/useRedirectIfAuthorized";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { SubmitHandler, useForm } from "react-hook-form"
+import s from "./Login.module.scss"
+import { Button } from "./../../components/Button/Button"
+import Image from "next/image"
+import { useState } from "react"
+import { useLoginMutation } from "@/store/services/auth/auth"
+import { useRedirectIfAuthorized } from "@/hooks/useRedirectIfAuthorized"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 type Inputs = {
-  email: string;
-  password: string;
+  email: string
+  password: string
 };
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({
     defaultValues: { email: "", password: "" },
-  });
+  })
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [login, { isLoading }] = useLoginMutation();
-  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false)
+  const [login, { isLoading }] = useLoginMutation()
+  const router = useRouter()
 
-  const GOOGLE_CLIENT_ID = "272583913867-t74i019ufdvmarh05jlv8bcu1ak0a6o6.apps.googleusercontent.com";
-  const REDIRECT_URI = "http://localhost:3000/auth/callback";
+  const GOOGLE_CLIENT_ID = "272583913867-t74i019ufdvmarh05jlv8bcu1ak0a6o6.apps.googleusercontent.com"
+  const REDIRECT_URI = "http://localhost:3000/auth/callback"
 
-  useRedirectIfAuthorized();
+  useRedirectIfAuthorized()
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      const response = await login(data).unwrap();
-      console.log("Успешный вход", response.accessToken);
-      router.push("/home");
+      const response = await login(data).unwrap()
+      console.log("Успешный вход", response.accessToken)
+      router.push("/home")
     } catch (error) {
-      console.error("Ошибка входа", error);
+      console.error("Ошибка входа", error)
     }
   };
 
   const handleGitHubLogin = () => {
-    const redirectUrl = `${window.location.origin}/auth/callback?provider=github`;
-    window.location.href = `https://inctagram.work/api/v1/auth/github/login?redirect_url=${encodeURIComponent(redirectUrl)}`;
-  };
+    const redirectUrl = `${window.location.origin}/auth/callback?provider=github`
+    window.location.href = `https://inctagram.work/api/v1/auth/github/login?redirect_url=${encodeURIComponent(redirectUrl)}`
+  }
 
   const handleGoogleLogin = () => {
     const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?` +
       `client_id=${GOOGLE_CLIENT_ID}` +
       `&redirect_uri=${encodeURIComponent(REDIRECT_URI)}` +
       `&response_type=code` +
-      `&scope=openid email profile`;
+      `&scope=openid email profile`
 
-    window.location.href = authUrl;
-  };
+    window.location.href = authUrl
+  }
   
   return (
     <div className={s.container}>
