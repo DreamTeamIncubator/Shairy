@@ -55,7 +55,12 @@ body {
   color: var(--light-100);
   font-family: Inter, Helvetica, sans-serif;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; 
+  min-height: 100vh;
 }
+
 * {
   box-sizing: border-box;
   padding: 0;

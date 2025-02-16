@@ -4,11 +4,9 @@ import { redirect } from 'next/navigation';
 import { Button } from '../Button/Button';
 import s from './Header.module.scss';
 import { LanguageSelect } from '../Select/LanguageSelect/LanguageSelect';
+import Link from 'next/link';
 
 export const Header = () => {
-  const loginForm = () => {
-    redirect('/login');
-  };
   const SignUpForm = () => {
     redirect('/sign-up');
   };
@@ -20,9 +18,11 @@ export const Header = () => {
         <div className={s.navigate}>
           <LanguageSelect />
           <div>
-            <Button variant={'textButton'} className={s.btn} onClick={loginForm}>
+           <Link href='/login'>
+            <Button variant={'textButton'} className={s.btn} >
               Log in
             </Button>
+            </Link>
             <Button variant={'primary'} className={s.btn} onClick={SignUpForm}>
               Sign up
             </Button>

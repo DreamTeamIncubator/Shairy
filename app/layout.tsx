@@ -1,10 +1,11 @@
-import type {Metadata} from 'next';
-import {Geist, Geist_Mono} from 'next/font/google';
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import {Header} from '@/components/Header/Header';
-import {Sidebar, sidebarItems} from '@/components/Sidebar/Sidebar';
+import { Header } from '@/components/Header/Header';
+import { Sidebar, sidebarItems } from '@/components/Sidebar/Sidebar';
 import styles from './page.module.css';
-import {Scroll} from '@/components/Scroll/Scroll';
+import { Scroll } from '@/components/Scroll/Scroll';
+import { StoreWrapper } from '@/store/store-wrapper';
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -22,20 +23,22 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-                                       children,
-                                   }: Readonly<{
+    children,
+}: Readonly<{
     children: React.ReactNode;
 }>) {
     return (
         <html lang="en">
             <body className={`${geistSans.variable} ${geistMono.variable}`}>
-                <Scroll maxHeight={'100vh'}>
-                    <Header/>
-                    <div className={styles.page}>
-                        <Sidebar elements={sidebarItems}/>
-                        {children}
-                    </div>
-                </Scroll>
+                <StoreWrapper>
+                    <Scroll maxHeight={'100vh'}>
+                        <Header />
+                        <div className={styles.page}>
+                            <Sidebar elements={sidebarItems} />
+                            {children}
+                        </div>
+                    </Scroll>
+                </StoreWrapper>
             </body>
         </html>
     );

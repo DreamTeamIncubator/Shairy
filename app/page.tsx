@@ -7,6 +7,7 @@ import {Pagination} from '@/components/Pagination/Pagination';
 import {useState} from 'react';
 import {RadixTabs} from '@/components/Tabs/Tabs';
 
+
 export default function Home() {
     const [currentPage, setCurrentPage] = useState(1);
     const [perPage, setPerPageOptions] = useState<number>(50);
@@ -52,7 +53,7 @@ export default function Home() {
             {/* <h1 style={{ marginBottom: '30px', textAlign: 'center' }}>DreamTeam - Летим</h1> */}
             <div>
                 <div className={styles.page}>
-                    <div style={{display: 'flex', flexDirection: 'column', gap: '30px'}}>
+                    <div style={{display: 'flex', marginTop: '30px', flexDirection: 'column', gap: '30px'}}>
                         <Button>Полетели ) </Button>
                         <Button variant={'secondary'}>Полетели ) </Button>
                         <Button variant={'outlined'}>Полетели ) </Button>
@@ -85,3 +86,5 @@ export default function Home() {
         </>
     );
 }
+
+
