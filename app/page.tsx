@@ -6,11 +6,14 @@ import {Input} from '@/components/Input/Input';
 import {Pagination} from '@/components/Pagination/Pagination';
 import {useState} from 'react';
 import {RadixTabs} from '@/components/Tabs/Tabs';
+import { ReCaptcha } from '@/components/ReCaptcha/ReCaptcha';
 
 
 export default function Home() {
     const [currentPage, setCurrentPage] = useState(1);
     const [perPage, setPerPageOptions] = useState<number>(50);
+    const [isCaptchaCompleted, setIsCaptchaCompleted] = useState(false);
+    const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string
 
     const tabs = [
         {
@@ -82,6 +85,8 @@ export default function Home() {
                 <div style={{marginTop: '50px'}}>
                     <RadixTabs tabs={tabs} defaultValue="tab1"/>
                 </div>
+                <ReCaptcha sitekey={sitekey} changeCaptchaStatus={setIsCaptchaCompleted}/>
+                <button disabled={!isCaptchaCompleted} onClick={() => isCaptchaCompleted && alert('сработало')}>тут кнопка для проверки работы</button>
             </div>
         </>
     );
