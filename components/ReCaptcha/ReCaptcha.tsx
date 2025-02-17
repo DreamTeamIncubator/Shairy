@@ -22,13 +22,15 @@ type Props = {
   sitekey: string
   changeCaptchaStatus: Dispatch<SetStateAction<boolean>> | (() => void);
   theme?: reCaptchaTheme
+  onCaptchaResponse?: (response: string) => void
 };
 
-export const ReCaptcha = ({ sitekey, changeCaptchaStatus, theme = 'dark' }: Props) => {
+export const ReCaptcha = ({ sitekey, changeCaptchaStatus, theme = 'dark', onCaptchaResponse }: Props) => {
   const onRecaptchaLoad = () => {
     setIsRecaptchaLoaded(true);
   };
   const captchaCompletedHandler = (response: string) => {
+    onCaptchaResponse && onCaptchaResponse(response);
     changeCaptchaStatus(true);
   };
   const captchaExpiredHandler = () => {
