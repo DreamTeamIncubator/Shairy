@@ -1,8 +1,10 @@
-'use-client';
-import { redirect } from 'next/navigation';
+'use client';
 
-const LogOut = () => {
-  redirect('/login');
+import LogOutForm from '@/features/ui/logOutFom/LogOutForm';
+
+export default function Page() {
+
+  return <>
+    <LogOutForm />
+  </>;
 };
-
-export default LogOut;

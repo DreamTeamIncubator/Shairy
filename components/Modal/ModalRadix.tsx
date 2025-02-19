@@ -25,9 +25,9 @@ export const ModalRadix = ({ modalTitle, className, onClose, open, children, siz
         <Dialog.Content className={clsx(s.Content, s[size], className)}>
           <Dialog.Title className={s.Title}>{modalTitle}</Dialog.Title>
             <hr className={s.Hr} />
-          <div className={s.Children}>
-            {children}
-          </div>
+          {/*<div className={s.Children}>*/}
+          {/*  {children}*/}
+          {/*</div>*/}
           <Dialog.Close asChild>
             <button className={s.IconButton} aria-label="Close">
               <Cross2Icon />
