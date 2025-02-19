@@ -1,5 +1,5 @@
-import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import type {Metadata} from 'next';
+import {Geist, Geist_Mono} from 'next/font/google';
 import './globals.css';
 import { ReactNode } from 'react';
 import { StoreWrapper } from '@/store/store-wrapper';
@@ -7,6 +7,7 @@ import { Scroll } from '@/components/Scroll/Scroll';
 import { Header } from '@/components/Header/Header';
 import styles from '@/app/page.module.css';
 import { Sidebar, sidebarItems } from '@/components/Sidebar/Sidebar';
+
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

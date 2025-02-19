@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 export const Header = () => {
   const SignUpForm = () => {
-    redirect('/sign-up');
+    redirect('/auth/sign-up');
   };
   
   return (
