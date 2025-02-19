@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './page.module.css';
+import styles from '../page.module.css';
 import { Button } from '@/components/Button/Button';
 import { Input } from '@/components/Input/Input';
 import { Pagination } from '@/components/Pagination/Pagination';
@@ -12,6 +12,7 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPageOptions] = useState<number>(50);
   const [isCaptchaCompleted, setIsCaptchaCompleted] = useState(false);
+
   const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string;
 
   const tabs = [
@@ -52,7 +53,6 @@ export default function Home() {
 
   return (
     <>
-      {/* <h1 style={{ marginBottom: '30px', textAlign: 'center' }}>DreamTeam - Летим</h1> */}
       <div className={styles.content}>
         <div>
           <div style={{ display: 'flex', marginTop: '30px', flexDirection: 'column', gap: '30px' }}>
