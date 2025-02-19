@@ -5,6 +5,7 @@ import {Header} from '@/components/Header/Header';
 import {Sidebar, sidebarItems} from '@/components/Sidebar/Sidebar';
 import styles from './page.module.css';
 import {Scroll} from '@/components/Scroll/Scroll';
+import {StoreWrapper} from '@/app/store/store-wrapper';
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -28,15 +29,17 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${geistSans.variable} ${geistMono.variable}`}>
-                <Scroll maxHeight={'100vh'}>
-                    <Header/>
-                    <div className={styles.page}>
-                        <Sidebar elements={sidebarItems}/>
-                        {children}
-                    </div>
-                </Scroll>
-            </body>
+        <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <StoreWrapper>
+            <Scroll maxHeight={'100vh'}>
+                <Header/>
+                <div className={styles.page}>
+                    <Sidebar elements={sidebarItems}/>
+                    {children}
+                </div>
+            </Scroll>
+        </StoreWrapper>
+        </body>
         </html>
     );
 }

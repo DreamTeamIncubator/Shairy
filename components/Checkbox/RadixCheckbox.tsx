@@ -11,7 +11,7 @@ type Props = {
 } & ComponentPropsWithoutRef<typeof Checkbox.Root>;
 
 export const RadixCheckbox = ({ disabled, showLabel, textLabel, ...rest }: Props) => (
-  <form>
+  // <form>
     <div style={{ display: "flex", alignItems: "center" }}>
       <Checkbox.Root className={s.root} disabled={disabled} {...rest}>
         <Checkbox.Indicator className={clsx(s.indicator, {[s.disabledIndicator]: disabled })}>
@@ -24,5 +24,5 @@ export const RadixCheckbox = ({ disabled, showLabel, textLabel, ...rest }: Props
         </label>
       )}
     </div>
-  </form>
+  // </form>
 );

@@ -10,7 +10,7 @@ export const Header = () => {
     redirect('/login');
   };
   const SignUpForm = () => {
-    redirect('/sign-up');
+    redirect('/auth/sign-up');
   };
   
   return (
