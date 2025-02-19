@@ -1,8 +1,8 @@
-import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import type {Metadata} from 'next';
+import {Geist, Geist_Mono} from 'next/font/google';
 import './globals.css';
-import { Header } from '@/components/Header/Header';
-import { Sidebar, sidebarItems } from '@/components/Sidebar/Sidebar';
+import {Header} from '@/components/Header/Header';
+import {Sidebar, sidebarItems} from '@/components/Sidebar/Sidebar';
 import styles from './page.module.css';
 import { Scroll } from '@/components/Scroll/Scroll';
 import { StoreWrapper } from '@/store/store-wrapper';

@@ -33,9 +33,9 @@ export const ModalRadix = ({ modalTitle, className, onClose, open, children, siz
               <Cross2Icon />
             </button>
           </Dialog.Close>
-          <div className={s.ButtonContainer}>
-          {children}
-          </div>
+          {/*<div className={s.ButtonContainer}>*/}
+          {/*{children}*/}
+          {/*</div>*/}
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
