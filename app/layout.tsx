@@ -26,17 +26,17 @@ export const metadata: Metadata = {
 export default function Layout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en">
-    <body className={`${geistSans.variable} ${geistMono.variable}`}>
-    <StoreWrapper>
-      <Scroll maxHeight={'100vh'}>
-        <Header />
-        <div className={styles.page}>
-          <Sidebar elements={sidebarItems} />
-          {children}
-        </div>
-      </Scroll>
-    </StoreWrapper>
-    </body>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <StoreWrapper>
+          <Header />
+          <Scroll style={{ height: '100vh', overflow: 'auto' }}>
+            <div className={styles.page}>
+              <Sidebar elements={sidebarItems} />
+              {children}
+            </div>
+          </Scroll>
+        </StoreWrapper>
+      </body>
     </html>
   );
 }
