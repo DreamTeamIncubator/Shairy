@@ -78,7 +78,7 @@ const ForgotPassword = () => {
           variant={'textButton'}
           type={'button'}
           onClick={() => {
-            router.push('/auth/login');
+            router.push('/login');
           }}>
           Back to Sign In
         </Button>
