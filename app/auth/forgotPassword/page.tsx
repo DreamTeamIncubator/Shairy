@@ -80,7 +80,7 @@ const ForgotPassword = () => {
           onClick={() => {
             router.push('/auth/login');
           }}>
-          Back to Sing In
+          Back to Sign In
         </Button>
         <div className={s.reCaptcha}>
           <ReCaptcha

@@ -127,7 +127,7 @@ const Login = () => {
             </Button>
           </div>
           <span className={s.text}>Don't have an account?</span>
-          <Link href="/sign-up">
+          <Link href="/auth/sign-up">
             <Button type={'submit'} variant={'textButton'} className={s.btn}>
               Sign Up
             </Button>
