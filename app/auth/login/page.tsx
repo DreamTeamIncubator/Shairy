@@ -27,7 +27,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [login, { isLoading }] = useLoginMutation();
   const router = useRouter();
-
+  // лучше выносить за компоненту, в env.
   const GOOGLE_CLIENT_ID =
     '272583913867-t74i019ufdvmarh05jlv8bcu1ak0a6o6.apps.googleusercontent.com';
   const REDIRECT_URI = 'http://localhost:3000/auth/callback';
