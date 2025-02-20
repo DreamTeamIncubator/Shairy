@@ -2,7 +2,7 @@
 
 import { SubmitHandler, useForm } from 'react-hook-form';
 import s from './Login.module.scss';
-import { Button } from '../../components/Button/Button';
+import { Button } from './../../../components/Button/Button';
 import Image from 'next/image';
 import { useState } from 'react';
 import { useLoginMutation } from '@/store/services/auth/auth';

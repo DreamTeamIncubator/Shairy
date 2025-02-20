@@ -177,7 +177,7 @@ const SignUp = () => {
                 <div className={s.buttonWrapper}>
                     <Button type="submit" disabled={isSignUpDisabled}>Sign up</Button>
                     <p>Do you have an account?</p>
-                    <Link href={'/login'}>
+                    <Link href={'/auth/login'}>
                         <Button className={s.signUpBtn} variant="textButton">Sign in</Button>
                     </Link>
                 </div>

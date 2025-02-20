@@ -18,7 +18,7 @@ export const Header = () => {
         <div className={s.navigate}>
           <LanguageSelect />
           <div>
-           <Link href='/login'>
+           <Link href='/auth/login'>
             <Button variant={'textButton'} className={s.btn} >
               Log in
             </Button>
