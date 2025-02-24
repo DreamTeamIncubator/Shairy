@@ -1,7 +1,7 @@
 'use client';
 
-import { SubmitHandler, useForm } from 'react-hook-form';
-import s from './Login.module.scss';
+import { SubmitHandler, useForm } from 'react-hook-form'; 
+import s from './Login.module.scss'; 
 import { Button } from './../../../components/Button/Button';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -17,12 +17,18 @@ type Inputs = {
 
 const Login = () => {
   const {
-    register,
-    handleSubmit,
+    register, 
+    handleSubmit, 
     formState: { errors },
+    watch, 
   } = useForm<Inputs>({
     defaultValues: { email: '', password: '' },
   });
+
+  const email = watch('email')
+  const password = watch('password')
+
+  const isFormValid = email.trim() !== '' && password.trim() !== ''
 
   const [showPassword, setShowPassword] = useState(false);
   const [login, { isLoading }] = useLoginMutation();
@@ -122,7 +128,7 @@ const Login = () => {
             <Link href="/auth/forgotPassword" className={s.forgotPasswordText}>
               Forgot password
             </Link>
-            <Button type={'submit'} variant={'primary'} className={s.btn}>
+            <Button type={'submit'} variant={'primary'} className={s.btn} disabled={!isFormValid}>
               Sign In
             </Button>
           </div>
