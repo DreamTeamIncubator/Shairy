@@ -80,12 +80,11 @@ const Login = () => {
             <Image src="/googleGithub/github.svg" alt="GitHub" width={36} height={36} />
           </div>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)} className={s.form} autoComplete="off">
+        <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
           <div className={s.formGroup}>
             <label className={s.label}>Email</label>
             <input
               placeholder="Epam@epam.com"
-              autoComplete="off"
               className={s.input}
               type="email"
               {...register('email', {
@@ -104,7 +103,6 @@ const Login = () => {
               <input
                 className={s.input}
                 type={showPassword ? 'text' : 'password'}
-                autoComplete="off"
                 {...register('password', {
                   required: 'The email or password are incorrect. Try again please',
                   minLength: {

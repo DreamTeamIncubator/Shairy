@@ -37,7 +37,7 @@ const RegistrationConfirmation = () => {
                     <h1>Congratulations!</h1>
                     <div>
                         <p>Your email has been confirmed</p>
-                        <Link href={'/login'}>
+                        <Link href={'auth/login'}>
                             <Button variant="secondary">Sign in</Button>
                         </Link>
                     </div>
