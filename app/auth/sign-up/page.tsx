@@ -8,6 +8,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { ModalRadix } from '@/components/Modal/ModalRadix';
 import s from './Sign-up.module.scss';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRegistrationMutation } from '@/app/store/auth/auth';
 
 // link в отдельную константу.
@@ -76,9 +77,38 @@ const SignUp = () => {
     }
   };
 
+  const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string;
+  const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI as string;
+
+  const handleGitHubLogin = () => {
+    const redirectUrl = `${window.location.origin}/auth/callback?provider=github`;
+    window.location.href = `https://inctagram.work/api/v1/auth/github/login?redirect_url=${encodeURIComponent(
+      redirectUrl
+    )}`;
+  };
+
+  const handleGoogleLogin = () => {
+    const authUrl =
+      `https://accounts.google.com/o/oauth2/v2/auth?` +
+      `client_id=${GOOGLE_CLIENT_ID}&` +
+      `&redirect_uri=${encodeURIComponent(REDIRECT_URI)}` +
+      `&response_type=code` +
+      `&scope=openid email profile`;
+
+    window.location.href = authUrl;
+  };
+
   return (
     <div className={s.container}>
       <h1>Sign Up</h1>
+      <div className={s.iconContainer}>
+          <div onClick={handleGoogleLogin} style={{ cursor: 'pointer' }}>
+            <Image src="/googleGithub/google.svg" alt="Google" width={36} height={36} />
+          </div>
+          <div onClick={handleGitHubLogin} style={{ cursor: 'pointer' }}>
+            <Image src="/googleGithub/github.svg" alt="GitHub" width={36} height={36} />
+          </div>
+        </div>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete={'on'}>
         <div className={s.inputWrapper}>
           <div className={s.inputGroup}>
