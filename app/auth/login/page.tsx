@@ -47,14 +47,13 @@ const Login = () => {
     }
   };
   
+ 
   const handleGitHubLogin = () => {
     const redirectUrl = `${window.location.origin}/auth/callback?provider=github`;
     window.location.href = `https://inctagram.work/api/v1/auth/github/login?redirect_url=${encodeURIComponent(
       redirectUrl
     )}`;
   };
-
-  
 
   const handleGoogleLogin = () => {
     const authUrl =
