@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import s from './TextArea.module.scss'; 
 import clsx from 'clsx';
 
-
 type Props = {
   label: string
   width: string
@@ -27,7 +26,7 @@ export const TextArea = ({showError, label, placeholder, error, disabled, width,
       <label className = {s.label}>{label}</label>
         <textarea className={clsx(s.textArea, { [s.error]: showError })} placeholder={placeholder} 
         disabled={disabled} onChange={handleChange}  style={{ width }}/>
-        { showCharacterCount && (<div className={s.character}>
+        {showCharacterCount && (<div className={s.character}>
           {characterCount}/500
         </div>
 )}
