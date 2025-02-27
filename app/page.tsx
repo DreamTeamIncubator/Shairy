@@ -52,7 +52,6 @@ export default function Home() {
 
   return (
     <>
-      {/* <h1 style={{ marginBottom: '30px', textAlign: 'center' }}>DreamTeam - Летим</h1> */}
       <div className={styles.content}>
         <div>
           <div style={{ display: 'flex', marginTop: '30px', flexDirection: 'column', gap: '30px' }}>
