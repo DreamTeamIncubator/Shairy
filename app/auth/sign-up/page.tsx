@@ -10,6 +10,8 @@ import s from './Sign-up.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRegistrationMutation } from '@/app/store/auth/auth';
+import { useRouter } from 'next/navigation';
+
 
 // link в отдельную константу.
 
@@ -48,6 +50,7 @@ const SignUp = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [emailValue, setEmailValue] = useState<string | null>(null);
   const isSignUpDisabled = !isValid || !watch('termsOfService') || isLoading || isError;
+  const router = useRouter()
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const { userName, email, password } = data;
@@ -81,12 +84,11 @@ const SignUp = () => {
   const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI as string;
 
   const handleGitHubLogin = () => {
-    const redirectUrl = `${window.location.origin}/auth/callback?provider=github`;
-    window.location.href = `https://inctagram.work/api/v1/auth/github/login?redirect_url=${encodeURIComponent(
-      redirectUrl
-    )}`;
+    const redirectUrl = `${window.location.origin}/auth/callback`
+    const loginUrl = `https://inctagram.work/api/v1/auth/github/login?redirect_url=${encodeURIComponent(redirectUrl)}`
+    router.push(loginUrl)
   };
-
+  
   const handleGoogleLogin = () => {
     const authUrl =
       `https://accounts.google.com/o/oauth2/v2/auth?` +
@@ -95,8 +97,8 @@ const SignUp = () => {
       `&response_type=code` +
       `&scope=openid email profile`;
 
-    window.location.href = authUrl;
-  };
+      router.push(authUrl)
+  }
 
   return (
     <div className={s.container}>

@@ -46,9 +46,7 @@ export const authAPI = createApi({
         }),
       }
     ),
-    googleLogin: builder.mutation<
-      { accessToken: string; email: string },
-      { redirectUrl: string; code: string }
+    googleLogin: builder.mutation<{ accessToken: string; email: string }, { redirectUrl: string; code: string }
     >({
       query: (body) => ({
         url: `/auth/google/login`,

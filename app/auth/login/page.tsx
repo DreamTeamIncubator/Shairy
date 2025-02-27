@@ -30,8 +30,9 @@ const Login = () => {
   const [login] = useLoginMutation();
   const router = useRouter();
 
-  const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string;
-  const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI as string;
+
+  const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string
+  const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI as string
 
   useRedirectIfAuthorized();
 
@@ -47,10 +48,9 @@ const Login = () => {
   };
 
   const handleGitHubLogin = () => {
-    const redirectUrl = `${window.location.origin}/auth/callback?provider=github`;
-    window.location.href = `https://inctagram.work/api/v1/auth/github/login?redirect_url=${encodeURIComponent(
-      redirectUrl
-    )}`;
+    const redirectUrl = `${window.location.origin}/auth/callback`
+    const loginUrl = `https://inctagram.work/api/v1/auth/github/login?redirect_url=${encodeURIComponent(redirectUrl)}`
+    router.push(loginUrl)
   };
 
   const handleGoogleLogin = () => {
@@ -61,8 +61,8 @@ const Login = () => {
       `&response_type=code` +
       `&scope=openid email profile`;
 
-    window.location.href = authUrl;
-  };
+      router.push(authUrl)
+  }
 
   return (
     <div className={s.container}>
