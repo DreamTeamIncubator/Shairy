@@ -1,156 +1,157 @@
-.container {
-  display: flex;
-  align-items: center;
-  width: 378px;
-  height: 528px;
-  border-radius: 2px;
-  border: 1px solid var(--dark-300, #333);
-  background: var(--dark-500, #171717);
-  position: absolute;
-  top: 126px;
-  left: 550px;
-}
-
-.formContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 24px;
-}
-
-.title {
-  color: var(--light-100, #fff);
-  text-align: center;
-  font-family: Inter;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 36px;
-}
-
-.iconContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 60px;
-  margin-top: 13px;
-}
-
-.formGroup {
-  display: flex;
-  flex-direction: column;
-  margin-top: 24px;
-  position: relative;
-}
-
-.errorMessage {
-  margin-top: 3px;
-  color: red;
-  font-size: 14px;
-  position: absolute;
-  top: 60px;
-}
-
-.label {
-  color: var(--light-900, #8d9094);
-  font-family: Inter;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 24px;
-}
-
-.input {
-  width: 330px;
-  height: 36px;
-  flex-shrink: 0;
-  border-radius: 2px;
-  border: 1px solid var(--dark-100, #4c4c4c);
-  padding-left: 12px;
-  padding-right: 6px;
-  background-color: transparent;
-  color: var(--light-100, #fff);
-  font-family: Inter;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 24px;
-  &:focus {
-    border: 1px solid var(--accent-500, #397df6);
-    outline: none;
+.container { 
+    display: flex; 
+    align-items: center;
+    width: 378px; 
+    height: 528px; 
+    border-radius: 2px; 
+    border: 1px solid var(--dark-300, #333); 
+    background: var(--dark-500, #171717); 
+    position: absolute; 
+    top: 126px;
+    left: 550px;
   }
-}
-
-.buttonContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  margin-top: 40px;
-  gap: 10px;
-  margin-bottom: 18px;
-}
-
-.link {
-  color: var(--light-900, #8d9094);
-  text-align: center;
-  font-family: Inter;
-  font-size: 14px;
-  font-style: normal;
-  line-height: 24px;
-}
-
-.text {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  color: var(--light-100, #fff);
-  text-align: center;
-  font-family: Inter;
-  font-size: 16px;
-  font-style: normal;
-  line-height: 24px;
-  margin-bottom: 12px;
-}
-
-.btn {
-  width: 330px;
-  font-family: Inter;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 24px;
-}
-
-.inputPassword {
-  appearance: none;
-  -webkit-appearance: none;
-  background-image: none;
-}
-
-.passwordContainer {
-  position: relative;
-  width: 330px;
-}
-
-.eyeIcon {
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: var(--light-900, #8d9094);
-}
-
-.eyeIcon:hover {
-  color: var(--light-100, #fff);
-}
-
-.forgotPasswordText {
-  color: var(--Light-900, #8d9094);
-  text-align: center;
-  font-family: Inter;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 24px;
+  
+  .formContainer {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    padding: 24px;
+  }
+  
+  .title { 
+    color: var(--light-100, #FFF); 
+    text-align: center; 
+    font-family: Inter; 
+    font-size: 20px; 
+    font-style: normal; 
+    font-weight: 700; 
+    line-height: 36px;
+  } 
+  
+  .iconContainer { 
+    display: flex;
+    flex-direction: row; 
+    justify-content: center; 
+    gap: 60px; 
+    margin-top: 13px; 
+  } 
+    
+  .formGroup { 
+    display: flex; 
+    flex-direction: column; 
+    margin-top: 24px; 
+    position: relative;
+  } 
+    
+  .errorMessage { 
+    margin-top: 3px;
+    color: red; 
+    font-size: 14px; 
+    position: absolute;
+    top: 60px; 
+  }
+  
+  .label { 
+    color: var(--light-900, #8D9094); 
+    font-family: Inter; 
+    font-size: 14px;
+    font-style: normal; 
+    font-weight: 400; 
+    line-height: 24px; 
+  } 
+    
+  .input { 
+    width: 330px; 
+    height: 36px; 
+    flex-shrink: 0; 
+    border-radius: 2px; 
+    border: 1px solid var(--dark-100, #4C4C4C); 
+    padding-left: 12px;
+    padding-right: 6px; 
+    background-color: transparent;
+    color: var(--light-100, #FFF); 
+    font-family: Inter; 
+    font-size: 16px; 
+    font-style: normal; 
+    font-weight: 400; 
+    line-height: 24px; 
+    &:focus { 
+      border: 1px solid var(--accent-500, #397DF6);
+      outline: none; 
+    } 
+  }
+  
+  .buttonContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 40px; 
+    gap: 10px; 
+    margin-bottom: 18px;
+  }
+   
+  .link {
+    color: var(--light-900, #8D9094);
+    text-align: center;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    line-height: 24px; 
+  }
+  
+  .text {
+    display: flex;
+    flex-direction: row; 
+    justify-content: center; 
+    color: var(--light-100, #FFF);
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 24px; 
+    margin-bottom: 12px;
+  }
+  
+  .btn {
+    width: 330px;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px; 
+  }
+  
+  .inputPassword {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: none;
+  }
+  
+  .passwordContainer {
+    position: relative;
+    width: 330px;
+  }
+  
+  .eyeIcon {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--light-900, #8D9094);
+  }
+  
+  .eyeIcon:hover {
+    color: var(--light-100, #FFF);
+  }
+  
+ 
+  .forgotPasswordText {
+    color: var(--Light-900, #8D9094);
+    text-align: center;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; 
 }

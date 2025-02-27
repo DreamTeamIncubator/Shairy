@@ -102,9 +102,8 @@ const SignUp = () => {
 
   return (
     <div className={s.container}>
-      <div className={s.form}>
-        <h1>Sign Up</h1>
-        <div className={s.iconContainer}>
+      <h1>Sign Up</h1>
+      <div className={s.iconContainer}>
           <div onClick={handleGoogleLogin} style={{ cursor: 'pointer' }}>
             <Image src="/googleGithub/google.svg" alt="Google" width={36} height={36} />
           </div>
@@ -112,134 +111,133 @@ const SignUp = () => {
             <Image src="/googleGithub/github.svg" alt="GitHub" width={36} height={36} />
           </div>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)} autoComplete={'on'}>
-          <div className={s.inputWrapper}>
-            <div className={s.inputGroup}>
-              <label htmlFor={'userName'}>Username</label>
-              <Input
-                type="text"
-                id={'userName'}
-                placeholder={'Epam11'}
-                error={errors.userName?.message}
-                {...register('userName', {
-                  required: 'UserName is required',
-                  minLength: { value: 6, message: 'Minimum number of characters 6' },
-                  maxLength: { value: 30, message: 'Maximum number of characters 30' },
-                  pattern: {
-                    value: validationPatterns.username,
-                    message: 'UserName can only contain letters, numbers, and underscores',
-                  },
-                })}
-                onFocus={() => clearErrors('userName')}
-              />
-            </div>
-
-            <div className={s.inputGroup}>
-              <label htmlFor={'email'}>Email</label>
-              <Input
-                type="email"
-                id={'email'}
-                placeholder={'Epam@epam.com'}
-                error={errors.email?.message}
-                {...register('email', {
-                  required: 'Email is required',
-                  pattern: {
-                    value: validationPatterns.email,
-                    message: 'The email must match the format example@example.com',
-                  },
-                })}
-                onFocus={() => clearErrors('email')}
-              />
-            </div>
-            <div className={s.inputGroup}>
-              <label htmlFor={'password'}>Password</label>
-              <Input
-                type="password"
-                id={'password'}
-                placeholder={'******************'}
-                error={errors.password?.message}
-                {...register('password', {
-                  required: 'Password is required',
-                  minLength: { value: 6, message: 'Minimum number of characters 6' },
-                  maxLength: { value: 20, message: 'Maximum number of characters 20' },
-                  pattern: {
-                    value: validationPatterns.password,
-                    message: 'Password must contain a-z, A-Z, 0-9, and special characters',
-                  },
-                })}
-                onFocus={() => clearErrors('password')}
-              />
-            </div>
-
-            <div className={s.inputGroup}>
-              <label htmlFor={'passwordConfirmation'}>Password confirmation</label>
-              <Input
-                type="password"
-                id={'passwordConfirmation'}
-                placeholder={'******************'}
-                error={errors.passwordConfirmation?.message}
-                {...register('passwordConfirmation', {
-                  required: 'Please confirm your password',
-                  validate: (value: string) =>
-                    value === watch('password') || 'The passwords must match',
-                })}
-                onFocus={() => clearErrors('passwordConfirmation')}
-              />
-            </div>
-          </div>
-
-          <div className={s.chechboxGroup}>
-            <Controller
-              name="termsOfService"
-              control={control}
-              rules={{ required: 'You must agree to the terms' }}
-              render={({ field }) => (
-                <>
-                  <div className={s.checkboxWrapper}>
-                    <RadixCheckbox checked={!!field.value} onCheckedChange={field.onChange} />
-                    <p>
-                      I agree to the <Link href={'/auth/terms'}>Terms of Service</Link> and
-                      <Link href={'/auth/privacy'}> Privacy Policy</Link>
-                    </p>
-                  </div>
-
-                  {errors.termsOfService && <p>{errors.termsOfService.message}</p>}
-                </>
-              )}
+      <form onSubmit={handleSubmit(onSubmit)} autoComplete={'on'}>
+        <div className={s.inputWrapper}>
+          <div className={s.inputGroup}>
+            <label htmlFor={'userName'}>Username</label>
+            <Input
+              type="text"
+              id={'userName'}
+              placeholder={'Epam11'}
+              error={errors.userName?.message}
+              {...register('userName', {
+                required: 'UserName is required',
+                minLength: { value: 6, message: 'Minimum number of characters 6' },
+                maxLength: { value: 30, message: 'Maximum number of characters 30' },
+                pattern: {
+                  value: validationPatterns.username,
+                  message: 'UserName can only contain letters, numbers, and underscores',
+                },
+              })}
+              onFocus={() => clearErrors('userName')}
             />
           </div>
 
-          <div className={s.buttonWrapper}>
-            <Button type="submit" disabled={isSignUpDisabled}>
-              Sign up
-            </Button>
-            <p>Do you have an account?</p>
-            <Link href={'/auth/login'}>
-              <Button className={s.signUpBtn} variant="textButton">
-                Sign in
-              </Button>
-            </Link>
+          <div className={s.inputGroup}>
+            <label htmlFor={'email'}>Email</label>
+            <Input
+              type="email"
+              id={'email'}
+              placeholder={'Epam@epam.com'}
+              error={errors.email?.message}
+              {...register('email', {
+                required: 'Email is required',
+                pattern: {
+                  value: validationPatterns.email,
+                  message: 'The email must match the format example@example.com',
+                },
+              })}
+              onFocus={() => clearErrors('email')}
+            />
           </div>
-        </form>
+          <div className={s.inputGroup}>
+            <label htmlFor={'password'}>Password</label>
+            <Input
+              type="password"
+              id={'password'}
+              placeholder={'******************'}
+              error={errors.password?.message}
+              {...register('password', {
+                required: 'Password is required',
+                minLength: { value: 6, message: 'Minimum number of characters 6' },
+                maxLength: { value: 20, message: 'Maximum number of characters 20' },
+                pattern: {
+                  value: validationPatterns.password,
+                  message: 'Password must contain a-z, A-Z, 0-9, and special characters',
+                },
+              })}
+              onFocus={() => clearErrors('password')}
+            />
+          </div>
 
-        <ModalRadix
-          className={s.emailSent}
-          open={isOpen}
-          onClose={() => {
-            setIsOpen(false);
-          }}
-          modalTitle={'Email sent'}>
-          <div>
-            <p>We have sent a link to confirm your email to {emailValue}</p>
-            <Button
-              onClick={() => {
-                setIsOpen(false);
-              }}>
-              OK
-            </Button>
+          <div className={s.inputGroup}>
+            <label htmlFor={'passwordConfirmation'}>Password confirmation</label>
+            <Input
+              type="password"
+              id={'passwordConfirmation'}
+              placeholder={'******************'}
+              error={errors.passwordConfirmation?.message}
+              {...register('passwordConfirmation', {
+                required: 'Please confirm your password',
+                validate: (value: string) =>
+                  value === watch('password') || 'The passwords must match',
+              })}
+              onFocus={() => clearErrors('passwordConfirmation')}
+            />
           </div>
-        </ModalRadix>
-      </div>
+        </div>
+
+        <div className={s.chechboxGroup}>
+          <Controller
+            name="termsOfService"
+            control={control}
+            rules={{ required: 'You must agree to the terms' }}
+            render={({ field }) => (
+              <>
+                <div className={s.checkboxWrapper}>
+                  <RadixCheckbox checked={!!field.value} onCheckedChange={field.onChange} />
+                  <p>
+                    I agree to the <Link href={'/auth/terms'}>Terms of Service</Link> and
+                    <Link href={'/auth/privacy'}> Privacy Policy</Link>
+                  </p>
+                </div>
+
+                {errors.termsOfService && <p>{errors.termsOfService.message}</p>}
+              </>
+            )}
+          />
+        </div>
+
+        <div className={s.buttonWrapper}>
+          <Button type="submit" disabled={isSignUpDisabled}>
+            Sign up
+          </Button>
+          <p>Do you have an account?</p>
+          <Link href={'/auth/login'}>
+            <Button className={s.signUpBtn} variant="textButton">
+              Sign in
+            </Button>
+          </Link>
+        </div>
+      </form>
+
+      <ModalRadix
+        className={s.emailSent}
+        open={isOpen}
+        onClose={() => {
+          setIsOpen(false);
+        }}
+        modalTitle={'Email sent'}>
+        <div>
+          <p>We have sent a link to confirm your email to {emailValue}</p>
+          <Button
+            onClick={() => {
+              setIsOpen(false);
+            }}>
+            OK
+          </Button>
+        </div>
+      </ModalRadix>
     </div>
   );
 };

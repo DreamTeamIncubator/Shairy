@@ -14,14 +14,12 @@ const AuthCallback = () => {
   
     if (code) {
       googleLogin({ code, redirectUrl: `${window.location.origin}/auth/callback` })
-      
         .unwrap()
         .then((response) => {
-          sessionStorage.setItem('accessToken', response.accessToken);
-          router.push('/home');
+          sessionStorage.setItem("accessToken", response.accessToken)
+          router.push("/home")
         })
         .catch((error) => {
-
           console.error("Ошибка аутентификации (Google)", error)
           router.push("/login")
         })
@@ -31,3 +29,4 @@ const AuthCallback = () => {
 }
 
 export default AuthCallback
+

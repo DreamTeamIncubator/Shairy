@@ -7,7 +7,6 @@ import { useNewPasswordMutation } from '@/store/services/auth/auth';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/Button/Button';
-import Image from 'next/image';
 
 type Inputs = {
   password: string;
@@ -45,70 +44,50 @@ const RecoveryPage = () => {
     }
   };
 
-  const handleShowPassword = () => setShowPassword((prev) => !prev);
-
   return (
     <div className={s.content}>
       <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
         <h2 className={s.title}>Recovery password</h2>
         <label className={s.label}>
-          <div className={s.password}>
-            <span className={s.text}>New password</span>
-            <Input
-              onIconClick={handleShowPassword}
-              {...register('password', {
-                required: 'Password is required',
-                pattern: {
-                  value: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+=\-[\]{};:'",.<>/?`~]).{6,20}$/,
-                  message:
-                    'Password must contain at least 1 uppercase letter, 1 number, and 1 special character',
-                },
-                minLength: {
-                  value: 6,
-                  message: 'Password must be at least 6 characters',
-                },
-                maxLength: {
-                  value: 20,
-                  message: 'Password must be at most 20 characters',
-                },
-              })}
-              type={showPassword ? 'text' : 'password'}
-            />
-            <span className={s.eyeIcon} onClick={handleShowPassword}>
-              <Image
-                src={showPassword ? '/eyeOpen.svg' : '/eyeClosed.svg'}
-                alt="Eye Icon"
-                width={24}
-                height={24}
-              />
-            </span>
-          </div>
+          <span className={s.text}>New password</span>
+          <Input
+            onIconClick={() => setShowPassword((prev) => !prev)}
+            showIcon
+            {...register('password', {
+              required: 'Password is required',
+              pattern: {
+                value: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+=\-[\]{};:'",.<>/?`~]).{6,20}$/,
+                message:
+                  'Password must contain at least 1 uppercase letter, 1 number, and 1 special character',
+              },
+              minLength: {
+                value: 6,
+                message: 'Password must be at least 6 characters',
+              },
+              maxLength: {
+                value: 20,
+                message: 'Password must be at most 20 characters',
+              },
+            })}
+            type={showPassword ? 'text' : 'password'}
+          />
           {errors.password && <span className={s.error}>{errors.password.message}</span>}
         </label>
         <label>
-          <div className={s.password}>
-            <span className={s.text}>Password confirmation</span>
-            <Input
-              onIconClick={handleShowPassword}
-              {...register('confirmPassword', {
-                required: 'Password confirmation is required',
-                validate: (value) => value === watch('password') || 'The passwords must match',
-              })}
-              type={showPassword ? 'text' : 'password'}
-            />
-            <span className={s.eyeIcon} onClick={handleShowPassword}>
-              <Image
-                src={showPassword ? '/eyeOpen.svg' : '/eyeClosed.svg'}
-                alt="Eye Icon"
-                width={24}
-                height={24}
-              />
-            </span>
-          </div>
-          {errors.confirmPassword && (
-            <span className={s.error}>{errors.confirmPassword.message}</span>
-          )}
+          <span className={s.text}>Password confirmation</span>
+          <Input
+            onIconClick={() => setShowPassword((prev) => !prev)}
+            showIcon
+            {...register('confirmPassword', {
+              required: 'Password confirmation is required',
+              validate: (value) => value === watch('password') || 'The passwords must match',
+            })}
+            type={showPassword ? 'text' : 'password'}
+          />
         </label>
+        {errors.confirmPassword && (
+          <span className={s.error}>{errors.confirmPassword.message}</span>
+        )}
 
         <span className={s.text}>Your password must be between 6 and 20 characters</span>
 
