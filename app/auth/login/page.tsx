@@ -1,7 +1,7 @@
 'use client';
 
-import { SubmitHandler, useForm } from 'react-hook-form'; 
-import s from './Login.module.scss'; 
+import { SubmitHandler, useForm } from 'react-hook-form';
+import s from './Login.module.scss';
 import { Button } from './../../../components/Button/Button';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -17,44 +17,41 @@ type Inputs = {
 
 const Login = () => {
   const {
-    register, 
-    handleSubmit, 
-    formState: { errors, isValid},
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
   } = useForm<Inputs>({
     defaultValues: { email: '', password: '' },
-    mode: 'onBlur'
+    mode: 'onBlur',
   });
 
   const [loginError, setLoginError] = useState<string | null>(null);
-  const [showPassword, setShowPassword] = useState(false)
-  const [login, { isLoading }] = useLoginMutation()
-  const router = useRouter()
-  // лучше выносить за компоненту, в env.
+  const [showPassword, setShowPassword] = useState(false);
+  const [login] = useLoginMutation();
+  const router = useRouter();
 
   const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string;
   const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI as string;
 
-  useRedirectIfAuthorized()
+  useRedirectIfAuthorized();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       const response = await login(data).unwrap();
       console.log('Успешный вход', response.accessToken);
       router.push('/home');
-    } catch (error: any) {
+    } catch (error) {
       console.error('Ошибка входа:', JSON.stringify(error, null));
-      setLoginError('The email or password is incorrect. Try again please')
+      setLoginError('The email or password is incorrect. Try again please');
     }
   };
-  
+
   const handleGitHubLogin = () => {
     const redirectUrl = `${window.location.origin}/auth/callback?provider=github`;
     window.location.href = `https://inctagram.work/api/v1/auth/github/login?redirect_url=${encodeURIComponent(
       redirectUrl
     )}`;
   };
-
-  
 
   const handleGoogleLogin = () => {
     const authUrl =
@@ -93,7 +90,6 @@ const Login = () => {
                   message: 'Incorrect email address',
                 },
               })}
-             
             />
             {errors.email && <span className={s.errorMessage}>{errors.email.message}</span>}
           </div>
@@ -120,20 +116,20 @@ const Login = () => {
                 />
               </span>
             </div>
-            { errors.password && <span className={s.errorMessage}>{errors.password.message}</span>}
+            {errors.password && <span className={s.errorMessage}>{errors.password.message}</span>}
             {!errors.password && loginError && <span className={s.errorMessage}>{loginError}</span>}
           </div>
           <div className={s.buttonContainer}>
             <Link href="/auth/forgotPassword" className={s.forgotPasswordText}>
               Forgot password
             </Link>
-            <Button type='submit' variant={'primary'} className={s.btn} disabled={!isValid}>
+            <Button type="submit" variant={'primary'} className={s.btn} disabled={!isValid}>
               Sign In
             </Button>
           </div>
-          <span className={s.text}>Don't have an account?</span>
+          <span className={s.text}>{`Don't have an account?`}</span>
           <Link href="/auth/sign-up">
-            <Button type='button' variant={'textButton'} className={s.btn}>
+            <Button type="button" variant={'textButton'} className={s.btn}>
               Sign Up
             </Button>
           </Link>
@@ -144,7 +140,3 @@ const Login = () => {
 };
 
 export default Login;
-
-
-
-
