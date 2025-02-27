@@ -17,14 +17,14 @@
   }
 }
 
-.iconContainer {
+.iconContainer { 
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 60px;
-  margin-top: 13px;
+  flex-direction: row; 
+  justify-content: center; 
+  gap: 60px; 
+  margin-top: 13px; 
   margin-bottom: 10px;
-}
+} 
 
 .inputWrapper {
   margin-bottom: 12px;
@@ -55,7 +55,7 @@
   padding: 9px;
 
   & a {
-    color: var(--accent-300);
+    color: var(--accent-300)
   }
 }
 

@@ -16,8 +16,6 @@ type Inputs = {
   email: string;
 };
 
-const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string;
-
 const ForgotPassword = () => {
   const {
     register,
@@ -86,7 +84,7 @@ const ForgotPassword = () => {
         </Button>
         <div className={s.reCaptcha}>
           <ReCaptcha
-            sitekey={sitekey}
+            sitekey="6LdHxG4qAAAAAPKRxEHrlV5VvLFHIf2BO5NMI8YM"
             changeCaptchaStatus={setIsCaptchaCompleted}
             onCaptchaResponse={setCaptchaResponse}
           />
