@@ -1,11 +1,38 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { baseQueryWithReauth } from './../base-query-with-access-token';
+
+import {
+  RegistrationConfirmationRequest,
+  RegistrationEmailResend,
+  RegistrationRequest,
+} from './types';
+import { baseQueryWithReauth } from '@/features/auth/lib/base-query-with-access-token';
 
 export const authAPI = createApi({
   reducerPath: 'authAPI',
   tagTypes: ['me'],
   baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
+    registration: builder.mutation<void, RegistrationRequest>({
+      query: (payload) => ({
+        method: 'POST',
+        url: `/auth/registration`,
+        body: payload,
+      }),
+    }),
+    registrationConfirmation: builder.mutation<void, RegistrationConfirmationRequest>({
+      query: ({ confirmationCode }) => ({
+        method: 'POST',
+        url: `/auth/registration-confirmation`,
+        body: { confirmationCode },
+      }),
+    }),
+    registrationEmailResend: builder.mutation<void, RegistrationEmailResend>({
+      query: (payload) => ({
+        method: 'POST',
+        url: `/auth/registration-email-resending`,
+        body: payload,
+      }),
+    }),
     login: builder.mutation<
       { accessToken: string },
       {
@@ -22,7 +49,7 @@ export const authAPI = createApi({
         try {
           const response = await queryFulfilled; // Wait for the mutation to complete
           // alternative option: set token to localAtorage
-          sessionStorage.setItem('access-token', response.data.accessToken);
+          localStorage.setItem('access-token', response.data.accessToken);
           await dispatch(authAPI.endpoints.getMe.initiate());
         } catch (error) {
           console.error(error);
@@ -46,7 +73,9 @@ export const authAPI = createApi({
         }),
       }
     ),
-    googleLogin: builder.mutation<{ accessToken: string; email: string }, { redirectUrl: string; code: string }
+    googleLogin: builder.mutation<
+      { accessToken: string; email: string },
+      { redirectUrl: string; code: string }
     >({
       query: (body) => ({
         url: `/auth/google/login`,
@@ -59,9 +88,9 @@ export const authAPI = createApi({
         url: `/auth/logout`,
         method: 'DELETE',
       }),
-      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-        const response = await queryFulfilled;
-        sessionStorage.removeItem('access-token');
+      async onQueryStarted(arg, { dispatch }) {
+        // const response = await queryFulfilled;
+        localStorage.removeItem('access-token');
         //dispatch(authAPI.util.invalidateTags(['me'])); не работает, потому что он инвалидирует кеш.. делает
         // перезапрос, падает 401 ошибка и он возвращает прошлое значение
         // а вот resetApiState именно сбрасывает стейт
@@ -106,4 +135,7 @@ export const {
   useLogoutMutation,
   useForgotPasswordMutation,
   useNewPasswordMutation,
+  useRegistrationMutation,
+  useRegistrationConfirmationMutation,
+  useRegistrationEmailResendMutation,
 } = authAPI;

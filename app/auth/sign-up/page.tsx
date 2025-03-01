@@ -1,17 +1,18 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Input } from '@/components/Input/Input';
-import { RadixCheckbox } from '@/components/Checkbox/RadixCheckbox';
-import { Button } from '@/components/Button/Button';
+
+import { RadixCheckbox } from '@/shared/ui/Checkbox/RadixCheckbox';
+import { Button } from '@/shared/ui/Button/Button';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { ModalRadix } from '@/components/Modal/ModalRadix';
+
 import s from './Sign-up.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRegistrationMutation } from '@/app/store/auth/auth';
 import { useRouter } from 'next/navigation';
-
+import { useRegistrationMutation } from '@/features/auth/api/auth';
+import { Input } from '@/shared/ui/Input/Input';
+import { ModalRadix } from '@/shared/ui/Modal/ModalRadix';
 
 // link в отдельную константу.
 
@@ -21,6 +22,13 @@ type FormData = {
   password: string;
   passwordConfirmation: string;
   termsOfService: boolean;
+};
+
+type APIError = {
+  status: number;
+  data?: {
+    messages: { field: string; message: string }[];
+  };
 };
 
 const validationPatterns = {
@@ -50,7 +58,7 @@ const SignUp = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [emailValue, setEmailValue] = useState<string | null>(null);
   const isSignUpDisabled = !isValid || !watch('termsOfService') || isLoading || isError;
-  const router = useRouter()
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const { userName, email, password } = data;
@@ -65,9 +73,10 @@ const SignUp = () => {
       setEmailValue(email);
       setIsOpen(true);
       reset();
-    } catch (error: any) {
-      if (error.status === 400 && error.data) {
-        const errorMessages = error.data.messages;
+    } catch (error) {
+      const apiError = error as APIError; // исправил any добавив тип APIError с утверждением, что error это APIError
+      if (apiError.status === 400 && apiError.data) {
+        const errorMessages = apiError.data.messages;
 
         errorMessages.forEach((msg: { field: string; message: string }) => {
           if (msg.field === 'email') {
@@ -84,11 +93,13 @@ const SignUp = () => {
   const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI as string;
 
   const handleGitHubLogin = () => {
-    const redirectUrl = `${window.location.origin}/auth/callback`
-    const loginUrl = `https://inctagram.work/api/v1/auth/github/login?redirect_url=${encodeURIComponent(redirectUrl)}`
-    router.push(loginUrl)
+    const redirectUrl = `${window.location.origin}/auth/callback`;
+    const loginUrl = `https://inctagram.work/api/v1/auth/github/login?redirect_url=${encodeURIComponent(
+      redirectUrl
+    )}`;
+    router.push(loginUrl);
   };
-  
+
   const handleGoogleLogin = () => {
     const authUrl =
       `https://accounts.google.com/o/oauth2/v2/auth?` +
@@ -97,20 +108,20 @@ const SignUp = () => {
       `&response_type=code` +
       `&scope=openid email profile`;
 
-      router.push(authUrl)
-  }
+    router.push(authUrl);
+  };
 
   return (
     <div className={s.container}>
       <h1>Sign Up</h1>
       <div className={s.iconContainer}>
-          <div onClick={handleGoogleLogin} style={{ cursor: 'pointer' }}>
-            <Image src="/googleGithub/google.svg" alt="Google" width={36} height={36} />
-          </div>
-          <div onClick={handleGitHubLogin} style={{ cursor: 'pointer' }}>
-            <Image src="/googleGithub/github.svg" alt="GitHub" width={36} height={36} />
-          </div>
+        <div onClick={handleGoogleLogin} style={{ cursor: 'pointer' }}>
+          <Image src="/googleGithub/google.svg" alt="Google" width={36} height={36} />
         </div>
+        <div onClick={handleGitHubLogin} style={{ cursor: 'pointer' }}>
+          <Image src="/googleGithub/github.svg" alt="GitHub" width={36} height={36} />
+        </div>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)} autoComplete={'on'}>
         <div className={s.inputWrapper}>
           <div className={s.inputGroup}>
@@ -187,7 +198,7 @@ const SignUp = () => {
           </div>
         </div>
 
-        <div className={s.chechboxGroup}>
+        <div className={s.checkboxGroup}>
           <Controller
             name="termsOfService"
             control={control}
