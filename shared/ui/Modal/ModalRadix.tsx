@@ -14,7 +14,6 @@ export type ModalRadixProps = {
   footer?: React.ReactNode;
 } & ComponentPropsWithoutRef<'div'>;
 
-//в {children} добавляются компоненты, которые будут отображены внутри модального окна
 
 export const ModalRadix = ({
   modalTitle,

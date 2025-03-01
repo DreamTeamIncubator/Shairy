@@ -13,7 +13,6 @@
 }
 
 .textArea {
-    width: 284px;
     height: 84px;
     flex-shrink: 0;
     border-radius: 2px;
@@ -66,5 +65,15 @@
     &:focus {
         border: 1px solid var(--Danger-500, #CC1439);  
     }
+}
+
+.character {
+    color: var(--Light-900, #8D9094);
+    text-align: right;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; 
 }
 
