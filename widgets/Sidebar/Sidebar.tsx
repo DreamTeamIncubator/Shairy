@@ -2,7 +2,7 @@
 
 import s from './Sidebar.module.scss';
 import { usePathname } from 'next/navigation';
-import { SidebarItem } from '@/entities/ SidebarItem/ ui/SidebarItem';
+import { SidebarItem } from '@/widgets/Sidebar/model/SidebarItem';
 
 export const sidebarItems = {
   top: ['home', 'create', 'my-profile', 'messenger', 'search'],
