@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import s from './SidebarItem.module.scss';
-import { formatPath, formatPathForURL } from '@/features/utils/formatPath';
+import { formatPath, formatPathForURL } from '@/shared/lib/formatPath';
 
 interface SidebarItemProps {
   item: string;

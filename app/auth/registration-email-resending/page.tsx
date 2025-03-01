@@ -1,12 +1,13 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Button } from '@/components/Button/Button';
+import { Button } from '@/shared/ui/Button/Button';
 import s from '@/app/auth/sign-up/Sign-up.module.scss';
-import { Input } from '@/components/Input/Input';
+
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useRegistrationEmailResendMutation } from '@/app/store/auth/auth';
-import { ModalRadix } from '@/components/Modal/ModalRadix';
+import { useRegistrationEmailResendMutation } from '@/features/auth/api/auth';
+import { ModalRadix } from '@/shared/ui/Modal/ModalRadix';
+import { Input } from '@/shared/ui/Input/Input';
 
 const validationPatterns = {
   username: /^[a-zA-Z0-9_]+$/,
@@ -16,6 +17,13 @@ const validationPatterns = {
 
 type Input = {
   email: string;
+};
+
+type APIError = {
+  status: number;
+  data?: {
+    messages: { field: string; message: string }[];
+  };
 };
 const RegistrationConfirmation = () => {
   const {
@@ -39,9 +47,10 @@ const RegistrationConfirmation = () => {
       setEmailValue(email);
       setIsOpen(true);
       reset();
-    } catch (error: any) {
-      if (error.status === 400 && error.data) {
-        const errorMessages = error.data.messages;
+    } catch (error) {
+      const apiError = error as APIError; // исправил any добавив тип APIError с утверждением, что error это APIError
+      if (apiError.status === 400 && apiError.data) {
+        const errorMessages = apiError.data.messages;
 
         errorMessages.forEach((msg: { field: string; message: string }) => {
           if (msg.field === 'email') {

@@ -1,7 +1,3 @@
-import { redirect } from 'next/navigation';
-
-export default function Home (){
-  return redirect('/')
-};
-
-
+export default function Home() {
+  return <>Home</>;
+}

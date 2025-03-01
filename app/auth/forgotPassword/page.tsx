@@ -6,11 +6,12 @@ import s from './ForgotPasswordForm.module.scss';
 import { useState } from 'react';
 
 import { useRouter } from 'next/navigation';
-import { useForgotPasswordMutation } from '@/store/services/auth/auth';
-import { Input } from '@/components/Input/Input';
-import { Button } from '@/components/Button/Button';
-import { ReCaptcha } from '@/components/ReCaptcha/ReCaptcha';
-import { ModalRadix } from '@/components/Modal/ModalRadix';
+
+import { Button } from '@/shared/ui/Button/Button';
+import { ReCaptcha } from '@/features/ReCaptcha/ReCaptcha';
+import { useForgotPasswordMutation } from '@/features/auth/api/auth';
+import { Input } from '@/shared/ui/Input/Input';
+import { ModalRadix } from '@/shared/ui/Modal/ModalRadix';
 
 type Inputs = {
   email: string;
