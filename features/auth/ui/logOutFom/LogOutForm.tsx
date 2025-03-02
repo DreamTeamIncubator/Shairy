@@ -12,7 +12,8 @@ export default function LogOutForm() {
   const handleLogout = async () => {
     try {
       await logout().unwrap();
-      router.push('/login');
+      console.log('auth');
+      router.push('/auth/login');
     } catch (err) {
       console.error('Ошибка при выходе:', err);
     }

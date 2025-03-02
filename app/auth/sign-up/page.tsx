@@ -46,6 +46,7 @@ const SignUp = () => {
     watch,
     clearErrors,
     setError,
+    trigger,
     formState: { errors, isValid },
   } = useForm<FormData>({
     defaultValues: {
