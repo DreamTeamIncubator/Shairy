@@ -29,7 +29,7 @@ export const Sidebar = ({ elements }: SidebarProps) => {
       </ul>
       <ul className={s.list}>
         {elements?.footer.map((item, index) => (
-          <SidebarItem key={index} item={item} pathname={pathname} />
+          <SidebarItem key={index} item={item} pathname={item} prePath={'auth/'} />
         ))}
       </ul>
     </nav>

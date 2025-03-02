@@ -71,7 +71,7 @@ export const authAPI = createApi({
           method: 'GET',
           params: { redirect_url },
         }),
-      }
+      },
     ),
     googleLogin: builder.mutation<
       { accessToken: string; email: string },
@@ -86,7 +86,8 @@ export const authAPI = createApi({
     logout: builder.mutation<void, void>({
       query: () => ({
         url: `/auth/logout`,
-        method: 'DELETE',
+        method: 'POST',
+        credentials: 'include',
       }),
       async onQueryStarted(arg, { dispatch }) {
         // const response = await queryFulfilled;
