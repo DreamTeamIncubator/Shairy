@@ -1,14 +1,16 @@
 import {Button} from '@/components/Button/Button';
-import s from '@/app/auth/sign-up/Sign-up.module.scss';
+import s from '@/app/auth/terms/Terms.module.scss';
 import Link from 'next/link';
 import React from 'react';
+import Image from 'next/image';
 
 const TermsOfServises = () => {
     return (
-        <div>
+        <div className={s.container}>
             <div>
-                <Link href={'/auth/sign-up'}>
-                    <Button className={s.signUpBtn} variant="secondary">Back to Sign Up</Button>
+                <Link className={s.signUpLink} href={'/auth/sign-up'}>
+                    <Image src={'/arrow-left.svg'} alt={'Стрелка назад'} width={24} height={24} />
+                    <Button variant='textButton'>Back to Sign Up</Button>
                 </Link>
             </div>
             <h1>Terms of Service</h1>

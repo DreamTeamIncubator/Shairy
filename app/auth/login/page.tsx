@@ -2,13 +2,14 @@
 
 import { SubmitHandler, useForm } from 'react-hook-form'; 
 import s from './Login.module.scss'; 
-import { Button } from './../../../components/Button/Button';
+import { Button } from '@/components/Button/Button';
 import Image from 'next/image';
 import { useState } from 'react';
 import { useLoginMutation } from '@/store/services/auth/auth';
 import { useRedirectIfAuthorized } from '@/hooks/useRedirectIfAuthorized';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import {paths} from '@/utils/utils';
 
 type Inputs = {
   email: string;
@@ -33,6 +34,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [login, { isLoading }] = useLoginMutation();
   const router = useRouter();
+
   // лучше выносить за компоненту, в env.
   const GOOGLE_CLIENT_ID =
     '272583913867-t74i019ufdvmarh05jlv8bcu1ak0a6o6.apps.googleusercontent.com';
@@ -44,7 +46,7 @@ const Login = () => {
     try {
       const response = await login(data).unwrap();
       console.log('Успешный вход', response.accessToken);
-      router.push('/home');
+      router.push(paths.home);
     } catch (error) {
       console.error('Ошибка входа', error);
     }

@@ -1,6 +1,9 @@
 import { BaseQueryFn, FetchArgs, fetchBaseQuery, FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
 import { Mutex } from "async-mutex";
 
+interface RefreshResponse {
+    accessToken: string;
+}
 
 export const baseQueryWithAccessToken = fetchBaseQuery({
   baseUrl: 'https://inctagram.work/api/v1',
@@ -39,15 +42,19 @@ export const baseQueryWithReauth: BaseQueryFn<
             try {
                 const refreshResult = await baseQueryWithAccessToken(
                     {
-                        url: 'auth/refresh',
+                        url: '/auth/refresh',
                         method: 'POST',
                         body: {}, // Include the body if needed, e.g., { refreshToken: '...' }
                     },
                     api,
                     extraOptions
                 )
-                if (refreshResult.data) {
-                    sessionStorage.setItem('access-token', refreshResult.data.accessToken)
+
+                const data = refreshResult.data as RefreshResponse | undefined;
+                console.log(refreshResult)
+
+                if (data?.accessToken) {
+                    sessionStorage.setItem('access-token', data.accessToken)
                     result = await baseQueryWithAccessToken(args, api, extraOptions)
                 } else {
                     // api.dispatch(loggedOut())

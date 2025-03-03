@@ -2,9 +2,12 @@
 
 import React, {useEffect, useState} from 'react';
 import {useRouter, useSearchParams} from 'next/navigation';
-import {useRegistrationConfirmationMutation} from '@/app/store/auth/auth';
 import Link from 'next/link';
+import s from './Registration-confirmation.module.scss';
 import {Button} from '@/components/Button/Button';
+import {paths} from '@/utils/utils';
+import Image from 'next/image';
+import {useRegistrationConfirmationMutation} from '@/store/services/auth/auth';
 
 const RegistrationConfirmation = () => {
 
@@ -22,29 +25,28 @@ const RegistrationConfirmation = () => {
 
         registrationConfirmation({confirmationCode})
             .unwrap()
-            .catch((error) => {
+            .catch((error: any) => {
                 router.push('/auth/registration-email-resending')
             })
 
     }, [confirmationCode, registrationConfirmation]);
 
     return (
-        <div className="container">
+        <>
             {isLoading && <p>Подтверждаем регистрацию...</p>}
 
             {isSuccess && (
-                <div>
+                <div className={s.container}>
                     <h1>Congratulations!</h1>
-                    <div>
-                        <p>Your email has been confirmed</p>
-                        <Link href={'/auth/login'}>
-                            <Button variant="secondary">Sign in</Button>
-                        </Link>
-                    </div>
+                    <p>Your email has been confirmed</p>
+                    <Link className={s.signInBtn} href={paths.auth.login}>
+                        <Button>Sign in</Button>
+                    </Link>
+                    <Image className={s.image} src={'/sign-up-confirmation.svg'} alt={''} width={432} height={300}/>
                 </div>
-                )}
-        </div>
-    );
-};
+            )}
+        </>
+    )
+}
 
 export default RegistrationConfirmation;

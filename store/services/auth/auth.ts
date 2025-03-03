@@ -3,9 +3,30 @@ import { baseQueryWithReauth } from './../base-query-with-access-token';
 
 export const authAPI = createApi({
   reducerPath: 'authAPI',
-  tagTypes: ['me'],
+  // tagTypes: ['me'],
   baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
+    registration: builder.mutation<void, RegistrationRequest>({
+      query: (payload) => ({
+        method: 'POST',
+        url: `/auth/registration`,
+        body: payload,
+      }),
+    }),
+    registrationConfirmation: builder.mutation<void, RegistrationConfirmationRequest>({
+      query: ({confirmationCode}) => ({
+        method: 'POST',
+        url: `/auth/registration-confirmation`,
+        body: {confirmationCode},
+      }),
+    }),
+    registrationEmailResend: builder.mutation<void, RegistrationEmailResend>({
+      query: (payload) => ({
+        method: 'POST',
+        url: `/auth/registration-email-resending`,
+        body: payload,
+      }),
+    }),
     login: builder.mutation<
       { accessToken: string },
       {
@@ -35,7 +56,7 @@ export const authAPI = createApi({
       void
     >({
       query: () => `/auth/me`,
-      providesTags: ['me'],
+      // providesTags: ['me'],
     }),
     gitHubLogin: builder.mutation<{ accessToken: string; email: string }, { redirect_url: string }>(
       {
@@ -108,4 +129,30 @@ export const {
   useLogoutMutation,
   useForgotPasswordMutation,
   useNewPasswordMutation,
+  useRegistrationMutation,
+  useRegistrationConfirmationMutation,
+  useRegistrationEmailResendMutation,
 } = authAPI;
+
+type RegistrationRequest = {
+  userName: string
+  email: string
+  password: string
+  baseUrl: string
+
+}
+
+type RegistrationConfirmationRequest = {
+  confirmationCode: string
+}
+
+type RegistrationEmailResend = {
+  email: string
+  baseUrl: string
+}
+
+export type ResponseError = {
+  statusCode: number;
+  messages: { message: string; field: string }[];
+  error: string;
+}

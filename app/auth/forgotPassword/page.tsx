@@ -1,16 +1,15 @@
 'use client';
 
 import { SubmitHandler, useForm } from 'react-hook-form';
-
 import s from './ForgotPasswordForm.module.scss';
 import { useState } from 'react';
-
 import { useRouter } from 'next/navigation';
 import { useForgotPasswordMutation } from '@/store/services/auth/auth';
 import { Input } from '@/components/Input/Input';
 import { Button } from '@/components/Button/Button';
 import { ReCaptcha } from '@/components/ReCaptcha/ReCaptcha';
 import { ModalRadix } from '@/components/Modal/ModalRadix';
+import {paths} from '@/utils/utils';
 
 type Inputs = {
   email: string;
@@ -78,7 +77,7 @@ const ForgotPassword = () => {
           variant={'textButton'}
           type={'button'}
           onClick={() => {
-            router.push('/auth/login');
+            router.push(paths.auth.login);
           }}>
           Back to Sign In
         </Button>
