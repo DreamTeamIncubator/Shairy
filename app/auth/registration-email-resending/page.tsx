@@ -1,19 +1,30 @@
 'use client';
 
-import React, {useState} from 'react';
-import {Button} from '@/components/Button/Button';
-import s from '@/app/auth/registration-email-resending/Registration-email.resending.module.scss';
-import {Input} from '@/components/Input/Input';
-import {SubmitHandler, useForm} from 'react-hook-form';
-import {ModalRadix} from '@/components/Modal/ModalRadix';
-import {useRegistrationEmailResendMutation} from '@/store/services/auth/auth';
-import {validationPatterns} from '@/utils/utils';
-import Image from 'next/image';
+import React, { useState } from 'react';
+import { Button } from '@/shared/ui/Button/Button';
+import s from '@/app/auth/sign-up/Sign-up.module.scss';
+
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useRegistrationEmailResendMutation } from '@/features/auth/api/auth';
+import { ModalRadix } from '@/shared/ui/Modal/ModalRadix';
+import { Input } from '@/shared/ui/Input/Input';
+
+const validationPatterns = {
+  username: /^[a-zA-Z0-9_]+$/,
+  email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+  password: /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!\"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]).*$/,
+};
 
 type Input = {
-    email: string;
-}
+  email: string;
+};
 
+type APIError = {
+  status: number;
+  data?: {
+    messages: { field: string; message: string }[];
+  };
+};
 const RegistrationConfirmation = () => {
     const {
         register,
@@ -31,14 +42,15 @@ const RegistrationConfirmation = () => {
     const onSubmit: SubmitHandler<Input> = async (data) => {
         const {email} = data;
 
-        try {
-            await registrationEmailResend({email, baseUrl: window.location.origin}).unwrap();
-            setEmailValue(email);
-            setIsOpen(true);
-            reset();
-        } catch (error: any) {
-            if (error.status === 400 && error.data) {
-                const errorMessages = error.data.messages;
+    try {
+      await registrationEmailResend({ email, baseUrl: window.location.origin }).unwrap();
+      setEmailValue(email);
+      setIsOpen(true);
+      reset();
+    } catch (error) {
+      const apiError = error as APIError; // исправил any добавив тип APIError с утверждением, что error это APIError
+      if (apiError.status === 400 && apiError.data) {
+        const errorMessages = apiError.data.messages;
 
                 errorMessages.forEach((msg: { field: string; message: string }) => {
                     if (msg.field === 'email') {

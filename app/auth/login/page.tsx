@@ -1,15 +1,15 @@
 'use client';
 
-import { SubmitHandler, useForm } from 'react-hook-form'; 
-import s from './Login.module.scss'; 
-import { Button } from '@/components/Button/Button';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import s from './Login.module.scss';
+import { Button } from '../../../shared/ui/Button/Button';
 import Image from 'next/image';
 import { useState } from 'react';
-import { useLoginMutation } from '@/store/services/auth/auth';
+
 import { useRedirectIfAuthorized } from '@/hooks/useRedirectIfAuthorized';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import {paths} from '@/utils/utils';
+import { useLoginMutation } from '@/features/auth/api/auth';
 
 type Inputs = {
   email: string;
@@ -18,27 +18,21 @@ type Inputs = {
 
 const Login = () => {
   const {
-    register, 
-    handleSubmit, 
-    formState: { errors },
-    watch, 
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
   } = useForm<Inputs>({
     defaultValues: { email: '', password: '' },
+    mode: 'onBlur',
   });
 
-  const email = watch('email')
-  const password = watch('password')
-
-  const isFormValid = email.trim() !== '' && password.trim() !== ''
-
+  const [loginError, setLoginError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
-  const [login, { isLoading }] = useLoginMutation();
+  const [login] = useLoginMutation();
   const router = useRouter();
 
-  // лучше выносить за компоненту, в env.
-  const GOOGLE_CLIENT_ID =
-    '272583913867-t74i019ufdvmarh05jlv8bcu1ak0a6o6.apps.googleusercontent.com';
-  const REDIRECT_URI = 'http://localhost:3000/auth/callback';
+  const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string;
+  const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI as string;
 
   useRedirectIfAuthorized();
 
@@ -46,28 +40,30 @@ const Login = () => {
     try {
       const response = await login(data).unwrap();
       console.log('Успешный вход', response.accessToken);
-      router.push(paths.home);
+      router.push('/home');
     } catch (error) {
-      console.error('Ошибка входа', error);
+      console.error('Ошибка входа:', JSON.stringify(error, null));
+      setLoginError('The email or password is incorrect. Try again please');
     }
   };
 
   const handleGitHubLogin = () => {
-    const redirectUrl = `${window.location.origin}/auth/callback?provider=github`;
-    window.location.href = `https://inctagram.work/api/v1/auth/github/login?redirect_url=${encodeURIComponent(
+    const redirectUrl = `${window.location.origin}/auth/callback`;
+    const loginUrl = `https://inctagram.work/api/v1/auth/github/login?redirect_url=${encodeURIComponent(
       redirectUrl
     )}`;
+    router.push(loginUrl);
   };
 
   const handleGoogleLogin = () => {
     const authUrl =
       `https://accounts.google.com/o/oauth2/v2/auth?` +
-      `client_id=${GOOGLE_CLIENT_ID}` +
+      `client_id=${GOOGLE_CLIENT_ID}&` +
       `&redirect_uri=${encodeURIComponent(REDIRECT_URI)}` +
       `&response_type=code` +
       `&scope=openid email profile`;
 
-    window.location.href = authUrl;
+    router.push(authUrl);
   };
 
   return (
@@ -106,10 +102,10 @@ const Login = () => {
                 className={s.input}
                 type={showPassword ? 'text' : 'password'}
                 {...register('password', {
-                  required: 'The email or password are incorrect. Try again please',
+                  required: 'Password is required',
                   minLength: {
-                    value: 3,
-                    message: 'The email or password are incorrect. Try again please',
+                    value: 5,
+                    message: 'Password is incorrect. Try again please',
                   },
                 })}
               />
@@ -123,18 +119,19 @@ const Login = () => {
               </span>
             </div>
             {errors.password && <span className={s.errorMessage}>{errors.password.message}</span>}
+            {!errors.password && loginError && <span className={s.errorMessage}>{loginError}</span>}
           </div>
           <div className={s.buttonContainer}>
             <Link href="/auth/forgotPassword" className={s.forgotPasswordText}>
               Forgot password
             </Link>
-            <Button type={'submit'} variant={'primary'} className={s.btn} disabled={!isFormValid}>
+            <Button type="submit" variant={'primary'} className={s.btn} disabled={!isValid}>
               Sign In
             </Button>
           </div>
-          <span className={s.text}>Don't have an account?</span>
+          <span className={s.text}>{`Don't have an account?`}</span>
           <Link href="/auth/sign-up">
-            <Button type={'submit'} variant={'textButton'} className={s.btn}>
+            <Button type="button" variant={'textButton'} className={s.btn}>
               Sign Up
             </Button>
           </Link>
