@@ -1,24 +1,21 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-
 import Link from 'next/link';
 import { Button } from '@/shared/ui/Button/Button';
-import { useRegistrationConfirmationMutation } from '@/features/auth/api/auth';
 import s from './Registration-confirmation.module.scss';
-import {Button} from '@/components/Button/Button';
-import {paths} from '@/utils/utils';
+import { paths } from '@/utils/utils';
 import Image from 'next/image';
-import {useRegistrationConfirmationMutation} from '@/store/services/auth/auth';
+import { useRegistrationConfirmationMutation } from '@/features/auth/api/auth';
 
 const RegistrationConfirmation = () => {
-  const searchParams = useSearchParams();
-  const confirmationCode = searchParams.get('code');
-  const [registrationConfirmation, { isLoading, isSuccess }] =
-    useRegistrationConfirmationMutation();
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const router = useRouter();
+    const searchParams = useSearchParams();
+    const confirmationCode = searchParams.get('code');
+    const [registrationConfirmation, { isLoading, isSuccess }] =
+        useRegistrationConfirmationMutation();
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const router = useRouter();
 
     useEffect(() => {
         if (!confirmationCode || isLoading) {
@@ -26,13 +23,12 @@ const RegistrationConfirmation = () => {
             return;
         }
 
-    registrationConfirmation({ confirmationCode })
-      .unwrap()
-      .catch((error) => {
-        router.push('/auth/registration-email-resending');
-        console.log(error);
-      });
-  }, [confirmationCode, errorMessage, isLoading, registrationConfirmation, router]);
+        registrationConfirmation({ confirmationCode })
+            .unwrap()
+            .catch((error) => {
+                router.push('/auth/registration-email-resending');
+            });
+    }, [confirmationCode, errorMessage, isLoading, registrationConfirmation, router]);
 
     return (
         <>
