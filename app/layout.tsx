@@ -3,7 +3,10 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { ReactNode } from 'react';
 import { StoreWrapper } from '@/store/store-wrapper';
-import ClientLayout from './client-layout';
+import { Header } from '@/widgets/Header/Header';
+import { Sidebar, sidebarItems } from '@/widgets/Sidebar/Sidebar';
+import { Scroll } from '@/shared/ui/Scroll/Scroll';
+import styles from '@/app/page.module.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -25,7 +28,11 @@ export default function Layout({ children }: Readonly<{ children: ReactNode }>) 
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <StoreWrapper>
-          <ClientLayout>{children}</ClientLayout>
+          <Header />
+          <div className={styles.page}>
+            <Sidebar elements={sidebarItems} />
+            <Scroll style={{ height: '100vh', overflow: 'hidden' }}>{children}</Scroll>
+          </div>
         </StoreWrapper>
       </body>
     </html>
