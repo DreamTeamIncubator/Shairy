@@ -1,0 +1,33 @@
+.post {
+  display: flex;
+  flex-direction: row;
+}
+
+.commentMain {
+  width: 100%;
+  height: 59px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: 24px;
+}
+
+.userName {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.likes {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  margin-left: 24px;
+  margin-bottom: 5px;
+}
+
+.time {
+  color: var(--light-900);
+  font-size: 14px;
+  line-height: 16px;
+  margin-left: 24px;
+}
