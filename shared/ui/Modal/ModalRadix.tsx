@@ -29,7 +29,7 @@ export const ModalRadix = ({
     <Dialog.Root open={open} onOpenChange={onClose} {...rest}>
       <Dialog.Portal>
         <Dialog.Overlay className={s.Overlay} />
-        <Dialog.Content className={clsx(s.Content, s[size], className)}>
+        <Dialog.Content  className={clsx(s.Content, s[size], className)}>
           <Dialog.Title className={s.Title}>{modalTitle}</Dialog.Title>
           <hr className={s.Hr} />
           <div className={s.Children}>{children}</div>

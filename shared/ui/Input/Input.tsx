@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react';
 import clsx from 'clsx';
-import s from '@/components/Input/Input.module.scss';
+import s from './Input.module.scss';
 import { EyeIcon } from '@/assets/icons/EyeIcon';
 import { SearchIcon } from '@/assets/icons/SearchIcon';
 
