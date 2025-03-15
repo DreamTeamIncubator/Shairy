@@ -41,7 +41,8 @@ export const baseQueryWithReauth: BaseQueryFn<
       try {
         const refreshResult = await baseQueryWithAccessToken(
           {
-            url: 'auth/refresh',
+            // url: 'auth/refresh',
+            url: 'auth/update-tokens',
             method: 'POST',
             body: {}, // Добавьте refreshToken, если требуется
           },
