@@ -1,15 +1,15 @@
-'use client';
+'use client'
 
-import Image from 'next/image';
-import noImg from '@/assets/icons/noImg.png';
+import Image from 'next/image'
+import noImg from '@/assets/icons/noImg.png'
 
-import s from './Comments.module.scss';
-import { CommentsType } from '../types';
-import { getTimeAgo } from '@/shared/lib/getTimeAgo';
+import s from './Comments.module.scss'
+import { CommentsType } from '../types'
+import { getTimeAgo } from '@/shared/lib/getTimeAgo'
 
 type CommentsProps = {
-  comments: CommentsType;
-};
+  comments: CommentsType
+}
 function Comments({ comments }: CommentsProps) {
   return (
     <div>
@@ -38,7 +38,7 @@ function Comments({ comments }: CommentsProps) {
       </ul>
       <hr className={s.hr} />
     </div>
-  );
+  )
 }
 
-export default Comments;
+export default Comments

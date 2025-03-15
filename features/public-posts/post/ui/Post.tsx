@@ -1,23 +1,23 @@
-'use client';
+'use client'
 
-import Image from 'next/image';
-import s from './Post.module.scss';
-import noImg from '@/assets/icons/noImg.png';
+import Image from 'next/image'
+import s from './Post.module.scss'
+import noImg from '@/assets/icons/noImg.png'
 
-import { PostType } from '../types';
-import { formatDate } from '@/shared/lib/formatDate';
-import Comments from '../../comments/ui/Comments';
-import { CommentsType } from '../../comments/types';
+import { PostType } from '../types'
+import { formatDate } from '@/shared/lib/formatDate'
+import Comments from '../../comments/ui/Comments'
+import { CommentsType } from '../../comments/types'
 
 type PostProps = {
-  post: PostType;
-  comments: CommentsType;
-};
+  post: PostType
+  comments: CommentsType
+}
 
-const testImg = [noImg, noImg, noImg, noImg];
+const testImg = [noImg, noImg, noImg, noImg]
 
 const Post = ({ post, comments }: PostProps) => {
-  const firstThreePhotos = testImg.slice(0, 3); //test
+  const firstThreePhotos = testImg.slice(0, 3) //test
   // const firstThreePhotos = post.avatarWhoLikes.slice(0, 3);
 
   return (
@@ -40,6 +40,7 @@ const Post = ({ post, comments }: PostProps) => {
             style={{ borderRadius: '50%', objectFit: 'cover' }}
           />
           <span className={s.userName}>{post.userName}</span>
+          <p className={s.description}>{post.description}</p>
         </div>
         <Comments comments={comments} />
         <div>
@@ -77,7 +78,7 @@ const Post = ({ post, comments }: PostProps) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Post;
+export default Post
