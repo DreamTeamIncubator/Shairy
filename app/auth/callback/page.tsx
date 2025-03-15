@@ -1,30 +1,31 @@
-'use client';
+'use client'
 
-import { useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useGoogleLoginMutation } from '@/features/auth/api/auth';
+import { useEffect } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useGoogleLoginMutation } from '@/features/auth/api/auth'
 
 const AuthCallback = () => {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const [googleLogin] = useGoogleLoginMutation();
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const [googleLogin] = useGoogleLoginMutation()
 
   useEffect(() => {
-    const code = searchParams.get('code');
+    const code = searchParams.get('code')
 
     if (code) {
       googleLogin({ code, redirectUrl: `${window.location.origin}/auth/callback` })
         .unwrap()
         .then((response) => {
-          localStorage.setItem('access-token', response.accessToken);
-          router.push('/home');
+          localStorage.setItem('access-token', response.accessToken)
+          window.location.reload()
+          router.push('/home')
         })
         .catch((error) => {
-          console.error('Ошибка аутентификации (Google)', error);
-          router.push('/auth/login');
-        });
+          console.error('Ошибка аутентификации (Google)', error)
+          router.push('/auth/login')
+        })
     }
-  }, [searchParams, googleLogin, router]);
-};
+  }, [searchParams, router])
+}
 
-export default AuthCallback;
+export default AuthCallback

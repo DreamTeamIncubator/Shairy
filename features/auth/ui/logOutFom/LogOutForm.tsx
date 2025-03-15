@@ -11,11 +11,17 @@ export default function LogOutForm() {
 
   const handleLogout = async () => {
     try {
-      await logout().unwrap()
-      console.log('auth')
+      const response = await logout()
+      console.log('Logout response:', response)
+
+      localStorage.removeItem('access-token')
+
       router.push('/')
     } catch (err) {
       console.error('Ошибка при выходе:', err)
+      if ('status' in err) {
+        console.error(`Ошибка API: ${err.status} - ${err.data?.message || 'Unknown error'}`)
+      }
     }
   }
 
