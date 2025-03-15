@@ -1,19 +1,19 @@
-'use client';
+'use client'
 
-import { redirect } from 'next/navigation';
-import { Button } from '../../shared/ui/Button/Button';
-import s from './Header.module.scss';
+import { redirect } from 'next/navigation'
+import { Button } from '../../shared/ui/Button/Button'
+import s from './Header.module.scss'
 
-import Link from 'next/link';
+import Link from 'next/link'
 
-import { LanguageSelect } from '@/shared/ui/Select/LanguageSelect/LanguageSelect';
-import { useGetMeQuery } from '@/features/auth/api/auth';
+import { LanguageSelect } from '@/shared/ui/Select/LanguageSelect/LanguageSelect'
+import { useGetMeQuery } from '@/features/auth/api/auth'
 
 export const Header = () => {
-  const { data } = useGetMeQuery();
+  const { data } = useGetMeQuery()
   const SignUpForm = () => {
-    redirect('/auth/sign-up');
-  };
+    redirect('/auth/sign-up')
+  }
 
   return (
     <div className={s.header}>
@@ -36,5 +36,5 @@ export const Header = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
