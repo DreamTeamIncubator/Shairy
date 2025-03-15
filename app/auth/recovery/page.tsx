@@ -1,19 +1,19 @@
-'use client';
+'use client'
 
-import { SubmitHandler, useForm } from 'react-hook-form';
-import s from './Recovery.module.scss';
+import { SubmitHandler, useForm } from 'react-hook-form'
+import s from './Recovery.module.scss'
 
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { Button } from '@/shared/ui/Button/Button';
-import Image from 'next/image';
-import { useNewPasswordMutation } from '@/features/auth/api/auth';
-import { Input } from '@/shared/ui/Input/Input';
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { Button } from '@/shared/ui/Button/Button'
+import Image from 'next/image'
+import { useNewPasswordMutation } from '@/features/auth/api/auth'
+import { Input } from '@/shared/ui/Input/Input'
 
 type Inputs = {
-  password: string;
-  confirmPassword: string;
-};
+  password: string
+  confirmPassword: string
+}
 
 const RecoveryPage = () => {
   const {
@@ -21,32 +21,32 @@ const RecoveryPage = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<Inputs>()
 
-  const searchParams = useSearchParams();
-  const [code, setCode] = useState<string>('');
-  const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
+  const searchParams = useSearchParams()
+  const [code, setCode] = useState<string>('')
+  const [showPassword, setShowPassword] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
-    const queryCode = searchParams.get('code');
+    const queryCode = searchParams.get('code')
     if (queryCode) {
-      setCode(queryCode);
+      setCode(queryCode)
     }
-  }, [searchParams]);
+  }, [searchParams])
 
-  const [newPassword] = useNewPasswordMutation();
+  const [newPassword] = useNewPasswordMutation()
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     try {
-      newPassword({ newPassword: data.password, recoveryCode: code });
-      router.push('/login');
+      newPassword({ newPassword: data.password, recoveryCode: code })
+      router.push('/auth/login')
     } catch (err) {
-      console.log(`Произошла ошибка ${err}`);
+      console.log(`Произошла ошибка ${err}`)
     }
-  };
+  }
 
-  const handleShowPassword = () => setShowPassword((prev) => !prev);
+  const handleShowPassword = () => setShowPassword((prev) => !prev)
 
   return (
     <div className={s.content}>
@@ -118,7 +118,7 @@ const RecoveryPage = () => {
         </Button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default RecoveryPage;
+export default RecoveryPage
