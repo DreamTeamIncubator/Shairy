@@ -1,27 +1,33 @@
-'use client';
+'use client'
 
-import { Button } from '@/shared/ui/Button/Button';
-import { useRouter } from 'next/navigation';
-import s from './LogOutForm.module.scss';
-import { useLogoutMutation } from '../../api/auth';
+import { Button } from '@/shared/ui/Button/Button'
+import { useRouter } from 'next/navigation'
+import s from './LogOutForm.module.scss'
+import { useLogoutMutation } from '../../api/auth'
 
 export default function LogOutForm() {
-  const router = useRouter();
-  const [logout] = useLogoutMutation();
+  const router = useRouter()
+  const [logout] = useLogoutMutation()
 
   const handleLogout = async () => {
     try {
-      await logout().unwrap();
-      console.log('auth');
-      router.push('/auth/login');
+      const response = await logout()
+      console.log('Logout response:', response)
+
+      localStorage.removeItem('access-token')
+
+      router.push('/')
     } catch (err) {
-      console.error('Ошибка при выходе:', err);
+      console.error('Ошибка при выходе:', err)
+      if ('status' in err) {
+        console.error(`Ошибка API: ${err.status} - ${err.data?.message || 'Unknown error'}`)
+      }
     }
-  };
+  }
 
   const handleClose = () => {
-    router.back();
-  };
+    router.back()
+  }
 
   return (
     <section className={s.section}>
@@ -35,5 +41,5 @@ export default function LogOutForm() {
         <Button onClick={handleClose}>No</Button>
       </div>
     </section>
-  );
+  )
 }

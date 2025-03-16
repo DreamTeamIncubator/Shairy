@@ -1,11 +1,11 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react'
 
 import {
   RegistrationConfirmationRequest,
   RegistrationEmailResend,
   RegistrationRequest,
-} from './types';
-import { baseQueryWithReauth } from '@/features/auth/lib/base-query-with-access-token';
+} from './types'
+import { baseQueryWithReauth } from '@/features/auth/lib/base-query-with-access-token'
 
 export const authAPI = createApi({
   reducerPath: 'authAPI',
@@ -36,8 +36,8 @@ export const authAPI = createApi({
     login: builder.mutation<
       { accessToken: string },
       {
-        email: string;
-        password: string;
+        email: string
+        password: string
       }
     >({
       query: (body) => ({
@@ -47,13 +47,13 @@ export const authAPI = createApi({
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
-          const response = await queryFulfilled; // Wait for the mutation to complete
+          const response = await queryFulfilled // Wait for the mutation to complete
           // alternative option: set token to localAtorage
-          localStorage.setItem('access-token', response.data.accessToken);
-          await dispatch(authAPI.endpoints.getMe.initiate());
+          localStorage.setItem('access-token', response.data.accessToken)
+          await dispatch(authAPI.endpoints.getMe.initiate())
         } catch (error) {
-          console.error(error);
-          throw error;
+          console.error(error)
+          throw error
         }
       },
     }),
@@ -71,7 +71,7 @@ export const authAPI = createApi({
           method: 'GET',
           params: { redirect_url },
         }),
-      },
+      }
     ),
     googleLogin: builder.mutation<
       { accessToken: string; email: string },
@@ -91,19 +91,19 @@ export const authAPI = createApi({
       }),
       async onQueryStarted(arg, { dispatch }) {
         // const response = await queryFulfilled;
-        localStorage.removeItem('access-token');
+        localStorage.removeItem('access-token')
         //dispatch(authAPI.util.invalidateTags(['me'])); не работает, потому что он инвалидирует кеш.. делает
         // перезапрос, падает 401 ошибка и он возвращает прошлое значение
         // а вот resetApiState именно сбрасывает стейт
-        await dispatch(authAPI.util.resetApiState());
+        await dispatch(authAPI.util.resetApiState())
       },
     }),
     forgotPassword: builder.mutation<
       void,
       {
-        email: string;
-        recaptcha: string;
-        baseUrl: string;
+        email: string
+        recaptcha: string
+        baseUrl: string
       }
     >({
       query: (body) => ({
@@ -115,8 +115,8 @@ export const authAPI = createApi({
     newPassword: builder.mutation<
       void,
       {
-        newPassword: string;
-        recoveryCode: string;
+        newPassword: string
+        recoveryCode: string
       }
     >({
       query: (body) => ({
@@ -126,7 +126,7 @@ export const authAPI = createApi({
       }),
     }),
   }),
-});
+})
 
 export const {
   useLoginMutation,
@@ -139,4 +139,4 @@ export const {
   useRegistrationMutation,
   useRegistrationConfirmationMutation,
   useRegistrationEmailResendMutation,
-} = authAPI;
+} = authAPI

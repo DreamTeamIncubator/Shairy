@@ -1,0 +1,35 @@
+.container {
+  font-family: Inter, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  justify-content: center;
+  text-align: center;
+  max-width: 432px;
+  margin: 0 auto;
+
+  & h1 {
+    font-size: 20px;
+    line-height: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  & p {
+    width: 294px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    margin-bottom: 54px;
+    align-self: center;
+  }
+}
+
+.image {
+  margin-top: 72px;
+}
+
+.signInBtn button {
+  width: 182px;
+  background: var(--accent-500);
+}
