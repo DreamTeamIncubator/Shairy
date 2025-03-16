@@ -4,7 +4,8 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import { allPosts, posts } from '@/features/posts/api/posts';
 import { profile } from '@/features/profile/api/profile';
 import { commentsAPI } from '@/features/comments/api/comments';
-import { postAPI } from '@/features/post/api/post';
+import { postAPI } from '@/features/posts/api/post';
+
 
 export const store = configureStore({
   reducer: {

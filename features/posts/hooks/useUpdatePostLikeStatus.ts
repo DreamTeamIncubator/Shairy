@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useUpdatePostLikeStatusMutation } from '../../api/post';
+import { useUpdatePostLikeStatusMutation } from '../api/post';
 
 
 export const useUpdatePostLikeStatus = (postId: number, initialIsLiked: boolean, initialLikesCount: number) => {

@@ -4,8 +4,7 @@ import { useState, useEffect } from 'react';
 import { useGetPostQuery, useGetPostLikesQuery } from '../api/post';
 import { useGetCommentsQuery, useUpdateCommentLikeStatusMutation } from '@/features/comments/api/comments';
 import { CommentItem as CommentItemType } from '@/features/comments/api/comments.types';
-import { useUpdatePostLikeStatus } from '../lib/hooks/useUpdatePostLikeStatus';
-import { useCommentActions } from '../lib/hooks/useCommentActions';
+
 import CommentItem from '@/features/comments/ui/CommentItem';
 import { TextArea } from '@/shared/ui/TextArea/TextArea';
 import { Button } from '@/shared/ui/Button/Button';
@@ -18,6 +17,8 @@ import LikeModal from './LikeModal';
 import ImageCarousel from './ImageCarousel';
 
 import s from './Post.module.scss';
+import { useCommentActions } from '../hooks/useCommentActions';
+import { useUpdatePostLikeStatus } from '../hooks/useUpdatePostLikeStatus';
 
 type PostProps = {
   postId: number;
