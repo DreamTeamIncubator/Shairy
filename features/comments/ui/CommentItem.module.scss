@@ -1,0 +1,106 @@
+.date {
+    color: var(--Light-900, #8D9094);
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; 
+    margin-right: 12px;
+}
+
+.showAnswer {
+    display: inline-block;
+    color: var(--Light-900, #8D9094);
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px;
+    position: relative;
+}
+
+
+.showAnswer::before {
+    content: ''; 
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--Light-900, #8D9094);
+    margin-right: 8px; /* Отступ между линией и текстом */
+    vertical-align: middle; /* Выравнивание по центру */
+}
+
+.avatar{
+    width:36px;
+    height:36px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.text{
+    width: 345px; 
+    color: var(--Light-100, #FFF);
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; 
+    margin-right: 12px;
+}
+
+.commentWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.commentsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 24px; 
+    position: absolute;
+    left: 516px;
+    top: 164px;
+}
+
+.avatarCommentWrapper {
+    display: flex;
+    gap: 10px;
+}
+
+.defaultAvatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #ccc;
+}
+
+.commentDateLikeAnswer {
+    display: flex;
+    flex-direction: column;
+}
+
+.like {
+    color: var(--Light-900, #8D9094);
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px; 
+    margin-right: 12px;
+}
+
+.answer{
+    color: var(--Light-100, #FFF);
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; 
+}
+
+.answerContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 12px;
+    gap: 24px; 
+}

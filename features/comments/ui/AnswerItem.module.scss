@@ -1,0 +1,61 @@
+
+.answer{
+    display: flex;
+    flex-direction: column; 
+}
+
+.avatar{
+    width:36px;
+    height:36px;
+    border-radius: 50%;
+}
+
+.avatarCommentWrapper {
+    display: flex;
+    gap: 10px;
+}
+
+.date {
+    color: var(--Light-900, #8D9094);
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 16px; 
+    margin-right: 12px;
+}
+
+.text{
+    width: 345px; 
+    color: var(--Light-100, #FFF);
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; 
+    margin-right: 12px;
+}
+
+.answerContent{
+    display: flex;
+    width: 324px;
+}
+
+.like {
+    color: var(--Light-900, #8D9094);
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px; 
+    margin-right: 12px;
+}
+
+
+.defaultAvatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #ccc;
+}
+

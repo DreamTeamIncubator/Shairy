@@ -1,0 +1,35 @@
+.input {
+    width: 596px; 
+}
+
+.users{
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+}
+
+.user{
+    display: flex;
+    width:596px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button {
+    width: 117px; 
+    height: 36px; 
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: aliceblue;
+}
+
+.avatarNameContainer{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 12px;
+}

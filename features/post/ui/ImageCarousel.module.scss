@@ -1,0 +1,49 @@
+.carouselContainer {
+    position: relative;
+    width: 490px;
+    height: 564px;
+    margin: auto;
+  }
+  
+  .image {
+    width: 490px;
+    object-fit: cover; 
+  }
+  
+  .arrowLeft,
+  .arrowRight {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 10;
+  }
+  
+  .arrowLeft {
+    left: 10px;
+  }
+  
+  .arrowRight {
+    right: 10px;
+  }
+  
+  .dotsContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    background-color: gray;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .activeDot {
+    background-color: white;
+  }
+  
