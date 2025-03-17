@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { useGetPostQuery, useGetPostLikesQuery } from '../api/post';
 import { useGetCommentsQuery, useUpdateCommentLikeStatusMutation } from '@/features/comments/api/comments';
 import { CommentItem as CommentItemType } from '@/features/comments/api/comments.types';
-
 import CommentItem from '@/features/comments/ui/CommentItem';
 import { TextArea } from '@/shared/ui/TextArea/TextArea';
 import { Button } from '@/shared/ui/Button/Button';
@@ -15,10 +14,10 @@ import { formatDistanceToNow } from 'date-fns';
 import EditPost from './EditPost';
 import LikeModal from './LikeModal';
 import ImageCarousel from './ImageCarousel';
-
 import s from './Post.module.scss';
 import { useCommentActions } from '../hooks/useCommentActions';
 import { useUpdatePostLikeStatus } from '../hooks/useUpdatePostLikeStatus';
+import DeletePost from './deletePost';
 
 type PostProps = {
   postId: number;
@@ -36,6 +35,7 @@ const Post = ({ postId, isEditing = false, onClose, open }: PostProps) => {
   const [editMode, setEditMode] = useState(isEditing);
   const [description, setDescription] = useState(post?.description || '');
   const [isLikeModalOpen, setIsLikeModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
 
   useEffect(() => {
     if (post) setDescription(post.description);
@@ -101,9 +101,10 @@ const Post = ({ postId, isEditing = false, onClose, open }: PostProps) => {
                   <Image src="/pencil.svg" alt="edit" width={24} height={24} />
                   <span>Edit Post</span>
                 </div>
-                <div className={s.pencilEditContainer}>
+                <div className={s.pencilEditContainer} onClick ={()=>{setIsDeleteModalOpen(true)}}>
                   <Image src="/delete.svg" alt="delete" width={24} height={24} />
                   <span>Delete Post</span>
+                  {isDeleteModalOpen && <DeletePost/>}
                 </div>
               </Popover.Content>
             </Popover.Root>

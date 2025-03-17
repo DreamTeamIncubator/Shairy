@@ -1,9 +1,10 @@
 'use client'
 
 import styles from '../page.module.css';
-import React, { useState } from 'react';
+import React from 'react';
 
 const Create = () => {
+
   return (
     <div className={styles.page}>
       <h1>Create</h1>

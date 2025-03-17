@@ -6,6 +6,7 @@ import { TextArea } from '@/shared/ui/TextArea/TextArea';
 import { Button } from '@/shared/ui/Button/Button';
 import { ModalRadix } from '@/shared/ui/Modal/ModalRadix';
 import s from './EditPost.module.scss';
+import { useUpdatePostMutation } from '../api/post';
 
 
 type EditPostProps = {
@@ -19,11 +20,21 @@ type EditPostProps = {
 const EditPost = ({ post, description, setDescription, onSave, setEditMode }: EditPostProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [originalDescription, setOriginalDescription] = useState(description);
+    const [updatePost] =useUpdatePostMutation()
 
     const handleCancelEdit = () => {
         setDescription(originalDescription);
         setEditMode(false);
     };
+
+    const handleSave = async () => {
+        try {
+            updatePost({postId: post.id, description}); 
+            setEditMode(false)
+        } catch (error) {
+            console.error("Ошибка при сохранении поста", error)
+        }
+    }
 
     return (
         <div className={s.postContainer}>
@@ -56,7 +67,7 @@ const EditPost = ({ post, description, setDescription, onSave, setEditMode }: Ed
                                 onChange={(e) => setDescription(e.currentTarget.value)}
                                 showCharacterCount={true}
                             />
-                            <Button className={s.saveButton} onClick={onSave}>Save changes</Button>
+                            <Button className={s.saveButton} onClick={handleSave}>Save changes</Button>
                     </div>
                     </div>
             {isModalOpen && (
