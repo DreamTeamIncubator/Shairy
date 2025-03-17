@@ -1,18 +1,13 @@
-'use client'
-
 import styles from '../page.module.css';
 import React from 'react';
 
-const Create = () => {
 
+const MyProfile = () => {
   return (
     <div className={styles.page}>
-      <h1>Create</h1>
+       <h1>Public Profile</h1>
     </div>
   );
 };
 
-export default Create; 
-
-
-
+export default MyProfile;

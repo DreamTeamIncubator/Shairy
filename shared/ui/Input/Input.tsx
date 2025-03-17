@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react';
+import { ChangeEvent, ComponentPropsWithoutRef } from 'react';
 import clsx from 'clsx';
 import s from './Input.module.scss';
 import { EyeIcon } from '@/assets/icons/EyeIcon';
@@ -9,6 +9,8 @@ type Props = ComponentPropsWithoutRef<'input'> & {
   error?: string;
   showIcon?: boolean;
   onIconClick?: () => void;
+  value: string;
+  onChange: (e:ChangeEvent<HTMLInputElement>)=> void; 
 };
 
 export const Input = ({
@@ -18,6 +20,8 @@ export const Input = ({
   showIcon = false,
   disabled,
   onIconClick,
+  value, 
+  onChange, 
   ...rest
 }: Props) => {
   const Icon = variant === 'search' ? SearchIcon : showIcon ? EyeIcon : null;

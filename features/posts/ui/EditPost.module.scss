@@ -1,0 +1,127 @@
+.postContainer {
+    display: flex;
+    gap: 24px; 
+    width: 972px; 
+    height: 564px;
+    background: var(--Dark-300, #333);
+    align-items: flex-start; 
+    position: relative;
+    overflow: hidden;
+}
+
+.postContainer::after {
+    content: ''; 
+    height: 1px; 
+    width: 480px; 
+    position: absolute;
+    top: 60px; 
+    right: 0;
+    background-color: var(--Dark-100, #4C4C4C);
+}
+
+.image {
+    width: 490px;
+    object-fit: cover; 
+}
+
+.textArea {
+    width: 433px;
+    height: 84px; 
+    resize: none; 
+    background: var(--Dark-500, #171717);
+}
+
+.text{
+    width: 345px; 
+    color: var(--Light-100, #FFF);
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; 
+    overflow-wrap: break-word; 
+    word-wrap: break-word;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 12px; 
+    gap: 24px; 
+}
+
+.button {
+    width: 96px;
+    outline:none; 
+}
+
+
+.editMode .image {
+    transform: translateY(60px);
+    height: 504px; 
+}
+
+.editPostTitle {
+    position: absolute;
+    top: 12px;
+    left: 24px;
+    color: var(--Light-100, #FFF);
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 36px;
+}
+
+.editMode .editPostTitle {
+    display: block;
+}
+
+.editTextAreaContainer{
+    width: 433px;
+    height: 405px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+    padding-top: 12px;
+}
+
+.avatarNameContainer{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 12px;
+}
+
+.avatar{
+    width:36px;
+    height:36px;
+    border-radius: 50%;
+    position: relative;
+}
+
+
+.saveButton {
+    width: 135px; 
+    display: inline-block;
+}
+
+.icon {
+    position: absolute; 
+    top: 20px;
+    right: 24px; 
+    cursor: pointer;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px;
+    width: 385px;
+    color: var(--Light-100, #FFF);
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 24px; 
+}
