@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useGetPostQuery, useGetPostLikesQuery } from '../api/post';
+import { useGetPostQuery, useGetPostLikesQuery, useUpdatePostMutation } from '../api/post';
 import { useGetCommentsQuery, useUpdateCommentLikeStatusMutation } from '@/features/comments/api/comments';
 import { CommentItem as CommentItemType } from '@/features/comments/api/comments.types';
 import CommentItem from '@/features/comments/ui/CommentItem';
@@ -31,6 +31,7 @@ const Post = ({ postId, isEditing = false, onClose, open }: PostProps) => {
   const { data: postLikes } = useGetPostLikesQuery({ postId });
   const { data: comments } = useGetCommentsQuery({ postId });
   const [updateCommentLikeStatus] = useUpdateCommentLikeStatusMutation();
+  const [updatePost] = useUpdatePostMutation()
 
   const [editMode, setEditMode] = useState(isEditing);
   const [description, setDescription] = useState(post?.description || '');
@@ -38,8 +39,11 @@ const Post = ({ postId, isEditing = false, onClose, open }: PostProps) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
 
   useEffect(() => {
-    if (post) setDescription(post.description);
-  }, [post]);
+    if (post?.description !== undefined) {
+        setDescription(post.description);
+    }
+}, [post?.description]); 
+
 
   const { isLiked, likesCount, handleUpdatePostLikeStatus } = useUpdatePostLikeStatus(
     postId,
@@ -64,6 +68,15 @@ const Post = ({ postId, isEditing = false, onClose, open }: PostProps) => {
     }
   };
 
+  const handleSave = async () => {
+    try {
+        await updatePost({postId, description}); 
+        setEditMode(false); 
+    } catch (error) {
+        console.error("Ошибка при сохранении поста", error)
+    }
+}
+
   return (
     <div className={clsx(s.postWrapper, { [s.blurBackground]: open })}>
       <div className={clsx(s.postContainer, { [s.notEditMode]: !editMode })}>
@@ -74,7 +87,7 @@ const Post = ({ postId, isEditing = false, onClose, open }: PostProps) => {
             post={post}
             description={description}
             setDescription={setDescription}
-            onSave={() => setEditMode(false)}
+            onSave={handleSave}
             setEditMode={setEditMode}
           />
         ) : (
