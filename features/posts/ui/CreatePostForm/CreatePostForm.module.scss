@@ -1,0 +1,44 @@
+.formWrapper {
+  //position: relative;
+  width: 482px;
+  box-sizing: border-box;
+  padding: 24px;
+}
+
+.userInfo {
+  display: flex;
+  column-gap: 12px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.submitBtn {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+.descriptionContainer {
+  display: flex;
+  flex-direction: column;
+  //width: 100%;
+}
+
+.description, .descriptionInfo {
+  color: var(--light-900);
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.textarea {
+  background-color: var(--dark-500);
+  color: var(--light-900);
+  border: 1px solid var(--dark-100);
+  border-radius: 2px;
+  min-height: 120px;
+}
+
+.descriptionInfo {
+  margin-left: auto;
+}

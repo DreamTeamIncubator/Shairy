@@ -14,19 +14,19 @@ import { paths, validationPatterns } from '@/utils/utils';
 import { useRegistrationMutation } from '@/features/auth/api/auth';
 
 type FormData = {
-    userName: string;
-    email: string;
-    password: string;
-    passwordConfirmation: string;
-    termsOfService: boolean;
-};
+    userName: string
+    email: string
+    password: string
+    passwordConfirmation: string
+    termsOfService: boolean
+}
 
 type APIError = {
-    status: number;
+    status: number
     data?: {
-        messages: { field: string; message: string }[];
-    };
-};
+        messages: { field: string; message: string }[]
+    }
+}
 
 const SignUp = () => {
     const {

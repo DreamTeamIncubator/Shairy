@@ -1,0 +1,94 @@
+//.imagesCropper {
+//  position: absolute;
+//  left: 0;
+//  right: 0;
+//  bottom: 0;
+//  //top: 0;
+//}
+//
+//.reactCrop {
+//  width: 100%;
+//  height: auto;
+//}
+//
+//.croppedImage {
+//  width: 100%;
+//  height: auto;
+//}
+//
+//.prevBtn, .nextBtn {
+//  position: absolute;
+//  top: 50%;
+//  width: 36px;
+//  height: 36px;
+//  background-color: var(--dark-500);
+//  border-radius: 2px;
+//  border: none;
+//  padding: 5px;
+//}
+//
+//.prevBtn {
+//  left: 0;
+//}
+//
+//.nextBtn {
+//  right: 0;
+//  transform: rotate(180deg);
+//}
+
+.imagesCropper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  .cropperContainer {
+    //height: 100%;
+    //height: auto;
+    //bottom: 50%; /* Высота кнопок навигации */
+    //overflow: hidden;
+  }
+
+  .reactCrop {
+    width: 100%;
+    min-height: 100%;
+    height: 100%;
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  //.navigationButtons {
+  //
+  //}
+
+  .prevBtn, .nextBtn {
+    position: absolute;
+    top: 50%;
+    width: 36px;
+    height: 36px;
+    background-color: var(--dark-500);
+    border: none;
+    cursor: pointer;
+  }
+
+  .prevBtn {
+    left: 0;
+  }
+
+  .nextBtn {
+    right: 0;
+    transform: rotate(180deg);
+  }
+}
+
+.imageCropWrapper {
+  height: 100%;
+}
+
+.reactCrop {
+  height: 100%;
+}

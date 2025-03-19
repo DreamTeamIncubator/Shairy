@@ -1,0 +1,20 @@
+.wrapper {
+    position: relative;
+    width: 972px;
+    display: grid;
+    grid-template-columns: 490px 300px;
+
+}
+
+.filtersContainer {
+    padding: 24px 54px 30px;
+    width: 482px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+}
+
+.filter {
+    width: 108px;
+    height: 108px;
+}
