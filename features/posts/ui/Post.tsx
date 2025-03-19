@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useGetPostQuery, useGetPostLikesQuery, useUpdatePostMutation } from '../api/post';
+import React, { useState, useEffect } from 'react';
+import {useGetPostQuery, useGetPostLikesQuery, useUpdatePostMutation, useDeleteUserPostMutation} from '../api/post';
 import { useGetCommentsQuery, useUpdateCommentLikeStatusMutation } from '@/features/comments/api/comments';
 import { CommentItem as CommentItemType } from '@/features/comments/api/comments.types';
 import CommentItem from '@/features/comments/ui/CommentItem';
@@ -17,7 +17,7 @@ import ImageCarousel from './ImageCarousel';
 import s from './Post.module.scss';
 import { useCommentActions } from '../hooks/useCommentActions';
 import { useUpdatePostLikeStatus } from '../hooks/useUpdatePostLikeStatus';
-import DeletePost from './deletePost';
+import {ModalRadix} from '@/shared/ui/Modal/ModalRadix';
 
 type PostProps = {
   postId: number;
@@ -77,6 +77,22 @@ const Post = ({ postId, isEditing = false, onClose, open }: PostProps) => {
     }
 }
 
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [deletePost] = useDeleteUserPostMutation()
+
+  const deletePostHandler = async()=>{
+    setIsDeleteModalOpen(true)
+  }
+
+  const confirmDeletePost = async () => {
+    try {
+      await deletePost(postId).unwrap();
+      setIsDeleteModalOpen(false);
+    } catch (err) {
+      console.error("Ошибка при удалении поста", err);
+    }
+  };
+
   return (
     <div className={clsx(s.postWrapper, { [s.blurBackground]: open })}>
       <div className={clsx(s.postContainer, { [s.notEditMode]: !editMode })}>
@@ -114,10 +130,10 @@ const Post = ({ postId, isEditing = false, onClose, open }: PostProps) => {
                   <Image src="/pencil.svg" alt="edit" width={24} height={24} />
                   <span>Edit Post</span>
                 </div>
-                <div className={s.pencilEditContainer} onClick ={()=>{setIsDeleteModalOpen(true)}}>
+                <div className={s.pencilEditContainer} onClick ={deletePostHandler}>
                   <Image src="/delete.svg" alt="delete" width={24} height={24} />
                   <span>Delete Post</span>
-                  {isDeleteModalOpen && <DeletePost/>}
+                  {/*{isDeleteModalOpen && <DeletePost/>}*/}
                 </div>
               </Popover.Content>
             </Popover.Root>
@@ -167,7 +183,7 @@ const Post = ({ postId, isEditing = false, onClose, open }: PostProps) => {
                 {postLikes && postLikes?.items?.length > 0 && (
                   <div className={s.avatars}>
                     {postLikes.items.slice(0, 5).map((user) => (
-                      <img key={user.id} src={user.avatars?.[0]?.url} className={s.avatarWhoLikes} />
+                      <img key={user.id} src={user.avatars?.[0]?.url} className={s.avatarWhoLikes}  alt={'avatar'}/>
                     ))}
                     {postLikes.items.length > 5 && <span>+{postLikes.items.length - 5}</span>}
                   </div>
@@ -198,6 +214,13 @@ const Post = ({ postId, isEditing = false, onClose, open }: PostProps) => {
           </>
         )}
       </div>
+      <ModalRadix open={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} modalTitle={'Delete Post'}>
+        <p className={s.text}>Are you sure you want to delete this post?</p>
+        <div className={s.wrapper}>
+          <Button variant={'outlined'} onClick={confirmDeletePost}>Yes</Button>
+          <Button variant={'primary'} onClick={() => setIsOpen(false)}>No</Button>
+        </div>
+      </ModalRadix>
     </div>
   );
 };

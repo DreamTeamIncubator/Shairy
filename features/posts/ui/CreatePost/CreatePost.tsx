@@ -3,8 +3,8 @@ import ImageUploader from '@/features/posts/ui/ImageUploader/ImageUploader';
 import ImagePreview from '@/features/posts/ui/ImagePreview/ImagePreview';
 import PhotoFilters from '@/features/posts/ui/PhotoFilters/PhotoFilters';
 import DescriptionForm from '@/features/posts/ui/CreatePostForm/CreatePostForm';
-import { useCreatePostMutation, useUploadImageMutation } from '@/features/posts/api/postApi';
 import ImagesCropper from '@/features/posts/ui/ImageCropper/ImagesCropper';
+import {useCreatePostMutation, useUploadImageMutation} from '@/features/posts/api/post';
 
 type Props = {
     onClose: () => void;
