@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { usePagination } from './usePagination';
 import s from './Pagination.module.scss';
 import clsx from 'clsx';
-import KeyboardArrowLeft from '@/components/Pagination/keyboardArrows/KeyboardArrowLeft';
-import KeyboardArrowRight from '@/components/Pagination/keyboardArrows/KeyboardArrowRight';
-import {RadixSelect} from '@/components/Select/RadixSelect';
+import KeyboardArrowLeft from '@/shared/ui/Pagination/keyboardArrows/KeyboardArrowLeft';
+import KeyboardArrowRight from '@/shared/ui/Pagination/keyboardArrows/KeyboardArrowRight';
+import {RadixSelect} from '@/shared/ui/Select/RadixSelect';
 
 type PaginationConditionals =
   | {

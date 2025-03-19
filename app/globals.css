@@ -68,3 +68,56 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+/*!* Общий контейнер *!*/
+/*.uppy-Dashboard-inner {*/
+/*  background-color: #1e1e1e; !* Темный фон *!*/
+/*  !*border-radius: 12px; !* Закругленные углы *!*!*/
+/*  !*padding: 20px;*!*/
+/*  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); !* Тень *!*/
+/*}*/
+
+/*!* Центрируем иконку *!*/
+/*.uppy-Dashboard-AddFiles {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*}*/
+
+/*!* Отключаем заголовок "Add Photo" *!*/
+/*.uppy-Dashboard-AddFiles-title {*/
+/*  !*display: none;*!*/
+/*}*/
+
+/*!* Увеличиваем иконку *!*/
+/*.uppy-Dashboard-AddFiles-icon {*/
+/*  font-size: 50px;*/
+/*  color: #bbb;*/
+/*}*/
+
+/*!* Кнопка "Select from Computer" *!*/
+/*.uppy-Dashboard-browse {*/
+/*  background-color: tomato;*/
+/*  color: blue;*/
+/*  border-radius: 8px;*/
+/*  padding: 10px 20px;*/
+/*  font-weight: bold;*/
+/*}*/
+
+/*!* Эффект наведения *!*/
+/*.uppy-Dashboard-browse:hover {*/
+/*  background: #0056b3;*/
+/*}*/
+
+/*!* Кнопка "Open Draft" *!*/
+/*.uppy-Dashboard-actionBtn--done {*/
+/*  background: tomato;*/
+/*  color: green;*/
+/*  border-radius: 8px ;*/
+/*}*/
+
+/*!* Эффект наведения *!*/
+/*.uppy-Dashboard-actionBtn--done:hover {*/
+/*  background: #444;*/
+/*}*/

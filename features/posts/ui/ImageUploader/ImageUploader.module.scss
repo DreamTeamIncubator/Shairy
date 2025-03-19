@@ -1,0 +1,28 @@
+.wrapper {
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 60px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.content {
+  background-color: var(--dark-500);
+  border: none;
+  border-radius: 2px;
+  width: 222px;
+  height: 228px;
+  margin: 0 auto;
+  padding: 90px;
+}
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
