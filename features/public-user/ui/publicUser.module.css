@@ -1,0 +1,27 @@
+.mainInformationBlock {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+.avatar {
+  border-radius: 50%;
+}
+.profileDescription {
+  display: flex;
+  flex-direction: column;
+  padding-inline-start: 30px;
+}
+.userStats {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  gap: 100px;
+}
+.postsBlock {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 30px;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
