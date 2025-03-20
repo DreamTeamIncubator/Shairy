@@ -14,11 +14,11 @@ type PostProps = {
   comments: CommentsType
 }
 
-const testImg = [noImg, noImg, noImg, noImg]
+// const testImg = [noImg, noImg, noImg, noImg]
 
 const Post = ({ post, comments }: PostProps) => {
-  const firstThreePhotos = testImg.slice(0, 3) //test
-  // const firstThreePhotos = post.avatarWhoLikes.slice(0, 3);
+  // const firstThreePhotos = testImg.slice(0, 3) //test
+  const firstThreePhotos = post.avatarWhoLikes.slice(0, 3)
 
   return (
     <div key={post.id} className={s.post}>
@@ -40,9 +40,8 @@ const Post = ({ post, comments }: PostProps) => {
             style={{ borderRadius: '50%', objectFit: 'cover' }}
           />
           <span className={s.userName}>{post.userName}</span>
-          <p className={s.description}>{post.description}</p>
         </div>
-        <Comments comments={comments} />
+        <Comments comments={comments} post={post} />
         <div>
           <div className={s.likes}>
             <div style={{ display: 'flex' }}>

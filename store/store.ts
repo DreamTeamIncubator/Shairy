@@ -6,6 +6,8 @@ import { profile } from '@/features/profile/api/profile';
 import { commentsAPI } from '@/features/comments/api/comments';
 import { postAPI } from '@/features/posts/api/post';
 
+import {postsAPI} from '@/features/posts/api/postApi';
+import {profileAPI} from '@/features/profile/api/profileApi';
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +18,8 @@ export const store = configureStore({
     [posts.reducerPath]: posts.reducer,
     [profile.reducerPath]: profile.reducer,
     [allPosts.reducerPath]: allPosts.reducer,
+    [postsAPI.reducerPath]: postsAPI.reducer,
+    [profileAPI.reducerPath]: profileAPI.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
@@ -28,6 +32,7 @@ export const store = configureStore({
       profile.middleware,
       allPosts.middleware
     ),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authAPI.middleware, postsAPI.middleware, profileAPI.middleware),
 });
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors
