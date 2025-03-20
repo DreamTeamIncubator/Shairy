@@ -15,3 +15,12 @@ export async function getProfilePublicUser(profileId: number) {
   }
   return await response.json()
 }
+
+export async function getAdditionalData(profileId: number) {
+  // const { profileId } = await params
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/public-posts/user/${profileId}/`
+  )
+
+  return await response.json()
+}
