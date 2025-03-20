@@ -1,11 +1,20 @@
-import React from 'react';
+import { getAdditionalData, getProfilePublicUser } from '@/features/public-user/api/public-userApi'
+import { PublicUser } from '@/features/public-user/ui/public-user'
 
-const PublicProfile = () => {
-  return (
-    <div>
-      <h1>Public Profile</h1>
-    </div>
-  );
-};
+type PageProps = {
+  params: {
+    profileId: string
+  }
+}
+export default async function PublicProfilePage({ params }: PageProps) {
+  const { profileId } = await params
+  const [profileData, additionalData] = await Promise.all([
+    getProfilePublicUser(+profileId),
+    getAdditionalData(+profileId),
+  ])
 
-export default PublicProfile;
+  if (!profileData) {
+    return <div>Profile not found</div>
+  }
+  return <PublicUser profileData={profileData} additionalData={additionalData} />
+}
