@@ -1,10 +1,19 @@
+'use client'
+
 import Image from 'next/image'
 import ImageWithoutAvatar from '../../../assets/icons/noImg.png'
-import { PropsType } from '../types'
+import { Item, PropsType } from '../types'
 import s from '../ui/publicUser.module.css'
+import { useRouter } from 'next/navigation'
+
 export const PublicUser = (props: PropsType) => {
   const { additionalData, profileData } = props
   console.log(additionalData)
+  const router = useRouter()
+
+  const openPost = (post: Item) => {
+    router.push(`/profile/${profileData.id}/post/${post.id}`, { scroll: false })
+  }
 
   return (
     <div>
@@ -63,7 +72,8 @@ export const PublicUser = (props: PropsType) => {
               backgroundColor: 'white',
               border: 'black 2px solid',
             }}
-            key={post.id}>
+            key={post.id}
+            onClick={() => openPost(post)}>
             {/* {post.description} */}
             {post.images.map((image) => (
               <Image alt="posts" key={image.createdAt} src={image.url} width={250} height={250} />
