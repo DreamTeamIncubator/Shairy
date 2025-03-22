@@ -67,7 +67,6 @@ export const Sidebar = ({elements}: SidebarProps) => {
         } else if (item === 'create') {
             return (
                 <li className={style.item} key={index}>
-                    {/*<span onClick={handleOpenModal}>Create</span>*/}
                     <Link
                         href={`/my-profile/${data?.userId}`}
                         className={`${style.link} ${isActive ? s.active : ''}`}>
