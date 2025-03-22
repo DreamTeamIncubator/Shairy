@@ -5,6 +5,7 @@ import { profile } from '@/features/profile/api/profile';
 import { commentsAPI } from '@/features/comments/api/comments';
 import { postAPI } from '@/features/posts/api/post';
 import {profileAPI} from '@/features/profile/api/profileApi';
+import {type TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 
 export const store = configureStore({
   reducer: {
@@ -34,3 +35,7 @@ export const store = configureStore({
 // see `setupListeners` docs - takes an optional callback as the 2nd arg for customization
 setupListeners(store.dispatch);
 
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

@@ -269,8 +269,16 @@
   .blurBackground {
     backdrop-filter: blur(0.5px); 
   }
-  
-  
+
+.modalText {
+    margin-bottom: 30px;
+}
+
+.modalButtonWrapper{
+    display: flex;
+    justify-content: flex-end;;
+    gap: 25px;
+}
 
 
 

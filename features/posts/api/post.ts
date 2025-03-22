@@ -42,54 +42,52 @@ export const postAPI = createApi({
         { type: 'Post', id: postId },
       ],
     }),
-    uploadImage: builder.mutation<any, any>({
-      query: (payload) => ({
-        method: 'POST',
-        url: `/posts/image`,
-        body: payload,
+      uploadImage: builder.mutation<any, any>({
+          query: (payload) => ({
+              method: 'POST',
+              url: `/posts/image`,
+              body: payload,
+          }),
+      }),
+      createPost: builder.mutation<any, any>({
+          query: (payload) => ({
+              method: 'POST',
+              url: `/posts`,
+              body: payload,
+          }),
+      }),
+      getAllUsersPosts: builder.query<ResponceAllPosts,  { pageSize: number, endCursorPostId?: number | null, userId: number }>({
+          query: ({ pageSize, endCursorPostId, userId })=>({
+              method: 'GET',
+              url: `public-posts/user/${userId}/${endCursorPostId || ''}`,
+              params: {
+                  pageSize,
+                  endCursorPostId,
+                  sortBy: 'createdAt',
+                  sortDirection: 'desc',
+              }
+          }),
+          serializeQueryArgs: ({ endpointName }) => endpointName,
+          merge: (currentCache, newPosts) => {
+              const existingPostIds = new Set(currentCache.items.map((item) => item.id));
+              const uniquePosts = newPosts.items.filter((post) => !existingPostIds.has(post.id));
+              currentCache.items.push(...uniquePosts);
+          },
+          forceRefetch({ currentArg, previousArg }) {
+              return currentArg?.endCursorPostId !== previousArg?.endCursorPostId;
+          },
+          providesTags: res => (res ? res.items.map(({ id }) => ({ type: 'UserPosts', id })) : []),
+      }),
+      deleteUserPost: builder.mutation<void, number>({
+          query: (postId) => ({
+              method: 'DELETE',
+              url: `posts/${postId}`
+          }),
       }),
     }),
-    createPost: builder.mutation<any, any>({
-      query: (payload) => ({
-        method: 'POST',
-        url: `/posts`,
-        body: payload,
-      }),
-    }),
-    getAllUsersPosts: builder.query<
-      ResponceAllPosts,
-      { pageSize: number; endCursorPostId?: number | null; userId: number }
-    >({
-      query: ({ pageSize, endCursorPostId, userId }) => ({
-        method: 'GET',
-        url: `public-posts/user/${userId}/${endCursorPostId || ''}`,
-        params: {
-          pageSize,
-          endCursorPostId,
-          sortBy: 'createdAt',
-          sortDirection: 'desc',
-        },
-      }),
-      serializeQueryArgs: ({ endpointName }) => endpointName,
-      merge: (currentCache, newPosts) => {
-        const existingPostIds = new Set(currentCache.items.map((item) => item.id))
-        const uniquePosts = newPosts.items.filter((post) => !existingPostIds.has(post.id))
-        currentCache.items.push(...uniquePosts)
-      },
-      forceRefetch({ currentArg, previousArg }) {
-        return currentArg?.endCursorPostId !== previousArg?.endCursorPostId
-      },
-      providesTags: (res) => (res ? res.items.map(({ id }) => ({ type: 'UserPosts', id })) : []),
-    }),
-    deleteUserPost: builder.mutation<void, number>({
-      query: (postId) => ({
-        method: 'DELETE',
-        url: `posts/${postId}`,
-      }),
-      invalidatesTags: (res, err, postId) => [{ type: 'UserPosts', id: postId }],
-    }),
-  }),
-})
+
+  })
+
 
 export const {
   useGetPostQuery,
