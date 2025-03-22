@@ -99,7 +99,7 @@ const Post = ({ postId, isEditing = false, onClose, open }: PostProps) => {
   return (
     <div className={clsx(s.postWrapper, { [s.blurBackground]: open })}>
       <div className={clsx(s.postContainer, { [s.notEditMode]: !editMode })}>
-        <Image
+      <Image
           src="/close.svg"
           alt="close edit"
           width={24}

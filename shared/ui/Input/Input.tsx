@@ -35,6 +35,8 @@ export const Input = ({
       <input
         className={classNames.input}
         placeholder={variant === 'search' ? 'Input search' : ''}
+        value={value}
+        onChange={onChange}
         {...rest}
         disabled={disabled}
       />
