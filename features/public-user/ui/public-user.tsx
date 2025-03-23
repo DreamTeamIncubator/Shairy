@@ -12,7 +12,7 @@ export const PublicUser = (props: PropsType) => {
   const router = useRouter()
 
   const openPost = (post: Item) => {
-    router.push(`/profile/${profileData.id}/post/${post.id}`, { scroll: false })
+    router.push(`/public-profile/${profileData.id}/public-post/${post.id}`, { scroll: false })
   }
 
   return (
@@ -76,7 +76,7 @@ export const PublicUser = (props: PropsType) => {
             onClick={() => openPost(post)}>
             {/* {post.description} */}
             {post.images.map((image) => (
-              <Image alt="posts" key={image.createdAt} src={image.url} width={250} height={250} />
+              <Image alt="posts" key={image.uploadId} src={image.url} width={250} height={250} />
             ))}
           </div>
         ))}

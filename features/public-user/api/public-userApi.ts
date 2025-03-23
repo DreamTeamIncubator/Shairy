@@ -7,7 +7,7 @@ export async function getProfilePublicUser(profileId: number) {
   }
 
   if (response.status === 404) {
-    throw new Error('Пост не найден')
+    throw new Error('Профиль не найден')
   }
 
   if (!response.ok) {
