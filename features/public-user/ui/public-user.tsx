@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation'
 
 export const PublicUser = (props: PropsType) => {
   const { additionalData, profileData } = props
-  console.log(additionalData)
   const router = useRouter()
 
   const openPost = (post: Item) => {
