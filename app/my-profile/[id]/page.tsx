@@ -11,7 +11,7 @@ import {useGetMeQuery} from '@/features/auth/api/auth';
 
 const MyProfile = () => {
     const [isOpen, setIsOpen] = useState(false)
-    const [endCursorPostId, setEndCursorPostId] = useState<any>(null)
+    const [endCursorPostId, setEndCursorPostId] = useState<null | number>(null)
     const {data: userData} = useGetMeQuery()
     const {id} = useParams()
 

@@ -33,7 +33,7 @@ type PostProps = {
     open: boolean;
     onClose: () => void;
     postData: Items
-    endCursorPostId: number
+    endCursorPostId: number | null
 };
 
 const Post = ({postId, isEditing = false, onClose, open, postData, endCursorPostId}: PostProps) => {
@@ -267,12 +267,12 @@ const Post = ({postId, isEditing = false, onClose, open, postData, endCursorPost
         open={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         modalTitle={'Delete Post'}>
-        <p className={s.text}>Are you sure you want to delete this post?</p>
-        <div className={s.wrapper}>
+        <p className={s.modalText}>Are you sure you want to delete this post?</p>
+        <div className={s.modalButtonWrapper}>
           <Button variant={'outlined'} onClick={confirmDeletePost}>
             Yes
           </Button>
-          <Button variant={'primary'} onClick={() => setIsOpen(false)}>
+          <Button variant={'primary'} onClick={onClose}>
             No
           </Button>
         </div>

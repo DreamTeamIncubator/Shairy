@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { ModalRadix, ModalRadixProps } from './ModalRadix';
-import { Button } from '../../shared/ui/Button/Button';
 import { useState } from 'react';
+import {Button} from '@/shared/ui/Button/Button';
 
 const meta = {
   component: ModalRadix,
