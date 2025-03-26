@@ -1,6 +1,6 @@
 .mainInformationBlock {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   padding: 30px;
 }
 .avatar {
