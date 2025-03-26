@@ -3,10 +3,12 @@
   background-color: var(--dark-700);
   border: 1px solid var(--dark-300);
   border-radius: 2px;
+  padding-right: 10px;
 }
 .countItem {
-  padding: 10px;
+  margin: 10px 0px 10px 10px;
 }
 .countItem:not(:first-child) {
-  border-left: 1px solid var(--dark-300);
+  border-left: 2px solid var(--dark-300);
+  padding-left: 10px;
 }
