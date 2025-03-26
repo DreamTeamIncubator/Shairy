@@ -1,11 +1,9 @@
 import styles from './page.module.css'
 import Image from 'next/image'
 import userWithoutPhoto from '../assets/icons/withoutAvatar.png'
-import { useState } from 'react'
-import { PublicUser } from '@/features/public-user/ui/public-user'
-import { Profile } from '@/features/profile/ui/Profile'
 import { UserCounter } from '@/shared/ui/UserCounter/UserCounter'
 import { PostDescription } from '@/features/posts/ui/PostsDescription/PostDescription'
+import Link from 'next/link'
 // import { Button } from '@/shared/ui/Button/Button';
 // import { Input } from '@/components/Input/Input';
 // import { Pagination } from '@/components/Pagination/Pagination';
@@ -30,6 +28,7 @@ import { PostDescription } from '@/features/posts/ui/PostsDescription/PostDescri
 
 //   return await response.json()
 // }
+
 export async function getFourLastPosts() {
   const url = new URL(`https://inctagram.work/api/v1/public-posts/all`)
 
@@ -132,7 +131,20 @@ export default async function Home() {
         <div className={styles.postsBlock}>
           {resUsers4.items.map((post) => (
             <div className={styles.postBlock} key={post.id}>
-              <Image alt="post" src={post.images[0].url} width={250} height={250} />
+              <Link
+                key={post.id}
+                href={`/public-profile/${post.ownerId}/public-post/${post.id}`} // Переход на маршрут поста
+                scroll={false} // Отключаем прокрутку страницы
+                className={styles.postBlock}>
+                {' '}
+                <Image
+                  alt="post"
+                  src={post.images[0].url}
+                  width={250}
+                  height={250}
+                  style={{ cursor: 'pointer' }}
+                />
+              </Link>
               <div className={styles.avatarNameBlock}>
                 <Image
                   alt="avatar"
