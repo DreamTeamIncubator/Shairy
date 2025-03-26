@@ -1,0 +1,12 @@
+.userCounterBlock {
+  display: flex;
+  background-color: var(--dark-700);
+  border: 1px solid var(--dark-300);
+  border-radius: 2px;
+}
+.countItem {
+  padding: 10px;
+}
+.countItem:not(:first-child) {
+  border-left: 1px solid var(--dark-300);
+}
