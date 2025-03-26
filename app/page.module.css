@@ -46,10 +46,3 @@
   margin: 10px 0 10px 0;
   color: var(--light-900);
 }
-.description {
-  max-width: 250px;
-  overflow: hidden;
-  /* display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3; */
-}

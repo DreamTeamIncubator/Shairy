@@ -1,6 +1,11 @@
 import styles from './page.module.css'
 import Image from 'next/image'
 import userWithoutPhoto from '../assets/icons/withoutAvatar.png'
+import { useState } from 'react'
+import { PublicUser } from '@/features/public-user/ui/public-user'
+import { Profile } from '@/features/profile/ui/Profile'
+import { UserCounter } from '@/shared/ui/UserCounter/UserCounter'
+import { PostDescription } from '@/features/posts/ui/PostsDescription/PostDescription'
 // import { Button } from '@/shared/ui/Button/Button';
 // import { Input } from '@/components/Input/Input';
 // import { Pagination } from '@/components/Pagination/Pagination';
@@ -116,16 +121,13 @@ export default async function Home() {
     const diffInDays = Math.floor(diffInHours / 24)
     return `${diffInDays} days ago`
   }
-  console.log(
-    '500 символов500 символов500 символов500 символов500 символов500 символов500'.substring(0, 20)
-  )
 
   return (
     <>
       <div className={styles.content}>
         <div className={styles.usersInfo}>
           <p>Registered users:</p>
-          <p>{resUsers4.totalUsers}</p>
+          <UserCounter users={resUsers4.totalUsers} />
         </div>
         <div className={styles.postsBlock}>
           {resUsers4.items.map((post) => (
@@ -142,46 +144,11 @@ export default async function Home() {
                 <p key={post.id}>{post.userName}</p>
               </div>
               <p className={styles.timeAgo}>{formatTimeAgo(post.createdAt)}</p>
-              <div className={styles.description}>{post.description}</div>
+
+              <PostDescription description={post.description} />
             </div>
           ))}
         </div>
-        {/* <div>
-          <div style={{ display: 'flex', marginTop: '30px', flexDirection: 'column', gap: '30px' }}>
-            <Button>Полетели ) </Button>
-            <Button variant={'secondary'}>Полетели ) </Button>
-            <Button variant={'outlined'}>Полетели ) </Button>
-            <Button variant={'textButton'}>Полетели ) </Button>
-          </div>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-          <Input placeholder={'Epam@epam.com'} variant={'email'} className={'active'} />
-          <Input placeholder={'Epam@epam.com'} variant={'email'} showIcon disabled={true} />
-          <Input placeholder={'Epam@epam.com'} variant={'email'} showIcon />
-          <Input variant={'search'} />
-          <Input variant={'search'} disabled />
-          <Input variant={'search'} error={'Error text'} className={'error'} />
-        </div>
-        <div>
-          <Pagination
-            count={30}
-            onChange={setCurrentPage}
-            page={currentPage}
-            siblings={1}
-            perPage={perPage}
-            perPageOptions={[10, 20, 30, 40, 50, 100]}
-            onPerPageChange={(perPage) => setPerPageOptions(perPage)}
-          />
-        </div>
-        <div style={{ marginTop: '50px' }}>
-          <RadixTabs tabs={tabs} defaultValue="tab1" />
-        </div>
-        <ReCaptcha sitekey={sitekey} changeCaptchaStatus={setIsCaptchaCompleted} />
-        <button
-          disabled={!isCaptchaCompleted}
-          onClick={() => isCaptchaCompleted && alert('сработало')}>
-          тут кнопка для проверки работы
-        </button> */}
       </div>
     </>
   )
