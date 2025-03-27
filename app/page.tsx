@@ -4,6 +4,10 @@ import userWithoutPhoto from '../assets/icons/withoutAvatar.png'
 import { UserCounter } from '@/shared/ui/UserCounter/UserCounter'
 import { PostDescription } from '@/features/posts/ui/PostsDescription/PostDescription'
 import Link from 'next/link'
+import { formatTimeAgo } from '@/utils/utils'
+import { getFourLastPosts } from '@/features/posts/api/fourLastPostsAPI'
+import { ResponseAllPosts } from '@/features/posts/api/post.types'
+
 // import { Button } from '@/shared/ui/Button/Button';
 // import { Input } from '@/components/Input/Input';
 // import { Pagination } from '@/components/Pagination/Pagination';
@@ -29,38 +33,13 @@ import Link from 'next/link'
 //   return await response.json()
 // }
 
-export async function getFourLastPosts() {
-  const url = new URL(`https://inctagram.work/api/v1/public-posts/all`)
-
-  // Устанавливаем параметры запроса
-  url.searchParams.append('pageSize', '4')
-  url.searchParams.append('sortDirection', 'desc')
-
-  const response = await fetch(url.toString())
-
-  if (response.status === 500) {
-    throw new Error('Ошибка сервера: 500')
-  }
-
-  if (response.status === 404) {
-    throw new Error('Пост не найден')
-  }
-
-  if (!response.ok) {
-    throw new Error('Не удалось загрузить страницу')
-  }
-
-  return await response.json()
-}
-
 export default async function Home() {
-  // const resUsers = await userCount()
-  const resUsers4 = await getFourLastPosts()
+  const lastPosts: ResponseAllPosts = await getFourLastPosts()
+
   // const [currentPage, setCurrentPage] = useState(1);
   // const [perPage, setPerPageOptions] = useState<number>(50);
   // const [isCaptchaCompleted, setIsCaptchaCompleted] = useState(false);
   // const sitekey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string;
-  console.log(resUsers4)
 
   // const tabs = [
   //   {
@@ -98,43 +77,20 @@ export default async function Home() {
   //   },
   // ];
 
-  function formatTimeAgo(isoDate: string) {
-    const date = new Date(isoDate)
-    const now = new Date()
-    const diffInSeconds = Math.floor((now - date) / 1000)
-
-    if (diffInSeconds < 60) {
-      return `${diffInSeconds} sec ago`
-    }
-
-    const diffInMinutes = Math.floor(diffInSeconds / 60)
-    if (diffInMinutes < 60) {
-      return `${diffInMinutes} min ago`
-    }
-
-    const diffInHours = Math.floor(diffInMinutes / 60)
-    if (diffInHours < 24) {
-      return `${diffInHours} hours ago`
-    }
-
-    const diffInDays = Math.floor(diffInHours / 24)
-    return `${diffInDays} days ago`
-  }
-
   return (
     <>
       <div className={styles.content}>
         <div className={styles.usersInfo}>
           <p>Registered users:</p>
-          <UserCounter users={resUsers4.totalUsers} />
+          <UserCounter users={lastPosts.totalUsers} />
         </div>
         <div className={styles.postsBlock}>
-          {resUsers4.items.map((post) => (
+          {lastPosts.items.map((post) => (
             <div className={styles.postBlock} key={post.id}>
               <Link
                 key={post.id}
-                href={`/public-profile/${post.ownerId}/public-post/${post.id}`} // Переход на маршрут поста
-                scroll={false} // Отключаем прокрутку страницы
+                href={`/public-profile/${post.ownerId}/public-post/${post.id}`}
+                scroll={false}
                 className={styles.postBlock}>
                 {' '}
                 <Image
