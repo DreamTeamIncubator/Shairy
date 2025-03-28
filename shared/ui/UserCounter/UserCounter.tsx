@@ -9,12 +9,15 @@ const makeTotalUserArray = (users: number) => {
 }
 export const UserCounter = ({ users }: Props) => {
   return (
-    <div className={s.userCounterBlock}>
-      {makeTotalUserArray(users).map((item, index) => (
-        <div className={s.countItem} key={index}>
-          {item}
-        </div>
-      ))}
+    <div className={s.usersInfo}>
+      <p>Registered users:</p>
+      <div className={s.userCounterBlock}>
+        {makeTotalUserArray(users).map((item, index) => (
+          <div className={s.countItem} key={index}>
+            {item}
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
