@@ -11,10 +11,12 @@ import { useGetMeQuery } from '@/features/auth/api/auth'
 import Image from 'next/image'
 
 const MyProfile = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [endCursorPostId, setEndCursorPostId] = useState<any>(null)
-  const { data: userData } = useGetMeQuery()
-  const { id } = useParams()
+
+    const [isOpen, setIsOpen] = useState(false)
+    const [endCursorPostId, setEndCursorPostId] = useState<null | number>(null)
+    const {data: userData} = useGetMeQuery()
+    const {id} = useParams()
+
 
   const { data: allPosts } = useGetAllUsersPostsQuery({
     pageSize: 8,

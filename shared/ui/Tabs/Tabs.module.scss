@@ -1,7 +1,7 @@
 .Root {
   display: flex;
   flex-direction: column;
-  width: 350px;
+  width: 100%;
   background-color: var(--dark-700);
   color: var(--dark-100);
 }
@@ -54,7 +54,7 @@
     border-bottom: 2px solid var(--dark-300);
   }
 
-  &[data-state="active"] {
+  &[data-state='active'] {
     color: var(--accent-500);
     background-color: var(--dark-700);
     border-bottom: 2px solid var(--accent-500);
@@ -97,4 +97,3 @@
   font-size: 15px;
   line-height: 1.5;
 }
-

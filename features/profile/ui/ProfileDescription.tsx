@@ -3,11 +3,12 @@ import s from '@/app/my-profile/[id]/myProfile.module.scss'
 import { Button } from '@/shared/ui/Button/Button'
 import noAvatar from '@/public/no-avatar.svg'
 import { useParams } from 'next/navigation'
-import { useGetprofileQuery } from '@/features/profile/api/profile'
+import Link from 'next/link'
+import { useGetPublicProfileQuery } from '@/features/profile/api/publicProfile'
 
 const ProfileDescription = () => {
   const { id } = useParams()
-  const { data } = useGetprofileQuery(+id)
+  const { data } = useGetPublicProfileQuery(Number(id))
   if (!id) {
     return <div>Loading...</div>
   }
@@ -20,7 +21,10 @@ const ProfileDescription = () => {
       </div>
       <div className={s.header}>
         <h2 className={s.name}>{data?.userName}</h2>
-        <Button variant={'secondary'}>Profile Settings</Button>
+
+        <Link href={`/my-profile/${id}/edit-profile?tab=General-Information`}>
+          <Button variant={'secondary'}>Profile Settings</Button>
+        </Link>
       </div>
       <div className={s.followers}>
         <div className={s.followersData}>

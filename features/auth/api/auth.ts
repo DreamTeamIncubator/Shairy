@@ -64,6 +64,13 @@ export const authAPI = createApi({
       query: () => `/auth/me`,
       providesTags: ['me'],
     }),
+    updateToken: builder.mutation<{ accessToken: string }, void>({
+      query: () => ({
+        url: '/auth/update-tokens', 
+        method: 'POST',
+        credentials: 'include', 
+      }),
+    }), 
     gitHubLogin: builder.mutation<{ accessToken: string; email: string }, { redirect_url: string }>(
       {
         query: ({ redirect_url }) => ({

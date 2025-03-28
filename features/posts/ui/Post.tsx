@@ -31,13 +31,22 @@ import type { Items } from '@/features/posts/api/post.types'
 import { useAppDispatch } from '@/store/store'
 
 type PostProps = {
-  postId: number
-  isEditing?: boolean
-  open: boolean
-  onClose: () => void
-  postData: Items
-  endCursorPostId: number
-}
+
+    postId: number;
+    isEditing?: boolean;
+    open: boolean;
+    onClose: () => void;
+    postData: Items
+    endCursorPostId: number | null
+};
+
+const Post = ({postId, isEditing = false, onClose, open, postData, endCursorPostId}: PostProps) => {
+    const {data: post} = useGetPostQuery({postId})
+    const {data: postLikes} = useGetPostLikesQuery({postId})
+    const {data: comments} = useGetCommentsQuery({postId})
+    const [updateCommentLikeStatus] = useUpdateCommentLikeStatusMutation()
+    const [updatePost] = useUpdatePostMutation()
+
 
 const Post = ({
   postId,
@@ -274,12 +283,12 @@ const Post = ({
         open={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         modalTitle={'Delete Post'}>
-        <p className={s.text}>Are you sure you want to delete this post?</p>
-        <div className={s.wrapper}>
+        <p className={s.modalText}>Are you sure you want to delete this post?</p>
+        <div className={s.modalButtonWrapper}>
           <Button variant={'outlined'} onClick={confirmDeletePost}>
             Yes
           </Button>
-          <Button variant={'primary'} onClick={() => setIsOpen(false)}>
+          <Button variant={'primary'} onClick={onClose}>
             No
           </Button>
         </div>

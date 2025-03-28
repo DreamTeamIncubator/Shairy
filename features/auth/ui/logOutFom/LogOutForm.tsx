@@ -32,7 +32,7 @@ export default function LogOutForm() {
   return (
     <section className={s.section}>
       <p>
-        Are you really want to log out of your account <b>“Epam@epam.com”</b>?
+        Do you really want to log out of your account <b>“Epam@epam.com”</b>?
       </p>
       <div className={s.buttonGroup}>
         <Button variant={'outlined'} onClick={handleLogout}>
