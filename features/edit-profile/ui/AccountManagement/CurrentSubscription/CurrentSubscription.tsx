@@ -56,7 +56,7 @@ export const CurrentSubscription = ({ subscriptionInfo }: CurrentSubscriptionPro
       <ModalRadix
         open={isModalOpen}
         onClose={handleClose}
-        modalTitle='Auto-Renewal Cancelation'
+        modalTitle='Auto-Renewal Cancellation'
         size='md'
         footer={<Button onClick={handleClose}>OK</Button>}>
           <p>
