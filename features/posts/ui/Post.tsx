@@ -31,22 +31,13 @@ import type { Items } from '@/features/posts/api/post.types'
 import { useAppDispatch } from '@/store/store'
 
 type PostProps = {
-
-    postId: number;
-    isEditing?: boolean;
-    open: boolean;
-    onClose: () => void;
-    postData: Items
-    endCursorPostId: number | null
-};
-
-const Post = ({postId, isEditing = false, onClose, open, postData, endCursorPostId}: PostProps) => {
-    const {data: post} = useGetPostQuery({postId})
-    const {data: postLikes} = useGetPostLikesQuery({postId})
-    const {data: comments} = useGetCommentsQuery({postId})
-    const [updateCommentLikeStatus] = useUpdateCommentLikeStatusMutation()
-    const [updatePost] = useUpdatePostMutation()
-
+  postId: number
+  isEditing?: boolean
+  open: boolean
+  onClose: () => void
+  postData: Items
+  endCursorPostId: number | null
+}
 
 const Post = ({
   postId,
