@@ -1,33 +1,37 @@
 'use client'
 
-import React, {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react'
 import {
-    useGetPostQuery,
-    useGetPostLikesQuery,
-    useUpdatePostMutation,
-    useDeleteUserPostMutation,
-    postAPI
+  useGetPostQuery,
+  useGetPostLikesQuery,
+  useUpdatePostMutation,
+  useDeleteUserPostMutation,
+  postAPI,
 } from '../api/post'
-import {useGetCommentsQuery, useUpdateCommentLikeStatusMutation} from '@/features/comments/api/comments'
-import {CommentItem as CommentItemType} from '@/features/comments/api/comments.types'
+import {
+  useGetCommentsQuery,
+  useUpdateCommentLikeStatusMutation,
+} from '@/features/comments/api/comments'
+import { CommentItem as CommentItemType } from '@/features/comments/api/comments.types'
 import CommentItem from '@/features/comments/ui/CommentItem'
-import {TextArea} from '@/shared/ui/TextArea/TextArea'
-import {Button} from '@/shared/ui/Button/Button'
-import clsx from 'clsx';
-import Image from 'next/image';
+import { TextArea } from '@/shared/ui/TextArea/TextArea'
+import { Button } from '@/shared/ui/Button/Button'
+import clsx from 'clsx'
+import Image from 'next/image'
 import * as Popover from '@radix-ui/react-popover'
-import {formatDistanceToNow} from 'date-fns'
+import { formatDistanceToNow } from 'date-fns'
 import EditPost from './EditPost'
 import LikeModal from './LikeModal'
 import ImageCarousel from './ImageCarousel'
 import s from './Post.module.scss'
-import {useCommentActions} from '../hooks/useCommentActions'
-import {useUpdatePostLikeStatus} from '../hooks/useUpdatePostLikeStatus'
-import {ModalRadix} from '@/shared/ui/Modal/ModalRadix'
-import type {Items, ResponceAllPosts} from '@/features/posts/api/post.types';
-import {useAppDispatch} from '@/store/store';
+import { useCommentActions } from '../hooks/useCommentActions'
+import { useUpdatePostLikeStatus } from '../hooks/useUpdatePostLikeStatus'
+import { ModalRadix } from '@/shared/ui/Modal/ModalRadix'
+import type { Items } from '@/features/posts/api/post.types'
+import { useAppDispatch } from '@/store/store'
 
 type PostProps = {
+
     postId: number;
     isEditing?: boolean;
     open: boolean;
@@ -43,40 +47,49 @@ const Post = ({postId, isEditing = false, onClose, open, postData, endCursorPost
     const [updateCommentLikeStatus] = useUpdateCommentLikeStatusMutation()
     const [updatePost] = useUpdatePostMutation()
 
-    const [editMode, setEditMode] = useState(isEditing)
-    const [description, setDescription] = useState(post?.description || '')
-    const [isLikeModalOpen, setIsLikeModalOpen] = useState(false)
-    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
 
-    useEffect(() => {
-        if (post?.description !== undefined) {
-            setDescription(post.description)
-        }
-    }, [post?.description])
+const Post = ({
+  postId,
+  isEditing = false,
+  onClose,
+  open,
+  postData,
+  endCursorPostId,
+}: PostProps) => {
+  const { data: post } = useGetPostQuery({ postId })
+  const { data: postLikes } = useGetPostLikesQuery({ postId })
+  const { data: comments } = useGetCommentsQuery({ postId })
+  const [updateCommentLikeStatus] = useUpdateCommentLikeStatusMutation()
+  const [updatePost] = useUpdatePostMutation()
 
+  const [editMode, setEditMode] = useState(isEditing)
+  const [description, setDescription] = useState(post?.description || '')
+  const [isLikeModalOpen, setIsLikeModalOpen] = useState(false)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
 
-    const {isLiked, likesCount, handleUpdatePostLikeStatus} = useUpdatePostLikeStatus(
-        postId,
-        post?.isLiked || false,
-        post?.likesCount || 0
-    )
+  useEffect(() => {
+    if (post?.description !== undefined) {
+      setDescription(post.description)
+    }
+  }, [post?.description])
 
-    const {
-        content,
-        setContent,
-        isReplying,
-        handleAddCommentOrAnswer,
-        handleAnswerClick,
-    } = useCommentActions(postId)
+  const { isLiked, likesCount, handleUpdatePostLikeStatus } = useUpdatePostLikeStatus(
+    postId,
+    post?.isLiked || false,
+    post?.likesCount || 0
+  )
 
-    const handleUpdateCommentLikeStatus = async (commentId: number, isLiked: boolean) => {
-        try {
-            const newLikeStatus = isLiked ? 'NONE' : 'LIKE'
-            await updateCommentLikeStatus({postId, commentId, likeStatus: newLikeStatus})
-        } catch (error) {
-            console.error('Ошибка при обновлении лайка:', error)
-        }
-    };
+  const { content, setContent, isReplying, handleAddCommentOrAnswer, handleAnswerClick } =
+    useCommentActions(postId)
+
+  const handleUpdateCommentLikeStatus = async (commentId: number, isLiked: boolean) => {
+    try {
+      const newLikeStatus = isLiked ? 'NONE' : 'LIKE'
+      await updateCommentLikeStatus({ postId, commentId, likeStatus: newLikeStatus })
+    } catch (error) {
+      console.error('Ошибка при обновлении лайка:', error)
+    }
+  }
 
   const handleSave = async () => {
     try {
@@ -87,33 +100,36 @@ const Post = ({postId, isEditing = false, onClose, open, postData, endCursorPost
     }
   }
 
-    const [deletePost] = useDeleteUserPostMutation()
-    const dispatch = useAppDispatch()
+  const [deletePost] = useDeleteUserPostMutation()
+  const dispatch = useAppDispatch()
 
-    const deletePostHandler = async () => {
-        setIsDeleteModalOpen(true)
+  const deletePostHandler = async () => {
+    setIsDeleteModalOpen(true)
+  }
+
+  const confirmDeletePost = async () => {
+    try {
+      await deletePost(postId).unwrap()
+      setIsDeleteModalOpen(false)
+
+      dispatch(
+        postAPI.util.updateQueryData(
+          'getAllUsersPosts',
+          { pageSize: 8, endCursorPostId: endCursorPostId, userId: postData.ownerId },
+          (draft: ResponceAllPosts) => {
+            const index = draft.items.findIndex((el) => el.id === postId)
+            if (index !== -1) {
+              draft.items.splice(index, 1)
+            }
+          }
+        )
+      )
+
+      onClose()
+    } catch (err) {
+      console.log('Ошибка при удалении поста', err)
     }
-
-    const confirmDeletePost = async () => {
-        try {
-            await deletePost(postId).unwrap()
-            setIsDeleteModalOpen(false)
-
-            dispatch(
-                postAPI.util.updateQueryData('getAllUsersPosts', {pageSize: 8, endCursorPostId: endCursorPostId, userId: postData.ownerId },  (draft: ResponceAllPosts) => {
-                    const index = draft.items.findIndex((el) => el.id === postId)
-                    if (index !== -1) {
-                        draft.items.splice(index, 1)
-                    }
-                })
-            )
-
-            onClose()
-
-        } catch (err) {
-            console.log('Ошибка при удалении поста', err);
-        }
-    };
+  }
 
   return (
     <div className={clsx(s.postWrapper, { [s.blurBackground]: open })}>
@@ -156,18 +172,18 @@ const Post = ({postId, isEditing = false, onClose, open, postData, endCursorPost
                 </div>
               </Popover.Trigger>
 
-                            <Popover.Content className={s.editContainer}>
-                                <div className={s.pencilEditContainer} onClick={() => setEditMode(true)}>
-                                    <Image src="/pencil.svg" alt="edit" width={24} height={24}/>
-                                    <span>Edit Post</span>
-                                </div>
-                                <div className={s.pencilEditContainer} onClick={deletePostHandler}>
-                                    <Image src="/delete.svg" alt="delete" width={24} height={24}/>
-                                    <span>Delete Post</span>
-                                    {/*{isDeleteModalOpen && <DeletePost/>}*/}
-                                </div>
-                            </Popover.Content>
-                        </Popover.Root>
+              <Popover.Content className={s.editContainer}>
+                <div className={s.pencilEditContainer} onClick={() => setEditMode(true)}>
+                  <Image src="/pencil.svg" alt="edit" width={24} height={24} />
+                  <span>Edit Post</span>
+                </div>
+                <div className={s.pencilEditContainer} onClick={deletePostHandler}>
+                  <Image src="/delete.svg" alt="delete" width={24} height={24} />
+                  <span>Delete Post</span>
+                  {/*{isDeleteModalOpen && <DeletePost/>}*/}
+                </div>
+              </Popover.Content>
+            </Popover.Root>
 
             <div className={s.container}>
               <div className={s.descriptionContainer}>

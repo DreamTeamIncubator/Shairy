@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation'
 
 export const PublicUser = (props: PropsType) => {
   const { additionalData, profileData } = props
-  console.log(additionalData)
   const router = useRouter()
 
   const openPost = (post: Item) => {
@@ -51,33 +50,28 @@ export const PublicUser = (props: PropsType) => {
               <p>Publications </p>
             </div>
           </div>
-          {/* <p>{profileData.description}</p> */}
-
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati voluptate tenetur
-            facilis eius. Delectus sint pariatur ad atque molestias fugit, accusamus mollitia
-            explicabo. Lorem ipsum dolor sit amet consectetur adipisicing elit. !!!Это хардкод если
-            что!!!
-          </p>
+          <p>{profileData.aboutMe}</p>
         </div>
       </div>
       <div className={s.postsBlock}>
         {additionalData.items.map((post) => (
-          <div
-            style={{
-              display: 'flex',
-
-              flexDirection: 'row',
-              justifyContent: 'center',
-              backgroundColor: 'white',
-              border: 'black 2px solid',
-            }}
-            key={post.id}
-            onClick={() => openPost(post)}>
+          <div key={post.id} onClick={() => openPost(post)}>
+            {post.images[0]?.url ? (
+              <Image
+                alt={`Post by ${post.userName}`}
+                src={post.images[0].url}
+                width={250}
+                height={250}
+              />
+            ) : (
+              <Image
+                alt={`Post by ${post.userName} without photo`}
+                src={ImageWithoutAvatar}
+                width={250}
+                height={250}
+              />
+            )}
             {/* {post.description} */}
-            {post.images.map((image) => (
-              <Image alt="posts" key={image.uploadId} src={image.url} width={250} height={250} />
-            ))}
           </div>
         ))}
       </div>
