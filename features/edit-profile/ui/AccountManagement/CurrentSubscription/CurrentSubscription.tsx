@@ -13,23 +13,22 @@ type CurrentSubscriptionProps = {
 }
 
 export const CurrentSubscription = ({ subscriptionInfo }: CurrentSubscriptionProps) => {
-  const [checked, setIsChecked] = useState(true)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [cancelAutoRenewal, {isLoading}] = useCancelAutoRenewalMutation()
+  const [checked, setIsChecked] = useState<boolean>(subscriptionInfo.autoRenewal)
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [cancelAutoRenewal, { isLoading }] = useCancelAutoRenewalMutation()
 
-  const handleCancelAutoRenewal = async ()=> {
-    try{
+  const handleCancelAutoRenewal = async () => {
+    try {
       const result = await cancelAutoRenewal().unwrap()
-      console.log("Автообновление было отменено:", result)
+      console.log('Автообновление было отменено:', result)
       setIsChecked(false)
       setIsModalOpen(true)
-    }
-    catch(error){
-      console.error("Ошибка отмены автообновления:", error)
+    } catch (error) {
+      console.error('Ошибка отмены автообновления:', error)
     }
   }
 
-  const handleClose=()=> {
+  const handleClose = () => {
     setIsModalOpen(false)
   }
 
@@ -51,18 +50,27 @@ export const CurrentSubscription = ({ subscriptionInfo }: CurrentSubscriptionPro
         </div>
       </div>
       <div className={s.checkboxAutoRenewal}>
-        <RadixCheckbox showLabel textLabel="Auto-Renewal" checked={checked} onCheckedChange={handleCancelAutoRenewal} disabled={isLoading}/>
+        <RadixCheckbox
+          showLabel
+          textLabel="Auto-Renewal"
+          checked={checked}
+          onCheckedChange={handleCancelAutoRenewal}
+          disabled={isLoading}
+        />
       </div>
       <ModalRadix
         open={isModalOpen}
         onClose={handleClose}
-        modalTitle='Auto-Renewal Cancellation'
-        size='md'
+        modalTitle="Auto-Renewal Cancellation"
+        size="md"
         footer={<Button onClick={handleClose}>OK</Button>}>
-          <p>
-            Auto-renewal has been successfully canceled 🎉 You can enable it again as long as your subscription is still active.
-          </p>
-        </ModalRadix>
+        <p>
+          {checked
+            ? `Auto-renewal has been successfully canceled 🎉 You can enable it again as long as your
+          subscription is still active.`
+            : 'You can re-enable auto-renewal by renewing your subscription'}
+        </p>
+      </ModalRadix>
     </div>
   )
 }
