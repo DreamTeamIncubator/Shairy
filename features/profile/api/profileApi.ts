@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {baseQueryWithAccessToken} from '@/features/auth/lib/base-query-with-access-token';
-import type {Avatars, UploadAvatarResponse} from '@/features/profile/api/profileTypes';
+import type {Avatars, UpdateProfileRequest, UploadAvatarResponse} from '@/features/profile/api/profileTypes';
 
 export const profileAPI = createApi({
     reducerPath: 'profileAPI',
@@ -29,6 +29,27 @@ export const profileAPI = createApi({
             }),
             invalidatesTags: ['profile'],
         }),
+        updateProfile: builder.mutation<Response, UpdateProfileRequest>({
+            query: (data: UpdateProfileRequest) => {
+              return {
+                method: "PUT",
+                url: "/users/profile",
+                body: data,
+              };
+            },
+            async onQueryStarted(data, { dispatch, queryFulfilled }) {
+              try {
+                await queryFulfilled;
+                dispatch(
+                  profileAPI.util.updateQueryData("getProfile", undefined, (draft) => {
+                    Object.assign(draft, data);
+                  })
+                );
+              } catch (error) {
+                console.error("❌ Ошибка обновления кеша:", error);
+              }
+            },
+          }),
     }),
 })
 
@@ -55,4 +76,9 @@ export type RootObjectAvatars = {
 
 
 
-export const { useGetProfileQuery, useUploadAvatarMutation, useDeleteAvatarMutation } = profileAPI
+export const { 
+  useGetProfileQuery, 
+  useUploadAvatarMutation, 
+  useDeleteAvatarMutation, 
+  useUpdateProfileMutation, 
+ } = profileAPI

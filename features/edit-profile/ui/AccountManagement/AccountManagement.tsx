@@ -23,7 +23,7 @@ export const AccountManagement = () => {
 
   const { data, isLoading: isDataLoading } = useGetCurrentPaymentQuery()
   const subscriptionInfo = data?.data[data?.data.length - 1]
-
+  
   const [selectedTypeAccount, setSelectedTypeAccount] = useState<'personal' | 'business' | null>(
     'personal'
   )
@@ -31,9 +31,7 @@ export const AccountManagement = () => {
   const [isOpenModalPayment, setIsOpenModalPayment] = useState<boolean>(false)
 
   useEffect(() => {
-    if (subscriptionInfo?.subscriptionId?.length) {
-      setSelectedTypeAccount('business')
-    }
+      setSelectedTypeAccount(subscriptionInfo?.subscriptionId?.length ? 'business' : 'personal')
   }, [subscriptionInfo])
 
   useEffect(() => {
