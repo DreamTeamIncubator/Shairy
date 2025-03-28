@@ -27,26 +27,17 @@ import s from './Post.module.scss'
 import { useCommentActions } from '../hooks/useCommentActions'
 import { useUpdatePostLikeStatus } from '../hooks/useUpdatePostLikeStatus'
 import { ModalRadix } from '@/shared/ui/Modal/ModalRadix'
-import type { Items } from '@/features/posts/api/post.types'
+import type { Items, ResponseAllPosts } from '@/features/posts/api/post.types'
 import { useAppDispatch } from '@/store/store'
 
 type PostProps = {
-
-    postId: number;
-    isEditing?: boolean;
-    open: boolean;
-    onClose: () => void;
-    postData: Items
-    endCursorPostId: number | null
-};
-
-const Post = ({postId, isEditing = false, onClose, open, postData, endCursorPostId}: PostProps) => {
-    const {data: post} = useGetPostQuery({postId})
-    const {data: postLikes} = useGetPostLikesQuery({postId})
-    const {data: comments} = useGetCommentsQuery({postId})
-    const [updateCommentLikeStatus] = useUpdateCommentLikeStatusMutation()
-    const [updatePost] = useUpdatePostMutation()
-
+  postId: number
+  isEditing?: boolean
+  open: boolean
+  onClose: () => void
+  postData: Items
+  endCursorPostId: number | null
+}
 
 const Post = ({
   postId,
@@ -116,7 +107,7 @@ const Post = ({
         postAPI.util.updateQueryData(
           'getAllUsersPosts',
           { pageSize: 8, endCursorPostId: endCursorPostId, userId: postData.ownerId },
-          (draft: ResponceAllPosts) => {
+          (draft: ResponseAllPosts) => {
             const index = draft.items.findIndex((el) => el.id === postId)
             if (index !== -1) {
               draft.items.splice(index, 1)
