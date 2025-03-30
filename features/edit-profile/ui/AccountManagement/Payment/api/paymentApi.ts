@@ -1,6 +1,6 @@
 import { baseQueryWithAccessToken } from '@/features/auth/lib/base-query-with-access-token'
 import { createApi } from '@reduxjs/toolkit/query/react'
-import { PaymentRequest, PaymentResponse, SubscriptionsRequest } from './types'
+import {type MyPaymentsResponce, PaymentRequest, PaymentResponse, SubscriptionsRequest} from './types'
 
 export const subscriptionsAPI = createApi({
   reducerPath: 'subscriptionsAPI',
@@ -22,6 +22,13 @@ export const subscriptionsAPI = createApi({
       }),
       providesTags:['Subscription']
     }),
+    getMyPayments: builder.query<MyPaymentsResponce[], void>({
+      query: () => ({
+        method: 'GET',
+        url: `/subscriptions/my-payments`,
+      }),
+      providesTags:['Subscription']
+    }),
     cancelAutoRenewal: builder.mutation<void, void>({
       query: () => ({
         url: "/subscriptions/canceled-auto-renewal",
@@ -32,4 +39,4 @@ export const subscriptionsAPI = createApi({
   }),
 })
 
-export const { usePaySubscribeMutation, useGetCurrentPaymentQuery, useCancelAutoRenewalMutation} = subscriptionsAPI
+export const { usePaySubscribeMutation, useGetCurrentPaymentQuery, useCancelAutoRenewalMutation, useGetMyPaymentsQuery} = subscriptionsAPI

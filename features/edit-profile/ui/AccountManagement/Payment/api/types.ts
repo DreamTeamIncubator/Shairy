@@ -21,3 +21,13 @@ export type SubscriptionsInfo = {
   endDateOfSubscription: string
   autoRenewal: boolean
 }
+export type MyPaymentsResponce = {
+  userId: number
+  subscriptionId: string
+  dateOfPayment: string
+  endDateOfSubscription: string
+  price: number
+  subscriptionType: 'MONTHLY'| 'DAY' | 'WEEKLY'
+  paymentType: 'STRIPE'| 'PAYPAL' |'CREDIT_CARD'
+}
+
