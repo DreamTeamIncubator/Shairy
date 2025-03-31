@@ -6,7 +6,7 @@ import { commentsAPI } from '@/features/comments/api/comments'
 import { postAPI } from '@/features/posts/api/post'
 import { profileAPI } from '@/features/profile/api/profileApi'
 import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { subscriptionsAPI } from '@/features/edit-profile/ui/AccountManagement/Payment/api/paymentApi'
+import { subscriptionsAPI } from '@/features/edit-profile/ui/AccountManagement/api/paymentApi'
 
 export const store = configureStore({
   reducer: {

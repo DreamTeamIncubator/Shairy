@@ -9,7 +9,7 @@ export type PaymentResponse = {
   url: string
 }
 
-export type SubscriptionsRequest = {
+export type SubscriptionsResponse = {
   data: SubscriptionsInfo[]
   hasAutoRenewal: boolean
 }
@@ -20,4 +20,13 @@ export type SubscriptionsInfo = {
   dateOfPayment: string
   endDateOfSubscription: string
   autoRenewal: boolean
+}
+
+export type CostPaymentResponse = {
+  data: CostPayment[]
+}
+
+type CostPayment = {
+  amount: number
+  typeDescription: string
 }

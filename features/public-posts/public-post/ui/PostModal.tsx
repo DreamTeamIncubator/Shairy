@@ -5,9 +5,9 @@ import s from './PostModal.module.scss'
 import { PostType } from '../types'
 import { CommentsType } from '../../comments/types'
 import { useEffect, useState } from 'react'
-import Post from './Post'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { PublicPost } from './Public-post'
 
 type PostModalProps = {
   post: PostType
@@ -39,7 +39,7 @@ const PostModal = ({ post, comments }: PostModalProps) => {
             />
           </Dialog.Close>
           <Dialog.Title></Dialog.Title>
-          <Post post={post} comments={comments} />
+          <PublicPost post={post} comments={comments} />
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

@@ -3,13 +3,13 @@
 import { RadixCheckbox } from '@/shared/ui/Checkbox/RadixCheckbox'
 import { ModalRadix } from '@/shared/ui/Modal/ModalRadix'
 import Image from 'next/image'
-import s from '../../../AccountManagement/AccountManagement.module.scss'
+import s from './Payment.module.scss'
 import { useState } from 'react'
 import PayPalIcon from '@/public/payIcons/paypal.svg'
 import StripeIcon from '@/public/payIcons/stripe.svg'
 import { Button } from '@/shared/ui/Button/Button'
-import { usePaySubscribeMutation } from '../api/paymentApi'
-import { SubscriptionsInfo } from '../api/types'
+import { SubscriptionsInfo } from '../../api/types'
+import { usePaySubscribeMutation } from '../../api/paymentApi'
 
 type PaymentProps = {
   subscriptionInfo?: SubscriptionsInfo

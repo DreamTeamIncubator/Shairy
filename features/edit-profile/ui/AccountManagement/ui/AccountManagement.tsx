@@ -3,14 +3,14 @@
 import { RadixCheckbox } from '@/shared/ui/Checkbox/RadixCheckbox'
 import s from './AccountManagement.module.scss'
 import { useEffect, useState } from 'react'
-import { useGetCurrentPaymentQuery } from './Payment/api/paymentApi'
+import { useGetCurrentPaymentQuery } from '../api/paymentApi'
 import { useSearchParams } from 'next/navigation'
 
 import { ModalRadix } from '@/shared/ui/Modal/ModalRadix'
 import { Button } from '@/shared/ui/Button/Button'
 import { Loader } from '@/shared/ui/ClientLoader/Loader'
 import { CurrentSubscription } from './CurrentSubscription/CurrentSubscription'
-import { Payment } from './Payment/ui/Payment'
+import { Payment } from './Payment/Payment'
 
 const accountTypes = [
   { id: 'personal', label: 'Personal' },
@@ -23,8 +23,6 @@ export const AccountManagement = () => {
 
   const { data, isLoading: isDataLoading } = useGetCurrentPaymentQuery()
   const subscriptionInfo = data?.data[data?.data.length - 1]
-
-  console.log(data)
 
   const [selectedTypeAccount, setSelectedTypeAccount] = useState<'personal' | 'business' | null>(
     'personal'

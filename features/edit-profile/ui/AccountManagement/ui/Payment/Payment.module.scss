@@ -1,13 +1,3 @@
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 70px;
-  color: var(--light-100);
-  font-size: 16px;
-  font-weight: 600;
-  font-family: var(--font-inter), sans-serif;
-}
-
 .accountType {
   display: flex;
   flex-direction: column;
@@ -23,31 +13,22 @@
   margin-top: 6px;
 }
 
-.subscription {
+.paymentLinks {
   display: flex;
   flex-direction: row;
-  gap: 48px;
-  margin: 12px 0 12px 24px;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 24px;
 
-  & p {
-    color: var(--light-900);
+  & span {
+    width: 16px;
+    height: 24px;
+    color: var(--light-100);
     font-size: 14px;
     font-weight: 400;
     font-family: var(--font-inter), sans-serif;
+    margin: 0 54px;
   }
-
-  & span {
-    display: inline-block;
-    color: var(--light-100);
-    font-size: 14px;
-    font-weight: 600;
-    font-family: var(--font-inter), sans-serif;
-    margin-top: 12px;
-  }
-}
-
-.checkboxAutoRenewal {
-  margin-top: 12px;
 }
 
 .checkbox {
@@ -75,29 +56,11 @@
       height: 10px;
       background-color: white;
       border-radius: 50%;
-      position: absolute; // Центрируем относительно чекбокса
+      position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%); // Точное центрирование
+      transform: translate(-50%, -50%);
     }
-  }
-}
-
-.paymentLinks {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  margin-top: 24px;
-
-  & span {
-    width: 16px;
-    height: 24px;
-    color: var(--light-100);
-    font-size: 14px;
-    font-weight: 400;
-    font-family: var(--font-inter), sans-serif;
-    margin: 0 54px;
   }
 }
 

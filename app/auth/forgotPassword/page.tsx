@@ -1,21 +1,18 @@
-'use client';
+'use client'
 
-import { SubmitHandler, useForm } from 'react-hook-form';
-
-import s from './ForgotPasswordForm.module.scss';
-import { useState } from 'react';
-
-import { useRouter } from 'next/navigation';
-
-import { Button } from '@/shared/ui/Button/Button';
-import { ReCaptcha } from '@/features/ReCaptcha/ReCaptcha';
-import { useForgotPasswordMutation } from '@/features/auth/api/auth';
-import { Input } from '@/shared/ui/Input/Input';
-import { ModalRadix } from '@/shared/ui/Modal/ModalRadix';
+import { SubmitHandler, useForm } from 'react-hook-form'
+import s from './ForgotPasswordForm.module.scss'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { Button } from '@/shared/ui/Button/Button'
+import { ReCaptcha } from '@/features/ReCaptcha/ReCaptcha'
+import { useForgotPasswordMutation } from '@/features/auth/api/auth'
+import { Input } from '@/shared/ui/Input/Input'
+import { ModalRadix } from '@/shared/ui/Modal/ModalRadix'
 
 type Inputs = {
-  email: string;
-};
+  email: string
+}
 
 const ForgotPassword = () => {
   const {
@@ -24,30 +21,30 @@ const ForgotPassword = () => {
     formState: { errors },
   } = useForm<Inputs>({
     defaultValues: { email: '' },
-  });
+  })
 
-  const [isCaptchaCompleted, setIsCaptchaCompleted] = useState<boolean>(false);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [userEmail, setUserEmail] = useState<string | null>(null);
-  const [captchaResponse, setCaptchaResponse] = useState<string | null>(null);
-  const [forgotPassword] = useForgotPasswordMutation();
-  const router = useRouter();
+  const [isCaptchaCompleted, setIsCaptchaCompleted] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [userEmail, setUserEmail] = useState<string | null>(null)
+  const [captchaResponse, setCaptchaResponse] = useState<string | null>(null)
+  const [forgotPassword] = useForgotPasswordMutation()
+  const router = useRouter()
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const baseUrl = window.location.origin;
+    const baseUrl = window.location.origin
 
     try {
-      forgotPassword({ email: data.email, recaptcha: captchaResponse as string, baseUrl });
-      setUserEmail(data.email);
-      setIsOpen(true);
+      forgotPassword({ email: data.email, recaptcha: captchaResponse as string, baseUrl })
+      setUserEmail(data.email)
+      setIsOpen(true)
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   const handleClose = () => {
-    setIsOpen(false);
-  };
+    setIsOpen(false)
+  }
 
   return (
     <div className={s.content}>
@@ -79,7 +76,7 @@ const ForgotPassword = () => {
           variant={'textButton'}
           type={'button'}
           onClick={() => {
-            router.push('/auth/login');
+            router.push('/auth/login')
           }}>
           Back to Sign In
         </Button>
@@ -101,7 +98,7 @@ const ForgotPassword = () => {
         <p>{`We have sent a link to confirm your email to ${userEmail}`}</p>
       </ModalRadix>
     </div>
-  );
-};
+  )
+}
 
-export default ForgotPassword;
+export default ForgotPassword

@@ -8,7 +8,7 @@ import { Loader } from '@/shared/ui/ClientLoader/Loader'
 import { useFixDoubleQueryParams } from '@/hooks/useFixDoubleQueryParams'
 import GeneralInformation from '@/features/edit-profile/ui/generalInformation/GeneralInformation'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { AccountManagement } from '@/features/edit-profile/ui/AccountManagement/AccountManagement'
+import { AccountManagement } from '@/features/edit-profile/ui/AccountManagement/ui/AccountManagement'
 
 export default function EditProfile() {
   const router = useRouter()
