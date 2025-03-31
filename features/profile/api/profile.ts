@@ -11,10 +11,17 @@ export const profile = createApi({
                 url: `public-user/profile/${profileId}`
             })
         }),
+        updateProfile: builder.mutation<ResponseUpdateProfile, RequestUpdateProfile>({
+            query: (body) => ({
+                url: '/users/profile',
+                method: 'PUT',
+                body,
+            }),
+        })
     }),
 })
 
-export const { useGetprofileQuery} = profile
+export const { useGetprofileQuery, useUpdateProfileMutation } = profile
 
 export type Avatars = {
     url: string;
@@ -37,4 +44,26 @@ export type ResponceProfile  = {
     avatars: Avatars[];
     userMetadata: UserMetadata;
     hasPaymentSubscription: boolean;
+}
+
+export type RequestUpdateProfile = {
+    userName: string
+    firstName: string
+    lastName: string
+    city: string
+    country: string
+    region: string
+    dateOfBirth: string
+    aboutMe: string
+}
+
+type ResponseUpdateProfile = {
+    statusCode: number
+    messages: [
+        {
+            message: string
+            field: string
+        }
+    ]
+    error: string
 }

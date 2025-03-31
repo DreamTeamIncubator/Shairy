@@ -9,7 +9,7 @@ type Props = ComponentPropsWithoutRef<'input'> & {
   error?: string;
   showIcon?: boolean;
   onIconClick?: () => void;
-  value: string;
+  value?: string;
   onChange: (e:ChangeEvent<HTMLInputElement>)=> void; 
 };
 

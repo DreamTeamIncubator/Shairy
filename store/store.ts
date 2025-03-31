@@ -4,7 +4,7 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import { profile } from '@/features/profile/api/profile';
 import { commentsAPI } from '@/features/comments/api/comments';
 import { postAPI } from '@/features/posts/api/post';
-import {profileAPI} from '@/features/profile/api/profileApi';
+// import {profileAPI} from '@/features/profile/api/profileApi';
 import {type TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 
 export const store = configureStore({
@@ -13,11 +13,10 @@ export const store = configureStore({
     [authAPI.reducerPath]: authAPI.reducer,
     [postAPI.reducerPath]: postAPI.reducer,
     [commentsAPI.reducerPath]: commentsAPI.reducer,
-    // [posts.reducerPath]: posts.reducer,
     [profile.reducerPath]: profile.reducer,
     // [allPosts.reducerPath]: allPosts.reducer,
     // [postsAPI.reducerPath]: postsAPI.reducer,
-    [profileAPI.reducerPath]: profileAPI.reducer,
+    // [profileAPI.reducerPath]: profileAPI.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.

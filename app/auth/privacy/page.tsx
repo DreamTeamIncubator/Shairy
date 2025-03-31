@@ -1,8 +1,9 @@
-import {Button} from '@/components/Button/Button';
+
 import Link from 'next/link';
 import s from '@/app/auth/privacy/Privacy.module.scss';
 import React from 'react';
 import Image from 'next/image';
+import {Button} from '@/shared/ui/Button/Button';
 
 const PrivacyPolicy = () => {
     return (
