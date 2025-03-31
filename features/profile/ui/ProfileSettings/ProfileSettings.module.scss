@@ -44,9 +44,12 @@
 .textarea {
   width: 100%;
   min-height: 84px;
-  border: 1px solid var(--dark-100);
   border-radius: 2px;
   background-color: var(--dark-500);
+  resize: none; 
+  color: var(--light-100);
+  padding: 6px;
+  line-height: 1.5;
 }
 
 .submitBtn {

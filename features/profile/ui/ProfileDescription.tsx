@@ -5,14 +5,17 @@ import noAvatar from '@/public/no-avatar.svg'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { useGetPublicProfileQuery } from '@/features/profile/api/publicProfile'
+import { useGetProfileQuery } from '../api/profileApi'
 
 const ProfileDescription = () => {
   const { id } = useParams()
+  const {data: authUser} = useGetProfileQuery()
   const { data } = useGetPublicProfileQuery(Number(id))
   if (!id) {
     return <div>Loading...</div>
   }
   const avatar = data?.avatars[0]?.url ? data.avatars[0].url : noAvatar.src
+  const owner = authUser?.id === Number(id)
 
   return (
     <div className={s.profile}>
@@ -20,11 +23,12 @@ const ProfileDescription = () => {
         <img src={avatar} alt="Avatar" className={s.img} />
       </div>
       <div className={s.header}>
-        <h2 className={s.name}>{data?.userName}</h2>
+        <h2 className={s.name}>{authUser?.userName || data?.userName}</h2>
 
-        <Link href={`/my-profile/${id}/edit-profile?tab=General-Information`}>
+       { owner && <Link href={`/my-profile/${id}/edit-profile?tab=General-Information`}>
           <Button variant={'secondary'}>Profile Settings</Button>
         </Link>
+}
       </div>
       <div className={s.followers}>
         <div className={s.followersData}>
@@ -42,10 +46,7 @@ const ProfileDescription = () => {
       </div>
       {/*TODO: delete test-text after adding feature 'add post'*/}
       <p className={s.description}>
-        {data?.aboutMe}
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat.
+        {authUser?.aboutMe || data?.aboutMe}
       </p>
     </div>
   )
