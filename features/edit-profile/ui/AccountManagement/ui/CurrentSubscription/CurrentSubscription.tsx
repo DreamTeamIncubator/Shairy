@@ -1,9 +1,9 @@
 'use client'
 
 import { RadixCheckbox } from '@/shared/ui/Checkbox/RadixCheckbox'
-import { SubscriptionsInfo } from '../Payment/api/types'
+import { SubscriptionsInfo } from '../../api/types'
 import s from './CurrentSubscription.module.scss'
-import { useCancelAutoRenewalMutation } from '../Payment/api/paymentApi'
+import { useCancelAutoRenewalMutation } from '../../api/paymentApi'
 import { useState } from 'react'
 import { ModalRadix } from '@/shared/ui/Modal/ModalRadix'
 import { Button } from '@/shared/ui/Button/Button'

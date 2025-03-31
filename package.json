@@ -42,7 +42,7 @@
     "react-image-filters": "^0.5.1",
     "react-redux": "^9.2.0",
     "sass": "^1.83.4",
-    "swiper": "^11.2.5"
+    "swiper": "^11.2.6"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

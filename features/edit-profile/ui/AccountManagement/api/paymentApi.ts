@@ -1,10 +1,10 @@
 import { baseQueryWithAccessToken } from '@/features/auth/lib/base-query-with-access-token'
 import { createApi } from '@reduxjs/toolkit/query/react'
 import {
-  type MyPaymentsResponse,
+  CostPaymentResponse,
   PaymentRequest,
   PaymentResponse,
-  SubscriptionsRequest,
+  SubscriptionsResponse,
 } from './types'
 
 export const subscriptionsAPI = createApi({
@@ -20,17 +20,10 @@ export const subscriptionsAPI = createApi({
       }),
       invalidatesTags: ['Subscription'],
     }),
-    getCurrentPayment: builder.query<SubscriptionsRequest, void>({
+    getCurrentPayment: builder.query<SubscriptionsResponse, void>({
       query: () => ({
         method: 'GET',
         url: `/subscriptions/current-payment-subscriptions`,
-      }),
-      providesTags: ['Subscription'],
-    }),
-    getMyPayments: builder.query<MyPaymentsResponce[], void>({
-      query: () => ({
-        method: 'GET',
-        url: `/subscriptions/my-payments`,
       }),
       providesTags: ['Subscription'],
     }),
@@ -41,6 +34,13 @@ export const subscriptionsAPI = createApi({
       }),
       invalidatesTags: ['Subscription'],
     }),
+    getCostPayment: builder.query<CostPaymentResponse, void>({
+      query: () => ({
+        method: 'GET',
+        url: `/subscriptions/cost-of-payment-subscriptions`,
+      }),
+      providesTags: ['Subscription'],
+    }),
   }),
 })
 
@@ -48,5 +48,5 @@ export const {
   usePaySubscribeMutation,
   useGetCurrentPaymentQuery,
   useCancelAutoRenewalMutation,
-  useGetMyPaymentsQuery,
+  useGetCostPaymentQuery,
 } = subscriptionsAPI

@@ -9,7 +9,7 @@ export type PaymentResponse = {
   url: string
 }
 
-export type SubscriptionsRequest = {
+export type SubscriptionsResponse = {
   data: SubscriptionsInfo[]
   hasAutoRenewal: boolean
 }
@@ -21,13 +21,21 @@ export type SubscriptionsInfo = {
   endDateOfSubscription: string
   autoRenewal: boolean
 }
-export type MyPaymentsResponce = {
+
+export type CostPaymentResponse = {
+  data: CostPayment[]
+}
+
+type CostPayment = {
+  amount: number
+  typeDescription: string
+}
+export type MyPaymentsResponse = {
   userId: number
   subscriptionId: string
   dateOfPayment: string
   endDateOfSubscription: string
   price: number
-  subscriptionType: 'MONTHLY'| 'DAY' | 'WEEKLY'
-  paymentType: 'STRIPE'| 'PAYPAL' |'CREDIT_CARD'
+  subscriptionType: 'MONTHLY' | 'DAY' | 'WEEKLY'
+  paymentType: 'STRIPE' | 'PAYPAL' | 'CREDIT_CARD'
 }
-

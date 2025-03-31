@@ -1,9 +1,9 @@
 import { getComments } from '@/features/public-posts/comments/api/commentApi'
-import { getPost } from '@/features/public-posts/post/api/postApi'
-import PostModal from '@/features/public-posts/post/ui/PostModal'
+import { getPost } from '@/features/public-posts/public-post/api/postApi'
+import PostModal from '@/features/public-posts/public-post/ui/PostModal'
 import { notFound } from 'next/navigation'
 import { CommentsType } from '@/features/public-posts/comments/types'
-import { PostType } from '@/features/public-posts/post/types'
+import { PostType } from '@/features/public-posts/public-post/types'
 
 type PageProps = {
   params: {
@@ -11,7 +11,7 @@ type PageProps = {
   }
 }
 
-export default async function PublicPost({ params }: PageProps) {
+export default async function PublicPostPage({ params }: PageProps) {
   const postId = Number(params.postId)
   try {
     const [post, comments]: [PostType, CommentsType] = await Promise.all([

@@ -1,6 +1,4 @@
 'use client'
-
-// import { AccountManagement } from '@/features/edit-profile/AccountManagement/AccountManagement'
 import { RadixTabs } from '@/shared/ui/Tabs/Tabs'
 import s from './editProfile.module.scss'
 
@@ -8,8 +6,9 @@ import { Loader } from '@/shared/ui/ClientLoader/Loader'
 import { useFixDoubleQueryParams } from '@/hooks/useFixDoubleQueryParams'
 import GeneralInformation from '@/features/edit-profile/ui/generalInformation/GeneralInformation'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { AccountManagement } from '@/features/edit-profile/ui/AccountManagement/AccountManagement'
-import MyPayments from '@/features/edit-profile/ui/MyPayments/MyPayments';
+
+import MyPayments from '@/features/edit-profile/ui/MyPayments/MyPayments'
+import { AccountManagement } from '@/features/edit-profile/ui/AccountManagement/ui/AccountManagement'
 
 export default function EditProfile() {
   const router = useRouter()
@@ -43,7 +42,7 @@ export default function EditProfile() {
             label: 'Account Management',
             content: <AccountManagement />,
           },
-          { value: 'My-payments', label: 'My payments', content: <MyPayments/> },
+          { value: 'My-payments', label: 'My payments', content: <MyPayments /> },
         ]}
         defaultValue={currentTab}
         onValueChange={handleTabChange}
