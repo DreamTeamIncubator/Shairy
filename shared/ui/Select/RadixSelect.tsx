@@ -18,6 +18,7 @@ type Props = {
   contentClassName?: string
   options: Option[];
   value?: string;
+  id?: string
   onValueChange: (value: string) => void;
   placeholder?: string;
   disabled?: boolean;

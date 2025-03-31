@@ -30,3 +30,12 @@ type CostPayment = {
   amount: number
   typeDescription: string
 }
+export type MyPaymentsResponse = {
+  userId: number
+  subscriptionId: string
+  dateOfPayment: string
+  endDateOfSubscription: string
+  price: number
+  subscriptionType: 'MONTHLY' | 'DAY' | 'WEEKLY'
+  paymentType: 'STRIPE' | 'PAYPAL' | 'CREDIT_CARD'
+}

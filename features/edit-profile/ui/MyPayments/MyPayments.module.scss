@@ -1,0 +1,43 @@
+
+.container{
+  display: flex;
+  flex-direction: column;
+  color: var(--light-100);
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+  height: 60vh;
+  justify-content: space-between;
+}
+
+.headLine, .paymentsRow {
+  display: flex;
+  gap: 70px;
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+
+.headLine {
+  font-weight: 700;
+}
+
+.dateOfPayment {
+  width: 120px;
+}
+
+.endDate {
+  width: 170px;
+}
+
+.price {
+  width: 40px;
+}
+
+.subscriptionType {
+  width: 130px;
+}
+
+.paymentType {
+  width: 100px;
+}
