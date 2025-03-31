@@ -28,7 +28,7 @@ const ProfileDescription = () => {
        { owner && <Link href={`/my-profile/${id}/edit-profile?tab=General-Information`}>
           <Button variant={'secondary'}>Profile Settings</Button>
         </Link>
-}
+      }
       </div>
       <div className={s.followers}>
         <div className={s.followersData}>

@@ -9,7 +9,7 @@ import Post from '@/features/posts/ui/Post'
 import type { Items } from '@/features/posts/api/post.types'
 import { useGetMeQuery } from '@/features/auth/api/auth'
 import Image from 'next/image'
-import { useGetProfileQuery } from '@/features/profile/api/profileApi'
+
 
 const MyProfile = () => {
 
