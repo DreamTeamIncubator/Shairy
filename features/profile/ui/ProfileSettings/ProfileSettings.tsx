@@ -236,7 +236,6 @@ export const ProfileSettings = () => {
 
     return (
         <div className={s.formWrapper}>
-            <h2>Добавление фото профиля</h2>
             <div>
                 <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
                     <div className={s.inputGroup}>

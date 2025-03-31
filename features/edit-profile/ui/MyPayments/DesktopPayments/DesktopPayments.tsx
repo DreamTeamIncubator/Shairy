@@ -21,6 +21,7 @@ const DesktopPayments = ({payments}: Props) => {
         setPage(1)
     }
     const totalPages = Math.ceil(payments.length / perPage)
+
     const displayedPayments = payments.slice((page - 1) * perPage, page * perPage)
 
     return (
