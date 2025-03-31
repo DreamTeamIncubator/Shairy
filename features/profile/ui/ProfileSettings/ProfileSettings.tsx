@@ -8,10 +8,11 @@ import {Button} from '@/shared/ui/Button/Button';
 import {useGetMeQuery} from '@/features/auth/api/auth';
 import {useEffect} from 'react';
 import {DatePicker} from '@/shared/ui/DatePicker/DatePicker';
-import {RequestUpdateProfile, useUpdateProfileMutation} from '@/features/profile/api/profile';
 import {validateAge} from '@/features/profile/ui/ProfileSettings/validate-age';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
+import type {UpdateProfileRequest} from '@/features/profile/api/profileTypes';
+import {useUpdateProfileMutation} from '@/features/profile/api/profileApi';
 
 export type FormData = {
     userName: string
@@ -209,7 +210,7 @@ export const ProfileSettings = () => {
             // 2. Отправка данных профиля
             const formattedDateOfBirth = data.dateOfBirth ? parseDateString(data.dateOfBirth)?.toISOString() : undefined;
 
-            const profileData: RequestUpdateProfile = {
+            const profileData: UpdateProfileRequest = {
                 userName: data.userName,
                 firstName: data.firstName,
                 lastName: data.lastName,
