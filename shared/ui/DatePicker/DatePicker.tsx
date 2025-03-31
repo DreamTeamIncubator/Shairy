@@ -22,7 +22,6 @@ type CustomDatePickerProps = {
     endDate?: Date | null
     required?: boolean
     maxDate?: Date | null
-    selectsRange?: true
 };
 
 // Исключаем конфликтующие пропсы и объединяем с нашими
@@ -51,7 +50,6 @@ export const DatePicker: FC<Props> = memo(({
     startDate,
     maxDate,
     onChange,
-    selectsRange,
     ...rest
     }) => {
     const handleDateChange = useCallback<NonNullable<DatePickerProps['onChange']>>(
