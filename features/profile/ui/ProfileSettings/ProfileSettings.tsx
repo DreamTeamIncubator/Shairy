@@ -5,16 +5,14 @@ import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import s from './ProfileSettings.module.scss';
 import {RadixSelect} from '@/shared/ui/Select/RadixSelect';
 import {Button} from '@/shared/ui/Button/Button';
-import {useGetMeQuery} from '@/features/auth/api/auth';
 import React, {useEffect} from 'react';
 import {validateAge} from '@/features/profile/ui/ProfileSettings/validate-age';
 import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import type {UpdateProfileRequest} from '@/features/profile/api/profileTypes';
-import {useUpdateProfileMutation} from '@/features/profile/api/profileApi';
+import {useGetProfileQuery, useUpdateProfileMutation} from '@/features/profile/api/profileApi';
 import {DatePicker} from '@/shared/ui/DatePicker/DatePicker';
 import {parseDateString, validationForProfileSettingsForm} from '@/utils/utils';
-import {useGetProfileQuery, useUpdateProfileMutation} from '@/features/profile/api/profileApi';
 
 
 export type FormData = {
