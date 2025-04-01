@@ -10,7 +10,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Input } from '@/shared/ui/Input/Input';
 import { ModalRadix } from '@/shared/ui/Modal/ModalRadix';
-import { paths, validationPatterns } from '@/utils/utils';
+import { paths, patternsForSignUpForm } from '@/utils/utils';
 import { useRegistrationMutation } from '@/features/auth/api/auth';
 
 type FormData = {
@@ -128,7 +128,7 @@ const SignUp = () => {
                                 minLength: {value: 6, message: 'Minimum number of characters 6'},
                                 maxLength: {value: 30, message: 'Maximum number of characters 30'},
                                 pattern: {
-                                    value: validationPatterns.username,
+                                    value: patternsForSignUpForm.username,
                                     message: 'UserName can only contain letters, numbers, and underscores',
                                 },
                             })}
@@ -145,7 +145,7 @@ const SignUp = () => {
                             {...register('email', {
                                 required: 'Email is required',
                                 pattern: {
-                                    value: validationPatterns.email,
+                                    value: patternsForSignUpForm.email,
                                     message: 'The email must match the format example@example.com',
                                 },
                             })}
@@ -164,7 +164,7 @@ const SignUp = () => {
                                 minLength: {value: 6, message: 'Minimum number of characters 6'},
                                 maxLength: {value: 20, message: 'Maximum number of characters 20'},
                                 pattern: {
-                                    value: validationPatterns.password,
+                                    value: patternsForSignUpForm.password,
                                     message: 'Password must contain a-z, A-Z, 0-9, and special characters',
                                 },
                             })}

@@ -14,16 +14,16 @@ export const profileAPI = createApi({
             }),
             providesTags: ['profile'],
         }),
-        uploadAvatar: builder.mutation<UploadAvatarResponse,  FormData>({
-            query: (payload) =>({
+        uploadAvatar: builder.mutation<UploadAvatarResponse, FormData>({
+            query: (payload) => ({
                 method: 'POST',
                 url: `/users/profile/avatar`,
                 body: payload,
             }),
             invalidatesTags: ['profile'],
         }),
-        deleteAvatar: builder.mutation<void,  void>({
-            query: () =>({
+        deleteAvatar: builder.mutation<void, void>({
+            query: () => ({
                 method: 'DELETE',
                 url: `/users/profile/avatar`,
             }),
@@ -31,25 +31,32 @@ export const profileAPI = createApi({
         }),
         updateProfile: builder.mutation<Response, UpdateProfileRequest>({
             query: (data: UpdateProfileRequest) => {
-              return {
-                method: "PUT",
-                url: "/users/profile",
-                body: data,
-              };
+
+                let processedData = {...data};
+                if (data.dateOfBirth) {
+                    const [day, month, year] = data.dateOfBirth.split('/').map(Number);
+                    processedData.dateOfBirth = new Date(year, month - 1, day).toISOString();
+                }
+
+                return {
+                    method: 'PUT',
+                    url: '/users/profile',
+                    body: processedData,
+                };
             },
-            async onQueryStarted(data, { dispatch, queryFulfilled }) {
-              try {
-                await queryFulfilled;
-                dispatch(
-                  profileAPI.util.updateQueryData("getProfile", undefined, (draft) => {
-                    Object.assign(draft, data);
-                  })
-                );
-              } catch (error) {
-                console.error("❌ Ошибка обновления кеша:", error);
-              }
+            async onQueryStarted(data, {dispatch, queryFulfilled}) {
+                try {
+                    await queryFulfilled;
+                    dispatch(
+                        profileAPI.util.updateQueryData('getProfile', undefined, (draft) => {
+                            Object.assign(draft, data);
+                        })
+                    );
+                } catch (error) {
+                    console.error('❌ Ошибка обновления кеша:', error);
+                }
             },
-          }),
+        }),
     }),
 })
 
@@ -75,10 +82,9 @@ export type RootObjectAvatars = {
 }
 
 
-
-export const { 
-  useGetProfileQuery, 
-  useUploadAvatarMutation, 
-  useDeleteAvatarMutation, 
-  useUpdateProfileMutation, 
- } = profileAPI
+export const {
+    useGetProfileQuery,
+    useUploadAvatarMutation,
+    useDeleteAvatarMutation,
+    useUpdateProfileMutation,
+} = profileAPI

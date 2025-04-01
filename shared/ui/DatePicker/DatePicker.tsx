@@ -1,167 +1,97 @@
 'use client';
 
-import { ComponentProps, FC, forwardRef, useCallback, memo } from 'react';
-import ReactDatePicker, { registerLocale, DatePickerProps } from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { format } from 'date-fns';
-import { ru } from 'date-fns/locale';
-import clsx from 'clsx';
+import React, { useState, useRef, useEffect } from 'react';
+import { DayPicker } from 'react-day-picker';
 import s from './DatePicker.module.scss';
+import clsx from 'clsx';
+import { formatDateToDDMMYYYY, parseDateString } from '@/utils/utils';
 
-registerLocale('ru', ru);
+type Props = {
+    value: string // Текущая дата в формате "DD.MM.YYYY"
+    onChange: (date: string) => void
+    error?: string
+} & React.ComponentProps<'div'>;
 
-// Чистые пропсы нашего компонента (без конфликтов с DatePicker)
-type CustomDatePickerProps = {
-    errorMessage?: string
-    label?: string
-    placeholder?: string
-    onChange: (date: Date | null) => void
-    setEndDate?: (date: Date | null) => void
-    setStartDate?: (date: Date | null) => void
-    startDate?: Date | null
-    endDate?: Date | null
-    required?: boolean
-    maxDate?: Date | null
-};
+export const DatePicker = ({ value, onChange, error, ...rest }: Props) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [inputValue, setInputValue] = useState(value);
+    const wrapperRef = useRef<HTMLDivElement>(null);
 
-// Исключаем конфликтующие пропсы и объединяем с нашими
-type Props = CustomDatePickerProps &
-    Omit<DatePickerProps,
-        'onChange' |
-        'selected' |
-        'selectsRange' |
-        'startDate' |
-        'endDate' |
-        'selectsStart' |
-        'selectsEnd'
-    >;
-
-export const DatePicker: FC<Props> = memo(({
-    className,
-    disabled,
-    endDate,
-    errorMessage,
-    label,
-    placeholder,
-    placeholderText,
-    required,
-    setEndDate,
-    setStartDate,
-    startDate,
-    maxDate,
-    onChange,
-    ...rest
-    }) => {
-    const handleDateChange = useCallback<NonNullable<DatePickerProps['onChange']>>(
-        (date: Date | [Date | null, Date | null] | null) => {
-            if (Array.isArray(date)) {
-                const [start, end] = date;
-                setStartDate?.(start);
-                setEndDate?.(end);
-            } else {
-                setStartDate?.(date);
-            }
-            onChange?.(Array.isArray(date) ? date[0] : date);
-        },
-        [setStartDate, setEndDate, onChange]
-    );
-
-    const divProps: ComponentProps<'div'> = {
-        className: clsx(s.root, disabled && s.disabled, className),
+    // Обработка выбора даты из календаря
+    const handleDaySelect = (date: Date | undefined) => {
+        const formattedDate = date ? formatDateToDDMMYYYY(date) : '';
+        onChange(formattedDate);
+        setInputValue(formattedDate);
+        setIsOpen(false);
     };
 
-    if (disabled) {
-        return (
-            <div {...divProps}>
-                <CustomInput disabled label={label} required={required} error={!!errorMessage} />
-            </div>
-        );
-    }
+    // Обработка ручного ввода даты
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const input = e.target.value;
+        setInputValue(input);
+
+        // Проверяем формат даты
+        if (input.match(/^\d{2}\.\d{2}\.\d{4}$/)) {
+            const parsedDate = parseDateString(input);
+            if (parsedDate && !isNaN(parsedDate.getTime())) {
+                onChange(formatDateToDDMMYYYY(parsedDate));
+            }
+        } else {
+            onChange(''); // Если формат неверный, очищаем значение
+        }
+    };
+
+    // Закрытие календаря при клике вне области
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     return (
-        <>
-            <ReactDatePicker
-                selected={startDate}
-                onChange={handleDateChange}
-                selectsRange={!!setEndDate}
-                startDate={startDate}
-                endDate={endDate}
-                disabled={disabled}
-                placeholderText={placeholder}
-                dateFormat="dd.MM.yyyy"
-                locale="ru"
-                maxDate={maxDate}
-                className={clsx(s.input, errorMessage && s.error, endDate && s.range)}
-                customInput={
-                    <CustomInput
-                        label={label}
-                        required={required}
-                        error={!!errorMessage}
-                    />
-                }
-                renderCustomHeader={({
-                    date,
-                    decreaseMonth,
-                    increaseMonth,
-                }) => (
-                    <div className={s.header}>
-                        <div>{format(date, 'LLLL yyyy', { locale: ru })}</div>
-                        <div className={s.buttonBox}>
-                            <button
-                                type="button"
-                                aria-label="Предыдущий месяц"
-                                onClick={decreaseMonth}
-                                className={s.button}
-                            >
-                                назад
-                            </button>
-                            <button
-                                type="button"
-                                aria-label="Следующий месяц"
-                                onClick={increaseMonth}
-                                className={s.button}
-                            >
-                                вперед
-                            </button>
-                        </div>
-                    </div>
-                )}
-                {...rest}
-            />
-            {errorMessage && <p className={s.errorText}>{errorMessage}</p>}
-        </>
-    );
-});
-
-type CustomInputProps = {
-    disabled?: boolean;
-    label?: string;
-    required?: boolean;
-    error?: boolean;
-    value?: string;
-    onClick?: () => void;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
-
-const CustomInput = memo(forwardRef<HTMLInputElement, CustomInputProps>(
-    ({ disabled, label, required, error, ...props }, ref) => (
-        <div className={clsx(s.inputContainer, error && s.error)}>
-            {label && (
-                <label>
-                    {label}
-                    {required && <span className={s.required}>*</span>}
-                </label>
-            )}
+        <div ref={wrapperRef} className={s.datePickerContainer} {...rest}>
             <input
-                ref={ref}
-                disabled={disabled}
-                className={s.inputField}
-                aria-invalid={error}
-                {...props}
+                type="text"
+                className={clsx(s.input, error && s.error)}
+                value={inputValue}
+                onChange={handleInputChange}
+                onClick={() => setIsOpen(true)}
+                placeholder="DD.MM.YYYY"
             />
+            {isOpen && (
+                <div className={s.calendarWrapper}>
+                    <DayPicker
+                        mode="single"
+                        showOutsideDays
+                        fixedWeeks
+                        selected={value ? parseDateString(value) : undefined}
+                        onSelect={handleDaySelect}
+                        disabled={{ after: new Date() }}
+                        classNames={{
+                            root: s.rpdRoot,
+                            caption: s.rpdCaption,
+                            caption_label: s.rpdCaptionLabel,
+                            month_caption: s.rpdMonth,
+                            nav: s.rdpNav,
+                            head: s.rpdHead,
+                            row: s.rpdRow,
+                            cell: s.rpdCell,
+                            weekday: s.rpdWeekday,
+                            day: s.rpdDay,
+                            day_selected: s.rpdSelected,
+                            day_outside: s.rpdOutside,
+                            day_today: s.rpdToday,
+                            day_disabled: s.rpdDisabled,
+                        }}
+                    />
+                </div>
+            )}
+            {error && <p className={s.errorText}>{error}</p>}
         </div>
-    )
-));
-
-DatePicker.displayName = 'DatePicker';
-CustomInput.displayName = 'CustomInput';
+    );
+};
