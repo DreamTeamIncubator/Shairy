@@ -10,6 +10,7 @@ import type { Items } from '@/features/posts/api/post.types'
 import { useGetMeQuery } from '@/features/auth/api/auth'
 import Image from 'next/image'
 
+
 const MyProfile = () => {
 
     const [isOpen, setIsOpen] = useState(false)
@@ -50,6 +51,7 @@ const MyProfile = () => {
       observer.disconnect()
     }
   }, [allPosts, endCursorPostId])
+
 
   const onClickHandler = (item: Items) => {
     if (!userData) return

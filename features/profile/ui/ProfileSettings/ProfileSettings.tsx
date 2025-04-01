@@ -14,6 +14,8 @@ import type {UpdateProfileRequest} from '@/features/profile/api/profileTypes';
 import {useUpdateProfileMutation} from '@/features/profile/api/profileApi';
 import {DatePicker} from '@/shared/ui/DatePicker/DatePicker';
 import {parseDateString, validationForProfileSettingsForm} from '@/utils/utils';
+import {useGetProfileQuery, useUpdateProfileMutation} from '@/features/profile/api/profileApi';
+
 
 export type FormData = {
     userName: string
@@ -75,20 +77,21 @@ export const ProfileSettings = () => {
         mode: 'onBlur',
     })
 
-    const {data: user} = useGetMeQuery()
+    //const {data: user} = useGetMeQuery()
+    const {data: user} = useGetProfileQuery()
     const [updateProfile] = useUpdateProfileMutation()
     const router = useRouter()
 
     useEffect(() => {
-        if (user?.userName) {
+        if (user) {
             reset({
-                userName: user.userName,
-                firstName: '',
-                lastName: '',
-                dateOfBirth: '',
-                country: '',
-                city: '',
-                aboutMe: '',
+                userName: user.userName || '',
+                firstName: user.firstName || '',
+                lastName: user.lastName || '',
+                dateOfBirth: user.dateOfBirth || '',
+                country: user.country || '',
+                city: user.city || '',
+                aboutMe: user.aboutMe || '',
             })
         }
     }, [user, reset])

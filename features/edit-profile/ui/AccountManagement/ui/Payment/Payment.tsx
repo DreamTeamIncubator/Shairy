@@ -8,27 +8,22 @@ import { useState } from 'react'
 import PayPalIcon from '@/public/payIcons/paypal.svg'
 import StripeIcon from '@/public/payIcons/stripe.svg'
 import { Button } from '@/shared/ui/Button/Button'
-import { SubscriptionsInfo } from '../../api/types'
 import { usePaySubscribeMutation } from '../../api/paymentApi'
-
-type PaymentProps = {
-  subscriptionInfo?: SubscriptionsInfo
-  setIsLoading: (isLoading: boolean) => void
-}
+import { PaymentProps, SubscriptionCost, SubscriptionDuration } from './types'
 
 const subscriptionPlans = [
-  { id: 'DAY', label: '$10 per 1 Day' },
-  { id: 'WEEKLY', label: '$50 per 7 Days' },
-  { id: 'MONTHLY', label: '$100 per Month' },
+  { id: 'DAY', label: '$10 per 1 Day', amount: 10 },
+  { id: 'WEEKLY', label: '$50 per 7 Days', amount: 50 },
+  { id: 'MONTHLY', label: '$100 per Month', amount: 100 },
 ] as const
 
 export const Payment = ({ subscriptionInfo, setIsLoading }: PaymentProps) => {
   const [isOpenModalAgree, setIsOpenModalAgree] = useState<boolean>(false)
   const [agree, setAgree] = useState<boolean>(true)
   const [paymentMethod, setPaymentMethod] = useState<string>('')
-  const [selectedSubscriptionCosts, setSelectedSubscriptionCosts] = useState<
-    'DAY' | 'WEEKLY' | 'MONTHLY' | null
-  >('DAY')
+  const [selectedSubscriptionCost, setSelectedSubscriptionCost] = useState<SubscriptionCost>(10)
+  const [selectedSubscriptionDuration, setSelectedSubscriptionDuration] =
+    useState<SubscriptionDuration>('DAY')
 
   const [paySubscribe] = usePaySubscribeMutation()
 
@@ -39,9 +34,9 @@ export const Payment = ({ subscriptionInfo, setIsLoading }: PaymentProps) => {
 
       try {
         const res = await paySubscribe({
-          typeSubscription: selectedSubscriptionCosts as string,
+          typeSubscription: selectedSubscriptionDuration as string,
           paymentType: paymentMethod,
-          amount: 0,
+          amount: selectedSubscriptionCost as number,
           baseUrl: `${window.location.origin}/my-profile/${subscriptionInfo?.userId}/edit-profile?tab=Account-Management`,
         }).unwrap()
         if (res?.url) {
@@ -67,6 +62,10 @@ export const Payment = ({ subscriptionInfo, setIsLoading }: PaymentProps) => {
     setPaymentMethod(paymentMethod)
   }
 
+  const handleSelectedSubscription = (id: SubscriptionDuration, amount: SubscriptionCost) => {
+    setSelectedSubscriptionDuration(id === selectedSubscriptionDuration ? null : id)
+    setSelectedSubscriptionCost(amount === selectedSubscriptionCost ? null : amount)
+  }
   return (
     <>
       <div>
@@ -76,16 +75,14 @@ export const Payment = ({ subscriptionInfo, setIsLoading }: PaymentProps) => {
             : 'Your subscription costs:'}
         </h3>
         <div className={s.accountType}>
-          {subscriptionPlans.map(({ id, label }) => (
+          {subscriptionPlans.map(({ id, label, amount }) => (
             <RadixCheckbox
               key={id}
               showLabel
               textLabel={label}
               className={s.checkbox}
-              checked={selectedSubscriptionCosts === id}
-              onCheckedChange={() =>
-                setSelectedSubscriptionCosts(id === selectedSubscriptionCosts ? null : id)
-              }
+              checked={selectedSubscriptionDuration === id}
+              onCheckedChange={() => handleSelectedSubscription(id, amount)}
             />
           ))}
         </div>

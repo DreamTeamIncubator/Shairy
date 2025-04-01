@@ -2,6 +2,7 @@ import { baseQueryWithAccessToken } from '@/features/auth/lib/base-query-with-ac
 import { createApi } from '@reduxjs/toolkit/query/react'
 import {
   CostPaymentResponse,
+  MyPaymentsResponse,
   PaymentRequest,
   PaymentResponse,
   SubscriptionsResponse,
@@ -27,6 +28,13 @@ export const subscriptionsAPI = createApi({
       }),
       providesTags: ['Subscription'],
     }),
+    getMyPayments: builder.query<MyPaymentsResponse[], void>({
+      query: () => ({
+        method: 'GET',
+        url: `/subscriptions/my-payments`,
+      }),
+      providesTags: ['Subscription'],
+    }),
     cancelAutoRenewal: builder.mutation<void, void>({
       query: () => ({
         url: '/subscriptions/canceled-auto-renewal',
@@ -49,4 +57,5 @@ export const {
   useGetCurrentPaymentQuery,
   useCancelAutoRenewalMutation,
   useGetCostPaymentQuery,
+  useGetMyPaymentsQuery,
 } = subscriptionsAPI
