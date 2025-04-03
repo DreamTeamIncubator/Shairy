@@ -18,6 +18,7 @@ const MyProfile = () => {
     const {data: userData} = useGetMeQuery()
     const {id} = useParams()
 
+    if (!userData) return
 
     const {data: allPosts} = useGetAllUsersPostsQuery({
         pageSize: 8,
@@ -59,9 +60,6 @@ const MyProfile = () => {
         setPostData(item)
     }
 
-    if (!id) {
-        return <div>Loading...</div>
-    }
     return (
         <>
             <ProfileDescription/>
