@@ -34,6 +34,7 @@
     "react": "^19.0.0",
     "react-cropper": "^2.3.3",
     "react-datepicker": "^8.2.1",
+    "react-day-picker": "^9.6.4",
     "react-dom": "^19.0.0",
     "react-dropzone": "^14.3.8",
     "react-easy-crop": "^5.4.1",
@@ -42,7 +43,10 @@
     "react-image-filters": "^0.5.1",
     "react-redux": "^9.2.0",
     "sass": "^1.83.4",
-    "swiper": "^11.2.6"
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "swiper": "^11.2.6",
+    "ws": "^8.18.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
