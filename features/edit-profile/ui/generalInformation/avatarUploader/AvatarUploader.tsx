@@ -16,13 +16,13 @@ import { useAppDispatch } from '@/store/store'
 import { publicProfile } from '@/features/profile/api/publicProfile'
 
 type Props = {
-  setIsOpen: (isOpen: boolean) => void
+  setClosedUploader: () => void
   handleUploadComplete: () => void
 }
 
 type ExtendedFile = File & { preview: string }
 
-const AvatarUploader = ({ setIsOpen, handleUploadComplete }: Props) => {
+const AvatarUploader = ({ setClosedUploader, handleUploadComplete }: Props) => {
   const [error, setError] = useState<string | null>(null)
   const [avatar, setAvatar] = useState<ExtendedFile | null>(null)
   const [step, setStep] = useState(1)
@@ -43,7 +43,7 @@ const AvatarUploader = ({ setIsOpen, handleUploadComplete }: Props) => {
     dispatch(publicProfile.util.invalidateTags(['profile']))
 
     handleUploadComplete()
-    setIsOpen(false)
+    setClosedUploader()
     router.back()
   }
 

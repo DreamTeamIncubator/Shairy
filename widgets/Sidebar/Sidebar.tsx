@@ -9,6 +9,9 @@ import style from './model/SidebarItem.module.scss'
 import {useState} from 'react';
 import CreatePost from '@/features/posts/ui/CreatePost/CreatePost';
 import {CreatePostModal} from '@/features/posts/ui/CreatePostModal/CreatePostModal';
+import {ModalRadix} from '@/shared/ui/Modal/ModalRadix';
+import LogOutForm from '@/features/auth/ui/logOutFom/LogOutForm';
+import {useBoolean} from '@/hooks/useBoolean';
 
 export const sidebarItems = {
     top: ['home', 'create', 'my-profile', 'messenger', 'search'],
@@ -20,14 +23,15 @@ type SidebarProps = {
     elements: typeof sidebarItems
 }
 export const Sidebar = ({elements}: SidebarProps) => {
+    const {value, setTrue, setFalse} = useBoolean()
+    const {value: isModalOpen, setTrue: setModalOpen, setFalse: setModalClosed} = useBoolean();
 
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [currentStep, setCurrentStep] = useState<number>(1); // Текущий шаг
 
     const steps = ['Add photo', 'Cropping', 'Filters', 'Publish']; // Заголовки для каждого шага
 
     const handleOpenModal = () => {
-        setIsModalOpen(true);
+        setModalOpen()
         setCurrentStep(1); // Сбрасываем шаг при открытии модалки
     };
 
@@ -66,7 +70,7 @@ export const Sidebar = ({elements}: SidebarProps) => {
             )
         } else if (item === 'create') {
             return (
-                <li className={style.item} key={index}>
+                <li className={style.item} key={index} onClick={handleOpenModal}>
                     <Link
                         href={`/my-profile/${data?.userId}`}
                         className={`${style.link} ${isActive ? s.active : ''}`}>
@@ -74,13 +78,30 @@ export const Sidebar = ({elements}: SidebarProps) => {
                             className={style.icon}
                             style={{maskImage: `url(/icons/sidebarIcons/create.svg)`}}
                         />
-                        <span onClick={handleOpenModal}>Create</span>
+                        <span>Create</span>
                     </Link>
                 </li>
             );
         } else {
             return <SidebarItem key={index} item={item} pathname={pathname}/>
         }
+    })
+
+    const mappedFooterElements = elements?.footer.map((item, index) => {
+        const itemPath = formatPathForURL(item)
+        const isActive = pathname === `/${itemPath}`
+        return (
+            <li className={style.item} key={index} onClick={setTrue}>
+                <div className={`${style.link} ${isActive ? s.active : ''}`}>
+                    <div
+                        className={style.icon}
+                        style={{maskImage: `url(/icons/sidebarIcons/log-out.svg)`}}
+                    />
+                    <span>Log Out</span>
+                </div>
+
+            </li>
+        )
     })
 
     return (
@@ -93,15 +114,15 @@ export const Sidebar = ({elements}: SidebarProps) => {
                     ))}
                 </ul>
                 <ul className={s.list}>
-                    {elements?.footer.map((item, index) => (
-                        <SidebarItem key={index} item={item} pathname={pathname}/>
-                    ))}
+                    {mappedFooterElements}
                 </ul>
             </nav>
+
+
             {/* Модальное окно */}
             <CreatePostModal
                 open={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
+                onClose={setModalClosed}
                 title={steps[currentStep - 1]} // Динамический заголовок
                 hideCloseButton={currentStep > 1} // Скрываем кнопку закрытия на всех шагах, кроме первого
                 onNext={handleNext}
@@ -110,78 +131,15 @@ export const Sidebar = ({elements}: SidebarProps) => {
             >
                 <CreatePost
                     currentStep={currentStep} // Передаем текущий шаг
-                    onClose={() => setIsModalOpen(false)}
+                    onClose={setModalClosed}
                     onStepChange={setCurrentStep} // Передаем функцию изменения шага
                 />
             </CreatePostModal>
+
+            {/*Modal Log-out*/}
+            <ModalRadix modalTitle={'Log Out'} open={value} onClose={setFalse}>
+                <LogOutForm setFalse={setFalse}/>
+            </ModalRadix>
         </>
     )
 }
-//
-// const pathname = usePathname();
-//
-// const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-// const [currentStep, setCurrentStep] = useState<number>(1); // Текущий шаг
-//
-// const steps = ['Add photo', 'Cropping', 'Filters', 'Publish']; // Заголовки для каждого шага
-//
-// const handleOpenModal = () => {
-//     setIsModalOpen(true);
-//     setCurrentStep(1); // Сбрасываем шаг при открытии модалки
-// };
-//
-// const handleNext = () => {
-//     setCurrentStep((prev) => Math.min(prev + 1, steps.length)); // Переход к следующему шагу
-// };
-//
-// const handlePrev = () => {
-//     setCurrentStep((prev) => Math.max(prev - 1, 1)); // Переход к предыдущему шагу
-// };
-//
-// const mappedTopSidebarItems = elements?.top.map((item, index) => {
-//     if (item === 'create') {
-//         return (
-//             <li key={index}>
-//                 <span onClick={handleOpenModal}>Create</span>
-//             </li>
-//         );
-//     } else {
-//         return <SidebarItem key={index} item={item} pathname={pathname} />;
-//     }
-// });
-//
-// return (
-//     <>
-//         <nav className={s.sidebar}>
-//             <ul className={`${s.list} ${s.top}`}>{mappedTopSidebarItems}</ul>
-//             <ul className={`${s.list} ${s.main}`}>
-//                 {elements?.main.map((item, index) => (
-//                     <SidebarItem key={index} item={item} pathname={pathname} />
-//                 ))}
-//             </ul>
-//             <ul className={s.list}>
-//                 {elements?.footer.map((item, index) => (
-//                     <SidebarItem key={index} item={item} pathname={item} prePath={'auth/'} />
-//                 ))}
-//             </ul>
-//         </nav>
-//
-//         {/* Модальное окно */}
-//         <CreatePostModal
-//             open={isModalOpen}
-//             onClose={() => setIsModalOpen(false)}
-//             title={steps[currentStep - 1]} // Динамический заголовок
-//             hideCloseButton={currentStep > 1} // Скрываем кнопку закрытия на всех шагах, кроме первого
-//             onNext={handleNext}
-//             onPrev={handlePrev}
-//             currentStep={currentStep} // Передаем текущий шаг
-//         >
-//             <CreatePost
-//                 currentStep={currentStep} // Передаем текущий шаг
-//                 onClose={() => setIsModalOpen(false)}
-//                 onStepChange={setCurrentStep} // Передаем функцию изменения шага
-//             />
-//         </CreatePostModal>
-//     </>
-// );
-// };

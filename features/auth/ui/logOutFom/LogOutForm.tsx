@@ -3,17 +3,20 @@
 import { Button } from '@/shared/ui/Button/Button'
 import { useRouter } from 'next/navigation'
 import s from './LogOutForm.module.scss'
-import { useLogoutMutation } from '../../api/auth'
+import {useGetMeQuery, useLogoutMutation} from '../../api/auth'
 
-export default function LogOutForm() {
+type Props = {
+  setFalse: ()=> void
+}
+
+export default function LogOutForm( {setFalse}: Props) {
   const router = useRouter()
   const [logout] = useLogoutMutation()
+  const {data} = useGetMeQuery()
 
   const handleLogout = async () => {
     try {
-      const response = await logout()
-      console.log('Logout response:', response)
-
+      await logout()
       localStorage.removeItem('access-token')
 
       router.push('/')
@@ -25,20 +28,17 @@ export default function LogOutForm() {
     }
   }
 
-  const handleClose = () => {
-    router.back()
-  }
 
   return (
     <section className={s.section}>
       <p>
-        Do you really want to log out of your account <b>“Epam@epam.com”</b>?
+        Do you really want to log out of your account <b>{data?.userName}</b>?
       </p>
       <div className={s.buttonGroup}>
         <Button variant={'outlined'} onClick={handleLogout}>
           Yes
         </Button>
-        <Button onClick={handleClose}>No</Button>
+        <Button onClick={setFalse}>No</Button>
       </div>
     </section>
   )
