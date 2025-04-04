@@ -1,5 +1,5 @@
 import React from 'react'
-import s from '@/app/my-profile/[id]/myProfile.module.scss'
+import s from '@/app/[lang]/my-profile/[id]/myProfile.module.scss'
 import { Button } from '@/shared/ui/Button/Button'
 import noAvatar from '@/public/no-avatar.svg'
 import { useParams } from 'next/navigation'
@@ -9,7 +9,7 @@ import { useGetProfileQuery } from '../api/profileApi'
 
 const ProfileDescription = () => {
   const { id } = useParams()
-  const {data: authUser} = useGetProfileQuery()
+  const { data: authUser } = useGetProfileQuery()
   const { data } = useGetPublicProfileQuery(Number(id))
   if (!id) {
     return <div>Loading...</div>
@@ -25,10 +25,11 @@ const ProfileDescription = () => {
       <div className={s.header}>
         <h2 className={s.name}>{authUser?.userName || data?.userName}</h2>
 
-       { owner && <Link href={`/my-profile/${id}/edit-profile?tab=General-Information`}>
-          <Button variant={'secondary'}>Profile Settings</Button>
-        </Link>
-      }
+        {owner && (
+          <Link href={`/my-profile/${id}/edit-profile?tab=General-Information`}>
+            <Button variant={'secondary'}>Profile Settings</Button>
+          </Link>
+        )}
       </div>
       <div className={s.followers}>
         <div className={s.followersData}>
@@ -45,9 +46,7 @@ const ProfileDescription = () => {
         </div>
       </div>
       {/*TODO: delete test-text after adding feature 'add post'*/}
-      <p className={s.description}>
-        {authUser?.aboutMe || data?.aboutMe}
-      </p>
+      <p className={s.description}>{authUser?.aboutMe || data?.aboutMe}</p>
     </div>
   )
 }
