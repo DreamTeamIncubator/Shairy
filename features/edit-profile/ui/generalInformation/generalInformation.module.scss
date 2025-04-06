@@ -1,0 +1,68 @@
+.container {
+  display: flex;
+  column-gap: 40px;
+}
+
+.profileAvatar {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+  width: 100%;
+  max-width: 260px;
+  height: auto;
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 192px;
+  height: 192px;
+  border-radius: 50%;
+  background-color: var(--dark-500);
+  position: relative;
+  z-index: 0;
+
+  img {
+    border-radius: 50%;
+  }
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.closeButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background-color: black;
+  border-radius: 50%;
+  top: 15%;
+  right: 5%;
+  z-index: 3;
+
+  & img {
+    width: 16px;
+    height: 16px;
+    background-color: var(--danger-500);
+    border-radius: 50%;
+  }
+}
+
+.deleteModalText {
+  margin-bottom: 55px;
+}
+
+.buttonWrap {
+  display: flex;
+  gap: 25px;
+  justify-content: flex-end;
+}

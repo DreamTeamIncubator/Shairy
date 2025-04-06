@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap:12px;
+  color: var(--light-100, #FFF);
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.wrapper {
+  padding: 17px 12px;
+  border-radius: 2px;
+  border: 1px solid var(--dark-300, #333);
+  background: var(--dark-500, #171717);
+}
+
+.paymentRow {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  & span:last-child {
+    font-weight: 700;
+  }
+}
+

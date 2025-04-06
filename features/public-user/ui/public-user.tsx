@@ -1,10 +1,18 @@
+'use client'
+
 import Image from 'next/image'
 import ImageWithoutAvatar from '../../../assets/icons/noImg.png'
-import { PropsType } from '../types'
+import { Item, PropsType } from '../types'
 import s from '../ui/publicUser.module.css'
+import { useRouter } from 'next/navigation'
+
 export const PublicUser = (props: PropsType) => {
   const { additionalData, profileData } = props
-  console.log(additionalData)
+  const router = useRouter()
+
+  const openPost = (post: Item) => {
+    router.push(`/public-profile/${profileData.id}/public-post/${post.id}`, { scroll: false })
+  }
 
   return (
     <div>
@@ -42,32 +50,28 @@ export const PublicUser = (props: PropsType) => {
               <p>Publications </p>
             </div>
           </div>
-          {/* <p>{profileData.description}</p> */}
-
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati voluptate tenetur
-            facilis eius. Delectus sint pariatur ad atque molestias fugit, accusamus mollitia
-            explicabo. Lorem ipsum dolor sit amet consectetur adipisicing elit. !!!Это хардкод если
-            что!!!
-          </p>
+          <p>{profileData.aboutMe}</p>
         </div>
       </div>
       <div className={s.postsBlock}>
         {additionalData.items.map((post) => (
-          <div
-            style={{
-              display: 'flex',
-
-              flexDirection: 'row',
-              justifyContent: 'center',
-              backgroundColor: 'white',
-              border: 'black 2px solid',
-            }}
-            key={post.id}>
+          <div key={post.id} onClick={() => openPost(post)}>
+            {post.images[0]?.url ? (
+              <Image
+                alt={`Post by ${post.userName}`}
+                src={post.images[0].url}
+                width={250}
+                height={250}
+              />
+            ) : (
+              <Image
+                alt={`Post by ${post.userName} without photo`}
+                src={ImageWithoutAvatar}
+                width={250}
+                height={250}
+              />
+            )}
             {/* {post.description} */}
-            {post.images.map((image) => (
-              <Image alt="posts" key={image.createdAt} src={image.url} width={250} height={250} />
-            ))}
           </div>
         ))}
       </div>

@@ -1,63 +1,59 @@
 .root {
-    all: unset;
-    border: 2px solid var(--light-100, #ffffff);
-    width: 18px;
-    height: 18px;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+  all: unset;
+  border: 2px solid var(--light-100, #ffffff);
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .root:not(:disabled):hover::after {
-    content: '';
-    position: absolute;
-    width: 36px;
-    height: 36px;
-    background-color: var(--Dark-100, #4C4C4C);
-    border-radius: 50%;
-    z-index: -1;
-    
+  content: '';
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  background-color: var(--Dark-100, #4c4c4c);
+  border-radius: 50%;
+  z-index: -1;
 }
 
-.root[data-state="checked"]:not(:disabled):hover::after{
-    content: '';
-    position: absolute;
-    width: 36px;
-    height: 36px;
-    background-color: var(--Dark-100, #4C4C4C);
-    border-radius: 50%;
-    z-index: -1;
-    
+.root[data-state='checked']:not(:disabled):hover::after {
+  content: '';
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  background-color: var(--Dark-100, #4c4c4c);
+  border-radius: 50%;
+  z-index: -1;
 }
 
-.root[data-state="checked"] {
-    background-color:  var(--light-100, #ffffff);
+.root[data-state='checked'] {
+  background-color: var(--light-100, #ffffff);
 }
 
 .root:disabled {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
 .indicator {
-    color: var(--Dark-900, #000000);
+  color: var(--Dark-900, #000000);
+  font-size: 24px;
 }
 
 .disabledIndicator {
-    color: var(--Dark-100, #4C4C4C);
+  color: var(--Dark-100, #4c4c4c);
 }
 
 .label {
-    color: var(--light-100, #ffffff);
-    padding-left: 15px;
-    font-size: 15px;
-    line-height: 1;
+  color: var(--light-100, #ffffff);
+  padding-left: 15px;
+  font-size: 15px;
+  line-height: 1;
 }
 
 .disabledLabel {
-    color: var(--Dark-100, #4C4C4C);
+  color: var(--Dark-100, #4c4c4c);
 }
-
-
-

@@ -1,4 +1,4 @@
-import { PostType, type ResponceAllPosts } from './post.types'
+import { PostType, type ResponseAllPosts } from './post.types'
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { baseQueryWithReauth } from '@/features/auth/lib/base-query-with-access-token'
 import { LikesResponseType } from '@/features/comments/api/comments.types'
@@ -57,7 +57,7 @@ export const postAPI = createApi({
       }),
     }),
     getAllUsersPosts: builder.query<
-      ResponceAllPosts,
+      ResponseAllPosts,
       { pageSize: number; endCursorPostId?: number | null; userId: number }
     >({
       query: ({ pageSize, endCursorPostId, userId }) => ({
@@ -86,7 +86,6 @@ export const postAPI = createApi({
         method: 'DELETE',
         url: `posts/${postId}`,
       }),
-      invalidatesTags: (res, err, postId) => [{ type: 'UserPosts', id: postId }],
     }),
   }),
 })

@@ -39,7 +39,7 @@ type Owner = {
   lastName: string
 }
 
-type Item = {
+export type Item = {
   id: number
   userName: string
   description: string

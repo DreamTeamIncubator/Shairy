@@ -6,21 +6,27 @@ import { useParams } from 'next/navigation'
 import { useGetAllUsersPostsQuery } from '@/features/posts/api/post'
 import ProfileDescription from '@/features/profile/ui/ProfileDescription'
 import Post from '@/features/posts/ui/Post'
+import type { Items } from '@/features/posts/api/post.types'
+import { useGetMeQuery } from '@/features/auth/api/auth'
+import Image from 'next/image'
+
 
 const MyProfile = () => {
-  const [isOpen, setIsOpen] = useState(false)
 
-  const [endCursorPostId, setEndCursorPostId] = useState<any>(null)
-  const { id } = useParams()
+    const [isOpen, setIsOpen] = useState(false)
+    const [endCursorPostId, setEndCursorPostId] = useState<null | number>(null)
+    const {data: userData} = useGetMeQuery()
+    const {id} = useParams()
+
 
   const { data: allPosts } = useGetAllUsersPostsQuery({
     pageSize: 8,
     endCursorPostId,
-    userId: +id,
+    userId: Number(id),
   })
-  console.log(allPosts)
+
   const lastPostRef = useRef<HTMLDivElement | null>(null)
-  const [postId, setPostId] = useState<null | number>(null)
+  const [postData, setPostData] = useState<Items>({})
 
   useEffect(() => {
     if (!lastPostRef.current) return
@@ -46,10 +52,16 @@ const MyProfile = () => {
     }
   }, [allPosts, endCursorPostId])
 
-  const onClickHandler = (id) => {
-    //TODO: open post if user is authorised
+
+  const onClickHandler = (item: Items) => {
+    if (!userData) return
+
     setIsOpen(true)
-    setPostId(id)
+    setPostData(item)
+  }
+
+  const onCloseHandler = () => {
+    setIsOpen(false)
   }
   if (!id) {
     return <div>Loading...</div>
@@ -65,14 +77,26 @@ const MyProfile = () => {
               key={item.id}
               ref={isLastPost ? lastPostRef : null}
               className={s.post}
-              onClick={() => onClickHandler(item.id)}>
-              <img src={item?.images[0]?.url} alt="photo-post" className={s.img} />
+              onClick={() => onClickHandler(item)}>
+              <Image
+                src={item?.images[0]?.url}
+                alt="photo-post"
+                width={250}
+                height={250}
+                className={s.img}
+              />
             </div>
           )
         })}
       </div>
       <ModalRadix open={isOpen} onClose={() => setIsOpen(false)} modalTitle={''}>
-        <Post postId={postId} open={true} onClose={() => console.log('onclose')} />
+        <Post
+          postId={postData.id}
+          open={isOpen}
+          onClose={onCloseHandler}
+          postData={postData}
+          endCursorPostId={endCursorPostId}
+        />
       </ModalRadix>
     </>
   )

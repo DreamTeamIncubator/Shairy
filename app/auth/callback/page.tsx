@@ -1,13 +1,18 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useGoogleLoginMutation } from '@/features/auth/api/auth'
+import { useGoogleLoginMutation, useGetMeQuery } from '@/features/auth/api/auth'
 
 const AuthCallback = () => {
   const searchParams = useSearchParams()
   const router = useRouter()
   const [googleLogin] = useGoogleLoginMutation()
+  const [token, setToken] = useState<string | null>(null)
+
+  const { data: user, isSuccess } = useGetMeQuery(undefined, {
+    skip: !token,
+  })
 
   useEffect(() => {
     const code = searchParams.get('code')
@@ -17,8 +22,7 @@ const AuthCallback = () => {
         .unwrap()
         .then((response) => {
           localStorage.setItem('access-token', response.accessToken)
-          window.location.reload()
-          router.push('/home')
+          setToken(response.accessToken)
         })
         .catch((error) => {
           console.error('Ошибка аутентификации (Google)', error)
@@ -26,6 +30,15 @@ const AuthCallback = () => {
         })
     }
   }, [searchParams, router])
+
+  useEffect(() => {
+    if (isSuccess && user) {
+      console.log('User data:', user)
+      router.push('/home')
+    }
+  }, [isSuccess, user, router])
+
+  return <div>Авторизация через Google...</div>
 }
 
 export default AuthCallback
