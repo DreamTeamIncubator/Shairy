@@ -4,15 +4,19 @@ import ImagePreview from '@/features/posts/ui/ImagePreview/ImagePreview';
 import PhotoFilters from '@/features/posts/ui/PhotoFilters/PhotoFilters';
 import DescriptionForm from '@/features/posts/ui/CreatePostForm/CreatePostForm';
 import ImagesCropper from '@/features/posts/ui/ImageCropper/ImagesCropper';
-import {useCreatePostMutation, useUploadImageMutation} from '@/features/posts/api/post';
+import {postAPI, useCreatePostMutation, useUploadImageMutation} from '@/features/posts/api/post';
+import {useGetMeQuery} from '@/features/auth/api/auth';
+import {useAppDispatch} from '@/store/store';
+import {ResponseAllPosts} from '@/features/posts/api/post.types';
 
 type Props = {
-    onClose: () => void;
-    currentStep: number;
-    onStepChange: (step: number) => void;
-};
+    onClose: () => void
+    currentStep: number
+    onStepChange: (step: number) => void
+    endCursorPostId: number | null
+}
 
-const CreatePost = ({ onClose, currentStep, onStepChange }: Props) => {
+const CreatePost = ({ onClose, currentStep, onStepChange, endCursorPostId }: Props) => {
     const [images, setImages] = useState<File[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [description, setDescription] = useState('');
@@ -23,6 +27,8 @@ const CreatePost = ({ onClose, currentStep, onStepChange }: Props) => {
 
     const [uploadImage] = useUploadImageMutation();
     const [createPost] = useCreatePostMutation();
+    const {data: userData} = useGetMeQuery();
+    const dispatch = useAppDispatch();
 
     // Инициализация croppedImages при загрузке изображений
     useEffect(() => {
@@ -36,6 +42,12 @@ const CreatePost = ({ onClose, currentStep, onStepChange }: Props) => {
     const handlePublish = async () => {
         if (filteredImages.length === 0) {
             alert('Сначала загрузите и обработайте изображения!');
+            return;
+        }
+
+        if (!userData) {
+            console.error('User data is missing');
+            alert('Ошибка: Не удалось получить данные пользователя.');
             return;
         }
 
@@ -58,12 +70,21 @@ const CreatePost = ({ onClose, currentStep, onStepChange }: Props) => {
             const uploadedImages = uploadResponse.images;
 
             // Шаг 2: Создаем пост
-            const postResponse = await createPost({
+            const newPost = await createPost({
                 description,
                 childrenMetadata: uploadedImages.map((img: UploadedImage) => ({ uploadId: img.uploadId })),
             }).unwrap();
 
-            console.log('Post created successfully:', postResponse);
+            console.log('Post created successfully:', newPost);
+
+            dispatch(
+                postAPI.util.updateQueryData(
+                    'getAllUsersPosts',
+                    { pageSize: 8, endCursorPostId: endCursorPostId, userId: userData.userId },
+                    (draft: ResponseAllPosts) => {
+                        draft.items.unshift(newPost);
+                    }
+                ))
 
             // Сброс состояний
             setImages([]);
