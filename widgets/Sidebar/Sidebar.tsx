@@ -10,16 +10,24 @@ import { useState } from 'react'
 import CreatePost from '@/features/posts/ui/CreatePost/CreatePost'
 import { CreatePostModal } from '@/features/posts/ui/CreatePostModal/CreatePostModal'
 
-export const sidebarItems = {
-  top: ['home', 'create', 'my-profile', 'messenger', 'search'],
-  main: ['statistics', 'favorites'],
-  footer: ['log-out'],
-}
+// export const sidebarItems = {
+//   top: ['home', 'create', 'my-profile', 'messenger', 'search'],
+//   main: ['statistics', 'favorites'],
+//   footer: ['log-out'],
+// }
 
 type SidebarProps = {
-  elements: typeof sidebarItems
+  sidebarItems: {
+    top: { pathValue: string; title: string }[]
+    main: { pathValue: string; title: string }[]
+    footer: { pathValue: string; title: string }[]
+  }
 }
-export const Sidebar = ({ elements }: SidebarProps) => {
+
+export const Sidebar = ({ sidebarItems }: SidebarProps) => {
+  // const localeData = useTranslationData()
+  console.log(sidebarItems)
+
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [currentStep, setCurrentStep] = useState<number>(1) // Текущий шаг
 
@@ -44,40 +52,45 @@ export const Sidebar = ({ elements }: SidebarProps) => {
   if (!data) {
     return null
   }
+  console.log(data)
 
-  const mappedTopElements = elements?.top.map((item, index) => {
-    const itemPath = formatPathForURL(item)
-    const isActive = pathname === `/${itemPath}`
-    if (item === 'my-profile') {
+  const mappedTopElements = sidebarItems.top.map((item, index) => {
+    const itemPath = formatPathForURL(item.pathValue)
+    console.log(itemPath)
+    console.log(pathname)
+
+    // const isActive = pathname.includes(`/${item.pathValue}`)
+
+    if (item.pathValue === 'my-profile') {
       return (
         <li className={style.item} key={index}>
           <Link
             href={`/my-profile/${data?.userId}`}
-            className={`${style.link} ${isActive ? s.active : ''}`}>
+            className={`${style.link} ${pathname.includes(item.pathValue) ? style.active : ''}`}>
             <div
               className={style.icon}
               style={{ maskImage: `url(/icons/sidebarIcons/my-profile.svg)` }}
             />
-            <span>My Profile</span>
+            <span>{sidebarItems.top[2].title}</span>
           </Link>
         </li>
       )
-    } else if (item === 'create') {
+    } else if (item.pathValue === 'create') {
       return (
         <li className={style.item} key={index}>
           <Link
             href={`/my-profile/${data?.userId}`}
-            className={`${style.link} ${isActive ? s.active : ''}`}>
+            className={`${style.link} ${item.pathValue === pathname ? style.active : ''}`}>
             <div
               className={style.icon}
               style={{ maskImage: `url(/icons/sidebarIcons/create.svg)` }}
             />
-            <span onClick={handleOpenModal}>Create</span>
+            <span onClick={handleOpenModal}>{sidebarItems.top[1].title}</span>
           </Link>
         </li>
       )
     } else {
-      return <SidebarItem key={index} item={item} pathname={pathname} />
+      return <SidebarItem key={index} item={item.title} pathValue={item.pathValue} />
     }
   })
 
@@ -86,13 +99,13 @@ export const Sidebar = ({ elements }: SidebarProps) => {
       <nav className={s.sidebar}>
         <ul className={`${s.list} ${s.top}`}>{mappedTopElements}</ul>
         <ul className={`${s.list} ${s.main}`}>
-          {elements?.main.map((item, index) => (
-            <SidebarItem key={index} item={item} pathname={pathname} />
+          {sidebarItems?.main.map((item, index) => (
+            <SidebarItem key={index} item={item.title} pathValue={item.pathValue} />
           ))}
         </ul>
         <ul className={s.list}>
-          {elements?.footer.map((item, index) => (
-            <SidebarItem key={index} item={item} pathname={pathname} />
+          {sidebarItems?.footer.map((item, index) => (
+            <SidebarItem key={index} item={item.title} pathValue={item.pathValue} />
           ))}
         </ul>
       </nav>
@@ -115,6 +128,7 @@ export const Sidebar = ({ elements }: SidebarProps) => {
     </>
   )
 }
+///сделать вэлью на анг. а перевод из обьекта. вэлью со строкой
 //
 // const pathname = usePathname();
 //
