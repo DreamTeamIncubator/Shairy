@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import { ReactNode, Suspense } from 'react'
 import { StoreWrapper } from '@/store/store-wrapper'
 import { Header } from '@/widgets/Header/Header'
-import { Sidebar, sidebarItems } from '@/widgets/Sidebar/Sidebar'
+import { Sidebar } from '@/widgets/Sidebar/Sidebar'
 import { Scroll } from '@/shared/ui/Scroll/Scroll'
 import styles from '../[lang]/page.module.css'
 import { ClientLoader } from '@/shared/ui/ClientLoader/ClientLoader'
+import { getDictionary } from './dictionaries'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -24,7 +24,30 @@ export const metadata: Metadata = {
   description: 'Shairy',
 }
 
-export default async function Layout({ children }: Readonly<{ children: ReactNode }>) {
+export default async function Layout({
+  children,
+  params,
+}: {
+  children: React.ReactNode
+  params: { lang: 'en' | 'ru' }
+}) {
+  const { lang } = await params
+  const dict = await getDictionary(lang)
+
+  const sidebarItems = {
+    top: [
+      { pathValue: 'home', title: dict.sidebar.home },
+      { pathValue: 'create', title: dict.sidebar.create },
+      { pathValue: 'my-profile', title: dict.sidebar.myProfile },
+      { pathValue: 'messenger', title: dict.sidebar.messenger },
+      { pathValue: 'search', title: dict.sidebar.search },
+    ],
+    main: [
+      { title: dict.sidebar.statistic, pathValue: 'statistics' },
+      { title: dict.sidebar.favorites, pathValue: 'favorites' },
+    ],
+    footer: [{ title: dict.sidebar.logOut, pathValue: 'log-out' }],
+  }
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
@@ -32,7 +55,7 @@ export default async function Layout({ children }: Readonly<{ children: ReactNod
           <ClientLoader>
             <Header />
             <div className={styles.page}>
-              <Sidebar elements={sidebarItems} />
+              <Sidebar sidebarItems={sidebarItems} />
               <Scroll style={{ height: '100vh', overflow: 'hidden' }}>{children}</Scroll>
             </div>
           </ClientLoader>
