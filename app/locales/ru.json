@@ -1,5 +1,342 @@
 {
-  "products": {
-    "cart": "рурурурурууру"
+  "auth": {
+    "emailConfirmedPage": {
+      "text": "Ваша почта подтверждена",
+      "textButton": "Войти",
+      "title": "Поздравляем!"
+    },
+    "forgotPasswordPage": {
+      "backToSignIn": "Вернуться на страницу входа",
+      "invalidEmail": "Неверный формат электронной почты",
+      "message": "Напишите адрес электронной почты и мы отправим ссылку для восстановления пароля",
+      "messageModal": "Мы отправили ссылку для подтверждения пароля на почту <1>text</1>",
+      "sendLink": "Отправить ссылку",
+      "title": "Забыл пароль",
+      "titleModal": "Ссылка отправлена"
+    },
+    "github": {
+      "successMessage": "Поздравляем, все готово!"
+    },
+    "linkExpiredPage": {
+      "text": "Похоже, срок действия ссылки для подтверждения истек. Не волнуйтесь, мы можем отправить ссылку еще раз.",
+      "textButton": "Отправить еще раз",
+      "title": "Срок действия ссылки истек"
+    },
+    "passwordResetPage": {
+      "confirmPasswordZod": "Подтверждение пароля обязательно",
+      "message": "Ваш пароль должен содержать от 6 до 20 символов",
+      "newPassword": "Новый пароль",
+      "passwordConfirmation": "Подтверждение пароля",
+      "passwordMaxZod": "Пароль должен содержать не более 20 символов",
+      "passwordMinZod": "Пароль должен содержать минимум 6 символов",
+      "passwordRefineZod": "Пароль должен содержать 0-9, a-z, A-Z, ! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~",
+      "textLink": "Создать новый пароль",
+      "title": "Создать новый пароль"
+    },
+    "privacyPolicy": {
+      "backSignUp": "Назад к регистрации",
+      "content": "Lorem ipsum dolor sit amet... (полный текст остаётся без изменений)",
+      "title": "Политика конфиденциальности"
+    },
+    "signInPage": {
+      "dontHaveAcc": "Нет учётной записи?",
+      "email": "Электронная почта",
+      "invalidEmail": "Неверный формат электронной почты",
+      "invalidPass": "Неверный формат пароля",
+      "password": "Пароль"
+    },
+    "signUpPage": {
+      "account": "У Вас есть аккаунт?",
+      "agreement": "Я согласен с <agreement>Пользовательским соглашением</agreement> и <policy>Политикой конфиденциальности</policy>",
+      "labelConfirm": "Подтверждение пароля",
+      "labelEmail": "Почта",
+      "labelName": "Имя пользователя",
+      "labelPassword": "Пароль",
+      "signIn": "Войти",
+      "signUp": "Зарегистрироваться",
+      "title": "Регистрация"
+    },
+    "termsOfService": {
+      "backSignUp": "Назад к регистрации",
+      "content": "Lorem ipsum dolor sit amet... (полный текст остаётся без изменений)",
+      "title": "Пользовательское соглашение"
+    }
+  },
+  "common": {
+    "avatarUploader": {
+      "buttons": {
+        "save": "Сохранить",
+        "select": "Загрузить С Устройства"
+      },
+      "errors": {
+        "tooBig": "<bold>Ошибка!</bold> Размер фото должен быть менее 10 MB (Мегабайт)",
+        "wrongFormat": "<bold>Ошибка!</bold> Формат загружаемого фото должен быть PNG или JPEG"
+      },
+      "title": "Добавить Фото Пользователя"
+    },
+    "createPostModal": {
+      "addPhotoCard": {
+        "buttons": {
+          "primary": "Загрузить с Устройства",
+          "secondary": "Открыть черновик"
+        },
+        "errors": {
+          "tooBig": "<bold>Ошибка!</bold> Размер фото должен быть менее 20 MB (Мегабайт)",
+          "wrongFormat": "<bold>Ошибка!</bold> Формат загружаемого фото должен быть PNG или JPEG"
+        },
+        "title": "Добавить Фото"
+      },
+      "cropPhotoCard": {
+        "buttons": {
+          "next": "Далее"
+        },
+        "title": "Обрезка"
+      },
+      "filterPhotoCard": {
+        "buttons": {
+          "next": "Далее"
+        },
+        "title": "Фильтры"
+      },
+      "publishPhotoCard": {
+        "buttons": {
+          "publish": "Опубликовать"
+        },
+        "descriptionField": {
+          "errors": {
+            "tooBig": "Максимальное количество символов 500"
+          },
+          "label": "Добавить описание публикации",
+          "placeholder": "Описание..."
+        },
+        "title": "Публикация"
+      },
+      "saveDraftSubModal": {
+        "buttons": {
+          "cancel": "Сохранить Черновик",
+          "confirm": "Отменить"
+        },
+        "message": "Вы действительно хотите отменить создание публикации? В случае отмены все данные будут утеряны",
+        "title": "Закрыть"
+      }
+    },
+    "datePicker": {
+      "locale": "gregorian_ru"
+    },
+    "logOutModal": {
+      "description": "Вы действительно хотите выйти из аккаунта <email></email>?",
+      "title": "Выход"
+    },
+    "modal": {
+      "buttonNames": {
+        "cancel": "Нет",
+        "confirm": "Да"
+      }
+    },
+    "postsList": {
+      "addPostButton": "Создать Пост",
+      "buttons": {
+        "draftButton": "Открыть Черновик"
+      },
+      "noPostsMessage": "Здесь пока нет постов"
+    }
+  },
+  "editProfile": {
+    "accountManagement": {
+      "accountType": "Тип аккаунта:",
+      "business": "Бизнес",
+      "currentSubscription": "Текущая подписка:",
+      "expireAt": "Срок истечения",
+      "modal": {
+        "errorButton": "Обратно к платежам",
+        "errorContent": "Транзакция не выполнилась. Пожалуйста, обратитесь в поддержку",
+        "errorTitle": "Ошибка",
+        "successButton": "OK",
+        "successContent": "Оплата произведена успешно!",
+        "successTitle": "Успех"
+      },
+      "nextPayment": "Следующий платеж",
+      "or": "или",
+      "personal": "Личный",
+      "yourSubscriptionCosts": "Стоимость вашей подписки"
+    },
+    "addPhotoButton": "Добавить Фото Пользователя",
+    "createPublication": {
+      "primaryButtonTitle": "Загрузить с устройства",
+      "title": "Добавить фото"
+    },
+    "deleteAvatarModal": {
+      "message": "Вы уверены, что хотите удалить это фото?",
+      "title": "Удалить Фото"
+    },
+    "myPayments": {
+      "dateOfPayment": "Дата Платежа",
+      "endDateOfSubscription": "Окончание Подписки",
+      "paymentType": "Тип Платежа",
+      "price": "Цена",
+      "subscriptionType": "Тип Подписки"
+    },
+    "photoSlider": {
+      "deletePhoto": {
+        "cancelButtonTitle": "Отмена",
+        "confirmButtonTitle": "Удалить",
+        "headerTitle": "Удалить фото?",
+        "message": "Фото будет удалено из вашей публикации."
+      }
+    },
+    "profileForm": {
+      "aboutMe": {
+        "label": "Обо мне"
+      },
+      "city": {
+        "label": "Выберите ваш город",
+        "placeholder": "Город"
+      },
+      "commonFieldErrors": {
+        "max": "<field></field> должно содержать не более <max></max> символов",
+        "min": "<field></field> должно содержать не менее <min></min> символов",
+        "onlyLetters": "<field></field> может содержать только буквы",
+        "required": "<field></field> обязательно для заполнения"
+      },
+      "country": {
+        "label": "Выберите вашу страну",
+        "placeholder": "Страна"
+      },
+      "dateOfBirth": {
+        "errors": {
+          "invalidDateFormat": "Неверный формат даты. Введите дату в указанном формате: <format></format>",
+          "toYoung": "Пользователь младше 13 лет не может создать профиль. <link>Политика конфиденциальности</link>",
+          "under1900": "Дата рождения не может быть раньше 1900 года"
+        },
+        "label": "Дата Рождения"
+      },
+      "firstName": {
+        "label": "Имя"
+      },
+      "lastName": {
+        "label": "Фамилия"
+      },
+      "submitButton": "сохранить изменения",
+      "userName": {
+        "errors": {
+          "regexp": "Имя пользователя может содержать только буквы, цифры, подчеркивания и тире"
+        },
+        "label": "Имя Пользователя"
+      }
+    },
+    "tabs": {
+      "accountManagement": {
+        "label": "Управление Аккаунтом"
+      },
+      "devices": {
+        "label": "Устройства"
+      },
+      "generalInformation": {
+        "label": "Общая информация"
+      },
+      "myPayments": {
+        "label": "Мои платежи"
+      }
+    }
+  },
+  "myProfile": {
+    "myPostModal": {
+      "cancelEditModal": {
+        "cancelButtonTitle": "Нет",
+        "confirmButtonTitle": "Да",
+        "description": "Вы действительно хотите закончить редактирование? В случае отмены сделанные вами изменения не будут сохранены.",
+        "title": "Отменить Редактирование"
+      },
+      "confirmDeleteModal": {
+        "cancelButtonTitle": "Нет",
+        "confirmButtonTitle": "Да",
+        "description": "Вы уверены, что хотите удалить этот пост?",
+        "title": "Удалить Пост"
+      }
+    },
+    "settingsButton": "Настройки Профиля",
+    "statistics": {
+      "followers": {
+        "label": "подписчики"
+      },
+      "following": {
+        "label": "подписки"
+      },
+      "publications": {
+        "label": "публикации"
+      }
+    }
+  },
+  "navbar": {
+    "forgotPassword": "Забыл пароль",
+    "main": "Главная страница",
+    "privacyPolicy": "Политика конфиденциальности",
+    "signIn": "Войти",
+    "signUp": "Зарегистрироваться",
+    "termsOfService": "Условия пользования"
+  },
+  "notificationMenu": {
+    "ago": "назад",
+    "new": "Новое",
+    "newNotification": "Новое уведомление!",
+    "notNewNotifications": "Нет новых уведомлений",
+    "notifications": "Уведомления"
+  },
+  "post": {
+    "card": {
+      "addNewComment": {
+        "error": "макс. длина 150 символов",
+        "placeholder": "Добавить комментарий...",
+        "submit": "Опубликовать"
+      },
+      "header": {
+        "buttons": {
+          "copyLink": "Скопировать ссылку",
+          "deletePost": "Удалить пост",
+          "editPost": "Редактировать пост",
+          "follow": "Подписаться",
+          "unfollow": "Отписаться"
+        }
+      },
+      "info": {
+        "likes": "<count></count> <bold>\"Нравится\"</bold>"
+      }
+    },
+    "comment": {
+      "answer": "Ответить",
+      "like": "Нравится",
+      "likes": "Нравится",
+      "viewAnswersBth": {
+        "close": "Скрыть ответы (<count></count>)",
+        "open": "Показать ответы (<count></count>)"
+      }
+    },
+    "editPostModalCard": {
+      "descriptionCloseModal": "Вы действительно хотите закрыть редактирование публикации? Если закрыть, изменения не будут сохранены",
+      "labelCard": "Редактирование Публикации",
+      "postDescription": {
+        "errors": {
+          "tooBig": "Максимальное количество символов 500"
+        },
+        "label": "Добавить описание публикации",
+        "placeholder": "Описание...",
+        "titleBtnSubmit": "Сохранить"
+      }
+    }
+  },
+  "publicPage": {
+    "hide": "Свернуть",
+    "registeredUsers": "Зарегистрировано пользователей",
+    "showMore": "Показать больше"
+  },
+  "sidebar": {
+    "create": "Создать",
+    "favorites": "Избранные",
+    "home": "Главная",
+    "logOut": "Выход",
+    "messenger": "Сообщения",
+    "myProfile": "Мой Профиль",
+    "search": "Поиск",
+    "statistic": "Статистика"
   }
 }
