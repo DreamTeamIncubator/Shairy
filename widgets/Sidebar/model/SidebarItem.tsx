@@ -12,8 +12,6 @@ export const SidebarItem = ({ item, pathValue }: SidebarItemProps) => {
   // const itemPath = formatPathForURL(pathname)
   const pathname = usePathname()
   const isActive = pathname.includes(`/${pathValue}`)
-  console.log(item)
-  console.log(pathValue)
 
   const fullPath = pathValue === 'log-out' ? `/auth/${pathValue}` : `/${pathValue}`
 

@@ -26,7 +26,6 @@ type SidebarProps = {
 
 export const Sidebar = ({ sidebarItems }: SidebarProps) => {
   // const localeData = useTranslationData()
-  console.log(sidebarItems)
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [currentStep, setCurrentStep] = useState<number>(1) // Текущий шаг
@@ -52,13 +51,8 @@ export const Sidebar = ({ sidebarItems }: SidebarProps) => {
   if (!data) {
     return null
   }
-  console.log(data)
 
   const mappedTopElements = sidebarItems.top.map((item, index) => {
-    const itemPath = formatPathForURL(item.pathValue)
-    console.log(itemPath)
-    console.log(pathname)
-
     // const isActive = pathname.includes(`/${item.pathValue}`)
 
     if (item.pathValue === 'my-profile') {
