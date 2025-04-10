@@ -1,3 +1,4 @@
+'use client'
 import Image from 'next/image'
 import userWithoutPhoto from '../../../assets/icons/withoutAvatar.png'
 import { PostDescription } from '@/features/posts/ui/PostsDescription/PostDescription'
@@ -5,7 +6,10 @@ import Link from 'next/link'
 import { formatTimeAgo } from '@/utils/utils'
 import { Items } from '@/features/posts/api/post.types'
 import styles from './PublicPostForUnregisteredUser.module.scss'
+import { useTranslationData } from '@/hooks/useTranslationData'
 export const PublicPostForUnregisteredUser = ({ postItem }: { postItem: Items }) => {
+  const { localeData, localPath } = useTranslationData()
+
   return (
     <div className={styles.postBlock} key={postItem.id}>
       <Link
@@ -31,7 +35,9 @@ export const PublicPostForUnregisteredUser = ({ postItem }: { postItem: Items })
         />
         <p key={postItem.id}>{postItem.userName}</p>
       </div>
-      <p className={styles.timeAgo}>{formatTimeAgo(postItem.createdAt)}</p>
+      <p className={styles.timeAgo}>
+        {formatTimeAgo(postItem.createdAt, localPath)} {localeData?.notificationMenu.ago}
+      </p>
 
       <PostDescription description={postItem.description} />
     </div>

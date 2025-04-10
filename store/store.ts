@@ -7,6 +7,7 @@ import { postAPI } from '@/features/posts/api/post'
 import { profileAPI } from '@/features/profile/api/profileApi'
 import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { subscriptionsAPI } from '@/features/edit-profile/ui/AccountManagement/api/paymentApi'
+import { notificationAPI } from '@/features/notifications/api'
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
     [publicProfile.reducerPath]: publicProfile.reducer,
     [profileAPI.reducerPath]: profileAPI.reducer,
     [subscriptionsAPI.reducerPath]: subscriptionsAPI.reducer,
+    [notificationAPI.reducerPath]: notificationAPI.reducer,
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
@@ -27,7 +29,8 @@ export const store = configureStore({
       commentsAPI.middleware,
       publicProfile.middleware,
       profileAPI.middleware,
-      subscriptionsAPI.middleware
+      subscriptionsAPI.middleware,
+      notificationAPI.middleware
     ),
 })
 

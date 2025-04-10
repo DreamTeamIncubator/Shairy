@@ -1,38 +1,49 @@
-'use client';
+'use client'
 
-import s from './LanguageSelect.module.scss';
-import Image from 'next/image';
-import { useState } from 'react';
-import { RadixSelect } from '../RadixSelect';
-
+import s from './LanguageSelect.module.scss'
+import Image from 'next/image'
+import { useState } from 'react'
+import { RadixSelect } from '../RadixSelect'
+import { useRouter, usePathname } from 'next/navigation'
 const options = [
-  { value: 'Russian', label: 'Russian', icon: '/languages/flagRussian.svg' },
-  { value: 'English', label: 'English', icon: '/languages/flagUK.svg' },
-];
+  { value: 'ru', label: 'Русский', icon: '/languages/flagRussian.svg' },
+  { value: 'en', label: 'English', icon: '/languages/flagUK.svg' },
+]
 
 export const LanguageSelect = () => {
-  const [open, setOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState(options[1]); 
-  
-  const handleValueChange = (value: string) => {
-    const selectedOption = options.find(option => option.value === value);
+  const [open, setOpen] = useState(false)
+  const router = useRouter()
+  const path = usePathname()
+  const [selectedLanguage, setSelectedLanguage] = useState(
+    options.find((el) => el.value === path.split('/')[1])
+  )
+
+  const handleValueChange = () => {
+    const selectedOption = options.find((option) => option.value === path.split('/')[1])
+
     if (selectedOption) {
-      setSelectedLanguage(selectedOption);
-      setOpen(false);
+      const newLang = path.split('/')[1] === 'en' ? 'ru' : 'en'
+
+      const currentPath = window.location.pathname
+      const pathWithoutLocale = currentPath.replace(/^\/(en|ru)/, '') || '/'
+      const newUrl = `/${newLang}${pathWithoutLocale}`
+      router.push(newUrl)
+      setSelectedLanguage(selectedOption)
+      setOpen(false)
     }
-  };
+  }
 
   return (
     <div className={s.selectedContainer}>
-      <RadixSelect 
+      <RadixSelect
         options={options}
         onValueChange={handleValueChange}
         className={s.languageSelect}
-        value={selectedLanguage.value} 
-        renderValue={(option) => ( 
+        value={selectedLanguage && selectedLanguage.value}
+        renderValue={(option) => (
           <div className={s.selectedValue}>
             {option.icon && (
-              <Image 
+              <Image
                 src={option.icon}
                 alt={`${option.label} flag`}
                 width={24}
@@ -46,7 +57,7 @@ export const LanguageSelect = () => {
         renderItem={(option) => (
           <div className={s.itemContent}>
             {option.icon && (
-              <Image 
+              <Image
                 src={option.icon}
                 alt={`${option.label} flag`}
                 width={24}
@@ -59,5 +70,5 @@ export const LanguageSelect = () => {
         )}
       />
     </div>
-  );
-};
+  )
+}
