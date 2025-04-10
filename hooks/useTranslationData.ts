@@ -1,4 +1,4 @@
-import { getDictionary } from '@/app/[lang]/dictionaries'
+import { getDictionary } from '@/locales/dictionaries/dictionaries'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 

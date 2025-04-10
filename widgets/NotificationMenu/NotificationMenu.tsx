@@ -10,34 +10,29 @@ import FilledBell from '@/assets/icons/filled-bell.svg'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import Image from 'next/image'
 import { io } from 'Socket.IO-client'
-import { useRouter, usePathname } from 'next/navigation'
 import { formatTimeAgo } from '@/utils/utils'
 
 export type Notification = {
   id: string
-  isNew?: boolean
+  isRead?: boolean
+  clientId: string
   message: string
   notifyAt: string
 }
 // { notifications }: { notifications: Notification[] }
 export const NotificationMenu = () => {
   const [open, setOpen] = useState(false)
-  const router = useRouter()
-  const pathname = usePathname()
-  console.dir(router)
-  console.log(pathname)
 
   const handleOpen = () => {
     setOpen(!open)
   }
   const [notifications, setNotifications] = useState<Notification[]>([])
-  //   const showSpan = notifications.length && !open
-  // const { t } = useTranslation()
+
   useEffect(() => {
-    const newSocket = io('http://localhost:8080', {
+    const newSocket = io('https://inctagram.work', {
       // Уберите query, используйте auth
       auth: {
-        token: localStorage.getItem('access-token'),
+        token: localStorage.getItem('accessToken'),
       },
       // Явно укажите версию протокола
       transports: ['websocket'],

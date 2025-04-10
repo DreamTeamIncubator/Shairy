@@ -1,6 +1,6 @@
 // import styles from '../page.module.css';
 import React from 'react'
-import { getDictionary } from '../dictionaries'
+import { getDictionary } from '../../../locales/dictionaries/dictionaries'
 
 export default async function Messenger({ params }: { params: Promise<{ lang: 'en' | 'ru' }> }) {
   const { lang } = await params

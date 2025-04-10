@@ -2,12 +2,11 @@
 
 import s from './LanguageSelect.module.scss'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { RadixSelect } from '../RadixSelect'
-import { getDictionary } from '@/app/[lang]/dictionaries'
 import { useRouter, usePathname } from 'next/navigation'
 const options = [
-  { value: 'ru', label: 'Russian', icon: '/languages/flagRussian.svg' },
+  { value: 'ru', label: 'Русский', icon: '/languages/flagRussian.svg' },
   { value: 'en', label: 'English', icon: '/languages/flagUK.svg' },
 ]
 
@@ -15,7 +14,6 @@ export const LanguageSelect = () => {
   const [open, setOpen] = useState(false)
   const router = useRouter()
   const path = usePathname()
-  const dict = useLang()
   const [selectedLanguage, setSelectedLanguage] = useState(
     options.find((el) => el.value === path.split('/')[1])
   )
@@ -35,9 +33,6 @@ export const LanguageSelect = () => {
     }
   }
 
-  if (!dict) {
-    return
-  }
   return (
     <div className={s.selectedContainer}>
       <RadixSelect
@@ -74,24 +69,6 @@ export const LanguageSelect = () => {
           </div>
         )}
       />
-      <div>{dict.products.cart}</div>
     </div>
   )
-}
-
-const useLang = () => {
-  const path = usePathname()
-  const [dict, setDict] = useState<any>(null)
-  useEffect(() => {
-    const loadDictionary = async () => {
-      try {
-        const dictionary = await getDictionary(path.split('/')[1] as 'en' | 'ru')
-        setDict(dictionary)
-      } finally {
-      }
-    }
-
-    loadDictionary()
-  }, [path])
-  return dict
 }

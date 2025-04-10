@@ -7,7 +7,7 @@ import { Sidebar } from '@/widgets/Sidebar/Sidebar'
 import { Scroll } from '@/shared/ui/Scroll/Scroll'
 import styles from '../[lang]/page.module.css'
 import { ClientLoader } from '@/shared/ui/ClientLoader/ClientLoader'
-import { getDictionary } from './dictionaries'
+import { getDictionary } from '../../locales/dictionaries/dictionaries'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
