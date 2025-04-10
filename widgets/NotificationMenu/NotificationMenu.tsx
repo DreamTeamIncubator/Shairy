@@ -11,6 +11,8 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import Image from 'next/image'
 import { io } from 'Socket.IO-client'
 import { formatTimeAgo } from '@/utils/utils'
+import { useTranslationData } from '@/hooks/useTranslationData'
+import { useGetNotificationsQuery } from '@/features/notifications/api'
 
 export type Notification = {
   id: string
@@ -18,21 +20,31 @@ export type Notification = {
   clientId: string
   message: string
   notifyAt: string
+  createdAt: string
 }
-// { notifications }: { notifications: Notification[] }
 export const NotificationMenu = () => {
   const [open, setOpen] = useState(false)
-
+  const [notifications, setNotifications] = useState<Notification[]>([])
+  // const [nnotifications, setNNotifications] = useState<Notification[]>([])
+  const { localPath, localeData } = useTranslationData()
   const handleOpen = () => {
     setOpen(!open)
   }
-  const [notifications, setNotifications] = useState<Notification[]>([])
-
+  const { data } = useGetNotificationsQuery({})
   useEffect(() => {
+    if (data) {
+      console.log(data)
+      setNotifications(data.items)
+    }
+  }, [data])
+  //inctagram.work/api/v1/api/v1/notifications/2469?sortBy=notifyAt&sortDirection=desc
+  https: useEffect(() => {
+    const token = localStorage.getItem('access-token')
+
     const newSocket = io('https://inctagram.work', {
       // Уберите query, используйте auth
-      auth: {
-        token: localStorage.getItem('accessToken'),
+      query: {
+        accessToken: token,
       },
       // Явно укажите версию протокола
       transports: ['websocket'],
@@ -54,6 +66,12 @@ export const NotificationMenu = () => {
 
     newSocket.on('connect_error', (err) => {
       console.error('❌ Ошибка:', {
+        message: err.message,
+      })
+    })
+
+    newSocket.on('error', (err) => {
+      console.error('❌ вторая ошибка на просто эррор:', {
         message: err.message,
       })
     })
@@ -91,20 +109,23 @@ export const NotificationMenu = () => {
         alignOffset={-12}
         className={styles.DropdownMenuContent}
         sideOffset={6}>
-        <DropdownMenu.Item>{'t.notificationMenu.notifications'}</DropdownMenu.Item>
+        <DropdownMenu.Item>{localeData?.notificationMenu.notifications}</DropdownMenu.Item>
         {notifications.map((notification) => (
           <div key={notification.id}>
             <DropdownMenu.Separator className={styles.DropdownMenuSeparator} />
             <DropdownMenu.Item className={styles.DropdownMenuItem}>
               <div>
-                <h2>{'t.notificationMenu.newNotification'}</h2>
-                {notification.isNew && (
-                  <span className={styles.NewNotification}>{'t.notificationMenu.new'}</span>
+                <h2>{localeData?.notificationMenu.notifications}</h2>
+                {notification.isRead && (
+                  <span className={styles.NewNotification}>{localeData?.notificationMenu.new}</span>
                 )}
               </div>
               <span className={styles.NotificationMessage}>{notification.message}</span>
               <div className={styles.NotificationDate}>
-                {formatTimeAgo(notification.notifyAt)} {'t.notificationMenu.ago'}
+                {notification.notifyAt
+                  ? formatTimeAgo(notification.notifyAt, localPath)
+                  : formatTimeAgo(notification.createdAt, localPath)}{' '}
+                {localeData?.notificationMenu.ago}
               </div>
             </DropdownMenu.Item>
           </div>

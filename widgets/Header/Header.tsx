@@ -9,6 +9,7 @@ import Link from 'next/link'
 import { LanguageSelect } from '@/shared/ui/Select/LanguageSelect/LanguageSelect'
 import { useGetMeQuery } from '@/features/auth/api/auth'
 import { NotificationMenu } from '../NotificationMenu/NotificationMenu'
+import { useTranslationData } from '@/hooks/useTranslationData'
 export type Notification = {
   id: string
   isNew?: boolean
@@ -20,7 +21,7 @@ export const Header = () => {
   const SignUpForm = () => {
     redirect('/auth/sign-up')
   }
-
+  const { localeData } = useTranslationData()
   return (
     <div className={s.header}>
       <div className={s.content}>
@@ -32,11 +33,11 @@ export const Header = () => {
             <div>
               <Link href="/auth/login">
                 <Button variant={'textButton'} className={s.btn}>
-                  Log in
+                  {localeData?.auth.signUpPage.signIn}
                 </Button>
               </Link>
               <Button variant={'primary'} className={s.btn} onClick={SignUpForm}>
-                Sign up
+                {localeData?.auth.signUpPage.signUp}
               </Button>
             </div>
           )}

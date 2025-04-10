@@ -16,5 +16,5 @@ export const useTranslationData = () => {
 
     loadDictionary()
   }, [path])
-  return localeData
+  return { localeData, localPath: path.split('/')[1].toString() as 'en' | 'ru' }
 }
