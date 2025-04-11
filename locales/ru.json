@@ -257,13 +257,13 @@
     "settingsButton": "Настройки Профиля",
     "statistics": {
       "followers": {
-        "label": "подписчики"
+        "label": "Подписчики"
       },
       "following": {
-        "label": "подписки"
+        "label": "Подписки"
       },
       "publications": {
-        "label": "публикации"
+        "label": "Публикации"
       }
     }
   },

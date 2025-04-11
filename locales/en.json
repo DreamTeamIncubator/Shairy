@@ -257,13 +257,13 @@
     "settingsButton": "Profile Settings",
     "statistics": {
       "followers": {
-        "label": "followers"
+        "label": "Followers"
       },
       "following": {
-        "label": "following"
+        "label": "Following"
       },
       "publications": {
-        "label": "publications"
+        "label": "Publications"
       }
     }
   },
