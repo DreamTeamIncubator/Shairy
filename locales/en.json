@@ -124,7 +124,7 @@
       "locale": "gregorian_en"
     },
     "logOutModal": {
-      "description": "Are you sure you want to log out of your account <email></email>?",
+      "description": "Are you sure you want to log out of your account ",
       "title": "Log out"
     },
     "modal": {

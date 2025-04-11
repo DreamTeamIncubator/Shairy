@@ -124,7 +124,7 @@
       "locale": "gregorian_ru"
     },
     "logOutModal": {
-      "description": "Вы действительно хотите выйти из аккаунта <email></email>?",
+      "description": "Вы действительно хотите выйти из аккаунта ",
       "title": "Выход"
     },
     "modal": {
