@@ -1,90 +1,46 @@
 import styles from './NotificationMenu.module.scss'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import OutlinedBell from '@/assets/icons/bell.svg'
 import DropdownArrow from '@/assets/icons/dropdown-arrow.svg'
 import FilledBell from '@/assets/icons/filled-bell.svg'
-// import { useTranslation } from '@/shared/hooks/useTranslation'
-// import { Typography } from '@/shared/ui/typography'
+
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import Image from 'next/image'
-import { io } from 'Socket.IO-client'
 import { formatTimeAgo } from '@/utils/utils'
 import { useTranslationData } from '@/hooks/useTranslationData'
-import { useGetNotificationsQuery } from '@/features/notifications/api'
+import {
+  useGetNotificationsQuery,
+  useMarkAsReadOnServerMutation,
+} from '@/features/notifications/notificationApi'
+import { useWebSocket } from '@/hooks/useWebSocket'
+import { NotificationsResponse } from '@/features/notifications/types'
 
-export type Notification = {
-  id: string
-  isRead?: boolean
-  clientId: string
-  message: string
-  notifyAt: string
-  createdAt: string
-}
 export const NotificationMenu = () => {
   const [open, setOpen] = useState(false)
-  const [notifications, setNotifications] = useState<Notification[]>([])
-  // const [nnotifications, setNNotifications] = useState<Notification[]>([])
+
   const { localPath, localeData } = useTranslationData()
   const handleOpen = () => {
     setOpen(!open)
   }
-  const { data } = useGetNotificationsQuery({})
-  useEffect(() => {
-    if (data) {
-      console.log(data)
-      setNotifications(data.items)
+  const { data: notificationData } = useGetNotificationsQuery({})
+
+  useWebSocket({
+    notifications: (data) => {
+      console.log('New notification:', data)
+    },
+    error: (err) => console.error('WebSocket error:', err),
+  })
+
+  const [markAsReadOnServer] = useMarkAsReadOnServerMutation<NotificationsResponse>()
+
+  const markAsRead = (id: string, isRead: boolean) => {
+    if (isRead) {
+      return
     }
-  }, [data])
-  //inctagram.work/api/v1/api/v1/notifications/2469?sortBy=notifyAt&sortDirection=desc
-  https: useEffect(() => {
-    const token = localStorage.getItem('access-token')
-
-    const newSocket = io('https://inctagram.work', {
-      // Уберите query, используйте auth
-      query: {
-        accessToken: token,
-      },
-      // Явно укажите версию протокола
-      transports: ['websocket'],
-      upgrade: false,
-      reconnectionAttempts: 5,
-      // Отключите механизм опроса (polling)
-      withCredentials: true,
-      forceNew: true,
-    })
-
-    newSocket.onAny((event, ...args) => {
-      console.log(`🔹 ${event}`, args)
-    })
-
-    // Обработчики в правильном порядке
-    newSocket.on('connect', () => {
-      console.log('✅ Соединение установлено, ID:', newSocket.id)
-    })
-
-    newSocket.on('connect_error', (err) => {
-      console.error('❌ Ошибка:', {
-        message: err.message,
-      })
-    })
-
-    newSocket.on('error', (err) => {
-      console.error('❌ вторая ошибка на просто эррор:', {
-        message: err.message,
-      })
-    })
-
-    newSocket.on('notifications', (data) => {
-      console.log('📨 Данные получены:', data)
-      setNotifications((prevNotifications) => [...prevNotifications, data])
-    })
-
-    return () => {
-      newSocket.disconnect()
-    }
-  }, [])
+    markAsReadOnServer([+id])
+  }
 
   return (
     <DropdownMenu.Root onOpenChange={handleOpen} open={open}>
@@ -96,9 +52,9 @@ export const NotificationMenu = () => {
             src={open ? FilledBell : OutlinedBell}
           />
 
-          {notifications.length ? (
+          {notificationData?.notReadCount ? (
             <span style={{ backgroundColor: 'red' }}>
-              {notifications.length < 10 ? notifications.length : '9+'}
+              {notificationData.notReadCount < 10 ? notificationData.notReadCount : '9+'}
             </span>
           ) : null}
         </button>
@@ -110,13 +66,15 @@ export const NotificationMenu = () => {
         className={styles.DropdownMenuContent}
         sideOffset={6}>
         <DropdownMenu.Item>{localeData?.notificationMenu.notifications}</DropdownMenu.Item>
-        {notifications.map((notification) => (
-          <div key={notification.id}>
+        {notificationData?.items.map((notification) => (
+          <div
+            onMouseEnter={() => markAsRead(notification?.id, notification.isRead)}
+            key={notification.id}>
             <DropdownMenu.Separator className={styles.DropdownMenuSeparator} />
             <DropdownMenu.Item className={styles.DropdownMenuItem}>
-              <div>
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <h2>{localeData?.notificationMenu.notifications}</h2>
-                {notification.isRead && (
+                {notification.isRead || (
                   <span className={styles.NewNotification}>{localeData?.notificationMenu.new}</span>
                 )}
               </div>

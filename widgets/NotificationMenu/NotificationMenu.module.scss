@@ -66,12 +66,11 @@
 }
 
 .NewNotification {
-  padding-left: 0.25rem;
-
+  padding: 0.5rem;
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-s);
-  color: var(--color-accent-500);
+  color: var(--accent-500);
 }
 
 .NotificationMessage {

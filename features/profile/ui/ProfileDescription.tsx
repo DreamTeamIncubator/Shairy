@@ -6,9 +6,11 @@ import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { useGetPublicProfileQuery } from '@/features/profile/api/publicProfile'
 import { useGetProfileQuery } from '../api/profileApi'
+import { useTranslationData } from '@/hooks/useTranslationData'
 
 const ProfileDescription = () => {
   const { id } = useParams()
+  const { localeData } = useTranslationData()
   const { data: authUser } = useGetProfileQuery()
   const { data } = useGetPublicProfileQuery(Number(id))
   if (!id) {
@@ -27,22 +29,22 @@ const ProfileDescription = () => {
 
         {owner && (
           <Link href={`/my-profile/${id}/edit-profile?tab=General-Information`}>
-            <Button variant={'secondary'}>Profile Settings</Button>
+            <Button variant={'secondary'}>{localeData?.myProfile.settingsButton}</Button>
           </Link>
         )}
       </div>
       <div className={s.followers}>
         <div className={s.followersData}>
           <span>{data?.userMetadata.following}</span>
-          <span>Following</span>
+          <span>{localeData?.myProfile.statistics.following.label}</span>
         </div>
         <div className={s.followersData}>
           <span>{data?.userMetadata.followers}</span>
-          <span>Followers</span>
+          <span>{localeData?.myProfile.statistics.followers.label}</span>
         </div>
         <div className={s.followersData}>
           <span>{data?.userMetadata.publications}</span>
-          <span>Publications</span>
+          <span>{localeData?.myProfile.statistics.publications.label}</span>
         </div>
       </div>
       {/*TODO: delete test-text after adding feature 'add post'*/}
