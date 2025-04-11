@@ -7,7 +7,7 @@ import { postAPI } from '@/features/posts/api/post'
 import { profileAPI } from '@/features/profile/api/profileApi'
 import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { subscriptionsAPI } from '@/features/edit-profile/ui/AccountManagement/api/paymentApi'
-import { notificationAPI } from '@/features/notifications/api'
+import { notificationAPI } from '@/features/notifications/notificationApi'
 
 export const store = configureStore({
   reducer: {
