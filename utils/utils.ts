@@ -101,8 +101,6 @@ export const validationForProfileSettingsForm = {
 
 // Utility functions
 export function formatTimeAgo(isoDate: string, localePath: 'en' | 'ru') {
-  console.log(localePath)
-
   const date = new Date(isoDate)
   const now = new Date()
   const diffInSeconds = Math.floor((now - date) / 1000)
