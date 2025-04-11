@@ -1,46 +1,259 @@
-import React, { useState, useRef } from 'react';
+// 'use client'
+//
+// import React, { useEffect, useState } from 'react';
+// import ImageCropper from './ImageCropper';
+// import s from './ImagesCropper.module.scss';
+// import arrow from '../../../../public/icons/arrow.svg';
+// import Image from 'next/image';
+// import Rectangle18x26Icon from '@/shared/ui/Icons/Rectangle18x26Icon';
+// import Rectangle18x18Icon from '@/shared/ui/Icons/Rectangle18x18Icon';
+// import Rectangle20x26Icon from '@/shared/ui/Icons/Rectangle20x26Icon';
+// import ImagePreviewIcon from '@/shared/ui/Icons/ImagePreviewIcon';
+// import ExpandIcon from '@/shared/ui/Icons/ExpandIcon';
+//
+// type Props = {
+//     images: string[];
+//     onCropComplete: (croppedImage: string, index: number) => void;
+// };
+//
+// type AspectType = 'original' | number;
+//
+// const ImagesCropper = ({ images, onCropComplete }: Props) => {
+//     const [activeIndex, setActiveIndex] = useState(0);
+//     const [selectedAspect, setSelectedAspect] = useState<Record<number, AspectType>>({});
+//     const [croppedImages, setCroppedImages] = useState<Record<number, string>>({});
+//     const [showThumbnails, setShowThumbnails] = useState(false);
+//     const [showAspectOptions, setShowAspectOptions] = useState(false);
+//
+//     useEffect(() => {
+//         if (croppedImages[activeIndex]) {
+//             onCropComplete(croppedImages[activeIndex], activeIndex);
+//         }
+//     }, [activeIndex, croppedImages]);
+//
+//     const handleAspectChange = (aspect: AspectType) => {
+//         setSelectedAspect(prev => ({
+//             ...prev,
+//             [activeIndex]: aspect
+//         }));
+//         setShowAspectOptions(false);
+//     };
+//
+//     const handleCropComplete = (croppedImage: string) => {
+//         setCroppedImages(prev => ({
+//             ...prev,
+//             [activeIndex]: croppedImage
+//         }));
+//     };
+//
+//     const hasMultipleImages = images.length > 1;
+//
+//     return (
+//         <div className={s.imagesCropper}>
+//             <button
+//                 onClick={() => setShowAspectOptions(!showAspectOptions)}
+//                 className={s.toggleAspectButton}
+//             >
+//                 <ExpandIcon isActive={showAspectOptions} />
+//             </button>
+//
+//             {showAspectOptions && (
+//                 <div className={s.aspectRatioBtns}>
+//                     <div
+//                         onClick={() => handleAspectChange('original')}
+//                         className={`${s.aspectRatioContainer} ${selectedAspect[activeIndex] === 'original' ? s.active : ''}`}
+//                     >
+//                         <span>Оригинал</span>
+//                         <ImagePreviewIcon />
+//                     </div>
+//                     <div
+//                         onClick={() => handleAspectChange(1)}
+//                         className={`${s.aspectRatioContainer} ${selectedAspect[activeIndex] === 1 ? s.active : ''}`}
+//                     >
+//                         <span>1:1</span>
+//                         <Rectangle18x18Icon isActive={selectedAspect[activeIndex] === 1} />
+//                     </div>
+//                     <div
+//                         onClick={() => handleAspectChange(4 / 5)}
+//                         className={`${s.aspectRatioContainer} ${selectedAspect[activeIndex] === 4 / 5 ? s.active : ''}`}
+//                     >
+//                         <span>5:4</span>
+//                         <Rectangle18x26Icon isActive={selectedAspect[activeIndex] === 4 / 5} />
+//                     </div>
+//                     <div
+//                         onClick={() => handleAspectChange(16 / 9)}
+//                         className={`${s.aspectRatioContainer} ${selectedAspect[activeIndex] === 16 / 9 ? s.active : ''}`}
+//                     >
+//                         <span>16:9</span>
+//                         <Rectangle20x26Icon isActive={selectedAspect[activeIndex] === 16 / 9} />
+//                     </div>
+//                 </div>
+//             )}
+//
+//             <ImageCropper
+//                 image={images[activeIndex]}
+//                 onCropComplete={handleCropComplete}
+//                 aspect={selectedAspect[activeIndex] === 'original' ? undefined : selectedAspect[activeIndex]}
+//             />
+//
+//             {hasMultipleImages && (
+//                 <div className={s.navigationButtons}>
+//                     <button
+//                         onClick={() => setActiveIndex((prev) => Math.max(prev - 1, 0))}
+//                         className={s.prevBtn}
+//                     >
+//                         <Image src={arrow} alt="Previous" />
+//                     </button>
+//                     <button
+//                         onClick={() => setActiveIndex((prev) => Math.min(prev + 1, images.length - 1))}
+//                         className={s.nextBtn}
+//                     >
+//                         <Image src={arrow} alt="Next" />
+//                     </button>
+//                 </div>
+//             )}
+//
+//             <button
+//                 onClick={() => setShowThumbnails(!showThumbnails)}
+//                 className={`${s.toggleThumbnailsBtn} ${showThumbnails ? s.active : ''}`}
+//             >
+//                 <ImagePreviewIcon />
+//             </button>
+//
+//             {showThumbnails && (
+//                 <div className={s.thumbnailGallery}>
+//                     {images.map((img, index) => (
+//                         <div
+//                             key={index}
+//                             className={`${s.thumbnailWrapper} ${activeIndex === index ? s.active : ''}`}
+//                             onClick={() => setActiveIndex(index)}
+//                         >
+//                             <img
+//                                 src={img}
+//                                 alt={`Thumbnail ${index}`}
+//                                 className={s.thumbnail}
+//                             />
+//                         </div>
+//                     ))}
+//                 </div>
+//             )}
+//         </div>
+//     );
+// };
+//
+// export default ImagesCropper;
+
+
+// // GPT вариант с ошибками
+'use client'
+import React, { useState, useCallback, useEffect } from 'react';
 import ImageCropper from './ImageCropper';
 import s from './ImagesCropper.module.scss';
-import Image from 'next/image';
 import arrow from '../../../../public/icons/arrow.svg';
+import Image from 'next/image';
+import Rectangle18x26Icon from '@/shared/ui/Icons/Rectangle18x26Icon';
+import Rectangle18x18Icon from '@/shared/ui/Icons/Rectangle18x18Icon';
+import Rectangle20x26Icon from '@/shared/ui/Icons/Rectangle20x26Icon';
+import ImagePreviewIcon from '@/shared/ui/Icons/ImagePreviewIcon';
+import ExpandIcon from '@/shared/ui/Icons/ExpandIcon';
 
 type Props = {
     images: string[];
     onCropComplete: (croppedImage: string, index: number) => void;
 };
 
+type AspectType = 'original' | number;
+
 const ImagesCropper = ({ images, onCropComplete }: Props) => {
     const [activeIndex, setActiveIndex] = useState(0);
-    const [crops, setCrops] = useState<{ unit: '%' | 'px'; width: number; height: number; x: number; y: number }[]>(
-        images.map(() => ({ unit: '%', width: 50, height: 50, x: 25, y: 25 }))
+    const [selectedAspects, setSelectedAspects] = useState<Record<number, AspectType>>(
+        () => images.reduce((acc, _, index) => ({ ...acc, [index]: 'original' }), {})
     );
+    const [showThumbnails, setShowThumbnails] = useState(false);
+    const [showAspectOptions, setShowAspectOptions] = useState(false);
+    const [lastProcessedAspect, setLastProcessedAspect] = useState<Record<number, AspectType>>({});
 
-    const handleCropChange = (newCrop: any) => {
-        setCrops((prevCrops) => {
-            const newCrops = [...prevCrops];
-            newCrops[activeIndex] = newCrop;
-            return newCrops;
-        });
-    };
+    // При изменении активного индекса сбрасываем состояние обработки
+    useEffect(() => {
+        setLastProcessedAspect(prev => ({ ...prev, [activeIndex]: selectedAspects[activeIndex] }));
+    }, [activeIndex, selectedAspects]);
 
-    const handleCropCompleteLocal = (croppedImage: string) => {
-        onCropComplete(croppedImage, activeIndex);
-    };
+    const handleAspectChange = useCallback((aspect: AspectType) => {
+        setSelectedAspects(prev => ({ ...prev, [activeIndex]: aspect }));
+        setShowAspectOptions(false);
 
-    // Проверяем, есть ли больше одной фотографии
+        // Если выбран "original", сразу передаем оригинальное изображение
+        if (aspect === 'original') {
+            onCropComplete(images[activeIndex], activeIndex);
+            setLastProcessedAspect(prev => ({ ...prev, [activeIndex]: 'original' }));
+        }
+    }, [activeIndex, images, onCropComplete]);
+
+    const handleCropComplete = useCallback((croppedImage: string) => {
+        // Передаем результат только если аспект не 'original' И он изменился
+        if (selectedAspects[activeIndex] !== 'original' &&
+            lastProcessedAspect[activeIndex] !== selectedAspects[activeIndex]) {
+            onCropComplete(croppedImage, activeIndex);
+            setLastProcessedAspect(prev => ({ ...prev, [activeIndex]: selectedAspects[activeIndex] }));
+        }
+    }, [activeIndex, selectedAspects, lastProcessedAspect, onCropComplete]);
+
+    const currentAspect = selectedAspects[activeIndex];
     const hasMultipleImages = images.length > 1;
 
     return (
         <div className={s.imagesCropper}>
-            {/* Активное изображение с рамкой обрезки */}
+
+            {/* кнопка отображения вариантов обрезки */}
+            <button
+                onClick={() => setShowAspectOptions(!showAspectOptions)}
+                className={s.toggleAspectButton}
+            >
+                <ExpandIcon isActive={showAspectOptions} />
+            </button>
+
+            {/* варианты обрезки фоток */}
+            {showAspectOptions && (
+                <div className={s.aspectRatioBtns}>
+                    <div
+                        onClick={() => handleAspectChange('original')}
+                        className={`${s.aspectRatioContainer} ${currentAspect === 'original' ? s.active : ''}`}
+                    >
+                        <span>Оригинал</span>
+                        <ImagePreviewIcon />
+                    </div>
+                    <div
+                        onClick={() => handleAspectChange(1)}
+                        className={`${s.aspectRatioContainer} ${currentAspect === 1 ? s.active : ''}`}
+                    >
+                        <span>1:1</span>
+                        <Rectangle18x18Icon isActive={currentAspect === 1} />
+                    </div>
+                    <div
+                        onClick={() => handleAspectChange(4 / 5)}
+                        className={`${s.aspectRatioContainer} ${currentAspect === 4 / 5 ? s.active : ''}`}
+                    >
+                        <span>5:4</span>
+                        <Rectangle18x26Icon isActive={currentAspect === 4 / 5} />
+                    </div>
+                    <div
+                        onClick={() => handleAspectChange(16 / 9)}
+                        className={`${s.aspectRatioContainer} ${currentAspect === 16 / 9 ? s.active : ''}`}
+                    >
+                        <span>16:9</span>
+                        <Rectangle20x26Icon isActive={currentAspect === 16 / 9} />
+                    </div>
+                </div>
+            )}
+
             <ImageCropper
+                key={`${activeIndex}-${currentAspect}`}
                 image={images[activeIndex]}
-                crop={crops[activeIndex]}
-                onCropChange={handleCropChange}
-                onCropComplete={handleCropCompleteLocal}
+                aspect={currentAspect === 'original' ? undefined : currentAspect}
+                onCropComplete={handleCropComplete}
             />
 
-            {/* Кнопки навигации (отображаются только если фотографий больше одной) */}
+            {/* кнопки перелистывания фоток */}
             {hasMultipleImages && (
                 <div className={s.navigationButtons}>
                     <button
@@ -55,6 +268,29 @@ const ImagesCropper = ({ images, onCropComplete }: Props) => {
                     >
                         <Image src={arrow} alt="Next" />
                     </button>
+                </div>
+            )}
+
+            {/* кнопка отображения миниатюр */}
+            <button
+                onClick={() => setShowThumbnails(!showThumbnails)}
+                className={`${s.toggleThumbnailsBtn} ${showThumbnails ? s.active : ''}`}
+            >
+                <ImagePreviewIcon />
+            </button>
+
+            {/* миниатюры */}
+            {showThumbnails && (
+                <div className={s.thumbnailGallery}>
+                    {images.map((img, index) => (
+                        <div
+                            key={index}
+                            className={`${s.thumbnailWrapper} ${activeIndex === index ? s.active : ''}`}
+                            onClick={() => setActiveIndex(index)}
+                        >
+                            <img src={img} alt={`Thumbnail ${index}`} className={s.thumbnail} />
+                        </div>
+                    ))}
                 </div>
             )}
         </div>

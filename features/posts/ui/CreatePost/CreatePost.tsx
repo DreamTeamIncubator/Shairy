@@ -8,6 +8,7 @@ import {postAPI, useCreatePostMutation, useUploadImageMutation} from '@/features
 import {useGetMeQuery} from '@/features/auth/api/auth';
 import {useAppDispatch} from '@/store/store';
 import {ResponseAllPosts} from '@/features/posts/api/post.types';
+import s from './CreatePost.module.scss';
 
 type Props = {
     onClose: () => void
@@ -112,7 +113,7 @@ const CreatePost = ({ onClose, currentStep, onStepChange, endCursorPostId }: Pro
     const imageUrls = images.map((img) => URL.createObjectURL(img));
 
     return (
-        <div>
+        <div className={s.createPostWrapper}>
             {currentStep === 1 && (
                 <div>
                     <ImageUploader
@@ -123,7 +124,7 @@ const CreatePost = ({ onClose, currentStep, onStepChange, endCursorPostId }: Pro
             )}
 
             {currentStep === 2 && (
-                <div>
+                <div className={s.cropperWrapper}>
                     {images.length > 0 && (
                         <ImagesCropper
                             images={imageUrls}
@@ -143,7 +144,7 @@ const CreatePost = ({ onClose, currentStep, onStepChange, endCursorPostId }: Pro
             )}
 
             {currentStep === 4 && (
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', maxWidth: '972px' }}>
+                <div className={s.publishWrapper}>
                     <ImagePreview
                         images={filteredImages}
                         activeIndex={activeIndex}

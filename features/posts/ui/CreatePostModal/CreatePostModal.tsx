@@ -7,6 +7,7 @@ import s from './CreatePostModal.module.scss';
 import { Button } from '@/shared/ui/Button/Button';
 import CrossIcon from '../../../../public/icons/Vector.svg';
 import Image from 'next/image';
+import arrow from '@/public/icons/arrow.svg';
 
 type CreatePostModalProps = {
     open: boolean;
@@ -81,7 +82,7 @@ export const CreatePostModal = ({
                             <div className={s.navigationButtons}>
                                 {currentStep > 1 && (
                                     <Button variant={'textButton'} className={s.prevButton} onClick={onPrev}>
-                                        Prev
+                                        <Image src={arrow} alt="Previous" />
                                     </Button>
                                 )}
                                 {currentStep >= 2 && currentStep < 4 && (

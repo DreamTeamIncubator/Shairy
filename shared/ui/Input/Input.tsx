@@ -20,6 +20,8 @@ export const Input = ({
   showIcon = false,
   disabled,
   onIconClick,
+  value,
+  onChange,
   ...rest
 }: Props) => {
   const Icon = variant === 'search' ? SearchIcon : showIcon ? EyeIcon : null

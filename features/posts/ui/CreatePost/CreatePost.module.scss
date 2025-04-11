@@ -1,3 +1,9 @@
+.createPostWrapper {
+    width: 100%;
+    height: inherit;
+    min-height: inherit;
+}
+
 .publishButton {
     position: absolute;
     top: 16px;
@@ -8,4 +14,16 @@
     padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.cropperWrapper {
+    height: inherit;;
+    min-height: inherit;
+}
+
+.publishWrapper {
+    width: 972px;
+    height: inherit;
+    min-height: inherit;
+    display: flex;
 }
