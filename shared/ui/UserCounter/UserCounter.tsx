@@ -1,6 +1,6 @@
 'use client'
-import { useTranslationData } from '@/hooks/useTranslationData'
 import s from './UserCounter.module.scss'
+import { useTranslation } from '@/locales/provider'
 
 type Props = {
   users: number
@@ -10,10 +10,11 @@ const makeTotalUserArray = (users: number) => {
   return ('00' + users).split('')
 }
 export const UserCounter = ({ users }: Props) => {
-  const { localeData } = useTranslationData()
+  const t = useTranslation().publicPage
+
   return (
     <div className={s.usersInfo}>
-      <p>{localeData?.publicPage.registeredUsers}:</p>
+      <p>{t.registeredUsers}:</p>
       <div className={s.userCounterBlock}>
         {makeTotalUserArray(users).map((item, index) => (
           <div className={s.countItem} key={index}>

@@ -6,9 +6,11 @@ import Link from 'next/link'
 import { formatTimeAgo } from '@/utils/utils'
 import { Items } from '@/features/posts/api/post.types'
 import styles from './PublicPostForUnregisteredUser.module.scss'
-import { useTranslationData } from '@/hooks/useTranslationData'
+import { useParams } from 'next/navigation'
+import { useTranslation } from '@/locales/provider'
 export const PublicPostForUnregisteredUser = ({ postItem }: { postItem: Items }) => {
-  const { localeData, localPath } = useTranslationData()
+  const { lang: localPath } = useParams<{ lang: string }>()
+  const t = useTranslation().notificationMenu
 
   return (
     <div className={styles.postBlock} key={postItem.id}>
@@ -36,7 +38,7 @@ export const PublicPostForUnregisteredUser = ({ postItem }: { postItem: Items })
         <p key={postItem.id}>{postItem.userName}</p>
       </div>
       <p className={styles.timeAgo}>
-        {formatTimeAgo(postItem.createdAt, localPath)} {localeData?.notificationMenu.ago}
+        {formatTimeAgo(postItem.createdAt, localPath as 'en' | 'ru')} {t.ago}
       </p>
 
       <PostDescription description={postItem.description} />

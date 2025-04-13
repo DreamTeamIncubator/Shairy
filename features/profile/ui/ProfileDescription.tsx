@@ -1,4 +1,3 @@
-import React from 'react'
 import s from '@/app/[lang]/my-profile/[id]/myProfile.module.scss'
 import { Button } from '@/shared/ui/Button/Button'
 import noAvatar from '@/public/no-avatar.svg'
@@ -6,11 +5,11 @@ import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { useGetPublicProfileQuery } from '@/features/profile/api/publicProfile'
 import { useGetProfileQuery } from '../api/profileApi'
-import { useTranslationData } from '@/hooks/useTranslationData'
+import { useTranslation } from '@/locales/provider'
 
 const ProfileDescription = () => {
   const { id } = useParams()
-  const { localeData } = useTranslationData()
+  const t = useTranslation().myProfile
   const { data: authUser } = useGetProfileQuery()
   const { data } = useGetPublicProfileQuery(Number(id))
   if (!id) {
@@ -29,22 +28,22 @@ const ProfileDescription = () => {
 
         {owner && (
           <Link href={`/my-profile/${id}/edit-profile?tab=General-Information`}>
-            <Button variant={'secondary'}>{localeData?.myProfile.settingsButton}</Button>
+            <Button variant={'secondary'}>{t.settingsButton}</Button>
           </Link>
         )}
       </div>
       <div className={s.followers}>
         <div className={s.followersData}>
           <span>{data?.userMetadata.following}</span>
-          <span>{localeData?.myProfile.statistics.following.label}</span>
+          <span>{t.statistics.following.label}</span>
         </div>
         <div className={s.followersData}>
           <span>{data?.userMetadata.followers}</span>
-          <span>{localeData?.myProfile.statistics.followers.label}</span>
+          <span>{t.statistics.followers.label}</span>
         </div>
         <div className={s.followersData}>
           <span>{data?.userMetadata.publications}</span>
-          <span>{localeData?.myProfile.statistics.publications.label}</span>
+          <span>{t.statistics.publications.label}</span>
         </div>
       </div>
       {/*TODO: delete test-text after adding feature 'add post'*/}

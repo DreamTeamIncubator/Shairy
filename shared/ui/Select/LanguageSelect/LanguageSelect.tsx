@@ -19,7 +19,9 @@ export const LanguageSelect = () => {
 
   const handleValueChange = (locale: string) => {
     setSelectedLanguage(locale)
-    const newPath = path.replace(/^\/(en|ru)/, locale)
+    const newPath = path.replace(/^\/(en|ru)/, `/${locale}`)
+
+    console.log('languageSelect onValueChange', { path, newPath })
 
     // A cookie is recorded if the user has manually selected the language via select.
     // It has the highest priority for automatic redirects if there is no locale segment in the request URL

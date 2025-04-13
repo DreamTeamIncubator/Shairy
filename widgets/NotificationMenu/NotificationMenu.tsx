@@ -9,18 +9,21 @@ import FilledBell from '@/assets/icons/filled-bell.svg'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu'
 import Image from 'next/image'
 import { formatTimeAgo } from '@/utils/utils'
-import { useTranslationData } from '@/hooks/useTranslationData'
 import {
   useGetNotificationsQuery,
   useMarkAsReadOnServerMutation,
 } from '@/features/notifications/notificationApi'
 import { useWebSocket } from '@/hooks/useWebSocket'
 import { NotificationsResponse } from '@/features/notifications/types'
+import { useTranslation } from '@/locales/provider'
+import { useParams } from 'next/navigation'
 
 export const NotificationMenu = () => {
   const [open, setOpen] = useState(false)
 
-  const { localPath, localeData } = useTranslationData()
+  const { lang: localPath } = useParams<{ lang: 'en' | 'ru' }>()
+  const t = useTranslation().notificationMenu
+
   const handleOpen = () => {
     setOpen(!open)
   }
@@ -65,7 +68,7 @@ export const NotificationMenu = () => {
         alignOffset={-12}
         className={styles.DropdownMenuContent}
         sideOffset={6}>
-        <DropdownMenu.Item>{localeData?.notificationMenu.notifications}</DropdownMenu.Item>
+        <DropdownMenu.Item>{t.notifications}</DropdownMenu.Item>
         {notificationData?.items.map((notification) => (
           <div
             onMouseEnter={() => markAsRead(notification?.id, notification.isRead)}
@@ -73,17 +76,15 @@ export const NotificationMenu = () => {
             <DropdownMenu.Separator className={styles.DropdownMenuSeparator} />
             <DropdownMenu.Item className={styles.DropdownMenuItem}>
               <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <h2>{localeData?.notificationMenu.notifications}</h2>
-                {notification.isRead || (
-                  <span className={styles.NewNotification}>{localeData?.notificationMenu.new}</span>
-                )}
+                <h2>{t.notifications}</h2>
+                {notification.isRead || <span className={styles.NewNotification}>{t.new}</span>}
               </div>
               <span className={styles.NotificationMessage}>{notification.message}</span>
               <div className={styles.NotificationDate}>
                 {notification.notifyAt
                   ? formatTimeAgo(notification.notifyAt, localPath)
                   : formatTimeAgo(notification.createdAt, localPath)}{' '}
-                {localeData?.notificationMenu.ago}
+                {t.ago}
               </div>
             </DropdownMenu.Item>
           </div>
