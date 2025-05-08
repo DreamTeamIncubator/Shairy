@@ -38,9 +38,9 @@ export const PublicPost = ({ post, comments }: PostProps) => {
               }}
               pagination={{
                 clickable: true,
-                el: `.${s.pagination}`, // Указываем кастомный элемент
-                bulletClass: `${s.bullet}`, // Класс для точек
-                bulletActiveClass: `${s.bulletActive}`, // Класс для активной точки
+                el: `.${s.pagination}`,
+                bulletClass: `${s.bullet}`,
+                bulletActiveClass: `${s.bulletActive}`,
               }}
               spaceBetween={20}
               slidesPerView={1}
