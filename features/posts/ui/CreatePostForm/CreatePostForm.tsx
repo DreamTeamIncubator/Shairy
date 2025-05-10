@@ -1,23 +1,21 @@
-import { useForm } from 'react-hook-form';
-import { Button } from '@/shared/ui/Button/Button';
+import {useForm} from 'react-hook-form';
 import s from './CreatePostForm.module.scss';
 import Image from 'next/image';
 import image from '@/public/icons/image.svg';
 
 type Props = {
-    uploadedPhotos: { id: string; url: string }[];
-    onClose: () => void;
+    uploadedPhotos?: { id: string; url: string }[];
     onPublish: () => void;
     description: string;
     setDescription: (description: string) => void;
 };
 
-const DescriptionForm = ({ uploadedPhotos, onClose, onPublish, description, setDescription }: Props) => {
+const DescriptionForm = ({ onPublish, description, setDescription }: Props) => {
     const { register, handleSubmit, formState: { errors } } = useForm<{ description: string }>();
 
     const onSubmit = (data: { description: string }) => {
-        setDescription(data.description); // Обновляем описание
-        onPublish(); // Вызываем публикацию
+        setDescription(data.description);
+        onPublish();
     };
 
     return (
@@ -41,9 +39,6 @@ const DescriptionForm = ({ uploadedPhotos, onClose, onPublish, description, setD
                         {errors.description && <span style={{ color: 'red' }}>{errors.description.message}</span>}
                     </div>
                 </div>
-                <Button className={s.submitBtn} variant={'textButton'} type="submit">
-                    Опубликовать
-                </Button>
             </form>
         </div>
     );

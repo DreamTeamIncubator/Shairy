@@ -20,6 +20,8 @@ export const Input = ({
   showIcon = false,
   disabled,
   onIconClick,
+  value,
+  onChange,
   ...rest
 }: Props) => {
   const Icon = variant === 'search' ? SearchIcon : showIcon ? EyeIcon : null
@@ -33,6 +35,8 @@ export const Input = ({
       <input
         className={classNames.input}
         placeholder={variant === 'search' ? 'Input search' : ''}
+        value={value}
+        onChange={onChange}
         {...rest}
         disabled={disabled}
       />
