@@ -10,10 +10,9 @@ type Props = {
 const PhotoFilters = ({ images, onFilteredImages }: Props) => {
     const [selectedFilters, setSelectedFilters] = useState<string[]>(new Array(images.length).fill('none'));
     const [activeIndex, setActiveIndex] = useState<number>(0);
-    const [isProcessing, setIsProcessing] = useState<boolean>(false); // Новое состояние
+    const [isProcessing, setIsProcessing] = useState<boolean>(false);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
-    // Объединяем фильтры и их названия в один массив объектов
     const filterOptions = [
         { name: 'Black & White', filter: 'grayscale(100%)' },
         { name: 'Sepia', filter: 'sepia(100%)' },
@@ -73,7 +72,6 @@ const PhotoFilters = ({ images, onFilteredImages }: Props) => {
         newFilters[activeIndex] = filter;
         setSelectedFilters(newFilters);
 
-        // Обновляем все изображения с учетом новых фильтров
         await updateFilteredImages();
     };
 
@@ -95,7 +93,6 @@ const PhotoFilters = ({ images, onFilteredImages }: Props) => {
 
     return (
         <div className={s.wrapper}>
-            {/* Основное изображение */}
             <ImagePreview
                 images={images}
                 selectedFilter={selectedFilters[activeIndex]}
@@ -103,7 +100,6 @@ const PhotoFilters = ({ images, onFilteredImages }: Props) => {
                 onSlideChange={handleSlideChange}
             />
 
-            {/* Список фильтров */}
             <div className={s.filtersContainer}>
                 {filterOptions.map(({ name, filter }, index) => (
                     <div
@@ -120,7 +116,6 @@ const PhotoFilters = ({ images, onFilteredImages }: Props) => {
                                 filter: filter,
                             }}
                         />
-                        {/* Подпись для фильтра */}
                         <span className={s.filterName}>{name}</span>
                     </div>
                 ))}

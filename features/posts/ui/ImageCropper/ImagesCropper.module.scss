@@ -1,76 +1,58 @@
 .imagesCropper {
-  max-width: 492px;
-  height: inherit;
+  width: 492px;
+  height: 100%;
   min-height: inherit;
   display: block;
-
-  .reactCrop {
-    width: 100%;
-    min-height: 100%;
-    height: 100%;
-    display: block;
-
-    & img {
-      width: 100%;
-      //height: 100%;
-      object-fit: cover;
-    }
   }
 
-  .prevBtn, .nextBtn {
-    position: absolute;
-    top: 50%;
-    width: 36px;
-    height: 36px;
-    background-color: var(--dark-500);
-    opacity: 0.8;
-    border: none;
-    cursor: pointer;
-  }
-
-  .prevBtn {
-    left: 12px;
-  }
-
-  .nextBtn {
-    right: 12px;
-    transform: rotate(180deg);
-  }
+.prevBtn, .nextBtn {
+  position: absolute;
+  top: 50%;
+  width: 36px;
+  height: 36px;
+  background-color: var(--dark-500);
+  opacity: 0.8;
+  border: none;
+  cursor: pointer;
 }
+
+.prevBtn {
+  left: 12px;
+}
+
+.nextBtn {
+  right: 12px;
+  transform: rotate(180deg);
+  }
+
 
 .imageCropWrapper {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  //height: inherit;
+  height: 100%;
   min-height: inherit;
+  overflow: hidden;
 
-  //position: relative;  /* Делаем контейнер относительно позиционированным */
-  width: 100%;  /* Убедитесь, что контейнер имеет нужную ширину */
-  height: 100%;  /* Убедитесь, что контейнер имеет нужную высоту */
-  overflow: hidden;  /* Это обрежет все, что выходит за пределы контейнера */
+  & img {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100%;
+  }
 }
 
 .croppedImage {
-  position: absolute; /* Позволяет позиционировать изображение относительно родителя */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Центрирует изображение */
-  object-fit: contain;  /* Изображение сохраняет пропорции и не выходит за пределы контейнера */
-  max-width: 100%;  /* Ограничиваем максимальную ширину */
-  max-height: 100%;  /* Ограничиваем максимальную высоту */
-  //z-index: 10000;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
 }
 
 .imageCropWrapper .reactCrop {
   min-height: inherit;
   margin: 0 auto;
   background-color: var(--dark-300);
-
-  //& img {
-  //  margin: auto;
-  //}
 }
 
 .imageCropWrapper :global(.ReactCrop__child-wrapper) {
@@ -147,7 +129,7 @@
   color: var(--light-900);
 
   &:hover {
-    color: var(--light-700); // светло-серый фон при наведении
+    color: var(--light-700);
   }
 
   &.active {

@@ -1,46 +1,44 @@
-/* Фон основной модалки */
 .overlay {
   position: fixed;
-  inset: 0; /* Занимает всю ширину и высоту экрана */
+  inset: 0;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 100;
 }
 
-/* Основной контейнер основной модалки */
 .content {
   background-color: var(--dark-300);
   border-radius: 2px;
   min-width: 492px;
-  min-height: 546px;
+  min-height: 550px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 10000;
+  z-index: 1000;
   font-family: Inter, Helvetica, sans-serif;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  /* Центрирование через transform */
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-/* Шапка основной модалки */
 .header {
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
+  padding: 12px 24px;
 }
 
 .title {
   font-size: 20px;
+  line-height: 36px;
   font-weight: bold;
   margin: 0 auto;
+  text-transform: capitalize;
 }
 
 .closeButton {
@@ -50,7 +48,8 @@
   outline: none;
   cursor: pointer;
   position: absolute;
-  right: 16px;
+  right: 0;
+  top: 12px;
 }
 
 .navigationButtons {
@@ -61,16 +60,31 @@
   display: flex;
   justify-content: space-between;
   transform: translateY(-50%);
+
+  & .prevButton,
+  & .nextButton, {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover,
+    &:active {
+      color: var(--accent-500);
+    }
+  }
 }
 
-.prevButton, .nextButton {
+.actions .publishButton {
+  position: relative;
   font-size: 16px;
   line-height: 24px;
   font-weight: 600;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
+  z-index: 100;
   cursor: pointer;
 }
 
@@ -83,39 +97,21 @@
   border-top: 1px solid var(--dark-100);
 }
 
-.children {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  min-height: 490px;
-  max-height: 490px;
-  box-sizing: border-box;
-  margin: auto;
-  overflow: hidden;
-
-  img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-}
-
 /* Стили для модалки с подтверждением */
 .confirmOverlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.7); /* Более темный фон для выделения */
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10001; /* Убедимся, что модалка с подтверждением поверх основной */
+  z-index: 10001;
 }
 
 .confirmContent {
   background-color: var(--dark-300);
   border-radius: 2px;
-  width: 378px; /* Уменьшенная ширина для модалки с подтверждением */
+  width: 378px;
   padding: 12px 24px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 10002;
@@ -136,14 +132,12 @@
   justify-content: space-between;
 }
 
-/* Заголовок модалки с подтверждением */
 .confirmTitle {
   font-size: 20px;
   line-height: 36px;
   font-weight: 700;
 }
 
-/* Описание модалки с подтверждением */
 .confirmDescription {
   font-size: 16px;
   line-height: 24px;
@@ -152,7 +146,6 @@
   margin: 30px 0 20px;
 }
 
-/* Кнопки модалки с подтверждением */
 .confirmButtons {
   font-size: 16px;
   line-height: 24px;

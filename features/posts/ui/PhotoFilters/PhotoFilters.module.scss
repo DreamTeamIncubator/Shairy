@@ -3,6 +3,8 @@
     width: 972px;
     display: grid;
     grid-template-columns: 490px 300px;
+    height: inherit;
+    min-height: inherit;
 }
 
 .preview {

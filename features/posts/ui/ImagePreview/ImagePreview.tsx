@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import s from './ImagePreview.module.scss';
 import arrow from '@/public/icons/arrow.svg';
-import image from '@/public/icons/image.svg';
 import Image from 'next/image';
 import clsx from 'clsx';
 
@@ -14,7 +13,6 @@ type Props = {
 
 const ImagePreview = ({images, activeIndex, onSlideChange, selectedFilter}: Props) => {
     const [currentIndex, setCurrentIndex] = useState(activeIndex);
-    const [showThumbnails, setShowThumbnails] = useState(false); // Состояние для управления видимостью миниатюр
 
     // Обработчик изменения слайда
     const handleSlideChange = (index: number) => {
@@ -34,28 +32,20 @@ const ImagePreview = ({images, activeIndex, onSlideChange, selectedFilter}: Prop
         handleSlideChange(newIndex);
     };
 
-    // Переключение видимости миниатюр
-    const toggleThumbnails = () => {
-        setShowThumbnails((prev) => !prev);
-    };
-
     const hasMultipleImages = images.length > 1;
 
     return (
         <div className={s.previewWrapper}>
-            {/* Основное изображение */}
             <div className={s.mainImageContainer}>
                 <img
                     src={images[currentIndex]}
                     alt={`Preview ${currentIndex}`}
                     width={490}
-                    height={490}
                     style={{
                         filter: selectedFilter,
                     }}
                 />
             </div>
-
 
             {hasMultipleImages &&
                 (<div className={s.navigationButtons}>
@@ -80,35 +70,6 @@ const ImagePreview = ({images, activeIndex, onSlideChange, selectedFilter}: Prop
                     ))}
                 </div>)
             }
-
-
-            {/*/!* Кнопка "Показать миниатюры" *!/*/}
-            {/*<div className={s.thumbnailToggle} onClick={toggleThumbnails}>*/}
-            {/*    <Image src={image} alt="imagePreview" />*/}
-            {/*</div>*/}
-
-            {/*/!* Миниатюры для переключения *!/*/}
-            {/*{showThumbnails && (*/}
-            {/*    <div className={s.thumbnailsContainer}>*/}
-            {/*        {images.map((image, index) => (*/}
-            {/*            <div*/}
-            {/*                key={index}*/}
-            {/*                className={`${s.thumbnail} ${currentIndex === index ? s.active : ''}`}*/}
-            {/*                onClick={() => handleSlideChange(index)}*/}
-            {/*            >*/}
-            {/*                <Image*/}
-            {/*                    src={image}*/}
-            {/*                    alt={`Thumbnail ${index}`}*/}
-            {/*                    width={80}*/}
-            {/*                    height={82}*/}
-            {/*                    style={{*/}
-            {/*                        filter: selectedFilter,*/}
-            {/*                    }}*/}
-            {/*                />*/}
-            {/*            </div>*/}
-            {/*        ))}*/}
-            {/*    </div>*/}
-            {/*)}*/}
         </div>
     );
 };

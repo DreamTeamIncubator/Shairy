@@ -22,7 +22,7 @@ export const paths = {
 export const patternsForSignUpForm = {
   username: /^[a-zA-Z0-9_]+$/,
   email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-  password: /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!\"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]).*$/,
+  password: /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]).*$/,
 }
 
 export const patternsForProfileSettingsForm = {
@@ -103,7 +103,7 @@ export const validationForProfileSettingsForm = {
 export function formatTimeAgo(isoDate: string) {
   const date = new Date(isoDate)
   const now = new Date()
-  const diffInSeconds = Math.floor((now - date) / 1000)
+  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000)
 
   if (diffInSeconds < 60) {
     return `${diffInSeconds} sec ago`

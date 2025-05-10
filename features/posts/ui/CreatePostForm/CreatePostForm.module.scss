@@ -10,6 +10,11 @@
   column-gap: 12px;
   align-items: center;
   margin-bottom: 24px;
+
+  & img {
+    width: 36px;
+    height: 36px;
+  }
 }
 
 .submitBtn {
@@ -21,7 +26,6 @@
 .descriptionContainer {
   display: flex;
   flex-direction: column;
-  //width: 100%;
 }
 
 .description, .descriptionInfo {
@@ -37,6 +41,7 @@
   border: 1px solid var(--dark-100);
   border-radius: 2px;
   min-height: 120px;
+  padding: 6px 12px;
 }
 
 .descriptionInfo {

@@ -1,27 +1,30 @@
 import Link from 'next/link'
 
 import s from './SidebarItem.module.scss'
-import { formatPath, formatPathForURL } from '@/shared/lib/formatPath'
+import { usePathname } from 'next/navigation'
 
 interface SidebarItemProps {
   item: string
-  pathname: string
-  prePath?: string
+  pathValue: string
 }
 
-export const SidebarItem = ({ item, pathname, prePath }: SidebarItemProps) => {
-  const itemPath = formatPathForURL(item)
-  const isActive = pathname === `/${itemPath}`
+export const SidebarItem = ({ item, pathValue }: SidebarItemProps) => {
+  // const itemPath = formatPathForURL(pathname)
+  const pathname = usePathname()
+  const isActive = pathname.includes(`/${pathValue}`)
 
-  const fullPath =
-    item === 'log-out' ? `/auth/${itemPath}` : `/${prePath ? prePath + itemPath : itemPath}`
+  const fullPath = pathValue === 'log-out' ? `/auth/${pathValue}` : `/${pathValue}`
 
   return (
-    <li className={s.item}>
-      <Link className={`${s.link} ${isActive ? s.active : ''}`} href={fullPath}>
-        <div className={s.icon} style={{ maskImage: `url(/icons/sidebarIcons/${item}.svg)` }} />
-        <span>{formatPath(item)}</span>
-      </Link>
-    </li>
+      <li className={s.item}>
+        <Link className={`${s.link} ${isActive ? s.active : ''}`} href={fullPath}>
+          <div
+              className={s.icon}
+              style={{ maskImage: `url(/icons/sidebarIcons/${pathValue}.svg)` }}
+          />
+          <span>{item}</span>
+        </Link>
+      </li>
   )
 }
+///${pathname.split('/')[2]}
