@@ -29,7 +29,7 @@ export const patternsForProfileSettingsForm = {
   username: /^[a-zA-Z0-9_-]+$/,
   name: /^[a-zA-Zа-яА-ЯёЁ]+$/,
   date: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/\d{4}$/,
-};
+}
 
 export const errorMessagesForProfileSettingsForm = {
   required: (field: string) => `${field} is required`,
@@ -42,46 +42,46 @@ export const validationForProfileSettingsForm = {
     required: errorMessagesForProfileSettingsForm.required('Username'),
     minLength: {
       value: 6,
-      message: errorMessagesForProfileSettingsForm.minLength('Username', 6)
+      message: errorMessagesForProfileSettingsForm.minLength('Username', 6),
     },
     maxLength: {
       value: 30,
-      message: errorMessagesForProfileSettingsForm.maxLength('Username', 30)
+      message: errorMessagesForProfileSettingsForm.maxLength('Username', 30),
     },
     pattern: {
       value: patternsForProfileSettingsForm.username,
-      message: 'Only letters, numbers, underscore and hyphen are allowed'
-    }
+      message: 'Only letters, numbers, underscore and hyphen are allowed',
+    },
   },
   firstName: {
     required: errorMessagesForProfileSettingsForm.required('First name'),
     minLength: {
       value: 1,
-      message: errorMessagesForProfileSettingsForm.minLength('First name', 1)
+      message: errorMessagesForProfileSettingsForm.minLength('First name', 1),
     },
     maxLength: {
       value: 50,
-      message: errorMessagesForProfileSettingsForm.maxLength('First name', 50)
+      message: errorMessagesForProfileSettingsForm.maxLength('First name', 50),
     },
     pattern: {
       value: patternsForProfileSettingsForm.name,
-      message: 'Only letters are allowed'
-    }
+      message: 'Only letters are allowed',
+    },
   },
   lastName: {
     required: errorMessagesForProfileSettingsForm.required('Last name'),
     minLength: {
       value: 1,
-      message: errorMessagesForProfileSettingsForm.minLength('Last name', 1)
+      message: errorMessagesForProfileSettingsForm.minLength('Last name', 1),
     },
     maxLength: {
       value: 50,
-      message: errorMessagesForProfileSettingsForm.maxLength('Last name', 50)
+      message: errorMessagesForProfileSettingsForm.maxLength('Last name', 50),
     },
     pattern: {
       value: patternsForProfileSettingsForm.name,
-      message: 'Only letters are allowed'
-    }
+      message: 'Only letters are allowed',
+    },
   },
   dateOfBirth: {
     pattern: {
@@ -94,46 +94,46 @@ export const validationForProfileSettingsForm = {
   aboutMe: {
     maxLength: {
       value: 200,
-      message: errorMessagesForProfileSettingsForm.maxLength('About me', 200)
-    }
-  }
+      message: errorMessagesForProfileSettingsForm.maxLength('About me', 200),
+    },
+  },
 }
 
 // Utility functions
-export function formatTimeAgo(isoDate: string) {
+export function formatTimeAgo(isoDate: string, localePath: 'en' | 'ru') {
   const date = new Date(isoDate)
   const now = new Date()
   const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000)
 
   if (diffInSeconds < 60) {
-    return `${diffInSeconds} sec ago`
+    return `${diffInSeconds} ${localePath === 'en' ? 'sec' : 'сек'} `
   }
 
   const diffInMinutes = Math.floor(diffInSeconds / 60)
   if (diffInMinutes < 60) {
-    return `${diffInMinutes} min ago`
+    return `${diffInMinutes}  ${localePath === 'en' ? 'min' : 'мин'} `
   }
 
   const diffInHours = Math.floor(diffInMinutes / 60)
   if (diffInHours < 24) {
-    return `${diffInHours} hours ago`
+    return `${diffInHours} ${localePath === 'en' ? 'hours' : 'часов'} `
   }
 
   const diffInDays = Math.floor(diffInHours / 24)
-  return `${diffInDays} days ago`
+  return `${diffInDays} ${localePath === 'en' ? 'days' : 'дней'} `
 }
 
 // Date --> в строку
 export const formatDateToDDMMYYYY = (date: Date | null): string => {
-  if (!date || isNaN(date.getTime())) return '';
-  const day = date.getDate().toString().padStart(2, '0');
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  return `${day}/${month}/${date.getFullYear()}`; // Разделитель изменен на "/"
-};
+  if (!date || isNaN(date.getTime())) return ''
+  const day = date.getDate().toString().padStart(2, '0')
+  const month = (date.getMonth() + 1).toString().padStart(2, '0')
+  return `${day}/${month}/${date.getFullYear()}` // Разделитель изменен на "/"
+}
 
 // строку --> в Date
 export const parseDateString = (dateStr: string): Date | undefined => {
-  const [day, month, year] = dateStr.split('/').map(Number); // Разделитель изменен на "/"
-  const date = new Date(year, month - 1, day);
-  return isNaN(date.getTime()) ? undefined : date;
+  const [day, month, year] = dateStr.split('/').map(Number) // Разделитель изменен на "/"
+  const date = new Date(year, month - 1, day)
+  return isNaN(date.getTime()) ? undefined : date
 }

@@ -16,15 +16,15 @@ export const SidebarItem = ({ item, pathValue }: SidebarItemProps) => {
   const fullPath = pathValue === 'log-out' ? `/auth/${pathValue}` : `/${pathValue}`
 
   return (
-      <li className={s.item}>
-        <Link className={`${s.link} ${isActive ? s.active : ''}`} href={fullPath}>
-          <div
-              className={s.icon}
-              style={{ maskImage: `url(/icons/sidebarIcons/${pathValue}.svg)` }}
-          />
-          <span>{item}</span>
-        </Link>
-      </li>
+    <li className={s.item}>
+      <Link className={`${s.link} ${isActive ? s.active : ''}`} href={fullPath}>
+        <div
+          className={s.icon}
+          style={{ maskImage: `url(/icons/sidebarIcons/${pathValue}.svg)` }}
+        />
+        <span>{item}</span>
+      </Link>
+    </li>
   )
 }
 ///${pathname.split('/')[2]}

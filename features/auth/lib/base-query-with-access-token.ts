@@ -29,8 +29,7 @@ export const baseQueryWithReauth: BaseQueryFn<
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
-  console.log('🚀 Выполняем запрос:', args);
-
+ 
   await mutex.waitForUnlock();
   let result = await baseQueryWithAccessToken(args, api, extraOptions);
 
@@ -42,7 +41,6 @@ export const baseQueryWithReauth: BaseQueryFn<
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();
       try {
-        console.log('🔄 Запрос на обновление токенов...');
         const refreshResult = await baseQueryWithAccessToken(
           {
             url: '/auth/update-tokens',
@@ -55,8 +53,6 @@ export const baseQueryWithReauth: BaseQueryFn<
 
         if (refreshResult.data && typeof refreshResult.data === 'object') {
           const { accessToken } = refreshResult.data as RefreshResponse;
-          console.log('✅ Новый accessToken:', accessToken);
-
           localStorage.setItem('access-token', accessToken);
 
           const newHeaders = new Headers();
@@ -66,8 +62,6 @@ export const baseQueryWithReauth: BaseQueryFn<
           typeof args === 'string'
               ? { url: args }
               : { ...args, headers: { ...args.headers, authorization: `Bearer ${accessToken}` } };
-
-          console.log('📡 Повторяем запрос с новым токеном:', modifiedArgs);
 
           result = await baseQueryWithAccessToken(modifiedArgs, api, extraOptions);
         } 
@@ -82,6 +76,5 @@ export const baseQueryWithReauth: BaseQueryFn<
     }
   }
 
-  console.log('📥 Итоговый результат запроса:', result);
   return result;
 };

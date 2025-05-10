@@ -1,0 +1,342 @@
+{
+  "auth": {
+    "emailConfirmedPage": {
+      "text": "Your email has been confirmed",
+      "textButton": "Log in",
+      "title": "Congratulations!"
+    },
+    "forgotPasswordPage": {
+      "backToSignIn": "Back to sign in page",
+      "invalidEmail": "Invalid email format",
+      "message": "Enter your email address and we'll send you a password recovery link",
+      "messageModal": "We've sent a password confirmation link to <1>text</1>",
+      "sendLink": "Send link",
+      "title": "Forgot password",
+      "titleModal": "Link sent"
+    },
+    "github": {
+      "successMessage": "Congratulations, everything is ready!"
+    },
+    "linkExpiredPage": {
+      "text": "It looks like the confirmation link has expired. Don't worry, we can send the link again.",
+      "textButton": "Send again",
+      "title": "Link expired"
+    },
+    "passwordResetPage": {
+      "confirmPasswordZod": "Password confirmation is required",
+      "message": "Your password must be between 6 and 20 characters",
+      "newPassword": "New password",
+      "passwordConfirmation": "Password confirmation",
+      "passwordMaxZod": "Password must be no more than 20 characters",
+      "passwordMinZod": "Password must be at least 6 characters",
+      "passwordRefineZod": "Password must contain 0-9, a-z, A-Z, ! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~",
+      "textLink": "Create new password",
+      "title": "Create new password"
+    },
+    "privacyPolicy": {
+      "backSignUp": "Back to registration",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam purus sit amet luctus. Tortor vitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur adipiscing. Massa enim nec dui nunc mattis enim ut tellus. Scelerisque eleifend donec pretium vulputate sapien nec sagittis. Feugiat nisl pretium fusce id velit ut tortor pretium viverra. Tortor aliquam nulla facilisi cras. Elit pellentesque habitant morbi tristique senectus et netus. Nulla facilisi nullam vehicula ipsum a arcu cursus. Ut lectus arcu bibendum at varius vel pharetra. Etiam erat velit scelerisque in dictum non consectetur. Quam adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus. Id diam maecenas ultricies mi eget mauris pharetra. Tincidunt lobortis feugiat vivamus at augue. Non odio euismod lacinia at. Aliquet eget sit amet tellus. Auctor neque vitae tempus quam. Tellus in hac habitasse platea dictumst vestibulum rhoncus est. Nisl pretium fusce id velit ut tortor pretium. Eget arcu dictum varius duis at consectetur. Est placerat in egestas erat imperdiet sed euismod nisi porta. Scelerisque felis imperdiet proin fermentum. Tellus in hac habitasse platea dictumst vestibulum rhoncus. Proin nibh nisl condimentum id venenatis a condimentum vitae. Massa tincidunt dui ut ornare lectus sit amet est placerat. Vel turpis nunc eget lorem dolor sed viverra ipsum. Enim ut tellus elementum sagittis. At consectetur lorem donec massa sapien faucibus et molestie. Enim sit amet venenatis urna cursus. Id velit ut tortor pretium viverra suspendisse potenti. Et magnis dis parturient montes nascetur ridiculus. Donec ultrices tincidunt arcu non sodales neque. Malesuada fames ac turpis egestas maecenas pharetra convallis posuere. Consequat mauris nunc congue nisi vitae. Ut tellus elementum sagittis vitae et leo duis. Dignissim sodales ut eu sem. Cras semper auctor neque vitae tempus quam pellentesque nec nam. Et magnis dis parturient montes nascetur ridiculus mus mauris. Morbi tempus iaculis urna id. Tristique nulla aliquet enim tortor. Libero nunc consequat interdum varius sit. Sed adipiscing diam donec adipiscing tristique risus nec feugiat. Facilisi nullam vehicula ipsum a arcu cursus vitae. Arcu odio ut sem nulla pharetra. Tincidunt praesent semper feugiat nibh sed pulvinar proin. Morbi non arcu risus quis varius quam quisque id diam. Ac turpis egestas sed tempus urna. Sit amet venenatis urna cursus eget nunc. Amet consectetur adipiscing elit ut aliquam purus sit. Nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Et egestas quis ipsum suspendisse ultrices gravida dictum. Ligula ullamcorper malesuada proin libero nunc consequat interdum varius sit. Pretium viverra suspendisse potenti nullam ac tortor vitae. Lobortis elementum nibh tellus molestie nunc non blandit. Eget nunc lobortis mattis aliquam. Quam adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus. Quis commodo odio aenean sed adipiscing diam. Pharetra massa massa ultricies mi quis hendrerit. Et magnis dis parturient montes. Cursus metus aliquam eleifend mi in nulla posuere. Tristique senectus et netus et. A lacus vestibulum sed arcu non odio. Sed elementum tempus egestas sed. Faucibus et molestie ac feugiat sed lectus vestibulum mattis ullamcorper. Gravida rutrum quisque non tellus orci ac. Turpis tincidunt id aliquet risus feugiat in ante metus dictum. Dolor morbi non arcu risus quis varius quam quisque. Bibendum at varius vel pharetra vel turpis nunc. A cras semper auctor neque. Aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Erat nam at lectus urna duis. Mauris pharetra et ultrices neque. Nulla facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum. Justo nec ultrices dui sapien eget mi proin sed libero. Pellentesque sit amet porttitor eget dolor. A diam maecenas sed enim ut. Fermentum et sollicitudin ac orci phasellus. Tincidunt vitae semper quis lectus nulla. Tincidunt dui ut ornare lectus sit amet est. Sed enim ut sem viverra aliquet eget sit. Eu augue ut lectus arcu bibendum at varius. Suspendisse sed nisi lacus sed viverra tellus in hac habitasse. Donec ultrices tincidunt arcu non sodales neque sodales ut etiam. Varius vel pharetra vel turpis nunc eget lorem dolor. Arcu odio ut sem nulla pharetra. Bibendum neque egestas congue quisque. Facilisis volutpat est velit egestas dui. Orci nulla pellentesque dignissim enim sit amet. Mauris vitae ultricies leo integer malesuada nunc vel risus commodo. Odio ut enim blandit volutpat maecenas volutpat blandit. Eu mi bibendum neque egestas congue quisque egestas diam in. Neque viverra justo nec ultrices dui sapien. Congue mauris rhoncus aenean vel elit. Vitae aliquet nec ullamcorper sit. Tempus imperdiet nulla malesuada pellentesque. Sed lectus vestibulum mattis ullamcorper velit. Commodo odio aenean sed adipiscing diam. Viverra nam libero justo laoreet. Id neque aliquam vestibulum morbi blandit cursus. Vel facilisis volutpat est velit egestas dui id ornare. Feugiat nibh sed pulvinar proin.",
+      "title": "Privacy Policy"
+    },
+    "signInPage": {
+      "dontHaveAcc": "Don't have an account?",
+      "email": "Email",
+      "invalidEmail": "Invalid email format",
+      "invalidPass": "Invalid password format",
+      "password": "Password"
+    },
+    "signUpPage": {
+      "account": "Already have an account?",
+      "agreement": "I agree to the <agreement>Terms of Service</agreement> and <policy>Privacy Policy</policy>",
+      "labelConfirm": "Password confirmation",
+      "labelEmail": "Email",
+      "labelName": "Username",
+      "labelPassword": "Password",
+      "signIn": "Sign in",
+      "signUp": "Sign up",
+      "title": "Registration"
+    },
+    "termsOfService": {
+      "backSignUp": "Back to registration",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fames ac turpis egestas integer eget aliquet nibh. Amet consectetur adipiscing elit ut aliquam purus sit amet luctus. Tortor vitae purus faucibus ornare suspendisse sed nisi. Dolor sit amet consectetur adipiscing. Massa enim nec dui nunc mattis enim ut tellus. Scelerisque eleifend donec pretium vulputate sapien nec sagittis. Feugiat nisl pretium fusce id velit ut tortor pretium viverra. Tortor aliquam nulla facilisi cras. Elit pellentesque habitant morbi tristique senectus et netus. Nulla facilisi nullam vehicula ipsum a arcu cursus. Ut lectus arcu bibendum at varius vel pharetra. Etiam erat velit scelerisque in dictum non consectetur. Quam adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus. Id diam maecenas ultricies mi eget mauris pharetra. Tincidunt lobortis feugiat vivamus at augue. Non odio euismod lacinia at. Aliquet eget sit amet tellus. Auctor neque vitae tempus quam. Tellus in hac habitasse platea dictumst vestibulum rhoncus est. Nisl pretium fusce id velit ut tortor pretium. Eget arcu dictum varius duis at consectetur. Est placerat in egestas erat imperdiet sed euismod nisi porta. Scelerisque felis imperdiet proin fermentum. Tellus in hac habitasse platea dictumst vestibulum rhoncus. Proin nibh nisl condimentum id venenatis a condimentum vitae. Massa tincidunt dui ut ornare lectus sit amet est placerat. Vel turpis nunc eget lorem dolor sed viverra ipsum. Enim ut tellus elementum sagittis. At consectetur lorem donec massa sapien faucibus et molestie. Enim sit amet venenatis urna cursus. Id velit ut tortor pretium viverra suspendisse potenti. Et magnis dis parturient montes nascetur ridiculus. Donec ultrices tincidunt arcu non sodales neque. Malesuada fames ac turpis egestas maecenas pharetra convallis posuere. Consequat mauris nunc congue nisi vitae. Ut tellus elementum sagittis vitae et leo duis. Dignissim sodales ut eu sem. Cras semper auctor neque vitae tempus quam pellentesque nec nam. Et magnis dis parturient montes nascetur ridiculus mus mauris. Morbi tempus iaculis urna id. Tristique nulla aliquet enim tortor. Libero nunc consequat interdum varius sit. Sed adipiscing diam donec adipiscing tristique risus nec feugiat. Facilisi nullam vehicula ipsum a arcu cursus vitae. Arcu odio ut sem nulla pharetra. Tincidunt praesent semper feugiat nibh sed pulvinar proin. Morbi non arcu risus quis varius quam quisque id diam. Ac turpis egestas sed tempus urna. Sit amet venenatis urna cursus eget nunc. Amet consectetur adipiscing elit ut aliquam purus sit. Nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Et egestas quis ipsum suspendisse ultrices gravida dictum. Ligula ullamcorper malesuada proin libero nunc consequat interdum varius sit. Pretium viverra suspendisse potenti nullam ac tortor vitae. Lobortis elementum nibh tellus molestie nunc non blandit. Eget nunc lobortis mattis aliquam. Quam adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus. Quis commodo odio aenean sed adipiscing diam. Pharetra massa massa ultricies mi quis hendrerit. Et magnis dis parturient montes. Cursus metus aliquam eleifend mi in nulla posuere. Tristique senectus et netus et. A lacus vestibulum sed arcu non odio. Sed elementum tempus egestas sed. Faucibus et molestie ac feugiat sed lectus vestibulum mattis ullamcorper. Gravida rutrum quisque non tellus orci ac. Turpis tincidunt id aliquet risus feugiat in ante metus dictum. Dolor morbi non arcu risus quis varius quam quisque. Bibendum at varius vel pharetra vel turpis nunc. A cras semper auctor neque. Aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Erat nam at lectus urna duis. Mauris pharetra et ultrices neque. Nulla facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum. Justo nec ultrices dui sapien eget mi proin sed libero. Pellentesque sit amet porttitor eget dolor. A diam maecenas sed enim ut. Fermentum et sollicitudin ac orci phasellus. Tincidunt vitae semper quis lectus nulla. Tincidunt dui ut ornare lectus sit amet est. Sed enim ut sem viverra aliquet eget sit. Eu augue ut lectus arcu bibendum at varius. Suspendisse sed nisi lacus sed viverra tellus in hac habitasse. Donec ultrices tincidunt arcu non sodales neque sodales ut etiam. Varius vel pharetra vel turpis nunc eget lorem dolor. Arcu odio ut sem nulla pharetra. Bibendum neque egestas congue quisque. Facilisis volutpat est velit egestas dui. Orci nulla pellentesque dignissim enim sit amet. Mauris vitae ultricies leo integer malesuada nunc vel risus commodo. Odio ut enim blandit volutpat maecenas volutpat blandit. Eu mi bibendum neque egestas congue quisque egestas diam in. Neque viverra justo nec ultrices dui sapien. Congue mauris rhoncus aenean vel elit. Vitae aliquet nec ullamcorper sit. Tempus imperdiet nulla malesuada pellentesque. Sed lectus vestibulum mattis ullamcorper velit. Commodo odio aenean sed adipiscing diam. Viverra nam libero justo laoreet. Id neque aliquam vestibulum morbi blandit cursus. Vel facilisis volutpat est velit egestas dui id ornare. Feugiat nibh sed pulvinar proin.",
+      "title": "Terms of Service"
+    }
+  },
+  "common": {
+    "avatarUploader": {
+      "buttons": {
+        "save": "Save",
+        "select": "Upload from Device"
+      },
+      "errors": {
+        "tooBig": "<bold>Error!</bold> Photo size must be less than 10 MB (Megabytes)",
+        "wrongFormat": "<bold>Error!</bold> Uploaded photo format must be PNG or JPEG"
+      },
+      "title": "Add User Photo"
+    },
+    "createPostModal": {
+      "addPhotoCard": {
+        "buttons": {
+          "primary": "Upload from Device",
+          "secondary": "Open draft"
+        },
+        "errors": {
+          "tooBig": "<bold>Error!</bold> Photo size must be less than 20 MB (Megabytes)",
+          "wrongFormat": "<bold>Error!</bold> Uploaded photo format must be PNG or JPEG"
+        },
+        "title": "Add Photo"
+      },
+      "cropPhotoCard": {
+        "buttons": {
+          "next": "Next"
+        },
+        "title": "Cropping"
+      },
+      "filterPhotoCard": {
+        "buttons": {
+          "next": "Next"
+        },
+        "title": "Filters"
+      },
+      "publishPhotoCard": {
+        "buttons": {
+          "publish": "Publish"
+        },
+        "descriptionField": {
+          "errors": {
+            "tooBig": "Maximum 500 characters"
+          },
+          "label": "Add publication description",
+          "placeholder": "Description..."
+        },
+        "title": "Publication"
+      },
+      "saveDraftSubModal": {
+        "buttons": {
+          "cancel": "Save Draft",
+          "confirm": "Cancel"
+        },
+        "message": "Do you really want to cancel creating a publication? If canceled, all data will be lost",
+        "title": "Close"
+      }
+    },
+    "datePicker": {
+      "locale": "gregorian_en"
+    },
+    "logOutModal": {
+      "description": "Are you sure you want to log out of your account ",
+      "title": "Log out"
+    },
+    "modal": {
+      "buttonNames": {
+        "cancel": "No",
+        "confirm": "Yes"
+      }
+    },
+    "postsList": {
+      "addPostButton": "Create Post",
+      "buttons": {
+        "draftButton": "Open Draft"
+      },
+      "noPostsMessage": "No posts here yet"
+    }
+  },
+  "editProfile": {
+    "accountManagement": {
+      "accountType": "Account type:",
+      "business": "Business",
+      "currentSubscription": "Current subscription:",
+      "expireAt": "Expiration date",
+      "modal": {
+        "errorButton": "Back to payments",
+        "errorContent": "Transaction failed. Please contact support",
+        "errorTitle": "Error",
+        "successButton": "OK",
+        "successContent": "Payment successful!",
+        "successTitle": "Success"
+      },
+      "nextPayment": "Next payment",
+      "or": "or",
+      "personal": "Personal",
+      "yourSubscriptionCosts": "Your subscription costs"
+    },
+    "addPhotoButton": "Add User Photo",
+    "createPublication": {
+      "primaryButtonTitle": "Upload from device",
+      "title": "Add photo"
+    },
+    "deleteAvatarModal": {
+      "message": "Are you sure you want to delete this photo?",
+      "title": "Delete Photo"
+    },
+    "myPayments": {
+      "dateOfPayment": "Payment Date",
+      "endDateOfSubscription": "Subscription End",
+      "paymentType": "Payment Type",
+      "price": "Price",
+      "subscriptionType": "Subscription Type"
+    },
+    "photoSlider": {
+      "deletePhoto": {
+        "cancelButtonTitle": "Cancel",
+        "confirmButtonTitle": "Delete",
+        "headerTitle": "Delete photo?",
+        "message": "The photo will be removed from your publication."
+      }
+    },
+    "profileForm": {
+      "aboutMe": {
+        "label": "About me"
+      },
+      "city": {
+        "label": "Select your city",
+        "placeholder": "City"
+      },
+      "commonFieldErrors": {
+        "max": "<field></field> must contain no more than <max></max> characters",
+        "min": "<field></field> must contain at least <min></min> characters",
+        "onlyLetters": "<field></field> can only contain letters",
+        "required": "<field></field> is required"
+      },
+      "country": {
+        "label": "Select your country",
+        "placeholder": "Country"
+      },
+      "dateOfBirth": {
+        "errors": {
+          "invalidDateFormat": "Invalid date format. Enter date in the specified format: <format></format>",
+          "toYoung": "Users under 13 cannot create a profile. <link>Privacy Policy</link>",
+          "under1900": "Birth date cannot be earlier than 1900"
+        },
+        "label": "Date of Birth"
+      },
+      "firstName": {
+        "label": "First name"
+      },
+      "lastName": {
+        "label": "Last name"
+      },
+      "submitButton": "save changes",
+      "userName": {
+        "errors": {
+          "regexp": "Username can only contain letters, numbers, underscores and dashes"
+        },
+        "label": "Username"
+      }
+    },
+    "tabs": {
+      "accountManagement": {
+        "label": "Account Management"
+      },
+      "devices": {
+        "label": "Devices"
+      },
+      "generalInformation": {
+        "label": "General Information"
+      },
+      "myPayments": {
+        "label": "My Payments"
+      }
+    }
+  },
+  "myProfile": {
+    "myPostModal": {
+      "cancelEditModal": {
+        "cancelButtonTitle": "No",
+        "confirmButtonTitle": "Yes",
+        "description": "Do you really want to finish editing? If canceled, your changes will not be saved.",
+        "title": "Cancel Editing"
+      },
+      "confirmDeleteModal": {
+        "cancelButtonTitle": "No",
+        "confirmButtonTitle": "Yes",
+        "description": "Are you sure you want to delete this post?",
+        "title": "Delete Post"
+      }
+    },
+    "settingsButton": "Profile Settings",
+    "statistics": {
+      "followers": {
+        "label": "Followers"
+      },
+      "following": {
+        "label": "Following"
+      },
+      "publications": {
+        "label": "Publications"
+      }
+    }
+  },
+  "navbar": {
+    "forgotPassword": "Forgot password",
+    "main": "Main page",
+    "privacyPolicy": "Privacy Policy",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "termsOfService": "Terms of Service"
+  },
+  "notificationMenu": {
+    "ago": "ago",
+    "new": "New",
+    "newNotification": "New notification!",
+    "notNewNotifications": "No new notifications",
+    "notifications": "Notifications"
+  },
+  "post": {
+    "card": {
+      "addNewComment": {
+        "error": "max. length 150 characters",
+        "placeholder": "Add a comment...",
+        "submit": "Publish"
+      },
+      "header": {
+        "buttons": {
+          "copyLink": "Copy link",
+          "deletePost": "Delete post",
+          "editPost": "Edit post",
+          "follow": "Follow",
+          "unfollow": "Unfollow"
+        }
+      },
+      "info": {
+        "likes": "<count></count> <bold>Likes</bold>"
+      }
+    },
+    "comment": {
+      "answer": "Reply",
+      "like": "Like",
+      "likes": "Likes",
+      "viewAnswersBth": {
+        "close": "Hide answers (<count></count>)",
+        "open": "Show answers (<count></count>)"
+      }
+    },
+    "editPostModalCard": {
+      "descriptionCloseModal": "Do you really want to close editing the publication? If closed, changes will not be saved",
+      "labelCard": "Publication Editing",
+      "postDescription": {
+        "errors": {
+          "tooBig": "Maximum 500 characters"
+        },
+        "label": "Add publication description",
+        "placeholder": "Description...",
+        "titleBtnSubmit": "Save"
+      }
+    }
+  },
+  "publicPage": {
+    "hide": "Collapse",
+    "registeredUsers": "Registered users",
+    "showMore": "Show more"
+  },
+  "sidebar": {
+    "create": "Create",
+    "favorites": "Favorites",
+    "home": "Home",
+    "logOut": "Log out",
+    "messenger": "Messages",
+    "myProfile": "My Profile",
+    "search": "Search",
+    "statistic": "Statistics"
+  }
+}

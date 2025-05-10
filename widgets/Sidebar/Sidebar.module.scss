@@ -3,13 +3,13 @@
   max-width: 220px;
   width: 100%;
   max-height: 100vh;
-  height: 100%;
   height: 734px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
   gap: 60px;
+  padding: 70px 20px 80px 60px;
 }
 
 .sidebar::after {
@@ -19,19 +19,4 @@
   width: 1px;
   background-color: var(--dark-100);
   right: 0;
-}
-
-.list {
-  margin-top: 60px;
-  &:first-child {
-    margin-top: 72px;
-  }
-  &:last-child {
-    margin-top: 180px;
-  }
-}
-.top {
-}
-.main {
-  margin-bottom: auto;
 }

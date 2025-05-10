@@ -6,12 +6,10 @@ import { PublicPostList } from '@/features/public-posts/publicPostList/PublicPos
 
 export default async function Home() {
   const lastPosts: ResponseAllPosts = await getFourLastPosts()
-
   return (
     <>
       <div className={styles.content}>
         <UserCounter users={lastPosts.totalUsers} />
-
         <PublicPostList lastPosts={lastPosts} />
       </div>
     </>
