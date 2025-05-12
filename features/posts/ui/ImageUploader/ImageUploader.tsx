@@ -7,7 +7,7 @@ import React from 'react';
 
 type Props = {
     setImages: React.Dispatch<React.SetStateAction<File[]>>
-    setError: React.Dispatch<React.SetStateAction<string | null>>
+    setError?: React.Dispatch<React.SetStateAction<string | null>>
 };
 
 const ImageUploader = ({setImages, setError}: Props) => {
@@ -18,9 +18,9 @@ const ImageUploader = ({setImages, setError}: Props) => {
         onDrop: (acceptedFiles, rejectedFiles) => {
             if (acceptedFiles.length > 0) {
                 setImages((prevImages) => [...prevImages, ...acceptedFiles]);
-                setError(null);
+                setError?.(null);
             } else {
-                setError('The photo must be less than 20MB and in JPEG or PNG format');
+                setError?.('The photo must be less than 20MB and in JPEG or PNG format');
             }
         },
     });
