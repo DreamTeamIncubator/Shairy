@@ -5,22 +5,45 @@ import ImageWithoutAvatar from '../../../assets/icons/noImg.png'
 import { Item, PropsType } from '../types'
 import s from '../ui/publicUser.module.css'
 import { useRouter } from 'next/navigation'
+import { Button } from '@/shared/ui/Button/Button'
+import { useFollowUserMutation, useGetUsersByUserNameQuery, useUnfollowUserMutation } from '@/features/users/api/users'
+
 
 export const PublicUser = (props: PropsType) => {
   const { additionalData, profileData } = props
+  const {data: user} = useGetUsersByUserNameQuery({ userName: profileData.userName }, {
+    refetchOnMountOrArgChange: true})
+  
+  const [followUser] = useFollowUserMutation()
+  const [unfollowUser] = useUnfollowUserMutation()
   const router = useRouter()
+
 
   const openPost = (post: Item) => {
     router.push(`/public-profile/${profileData.id}/public-post/${post.id}`, { scroll: false })
   }
 
+  const handleFollowUser = async () => {
+    try {
+
+      if (user?.isFollowing) {
+        await unfollowUser({ userId: profileData.id}).unwrap()
+      } else {
+        await followUser({ selectedUserId: profileData.id}).unwrap()
+      }
+    } catch (error) {
+      console.error('Error following', error)
+    }
+  }
+  
+
   return (
     <div>
       <div className={s.mainInformationBlock}>
-        {profileData.avatars.length ? (
+        {user?.avatars.length ? (
           <Image
             className={s.avatar}
-            src={profileData.avatars[0].url}
+            src={user?.avatars[0].url}
             alt={'avatar'}
             width={204}
             height={204}
@@ -35,7 +58,15 @@ export const PublicUser = (props: PropsType) => {
           />
         )}
         <div className={s.profileDescription}>
-          <h1> {profileData.userName}</h1>
+          <div className={s.nameButtonsWrapper}>
+            <h1> {user?.userName}</h1>
+            <div className={s.actions}>
+              <Button className={s.followButton} onClick={handleFollowUser} variant={user?.isFollowing ? 'outlined' : 'primary'}>
+                {user?.isFollowing ? 'Unfollow' : 'Follow'}
+              </Button>
+              <Button variant="secondary" className={s.messageButton}>Send Message</Button>
+            </div>
+          </div>
           <div className={s.userStats}>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <p>{profileData.userMetadata.followers}</p>
@@ -50,7 +81,8 @@ export const PublicUser = (props: PropsType) => {
               <p>Publications </p>
             </div>
           </div>
-          <p>{profileData.aboutMe}</p>
+          <p>{user?.aboutMe}</p>
+
         </div>
       </div>
       <div className={s.postsBlock}>

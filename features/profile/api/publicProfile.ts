@@ -5,15 +5,15 @@ import type {ResponceProfile} from '@/features/profile/api/profileTypes';
 export const publicProfile = createApi({
     reducerPath: 'profile',
     baseQuery: baseQueryWithReauth,
-    tagTypes: ['profile'],
+    tagTypes: ['profile', 'PublicProfile'],
     endpoints: (builder) => ({
         getPublicProfile: builder.query<ResponceProfile, number>({
-            query: (profileId)=>({
-                method: 'GET',
-                url: `public-user/profile/${profileId}`
+            query: (profileId) => ({
+              method: 'GET',
+              url: `public-user/profile/${profileId}`,
             }),
-            providesTags: ['profile'],
-        }),
+            providesTags: (result, error, id) => [{ type: 'PublicProfile', id }],
+          })          
     }),
 })
 

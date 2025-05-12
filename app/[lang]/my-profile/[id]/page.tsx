@@ -1,26 +1,24 @@
 'use client'
-import React, {useEffect, useRef, useState} from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import s from './myProfile.module.scss'
-import {ModalRadix} from '@/shared/ui/Modal/ModalRadix'
-import {useParams} from 'next/navigation'
-import {useGetAllUsersPostsQuery} from '@/features/posts/api/post'
+import { ModalRadix } from '@/shared/ui/Modal/ModalRadix'
+import { useParams } from 'next/navigation'
+import { useGetAllUsersPostsQuery } from '@/features/posts/api/post'
 import ProfileDescription from '@/features/profile/ui/ProfileDescription'
 import Post from '@/features/posts/ui/Post'
-import type {Items} from '@/features/posts/api/post.types'
-import {useGetMeQuery} from '@/features/auth/api/auth'
+import type { Items } from '@/features/posts/api/post.types'
+import { useGetMeQuery } from '@/features/auth/api/auth'
 import Image from 'next/image'
-import {useBoolean} from '@/hooks/useBoolean';
+import { useBoolean } from '@/hooks/useBoolean';
 
 
 const MyProfile = () => {
-    const {value: isOpen, setTrue: setOpen, setFalse: setClosed} = useBoolean()
+    const { value: isOpen, setTrue: setOpen, setFalse: setClosed } = useBoolean()
     const [endCursorPostId, setEndCursorPostId] = useState<null | number>(null)
-    const {data: userData} = useGetMeQuery()
-    const {id} = useParams()
+    const { data: userData } = useGetMeQuery()
+    const { id } = useParams()
 
-    if (!userData) return
-
-    const {data: allPosts} = useGetAllUsersPostsQuery({
+    const { data: allPosts } = useGetAllUsersPostsQuery({
         pageSize: 8,
         endCursorPostId,
         userId: Number(id),
@@ -43,7 +41,7 @@ const MyProfile = () => {
                     }
                 })
             },
-            {threshold: 0.1}
+            { threshold: 0.1 }
         )
 
         observer.observe(lastPostRef.current)
@@ -62,7 +60,7 @@ const MyProfile = () => {
 
     return (
         <>
-            <ProfileDescription/>
+            <ProfileDescription />
             <div className={s.postsWrapper}>
                 {allPosts?.items.map((item, index) => {
                     const isLastPost = index === allPosts.items.length - 1

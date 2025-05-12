@@ -7,16 +7,26 @@ import Link from 'next/link'
 import { useGetPublicProfileQuery } from '@/features/profile/api/publicProfile'
 import { useGetProfileQuery } from '../api/profileApi'
 import { useTranslationData } from '@/hooks/useTranslationData'
+import { useGetUsersByUserNameQuery } from '@/features/users/api/users'
+
 
 const ProfileDescription = () => {
   const { id } = useParams()
   const { localeData } = useTranslationData()
   const { data: authUser } = useGetProfileQuery()
-  const { data } = useGetPublicProfileQuery(Number(id))
+  const {data} = useGetPublicProfileQuery(Number(id))
+  
+  const {data: user} = useGetUsersByUserNameQuery(
+    { userName: data?.userName ?? ''}, 
+    {
+      skip: !data?.userName,        
+    }
+  )
+  
   if (!id) {
     return <div>Loading...</div>
   }
-  const avatar = data?.avatars[0]?.url ? data.avatars[0].url : noAvatar.src
+  const avatar = user?.avatars[0]?.url ? user.avatars[0].url : noAvatar.src
   const owner = authUser?.id === Number(id)
 
   return (
@@ -35,20 +45,20 @@ const ProfileDescription = () => {
       </div>
       <div className={s.followers}>
         <div className={s.followersData}>
-          <span>{data?.userMetadata.following}</span>
+          <span>{user?.followingCount || data?.userMetadata.following}</span>
           <span>{localeData?.myProfile.statistics.following.label}</span>
         </div>
         <div className={s.followersData}>
-          <span>{data?.userMetadata.followers}</span>
+          <span>{user?.followersCount || data?.userMetadata.followers}</span>
           <span>{localeData?.myProfile.statistics.followers.label}</span>
         </div>
         <div className={s.followersData}>
-          <span>{data?.userMetadata.publications}</span>
+          <span>{user?.publicationsCount || data?.userMetadata.publications}</span>
           <span>{localeData?.myProfile.statistics.publications.label}</span>
         </div>
       </div>
       {/*TODO: delete test-text after adding feature 'add post'*/}
-      <p className={s.description}>{authUser?.aboutMe || data?.aboutMe}</p>
+      <p className={s.description}>{data?.aboutMe}</p>
     </div>
   )
 }
