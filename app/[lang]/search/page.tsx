@@ -55,14 +55,14 @@ const Search = () => {
   const renderUser = (user: RecentUser) => (
     <div key={user.id} className={s.userContainer}>
       <Image src={'/close.svg'} alt="close" width={12} height={12} onClick={() => { handleRemoveRecentSearch(user.id) }} />
-      <div className={s.user} onClick={() => saveToRecent(user)}>
+      <div className={s.user} >
         {user.avatarUrl ? (
           <Image src={user.avatarUrl} alt="avatar" width={48} height={48} className={s.avatar} />
         ) : (
           <div className={s.avatar}></div>
         )}
         <div className={s.namesContainer}>
-          <Link href={`/public-profile/${user.id}`}>
+          <Link href={`/public-profile/${user.id}`} onClick={() => saveToRecent(user)}>
             <span className={s.userName}>{user.userName}</span>
           </Link>
           <div className={s.names}>

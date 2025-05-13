@@ -19,7 +19,7 @@ const ProfileDescription = () => {
   const {data: user} = useGetUsersByUserNameQuery(
     { userName: data?.userName ?? ''}, 
     {
-      skip: !data?.userName,        
+      skip: !data?.userName,    
     }
   )
   
@@ -45,15 +45,15 @@ const ProfileDescription = () => {
       </div>
       <div className={s.followers}>
         <div className={s.followersData}>
-          <span>{user?.followingCount || data?.userMetadata.following}</span>
+          <span>{user?.followingCount}</span>
           <span>{localeData?.myProfile.statistics.following.label}</span>
         </div>
         <div className={s.followersData}>
-          <span>{user?.followersCount || data?.userMetadata.followers}</span>
+          <span>{user?.followersCount}</span>
           <span>{localeData?.myProfile.statistics.followers.label}</span>
         </div>
         <div className={s.followersData}>
-          <span>{user?.publicationsCount || data?.userMetadata.publications}</span>
+          <span>{user?.publicationsCount }</span>
           <span>{localeData?.myProfile.statistics.publications.label}</span>
         </div>
       </div>
