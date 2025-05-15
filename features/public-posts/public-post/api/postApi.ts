@@ -1,5 +1,7 @@
 export async function getPost(id: number) {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/public-posts/${id}`)
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/public-posts/${id}`, {
+    next: { tags: ['1comments'] },
+  })
   if (response.status === 500) {
     throw new Error('Ошибка сервера: 500')
   }

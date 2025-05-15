@@ -1,7 +1,12 @@
-import { baseQueryWithReauth } from '@/features/auth/lib/base-query-with-access-token';
-import { createApi } from '@reduxjs/toolkit/query/react';
-import { CommentItem, CommentsAnswerResponseType, CommentsResponseType, LikesResponseType } from './comments.types';
-import { ApiErrorResponse } from './error.types';
+import { baseQueryWithReauth } from '@/features/auth/lib/base-query-with-access-token'
+import { createApi } from '@reduxjs/toolkit/query/react'
+import {
+  CommentItem,
+  CommentsAnswerResponseType,
+  CommentsResponseType,
+  LikesResponseType,
+} from './comments.types'
+import { ApiErrorResponse } from './error.types'
 
 export const commentsAPI = createApi({
   reducerPath: 'commentsAPI',
@@ -15,7 +20,10 @@ export const commentsAPI = createApi({
       }),
       providesTags: (result, error, { postId }) => [{ type: 'Post', id: postId }],
     }),
-    getCommentAnswers: builder.query<CommentsAnswerResponseType, { postId: number; commentId: number }>({
+    getCommentAnswers: builder.query<
+      CommentsAnswerResponseType,
+      { postId: number; commentId: number }
+    >({
       query: ({ postId, commentId }) => ({
         url: `/posts/${postId}/comments/${commentId}/answers`,
         method: 'GET',
@@ -25,7 +33,10 @@ export const commentsAPI = createApi({
         { type: 'Comment', id: commentId },
       ],
     }),
-    getCommentsAnswersLikes: builder.query<LikesResponseType, { postId: number; commentId: number; answerId: number }>({
+    getCommentsAnswersLikes: builder.query<
+      LikesResponseType,
+      { postId: number; commentId: number; answerId: number }
+    >({
       query: ({ postId, commentId, answerId }) => ({
         url: `/posts/${postId}/comments/${commentId}/answers/${answerId}/likes`,
         method: 'GET',
@@ -48,7 +59,10 @@ export const commentsAPI = createApi({
         { type: 'Like', id: commentId },
       ],
     }),
-    updateCommentLikeStatus: builder.mutation<void, { postId: number; commentId: number; likeStatus: "NONE" | "LIKE" }>({
+    updateCommentLikeStatus: builder.mutation<
+      void,
+      { postId: number; commentId: number; likeStatus: 'NONE' | 'LIKE' }
+    >({
       query: ({ postId, commentId, likeStatus }) => ({
         url: `/posts/${postId}/comments/${commentId}/like-status`,
         method: 'PUT',
@@ -66,12 +80,15 @@ export const commentsAPI = createApi({
         method: 'POST',
         body: { content },
       }),
-      invalidatesTags: ['Post'],
+      invalidatesTags: ['Post', 'Comment'],
       transformErrorResponse: (response: { status: number; data: ApiErrorResponse }) => {
-        return response.data;
+        return response.data
       },
     }),
-    addCommentAnswer: builder.mutation<CommentItem, { postId: number; commentId: number; content: string }>({
+    addCommentAnswer: builder.mutation<
+      CommentItem,
+      { postId: number; commentId: number; content: string }
+    >({
       query: ({ postId, commentId, content }) => ({
         url: `/posts/${postId}/comments/${commentId}/answers`,
         method: 'POST',
@@ -82,11 +99,11 @@ export const commentsAPI = createApi({
         { type: 'Comment', id: commentId },
       ],
       transformErrorResponse: (response: { status: number; data: ApiErrorResponse }) => {
-        return response.data;
+        return response.data
       },
     }),
   }),
-});
+})
 
 export const {
   useGetCommentsQuery,
@@ -95,6 +112,5 @@ export const {
   useGetCommentsLikeQuery,
   useUpdateCommentLikeStatusMutation,
   useAddCommentMutation,
-  useAddCommentAnswerMutation, 
-} = commentsAPI;
-
+  useAddCommentAnswerMutation,
+} = commentsAPI

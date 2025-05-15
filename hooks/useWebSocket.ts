@@ -21,9 +21,7 @@ export const useWebSocket = (eventHandlers: Partial<SocketEvents>) => {
     })
 
     // Общие обработчики
-    socket.on('connect', () =>
-      console.log('✅ Connected: пусть пока побудут. спасибо за понимание =)')
-    )
+
     socket.on('connect_error', (err) =>
       console.error('❌ Connection error если что починю:', err.message)
     )
