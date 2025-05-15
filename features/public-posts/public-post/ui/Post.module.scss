@@ -1,6 +1,7 @@
 .post {
   display: flex;
   flex-direction: row;
+  background-color: var(--dark-300);
 }
 
 .swiperWrapper {
@@ -102,6 +103,8 @@
 .likes {
   display: flex;
   gap: 12px;
+  justify-content: start;
+  align-items: center;
   margin-top: 12px;
   margin-left: 24px;
   margin-bottom: 5px;
@@ -109,6 +112,9 @@
 
 .time {
   color: var(--light-900);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 14px;
   line-height: 16px;
   margin-left: 24px;
