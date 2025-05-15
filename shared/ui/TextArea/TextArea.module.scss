@@ -1,81 +1,81 @@
 .textAreaContainer {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  width: 100%;
 }
 
 .label {
-    color: var(--Light-900, #8D9094);
-    font-family: Inter;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 24px;
+  color: var(--Light-900, #8d9094);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
 }
 
 .textArea {
-    position: relative;
-    flex-shrink: 0;
-    line-height: 1.7; 
-    border-radius: 2px;
-    border: none; 
+  flex-shrink: 0;
+  line-height: 1.7;
+  border-radius: 2px;
+  border: none;
+  color: var(--light-100, #ffffff);
+  padding: 10px;
+  outline: none;
+  caret-color: var(--light-100, #ffffff);
+  resize: none;
+  text-align: left;
+  vertical-align: top;
+  padding-bottom: 4px;
+
+  &:hover {
+    border: none;
+  }
+
+  &:focus {
+    border: none;
+    outline: none;
+  }
+
+  &:disabled {
+    color: var(--Dark-100, #4c4c4c);
+    border: none;
+  }
+
+  &::placeholder {
+    color: var(--Light-900, #8d9094);
+  }
+
+  &:not(:disabled):hover::placeholder,
+  &:not(:disabled):focus::placeholder {
     color: var(--light-100, #ffffff);
-    padding: 10px;
-    outline: none; 
-    caret-color: var(--light-100, #ffffff);
-    resize: none;
-    text-align: left;
-    vertical-align: top;
-    padding-bottom: 4px;
-
-    &:hover {
-        border: none; 
-    }
-
-    &:focus {
-        border: none;
-        outline: none; 
-    }
-
-    &:disabled {
-        color: var(--Dark-100, #4C4C4C);
-        border: none;
-    }
-
-    &::placeholder {
-        color: var(--Light-900, #8D9094);
-    }
-
-    &:not(:disabled):hover::placeholder,
-    &:not(:disabled):focus::placeholder {
-        color: var(--light-100, #ffffff);
-    }
+  }
 }
 
 .error {
-    color: var(--Danger-500, #CC1439);
-    font-family: Inter;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 24px;
+  color: var(--Danger-500, #cc1439);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
 
-    border: 1px solid var(--Danger-500, #CC1439); 
+  border: 1px solid var(--Danger-500, #cc1439);
 
-    &:hover {
-        border: 1px solid var(--Danger-500, #CC1439);  
-    }
-    &:focus {
-        border: 1px solid var(--Danger-500, #CC1439);  
-    }
+  &:hover {
+    border: 1px solid var(--Danger-500, #cc1439);
+  }
+  &:focus {
+    border: 1px solid var(--Danger-500, #cc1439);
+  }
 }
 
 .character {
-    color: var(--Light-900, #8D9094);
-    text-align: right;
-    font-family: Inter;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 16px; 
+  color: var(--Light-900, #8d9094);
+  text-align: right;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
 }
-
