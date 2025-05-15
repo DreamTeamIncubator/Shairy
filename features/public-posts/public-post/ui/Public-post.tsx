@@ -12,6 +12,9 @@ import { Navigation, Pagination } from 'swiper/modules'
 import arrowLeft from '@/public/arrowLeft.svg'
 import arrowRight from '@/public/arrowRight.svg'
 import 'swiper/css/navigation'
+import { useGetMeQuery } from '@/features/auth/api/auth'
+import { CommentTextAreaWithSubmit } from '@/features/posts/ui/CommentTaxtArea/CommentTextArea'
+import { useCommentActions } from '@/features/posts/hooks/useCommentActions'
 
 type PostProps = {
   post: PostType
@@ -23,8 +26,8 @@ const testImg = [noImg, noImg, noImg, noImg, noImg]
 export const PublicPost = ({ post, comments }: PostProps) => {
   // const firstThreePhotos = testImg.slice(0, 3) //test
   const firstThreePhotos = post.avatarWhoLikes.slice(0, 3)
-  console.log(post)
 
+  const { data } = useGetMeQuery()
   return (
     <div key={post.id} className={s.post}>
       <div className={s.postImage}>
@@ -56,6 +59,7 @@ export const PublicPost = ({ post, comments }: PostProps) => {
                   />
                 </SwiperSlide>
               ))}
+
               <div className={`${s.customPrev} ${s.navButton}`}>
                 <Image width={40} height={40} src={arrowLeft} alt="arrowLeft" />
               </div>
@@ -87,9 +91,10 @@ export const PublicPost = ({ post, comments }: PostProps) => {
           <span className={s.userName}>{post.userName}</span>
         </div>
         <Comments comments={comments} post={post} />
+
         <div>
           <div className={s.likes}>
-            <div style={{ display: 'flex' }}>
+            <div>
               {firstThreePhotos.length > 0 ? (
                 firstThreePhotos.map((photo, i) => (
                   <Image
@@ -116,11 +121,17 @@ export const PublicPost = ({ post, comments }: PostProps) => {
                 />
               )}
             </div>
-            <span>{`${post.likesCount} "Like"`}</span>
+            <div style={{ display: 'flex', height: '200 ' }}>
+              <span>{`${post.likesCount} Like`}</span>
+
+              <time className={s.time}>{formatDate(post.createdAt)}</time>
+            </div>
           </div>
-          <time className={s.time}>{formatDate(post.createdAt)}</time>
+          {data && <CommentTextAreaWithSubmit postId={post.id} />}
         </div>
       </div>
     </div>
   )
 }
+
+////публичный не мой не могу коментировать

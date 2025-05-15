@@ -162,7 +162,6 @@ const Post = ({
                   <Image src="/edit.svg" alt="edit" width={24} height={24} className={s.icon} />
                 </div>
               </Popover.Trigger>
-
               <Popover.Content className={s.editContainer}>
                 <div className={s.pencilEditContainer} onClick={() => setEditMode(true)}>
                   <Image src="/pencil.svg" alt="edit" width={24} height={24} />
@@ -220,7 +219,6 @@ const Post = ({
                 </div>
                 <Image src="/save.svg" alt="save" width={24} height={24} />
               </div>
-
               <div className={s.likesAvatarContainer} onClick={() => setIsLikeModalOpen(true)}>
                 {postLikes && postLikes?.items?.length > 0 && (
                   <div className={s.avatars}>
@@ -235,9 +233,8 @@ const Post = ({
                     {postLikes.items.length > 5 && <span>+{postLikes.items.length - 5}</span>}
                   </div>
                 )}
-                <span className={s.userName}>{likesCount > 0 ? `${likesCount} "Like"` : null}</span>
+                <span className={s.userName}>{likesCount > 0 ? `${likesCount} Like` : null}</span>
               </div>
-
               {isLikeModalOpen && (
                 <LikeModal
                   isOpen={true}
@@ -245,7 +242,6 @@ const Post = ({
                   likes={postLikes?.items || []}
                 />
               )}
-
               <span className={s.date}>
                 {post?.updatedAt
                   ? formatDistanceToNow(new Date(post.updatedAt), { addSuffix: true })
@@ -289,3 +285,4 @@ const Post = ({
 }
 
 export default Post
+//// это мой

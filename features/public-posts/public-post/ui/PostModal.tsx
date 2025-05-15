@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { PublicPost } from './Public-post'
+import { useGetMeQuery } from '@/features/auth/api/auth'
 
 type PostModalProps = {
   post: PostType
