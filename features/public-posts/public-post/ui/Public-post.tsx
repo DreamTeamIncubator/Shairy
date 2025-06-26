@@ -23,7 +23,6 @@ const testImg = [noImg, noImg, noImg, noImg, noImg]
 export const PublicPost = ({ post, comments }: PostProps) => {
   // const firstThreePhotos = testImg.slice(0, 3) //test
   const firstThreePhotos = post.avatarWhoLikes.slice(0, 3)
-  console.log(post)
 
   return (
     <div key={post.id} className={s.post}>
