@@ -9,6 +9,7 @@ import { Button } from '@/shared/ui/Button/Button'
 import Image from 'next/image'
 import { useNewPasswordMutation } from '@/features/auth/api/auth'
 import { Input } from '@/shared/ui/Input/Input'
+import { useTranslationData } from '@/hooks/useTranslationData'
 
 type Inputs = {
   password: string
@@ -27,6 +28,7 @@ const RecoveryPage = () => {
   const [code, setCode] = useState<string>('')
   const [showPassword, setShowPassword] = useState(false)
   const router = useRouter()
+  const { localeData } = useTranslationData()
 
   useEffect(() => {
     const queryCode = searchParams.get('code')
@@ -51,26 +53,25 @@ const RecoveryPage = () => {
   return (
     <div className={s.content}>
       <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-        <h2 className={s.title}>Recovery password</h2>
+        <h2 className={s.title}>{localeData?.auth.passwordResetPage.title}</h2>
         <label className={s.label}>
           <div className={s.password}>
-            <span className={s.text}>New password</span>
+            <span className={s.text}>{localeData?.auth.passwordResetPage.newPassword}</span>
             <Input
               onIconClick={handleShowPassword}
               {...register('password', {
                 required: 'Password is required',
                 pattern: {
                   value: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+=\-[\]{};:'",.<>/?`~]).{6,20}$/,
-                  message:
-                    'Password must contain at least 1 uppercase letter, 1 number, and 1 special character',
+                  message: `${localeData?.auth.passwordResetPage.passwordRefineZod}`,
                 },
                 minLength: {
                   value: 6,
-                  message: 'Password must be at least 6 characters',
+                  message: `${localeData?.auth.passwordResetPage.passwordMinZod}`,
                 },
                 maxLength: {
                   value: 20,
-                  message: 'Password must be at most 20 characters',
+                  message: `${localeData?.auth.passwordResetPage.passwordMaxZod}`,
                 },
               })}
               type={showPassword ? 'text' : 'password'}
@@ -88,12 +89,16 @@ const RecoveryPage = () => {
         </label>
         <label>
           <div className={s.password}>
-            <span className={s.text}>Password confirmation</span>
+            <span className={s.text}>
+              {localeData?.auth.passwordResetPage.passwordConfirmation}
+            </span>
             <Input
               onIconClick={handleShowPassword}
               {...register('confirmPassword', {
                 required: 'Password confirmation is required',
-                validate: (value) => value === watch('password') || 'The passwords must match',
+                validate: (value) =>
+                  value === watch('password') ||
+                  `${localeData?.auth.passwordResetPage.PasswordsDoNotMatch}`,
               })}
               type={showPassword ? 'text' : 'password'}
             />
@@ -111,10 +116,10 @@ const RecoveryPage = () => {
           )}
         </label>
 
-        <span className={s.text}>Your password must be between 6 and 20 characters</span>
+        <span className={s.text}>{localeData?.auth.passwordResetPage.message}</span>
 
         <Button className={s.button} type="submit">
-          Create new password
+          {localeData?.auth.passwordResetPage.textLink}
         </Button>
       </form>
     </div>

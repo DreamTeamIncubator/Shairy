@@ -4,7 +4,7 @@ import { getFourLastPosts } from '@/features/posts/api/fourLastPostsAPI'
 import { ResponseAllPosts } from '@/features/posts/api/post.types'
 import { PublicPostList } from '@/features/public-posts/publicPostList/PublicPostsList'
 
-export default async function Home() {
+export default async function Page() {
   const lastPosts: ResponseAllPosts = await getFourLastPosts()
   return (
     <>

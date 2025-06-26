@@ -9,6 +9,7 @@ import { ReCaptcha } from '@/features/ReCaptcha/ReCaptcha'
 import { useForgotPasswordMutation } from '@/features/auth/api/auth'
 import { Input } from '@/shared/ui/Input/Input'
 import { ModalRadix } from '@/shared/ui/Modal/ModalRadix'
+import { useTranslationData } from '@/hooks/useTranslationData'
 
 type Inputs = {
   email: string
@@ -46,10 +47,12 @@ const ForgotPassword = () => {
     setIsOpen(false)
   }
 
+  const { localeData } = useTranslationData()
+
   return (
     <div className={s.content}>
       <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-        <h2 className={s.title}>Forgot Password</h2>
+        <h2 className={s.title}>{localeData?.auth.forgotPasswordPage.title}</h2>
         <label>
           <span className={s.text}>Email</span>
           <Input
@@ -63,14 +66,12 @@ const ForgotPassword = () => {
               },
             })}
           />
-          <span className={s.text}>
-            Enter your email address and we will send you further instructions{' '}
-          </span>
+          <span className={s.text}>{localeData?.auth.forgotPasswordPage.message}</span>
         </label>
-        {errors.email && <span>This field is required</span>}
+        {errors.email && <span>{localeData?.auth.forgotPasswordPage.invalidEmail}</span>}
 
-        <Button type="submit" disabled={!isCaptchaCompleted}>
-          Send Link
+        <Button type="submit" disabled={!isCaptchaCompleted} style={{}}>
+          {localeData?.auth.forgotPasswordPage.sendLink}
         </Button>
         <Button
           variant={'textButton'}
@@ -78,7 +79,7 @@ const ForgotPassword = () => {
           onClick={() => {
             router.push('/auth/login')
           }}>
-          Back to Sign In
+          {localeData?.auth.forgotPasswordPage.backToSignIn}
         </Button>
         <div className={s.reCaptcha}>
           <ReCaptcha
@@ -92,10 +93,10 @@ const ForgotPassword = () => {
       <ModalRadix
         open={isOpen}
         onClose={handleClose}
-        modalTitle="Email sent"
+        modalTitle={localeData?.auth.forgotPasswordPage.titleModal}
         size="md"
         footer={<Button onClick={handleClose}>OK</Button>}>
-        <p>{`We have sent a link to confirm your email to ${userEmail}`}</p>
+        <p>{`${localeData?.auth.forgotPasswordPage.messageModal} ${userEmail}`}</p>
       </ModalRadix>
     </div>
   )

@@ -31,7 +31,8 @@
       "passwordMinZod": "Password must be at least 6 characters",
       "passwordRefineZod": "Password must contain 0-9, a-z, A-Z, ! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~",
       "textLink": "Create new password",
-      "title": "Create new password"
+      "title": "Create new password",
+      "PasswordsDoNotMatch": "The passwords must match"
     },
     "privacyPolicy": {
       "backSignUp": "Back to registration",

@@ -21,7 +21,7 @@ const PostModal = ({ post, comments }: PostModalProps) => {
 
   useEffect(() => {
     if (!isOpen) {
-      router.replace(`/public-profile/${post.ownerId}`, { scroll: false }) // Убираем postId из URL
+      router.replace(`/public-profile/${post.ownerId}`, { scroll: false })
     }
   }, [isOpen, router, post.ownerId])
 

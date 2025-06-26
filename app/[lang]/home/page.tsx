@@ -1,5 +1,11 @@
+'use client'
 
-export default function Home() {
-  return <>Home
-  </>;
+import { Home } from '@/features/home/ui/Home/Home'
+
+export default function HomePage() {
+  return (
+    <>
+      <Home />
+    </>
+  )
 }

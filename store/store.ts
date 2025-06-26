@@ -8,6 +8,7 @@ import { profileAPI } from '@/features/profile/api/profileApi'
 import { type TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { subscriptionsAPI } from '@/features/edit-profile/ui/AccountManagement/api/paymentApi'
 import { notificationAPI } from '@/features/notifications/notificationApi'
+import { homeAPI } from '@/features/home/api/home'
 import { usersAPI } from '@/features/users/api/users'
 
 export const store = configureStore({
@@ -20,6 +21,7 @@ export const store = configureStore({
     [profileAPI.reducerPath]: profileAPI.reducer,
     [subscriptionsAPI.reducerPath]: subscriptionsAPI.reducer,
     [notificationAPI.reducerPath]: notificationAPI.reducer,
+    [homeAPI.reducerPath]: homeAPI.reducer,
     [usersAPI.reducerPath]: usersAPI.reducer
   },
   // Adding the api middleware enables caching, invalidation, polling,
@@ -33,6 +35,7 @@ export const store = configureStore({
       profileAPI.middleware,
       subscriptionsAPI.middleware,
       notificationAPI.middleware,
+      homeAPI.middleware
       usersAPI.middleware,
     ),
 })
