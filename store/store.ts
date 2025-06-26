@@ -35,7 +35,7 @@ export const store = configureStore({
       profileAPI.middleware,
       subscriptionsAPI.middleware,
       notificationAPI.middleware,
-      homeAPI.middleware
+      homeAPI.middleware,
       usersAPI.middleware,
     ),
 })
