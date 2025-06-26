@@ -1,94 +1,144 @@
-//.imagesCropper {
-//  position: absolute;
-//  left: 0;
-//  right: 0;
-//  bottom: 0;
-//  //top: 0;
-//}
-//
-//.reactCrop {
-//  width: 100%;
-//  height: auto;
-//}
-//
-//.croppedImage {
-//  width: 100%;
-//  height: auto;
-//}
-//
-//.prevBtn, .nextBtn {
-//  position: absolute;
-//  top: 50%;
-//  width: 36px;
-//  height: 36px;
-//  background-color: var(--dark-500);
-//  border-radius: 2px;
-//  border: none;
-//  padding: 5px;
-//}
-//
-//.prevBtn {
-//  left: 0;
-//}
-//
-//.nextBtn {
-//  right: 0;
-//  transform: rotate(180deg);
-//}
-
 .imagesCropper {
+  width: 492px;
+  height: 100%;
+  min-height: inherit;
+  display: block;
+  }
+
+.prevBtn, .nextBtn {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  .cropperContainer {
-    //height: 100%;
-    //height: auto;
-    //bottom: 50%; /* Высота кнопок навигации */
-    //overflow: hidden;
-  }
-
-  .reactCrop {
-    width: 100%;
-    min-height: 100%;
-    height: 100%;
-
-    & img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  //.navigationButtons {
-  //
-  //}
-
-  .prevBtn, .nextBtn {
-    position: absolute;
-    top: 50%;
-    width: 36px;
-    height: 36px;
-    background-color: var(--dark-500);
-    border: none;
-    cursor: pointer;
-  }
-
-  .prevBtn {
-    left: 0;
-  }
-
-  .nextBtn {
-    right: 0;
-    transform: rotate(180deg);
-  }
+  top: 50%;
+  width: 36px;
+  height: 36px;
+  background-color: var(--dark-500);
+  opacity: 0.8;
+  border: none;
+  cursor: pointer;
 }
+
+.prevBtn {
+  left: 12px;
+}
+
+.nextBtn {
+  right: 12px;
+  transform: rotate(180deg);
+  }
+
 
 .imageCropWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: inherit;
+  overflow: hidden;
+
+  & img {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100%;
+  }
+}
+
+.croppedImage {
+  object-fit: contain;
+  width: 100%;
   height: 100%;
 }
 
-.reactCrop {
-  height: 100%;
+.imageCropWrapper .reactCrop {
+  min-height: inherit;
+  margin: 0 auto;
+  background-color: var(--dark-300);
+}
+
+.imageCropWrapper :global(.ReactCrop__child-wrapper) {
+  height: inherit;
+  min-height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.thumbnailGallery {
+  position: absolute;
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  background-color: var(--dark-500);
+  opacity: 0.8;
+  bottom: 50px;
+  right: 11px;
+
+  & img {
+    width: 80px;
+    height: 82px;
+    opacity: 1;
+  }
+}
+
+.toggleAspectButton,
+.toggleThumbnailsBtn {
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+  border: none;
+  background-color: var(--dark-500);
+  opacity: 0.8;
+  position: absolute;
+  bottom: 11px;
+  z-index: 100;
+  cursor: pointer;
+
+}
+
+.toggleAspectButton {
+  left: 11px;
+}
+
+.toggleThumbnailsBtn {
+  right: 11px;
+  color: var(--light-100);
+
+  &.active {
+    color: var(--accent-500);
+  }
+}
+
+.aspectRatioBtns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  width: 156px;
+  bottom: 50px;
+  left: 11px;
+  background-color: var(--dark-500);
+  opacity: 0.8;
+  padding: 10px 12px;
+  z-index: 100;
+}
+
+.aspectRatioContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--light-900);
+
+  &:hover {
+    color: var(--light-700);
+  }
+
+  &.active {
+    color: var(--light-100);
+  }
+}
+
+.svgIcon {
+  display: block;
+  width: 18px;
+  height: 18px;
 }

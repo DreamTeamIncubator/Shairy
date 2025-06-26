@@ -25,3 +25,25 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+.nameButtonsWrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 730px;
+}
+
+.actions{
+  display: flex;
+  gap:10px;
+}
+
+.followButton{
+  width:98px;
+  height:36px;
+}
+
+.messageButton{
+  width:162px;
+  height:36px;
+}

@@ -1,0 +1,111 @@
+.page{
+    display: flex;
+    flex-direction: column;
+    margin-top: 35px;
+    margin-left: 24px;
+}
+
+.searchText{
+    color: var(--Light-100, #FFF);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 36px; /* 180% */
+}
+
+.inputWrapper{
+    display: flex;
+    flex-direction: column;
+    gap:13px;
+}
+
+.avatar{
+    display: flex;
+    border-radius: 50%;
+    background-color: gray;
+    width:48px;
+    height:48px;
+}
+
+.userList{
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+    margin-top: 25px;
+}
+
+.user{
+    display: flex;
+    flex-direction: row;
+    gap:8px;
+    align-items: center;
+}
+
+.namesContainer{
+    display: flex;
+    flex-direction: column;
+}
+
+.userName{
+    font-size: 14px;
+    font-weight: 700; 
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: none;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
+}
+
+.name {
+    color: var(--Light-900, #8D9094);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px; /* 171.429% */
+}
+
+.names{
+    display: flex;
+    gap:6px;
+}
+
+.recentTitle{
+    color: var(--Light-100, #FFF);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+.containe{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.emptyWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 200px; 
+    text-align: center;
+  }
+  
+  .empty {
+    line-height: 24px;
+    color: var(--Light-900, #8D9094);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .smallText{
+    color: var(--Light-900, #8D9094);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px; 
+  }
+
+  .userContainer{
+    display: flex;
+    align-items: center;
+    gap:6px;
+  }
+  

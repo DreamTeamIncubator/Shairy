@@ -25,6 +25,7 @@ export type PropsType = {
   profileData: UserProfileData
   additionalData: AdditionalData
 }
+
 type Image = {
   url: string
   width: number

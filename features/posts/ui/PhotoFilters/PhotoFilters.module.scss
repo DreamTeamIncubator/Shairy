@@ -3,18 +3,48 @@
     width: 972px;
     display: grid;
     grid-template-columns: 490px 300px;
+    height: inherit;
+    min-height: inherit;
+}
 
+.preview {
+    width: 100%;
+    height: 100%;
+
+    & img {
+        width: 100%;
+        height: 100%;
+        margin: auto;
+    }
 }
 
 .filtersContainer {
     padding: 24px 54px 30px;
     width: 482px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 24px;
+    row-gap: 18px;
 }
 
-.filter {
+.filtersContainer .filter {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
     width: 108px;
     height: 108px;
+
+    & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.filterName {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    color: var(--light-100);
+    text-align: center;
 }
