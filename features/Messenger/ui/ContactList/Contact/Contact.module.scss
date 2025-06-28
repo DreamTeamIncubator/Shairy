@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  width: 267px;
+  height: 72px;
+  border-bottom: 1px solid var(--dark-300);
+  padding: 12px;
+  gap: 12px;
+}
+
+.avatar {
+  border-radius: 9999%;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.name {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 120px;
+}
+
+.text {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  color: var(--light-900);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 164px;
+}

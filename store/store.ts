@@ -10,10 +10,10 @@ import { subscriptionsAPI } from '@/features/edit-profile/ui/AccountManagement/a
 import { notificationAPI } from '@/features/notifications/notificationApi'
 import { homeAPI } from '@/features/home/api/home'
 import { usersAPI } from '@/features/users/api/users'
+import { messengerApi } from '@/features/Messenger/api/messenger'
 
 export const store = configureStore({
   reducer: {
-    // Add the generated reducer as a specific top-level slice
     [authAPI.reducerPath]: authAPI.reducer,
     [postAPI.reducerPath]: postAPI.reducer,
     [commentsAPI.reducerPath]: commentsAPI.reducer,
@@ -22,10 +22,9 @@ export const store = configureStore({
     [subscriptionsAPI.reducerPath]: subscriptionsAPI.reducer,
     [notificationAPI.reducerPath]: notificationAPI.reducer,
     [homeAPI.reducerPath]: homeAPI.reducer,
-    [usersAPI.reducerPath]: usersAPI.reducer
+    [usersAPI.reducerPath]: usersAPI.reducer,
+    [messengerApi.reducerPath]: messengerApi.reducer,
   },
-  // Adding the api middleware enables caching, invalidation, polling,
-  // and other useful features of `rtk-query`.
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       authAPI.middleware,
@@ -37,11 +36,10 @@ export const store = configureStore({
       notificationAPI.middleware,
       homeAPI.middleware,
       usersAPI.middleware,
+      messengerApi.middleware
     ),
 })
 
-// optional, but required for refetchOnFocus/refetchOnReconnect behaviors
-// see `setupListeners` docs - takes an optional callback as the 2nd arg for customization
 setupListeners(store.dispatch)
 
 export type AppDispatch = typeof store.dispatch

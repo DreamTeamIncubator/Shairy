@@ -13,15 +13,14 @@ import arrowLeft from '@/public/arrowLeft.svg'
 import arrowRight from '@/public/arrowRight.svg'
 import 'swiper/css/navigation'
 import { useGetMeQuery } from '@/features/auth/api/auth'
-import { CommentTextAreaWithSubmit } from '@/features/posts/ui/CommentTaxtArea/CommentTextArea'
-import { useCommentActions } from '@/features/posts/hooks/useCommentActions'
+import { CommentTextAreaWithSubmit } from '@/features/posts/ui/CommentTextArea/CommentTextArea'
 
 type PostProps = {
   post: PostType
   comments: CommentsType
 }
 
-const testImg = [noImg, noImg, noImg, noImg, noImg]
+// const testImg = [noImg, noImg, noImg, noImg, noImg]
 
 export const PublicPost = ({ post, comments }: PostProps) => {
   // const firstThreePhotos = testImg.slice(0, 3) //test
