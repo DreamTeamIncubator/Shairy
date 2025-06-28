@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 269px;
+  height: 100%;
+  border-right: 1px solid var(--dark-300);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--dark-300);
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    margin-top: 18px;
+  }
+}
