@@ -15,9 +15,7 @@ export const InputSearch = ({ setSearchValue }: InputSearchProps) => {
   const debouncedValue = useDebounce(inputValue)
 
   useEffect(() => {
-    if (debouncedValue) {
-      setSearchValue(debouncedValue)
-    }
+    setSearchValue(debouncedValue)
   }, [debouncedValue])
 
   return (
