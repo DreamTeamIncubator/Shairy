@@ -2,7 +2,8 @@
 
 import { SearchIcon } from '@/assets/icons/SearchIcon'
 import s from './InputSearch.module.scss'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useDebounce } from '@/hooks/useDebounce'
 
 type InputSearchProps = {
   setSearchValue: (value: string) => void
@@ -11,10 +12,13 @@ type InputSearchProps = {
 export const InputSearch = ({ setSearchValue }: InputSearchProps) => {
   const [inputValue, setInputValue] = useState('')
 
-  const handleSearch = () => {
-    console.log(inputValue)
-    setSearchValue(inputValue)
-  }
+  const debouncedValue = useDebounce(inputValue)
+
+  useEffect(() => {
+    if (debouncedValue) {
+      setSearchValue(debouncedValue)
+    }
+  }, [debouncedValue])
 
   return (
     <div className={s.container}>
@@ -26,7 +30,7 @@ export const InputSearch = ({ setSearchValue }: InputSearchProps) => {
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
-      <span className={s.icon} onClick={handleSearch}>
+      <span className={s.icon}>
         <SearchIcon />
       </span>
     </div>
