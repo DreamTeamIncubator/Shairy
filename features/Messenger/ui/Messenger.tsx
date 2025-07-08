@@ -14,8 +14,6 @@ export const Messenger = () => {
   const [receiver, setReceiver] = useState<User | null>(null)
   const [searchValue, setSearchValue] = useState('')
 
-  console.log(searchValue)
-
   return (
     <div className={s.container}>
       <Text className={s.title}>Messenger</Text>

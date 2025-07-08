@@ -34,8 +34,11 @@ export const Conversation = ({ receiver }: ConversationProps) => {
 
   const handleSend = () => {
     if (!input.trim()) return
+
     sendMessage(input, receiver?.id)
+
     refetch()
+
     setInput('')
   }
 

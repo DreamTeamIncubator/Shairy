@@ -21,10 +21,13 @@ export const useConversationSocket = (accessToken: string, onReceive: (msg: any)
         message: data.messageText,
         receiverId: data.ownerId,
       })
+      console.log('send')
+      console.log(data)
     })
 
     socket.on('receive-message', (data) => {
       onReceive(data)
+      console.log('recieved')
     })
 
     socket.on('error', (err) => {
