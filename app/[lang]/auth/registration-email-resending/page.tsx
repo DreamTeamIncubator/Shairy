@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useRegistrationEmailResendMutation } from '@/features/auth/api/auth'
 import { ModalRadix } from '@/shared/ui/Modal/ModalRadix'
 import { Input } from '@/shared/ui/Input/Input'
-import { validationPatterns } from '@/utils/utils'
+import { patternsForSignUpForm } from '@/utils/utils'
 import Image from 'next/image'
 
 type Input = {
@@ -78,7 +78,7 @@ const RegistrationConfirmation = () => {
             {...register('email', {
               required: 'Email is required',
               pattern: {
-                value: validationPatterns.email,
+                value: patternsForSignUpForm.email,
                 message: 'The email must match the format example@example.com',
               },
             })}
