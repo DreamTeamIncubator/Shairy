@@ -43,11 +43,10 @@ const RegistrationConfirmation = () => {
       setIsOpen(true)
       reset()
     } catch (error) {
-      const apiError = error as APIError // исправил any добавив тип APIError с утверждением, что error это APIError
-      if (apiError.status === 400 && apiError.data) {
-        const errorMessages = apiError.data.messages
+      if ((error as APIError).status === 400 && (error as APIError).data) {
+        const errorMessages = (error as APIError).data!.messages
 
-        errorMessages.forEach((msg: { field: string; message: string }) => {
+        errorMessages.forEach((msg) => {
           if (msg.field === 'email') {
             setError('email', { type: 'manual', message: msg.message })
           }
