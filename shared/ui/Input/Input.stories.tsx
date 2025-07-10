@@ -17,6 +17,7 @@ export const EmailDefault: Story = {
     showIcon: true,
     error: '',
     disabled: false,
+    onChange: () => {},
   },
 }
 
