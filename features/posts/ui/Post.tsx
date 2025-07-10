@@ -31,7 +31,7 @@ import type { Items, ResponseAllPosts } from '@/features/posts/api/post.types'
 import { useAppDispatch } from '@/store/store'
 
 type PostProps = {
-  postId: number
+  postId?: number
   isEditing?: boolean
   open: boolean
   onClose: () => void
@@ -40,13 +40,14 @@ type PostProps = {
 }
 
 const Post = ({
-  postId,
+  // postId,
   isEditing = false,
   onClose,
   open,
   postData,
   endCursorPostId,
 }: PostProps) => {
+  const postId = postData.id || 0
   const { data: post } = useGetPostQuery({ postId })
   const { data: postLikes } = useGetPostLikesQuery({ postId })
   const { data: comments } = useGetCommentsQuery({ postId })

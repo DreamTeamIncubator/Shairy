@@ -4,10 +4,9 @@ import PostModal from '@/features/public-posts/public-post/ui/PostModal'
 import { notFound } from 'next/navigation'
 import { CommentsType } from '@/features/public-posts/comments/types'
 import { PostType } from '@/features/public-posts/public-post/types'
+
 type PageProps = {
-  params: {
-    postId: string
-  }
+  params: Promise<{ postId: string }>
 }
 
 export default async function PublicPostPage({ params }: PageProps) {

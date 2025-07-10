@@ -1,29 +1,28 @@
-
-import { Input } from '@/components/Input/Input';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react'
+import { Input } from './Input'
 
 const meta = {
   component: Input,
   tags: ['autodocs'],
-} satisfies Meta<typeof Input>;
+} satisfies Meta<typeof Input>
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof meta>
 
 export const EmailDefault: Story = {
   args: {
-    variant: "email",
+    variant: 'email',
     placeholder: 'Epam@epam.com',
     showIcon: true,
     error: '',
-    disabled: false
+    disabled: false,
   },
-};
+}
 
 export const SearchDefault: Story = {
   args: {
     ...EmailDefault.args,
-    variant: "search",
+    variant: 'search',
   },
-};
+}
