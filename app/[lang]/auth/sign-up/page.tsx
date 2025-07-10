@@ -11,7 +11,7 @@ import { Input } from '@/shared/ui/Input/Input'
 import { ModalRadix } from '@/shared/ui/Modal/ModalRadix'
 import { paths, patternsForSignUpForm } from '@/utils/utils'
 import { useRegistrationMutation } from '@/features/auth/api/auth'
-import s from '@/app/[lang]/auth/Sign-up/SignUp.module.scss'
+import s from './sign-up/SignUp.module.scss'
 
 type FormData = {
   userName: string
