@@ -4,7 +4,6 @@ import PostModal from '@/features/public-posts/public-post/ui/PostModal'
 import { notFound } from 'next/navigation'
 import { CommentsType } from '@/features/public-posts/comments/types'
 import { PostType } from '@/features/public-posts/public-post/types'
-import { revalidateTag } from 'next/cache'
 type PageProps = {
   params: {
     postId: string
