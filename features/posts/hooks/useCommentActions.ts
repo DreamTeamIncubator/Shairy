@@ -1,37 +1,41 @@
-import { useState } from "react";
-import { useAddCommentMutation, useAddCommentAnswerMutation } from "@/features/comments/api/comments";
-
-
+import { useState } from 'react'
+import {
+  useAddCommentMutation,
+  useAddCommentAnswerMutation,
+} from '@/features/comments/api/comments'
 export const useCommentActions = (postId: number) => {
-  const [content, setContent] = useState("");
-  const [isReplying, setIsReplying] = useState(false);
-  const [replyToId, setReplyToId] = useState<number | null>(null);
-
-  const [addComment] = useAddCommentMutation();
-  const [addAnswer] = useAddCommentAnswerMutation();
+  const [content, setContent] = useState('')
+  const [isReplying, setIsReplying] = useState(false)
+  const [replyToId, setReplyToId] = useState<number | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [addComment] = useAddCommentMutation()
+  const [addAnswer] = useAddCommentAnswerMutation()
 
   const handleAddCommentOrAnswer = async () => {
-    if (!content.trim()) return;
+    if (!content.trim()) return
+    setIsLoading(true)
 
     try {
       if (isReplying && replyToId !== null) {
-        await addAnswer({ postId, commentId: replyToId, content, });
+        await addAnswer({ postId, commentId: replyToId, content })
       } else {
-        await addComment({ postId, content });
+        await addComment({ postId, content })
       }
-      setContent("");
-      setIsReplying(false);
-      setReplyToId(null);
+      setContent('')
+      setIsReplying(false)
+      setReplyToId(null)
     } catch (error) {
-      console.error("Ошибка при добавлении комментария/ответа:", error);
+      console.error('Ошибка при добавлении комментария/ответа:', error)
+    } finally {
+      setIsLoading(false)
     }
-  };
+  }
 
   const handleAnswerClick = (id: number, username: string, isAnswer = false) => {
-    setIsReplying(true);
-    setReplyToId(id);
-    setContent(`@${username} `);
-  };
+    setIsReplying(true)
+    setReplyToId(id)
+    setContent(`@${username} `)
+  }
 
   return {
     content,
@@ -39,6 +43,6 @@ export const useCommentActions = (postId: number) => {
     isReplying,
     handleAddCommentOrAnswer,
     handleAnswerClick,
-  };
-};
-
+    isLoading,
+  }
+}

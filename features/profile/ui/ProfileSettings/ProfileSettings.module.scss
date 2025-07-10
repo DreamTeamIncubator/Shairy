@@ -1,0 +1,66 @@
+.formWrapper {
+  width: 100%;
+  display: flex;
+  gap: 40px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+
+  label {
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--light-900);
+  }
+
+  input {
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--light-100);
+  }
+}
+
+.link {
+  text-decoration: underline;
+}
+
+.selectContainer {
+  width: 100%;
+  display: flex;
+  gap: 24px;
+}
+
+.selectGroup {
+  width: 50%;
+}
+
+.textareaContainer {
+  width: 100%;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 84px;
+  border-radius: 2px;
+  background-color: var(--dark-500);
+  resize: none; 
+  color: var(--light-100);
+  padding: 6px;
+  line-height: 1.5;
+}
+
+.submitBtn {
+  width: 160px;
+  margin-left: auto;
+  margin-top: 48px;
+}
+
+.error {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: var(--danger-500);
+}

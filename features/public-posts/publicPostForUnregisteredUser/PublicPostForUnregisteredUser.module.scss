@@ -1,0 +1,14 @@
+.postBlock {
+  margin-bottom: 30px;
+}
+.avatarNameBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+.timeAgo {
+  font-size: 12px;
+  margin: 10px 0 10px 0;
+  color: var(--light-900);
+}

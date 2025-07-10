@@ -6,7 +6,7 @@ import noImg from '@/assets/icons/noImg.png'
 import s from './Comments.module.scss'
 import { CommentsType } from '../types'
 import { getTimeAgo } from '@/shared/lib/getTimeAgo'
-import { PostType } from '../../post/types'
+import { PostType } from '../../public-post/types'
 
 type CommentsProps = {
   comments: CommentsType

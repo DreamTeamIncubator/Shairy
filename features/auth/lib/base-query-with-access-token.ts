@@ -19,6 +19,7 @@ export const baseQueryWithAccessToken = fetchBaseQuery({
     }
     return headers;
   },
+  credentials: 'include'
 });
 
 const mutex = new Mutex();
@@ -28,6 +29,7 @@ export const baseQueryWithReauth: BaseQueryFn<
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
+ 
   await mutex.waitForUnlock();
   let result = await baseQueryWithAccessToken(args, api, extraOptions);
 
@@ -35,16 +37,15 @@ export const baseQueryWithReauth: BaseQueryFn<
     result.error?.status === 401 ||
     (result.error?.status === 'PARSING_ERROR' && result.error?.originalStatus === 401)
   ) {
-    console.log('baseQueryWithReauth: NEED REAUTH: ' + args);
+ 
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();
       try {
         const refreshResult = await baseQueryWithAccessToken(
           {
-            // url: 'auth/refresh',
-            url: 'auth/update-tokens',
+            url: '/auth/update-tokens',
             method: 'POST',
-            body: {}, // Добавьте refreshToken, если требуется
+            credentials: 'include',
           },
           api,
           extraOptions
@@ -53,12 +54,19 @@ export const baseQueryWithReauth: BaseQueryFn<
         if (refreshResult.data && typeof refreshResult.data === 'object') {
           const { accessToken } = refreshResult.data as RefreshResponse;
           localStorage.setItem('access-token', accessToken);
-          result = await baseQueryWithAccessToken(args, api, extraOptions);
-        } else {
-          // Здесь можно обработать случай, если refreshToken истек
-        }
+
+          const newHeaders = new Headers();
+          newHeaders.set('authorization', `Bearer ${accessToken}`);
+
+          const modifiedArgs =
+          typeof args === 'string'
+              ? { url: args }
+              : { ...args, headers: { ...args.headers, authorization: `Bearer ${accessToken}` } };
+
+          result = await baseQueryWithAccessToken(modifiedArgs, api, extraOptions);
+        } 
       } catch (error) {
-        console.error(error);
+        console.error('❌ Ошибка при обновлении токена:', error);
       } finally {
         release();
       }
@@ -67,5 +75,6 @@ export const baseQueryWithReauth: BaseQueryFn<
       result = await baseQueryWithAccessToken(args, api, extraOptions);
     }
   }
+
   return result;
 };

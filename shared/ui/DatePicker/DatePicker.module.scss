@@ -1,0 +1,127 @@
+.datePickerContainer {
+  font-family: Inter, Helvetica, sans-serif;
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  border-radius: 2px;
+  padding: 6px 12px;
+  background-color: transparent;
+  color: var(--light-900);
+  border: 1px solid var(--dark-100);
+  outline: none;
+  transition: all 0.2s ease;
+
+  &:focus {
+    background-color: var(--dark-500);
+  }
+}
+
+.calendarWrapper {
+  position: absolute;
+  top: 40px;
+  background-color: var(--dark-500);
+  border: 1px solid var(--dark-300);
+  padding: 16px 24px;
+}
+
+.rpdMonth {
+  padding: 6px 8px;
+  margin-bottom: 12px;
+  min-width: 200px;
+}
+
+.rpdCaptionLabel {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+  min-width: 156px;
+  color: var(--light-100);
+}
+
+.rpdWeekday {
+  color: var(--light-900);
+  width: 36px;
+  height: 36px;
+  margin: 0 auto;
+}
+
+.rdpNav {
+  position: absolute;
+  right: 24px;
+
+  & button {
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--dark-100);
+    padding: 10px;
+
+    & svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    & polygon {
+      fill: var(--light-100);
+
+    }
+  }
+}
+
+.rpdDay {
+  width: 36px;
+  height: 36px;
+
+  & button {
+    color: var(--light-100);
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    cursor: pointer;
+  }
+
+  & button[disabled] {
+    color: var(--light-900);
+    cursor: not-allowed;
+  }
+}
+
+.rpdRoot .rdpCell {
+  vertical-align: middle;
+  width: 36px;
+  height: 36px;
+}
+
+.rpdDay[data-focused="true"] button,
+.rpdDay button.rdp-selected {
+  background-color: #234E99;
+  color: white;
+  border: none;
+  border-radius: 50%;
+}
+
+.rpdDay[data-today="true"] {
+  & button {
+    color: #397DF6;
+  }
+}
+
+
+/* Стили для выходных ТОЛЬКО в текущем месяце */
+.rpdDay:not([data-outside="true"]):nth-child(7n + 6) button, /* Суббота */
+.rpdDay:not([data-outside="true"]):nth-child(7n) button {   /* Воскресенье */
+  color: var(--danger-300);
+}
+
+/* Стили для outside-дней (перекрывают выходные) */
+.rpdDay[data-outside="true"] button {
+  color: var(--light-900) !important; /* Перебиваем стили выходных */
+}

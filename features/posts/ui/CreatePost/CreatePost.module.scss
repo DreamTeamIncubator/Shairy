@@ -1,11 +1,24 @@
-.publishButton {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
+.createPostWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-width: 490px;
+    min-height: 490px;
+    height: 490px;
+    box-sizing: border-box;
+    margin: auto;
+    overflow: hidden;
+}
+
+.cropperWrapper {
+    height: inherit;;
+    min-height: inherit;
+}
+
+.publishWrapper {
+    width: 972px;
+    height: inherit;
+    min-height: inherit;
+    display: flex;
 }

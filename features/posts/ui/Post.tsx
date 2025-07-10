@@ -1,11 +1,12 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import {
   useGetPostQuery,
   useGetPostLikesQuery,
   useUpdatePostMutation,
   useDeleteUserPostMutation,
+  postAPI,
 } from '../api/post'
 import {
   useGetCommentsQuery,
@@ -26,15 +27,27 @@ import s from './Post.module.scss'
 import { useCommentActions } from '../hooks/useCommentActions'
 import { useUpdatePostLikeStatus } from '../hooks/useUpdatePostLikeStatus'
 import { ModalRadix } from '@/shared/ui/Modal/ModalRadix'
+import type { Items, ResponseAllPosts } from '@/features/posts/api/post.types'
+import { useAppDispatch } from '@/store/store'
 
 type PostProps = {
-  postId: number
+  postId?: number
   isEditing?: boolean
   open: boolean
   onClose: () => void
+  postData: Items
+  endCursorPostId: number | null
 }
 
-const Post = ({ postId, isEditing = false, onClose, open }: PostProps) => {
+const Post = ({
+  // postId,
+  isEditing = false,
+  onClose,
+  open,
+  postData,
+  endCursorPostId,
+}: PostProps) => {
+  const postId = postData.id || 0
   const { data: post } = useGetPostQuery({ postId })
   const { data: postLikes } = useGetPostLikesQuery({ postId })
   const { data: comments } = useGetCommentsQuery({ postId })
@@ -79,8 +92,8 @@ const Post = ({ postId, isEditing = false, onClose, open }: PostProps) => {
     }
   }
 
-  const [isOpen, setIsOpen] = useState<boolean>(false)
   const [deletePost] = useDeleteUserPostMutation()
+  const dispatch = useAppDispatch()
 
   const deletePostHandler = async () => {
     setIsDeleteModalOpen(true)
@@ -90,16 +103,30 @@ const Post = ({ postId, isEditing = false, onClose, open }: PostProps) => {
     try {
       await deletePost(postId).unwrap()
       setIsDeleteModalOpen(false)
-      setIsOpen(false)
+
+      dispatch(
+        postAPI.util.updateQueryData(
+          'getAllUsersPosts',
+          { pageSize: 8, endCursorPostId: endCursorPostId, userId: postData.ownerId },
+          (draft: ResponseAllPosts) => {
+            const index = draft.items.findIndex((el) => el.id === postId)
+            if (index !== -1) {
+              draft.items.splice(index, 1)
+            }
+          }
+        )
+      )
+
+      onClose()
     } catch (err) {
-      console.error('Ошибка при удалении поста', err)
+      console.log('Ошибка при удалении поста', err)
     }
   }
 
   return (
     <div className={clsx(s.postWrapper, { [s.blurBackground]: open })}>
       <div className={clsx(s.postContainer, { [s.notEditMode]: !editMode })}>
-      <Image
+        <Image
           src="/close.svg"
           alt="close edit"
           width={24}
@@ -248,12 +275,12 @@ const Post = ({ postId, isEditing = false, onClose, open }: PostProps) => {
         open={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         modalTitle={'Delete Post'}>
-        <p className={s.text}>Are you sure you want to delete this post?</p>
-        <div className={s.wrapper}>
+        <p className={s.modalText}>Are you sure you want to delete this post?</p>
+        <div className={s.modalButtonWrapper}>
           <Button variant={'outlined'} onClick={confirmDeletePost}>
             Yes
           </Button>
-          <Button variant={'primary'} onClick={() => setIsOpen(false)}>
+          <Button variant={'primary'} onClick={onClose}>
             No
           </Button>
         </div>
@@ -263,3 +290,4 @@ const Post = ({ postId, isEditing = false, onClose, open }: PostProps) => {
 }
 
 export default Post
+//// это мой

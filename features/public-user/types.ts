@@ -25,6 +25,7 @@ export type PropsType = {
   profileData: UserProfileData
   additionalData: AdditionalData
 }
+
 type Image = {
   url: string
   width: number
@@ -39,7 +40,7 @@ type Owner = {
   lastName: string
 }
 
-type Item = {
+export type Item = {
   id: number
   userName: string
   description: string

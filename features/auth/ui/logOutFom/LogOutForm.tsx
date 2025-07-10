@@ -3,42 +3,48 @@
 import { Button } from '@/shared/ui/Button/Button'
 import { useRouter } from 'next/navigation'
 import s from './LogOutForm.module.scss'
-import { useLogoutMutation } from '../../api/auth'
+import { useGetMeQuery, useLogoutMutation } from '../../api/auth'
+import { useTranslationData } from '@/hooks/useTranslationData'
 
-export default function LogOutForm() {
+type Props = {
+  setFalse: () => void
+}
+
+export default function LogOutForm({ setFalse }: Props) {
   const router = useRouter()
   const [logout] = useLogoutMutation()
-
+  const { data } = useGetMeQuery()
+  const { localeData } = useTranslationData()
   const handleLogout = async () => {
     try {
-      const response = await logout()
-      console.log('Logout response:', response)
-
+      await logout()
       localStorage.removeItem('access-token')
 
       router.push('/')
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Ошибка при выходе:', err)
-      if ('status' in err) {
-        console.error(`Ошибка API: ${err.status} - ${err.data?.message || 'Unknown error'}`)
+
+      if (typeof err === 'object' && err !== null && 'status' in err) {
+        const errorWithStatus = err as { status: number; data?: { message?: string } }
+        console.error(
+          `Ошибка API: ${errorWithStatus.status} - ${
+            errorWithStatus.data?.message || 'Unknown error'
+          }`
+        )
       }
     }
-  }
-
-  const handleClose = () => {
-    router.back()
   }
 
   return (
     <section className={s.section}>
       <p>
-        Are you really want to log out of your account <b>“Epam@epam.com”</b>?
+        {localeData?.common.logOutModal.description} <b>{data?.userName}</b>?
       </p>
       <div className={s.buttonGroup}>
         <Button variant={'outlined'} onClick={handleLogout}>
-          Yes
+          {localeData?.common.modal.buttonNames.confirm}
         </Button>
-        <Button onClick={handleClose}>No</Button>
+        <Button onClick={setFalse}>{localeData?.common.modal.buttonNames.cancel}</Button>
       </div>
     </section>
   )

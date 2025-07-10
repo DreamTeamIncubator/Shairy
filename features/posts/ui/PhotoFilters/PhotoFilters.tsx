@@ -10,15 +10,19 @@ type Props = {
 const PhotoFilters = ({ images, onFilteredImages }: Props) => {
     const [selectedFilters, setSelectedFilters] = useState<string[]>(new Array(images.length).fill('none'));
     const [activeIndex, setActiveIndex] = useState<number>(0);
-    const [isProcessing, setIsProcessing] = useState<boolean>(false); // Новое состояние
+    const [isProcessing, setIsProcessing] = useState<boolean>(false);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
-    const filters = [
-        'grayscale(100%)',
-        'sepia(100%)',
-        'invert(100%)',
-        'blur(5px)',
-        'contrast(200%)',
+    const filterOptions = [
+        { name: 'Black & White', filter: 'grayscale(100%)' },
+        { name: 'Sepia', filter: 'sepia(100%)' },
+        { name: 'Invert Colors', filter: 'invert(100%)' },
+        { name: 'Blur', filter: 'blur(5px)' },
+        { name: 'Contrast', filter: 'contrast(200%)' },
+        { name: 'Darken', filter: 'brightness(50%)' },
+        { name: 'Hue Rotate', filter: 'hue-rotate(270deg)' },
+        { name: 'H.Saturation', filter: 'saturate(200%)' },
+        { name: 'L.Saturation', filter: 'saturate(50%)' },
     ];
 
     // Применение фильтра к изображению
@@ -68,7 +72,6 @@ const PhotoFilters = ({ images, onFilteredImages }: Props) => {
         newFilters[activeIndex] = filter;
         setSelectedFilters(newFilters);
 
-        // Обновляем все изображения с учетом новых фильтров
         await updateFilteredImages();
     };
 
@@ -90,19 +93,17 @@ const PhotoFilters = ({ images, onFilteredImages }: Props) => {
 
     return (
         <div className={s.wrapper}>
-            <div className={s.preview}>
-                <ImagePreview
-                    images={images}
-                    selectedFilter={selectedFilters[activeIndex]}
-                    activeIndex={activeIndex}
-                    onSlideChange={handleSlideChange}
-                />
-            </div>
+            <ImagePreview
+                images={images}
+                selectedFilter={selectedFilters[activeIndex]}
+                activeIndex={activeIndex}
+                onSlideChange={handleSlideChange}
+            />
 
             <div className={s.filtersContainer}>
-                {filters.map((filter) => (
+                {filterOptions.map(({ name, filter }, index) => (
                     <div
-                        key={filter}
+                        key={index}
                         onClick={() => handleFilterChange(filter)}
                         className={s.filter}
                     >
@@ -115,6 +116,7 @@ const PhotoFilters = ({ images, onFilteredImages }: Props) => {
                                 filter: filter,
                             }}
                         />
+                        <span className={s.filterName}>{name}</span>
                     </div>
                 ))}
             </div>

@@ -171,7 +171,7 @@
 
 .textCommentArea {
     width: 481px;
-    height: 62px;
+    height: 72px;
     background: var(--Dark-300, #333);
     position: absolute;
     left: 490px;
@@ -269,8 +269,16 @@
   .blurBackground {
     backdrop-filter: blur(0.5px); 
   }
-  
-  
+
+.modalText {
+    margin-bottom: 30px;
+}
+
+.modalButtonWrapper{
+    display: flex;
+    justify-content: flex-end;;
+    gap: 25px;
+}
 
 
 
