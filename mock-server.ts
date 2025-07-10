@@ -1,10 +1,30 @@
-const { createServer } = require('http')
-const { Server } = require('socket.io')
+import { createServer } from 'http'
+import { Server, Socket } from 'socket.io'
+
+// Тип уведомления
+interface Notification {
+  id: number
+  message: string
+  isRead: boolean
+  notifyAt: string
+}
+
+// Опишем типы событий, которые сервер отправляет клиенту
+type ServerToClientEvents = {
+  notifications: (notification: Notification) => void
+}
+
+// Типы событий, которые клиент может отправлять серверу (если нужны)
+
+// Тип данных в handshake.auth
+type SocketAuth = {
+  token?: string
+}
 
 const httpServer = createServer()
-const io = new Server(httpServer, {
+const io = new Server<ServerToClientEvents, SocketAuth>(httpServer, {
   cors: {
-    origin: 'http://localhost:3000', // Укажите ваш клиентский URL
+    origin: 'http://localhost:3000',
     methods: ['GET', 'POST'],
     credentials: true,
   },
@@ -24,40 +44,38 @@ io.use((socket, next) => {
   next(new Error('Не авторизован'))
 })
 
-io.on('connection', (socket) => {
+io.on('connection', (socket: Socket<ServerToClientEvents>) => {
   console.log('✅ Клиент подключен:', socket.id)
 
   // Отправка тестового уведомления сразу при подключении
-  socket.emit('notifications', {
+  const initialNotification: Notification = {
     id: 1,
-    message: 'Добро пожаловат1ь!',
+    message: 'Добро пожаловать!',
     isRead: false,
     notifyAt: new Date().toISOString(),
-  })
+  }
+  socket.emit('notifications', initialNotification)
 
-  // Установка интервала для отправки уведомлений каждые 5 секунд
+  // Интервал отправки уведомлений
   const notificationInterval = setInterval(() => {
-    const notification = {
-      id: Date.now(), // Используем timestamp как уникальный ID
+    const notification: Notification = {
+      id: Date.now(),
       message: `Новое уведомление ${new Date().toLocaleTimeString()}`,
       isRead: false,
       notifyAt: new Date().toISOString(),
     }
-
     console.log('Отправка уведомления:', notification)
     socket.emit('notifications', notification)
-  }, 5000) // 5000 мс = 5 секунд
+  }, 5000)
 
-  // Обработка отключения
   socket.on('disconnect', (reason) => {
     console.log(`Клиент ${socket.id} отключен. Причина:`, reason)
-    clearInterval(notificationInterval) // Очищаем интервал при отключении
+    clearInterval(notificationInterval)
   })
 
-  // Обработка ошибок
   socket.on('error', (err) => {
     console.error('Ошибка сокета:', err)
-    clearInterval(notificationInterval) // Очищаем интервал при ошибке
+    clearInterval(notificationInterval)
   })
 })
 

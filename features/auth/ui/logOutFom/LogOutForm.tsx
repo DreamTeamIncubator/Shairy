@@ -21,14 +21,19 @@ export default function LogOutForm({ setFalse }: Props) {
       localStorage.removeItem('access-token')
 
       router.push('/')
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Ошибка при выходе:', err)
-      if ('status' in err) {
-        console.error(`Ошибка API: ${err.status} - ${err.data?.message || 'Unknown error'}`)
+
+      if (typeof err === 'object' && err !== null && 'status' in err) {
+        const errorWithStatus = err as { status: number; data?: { message?: string } }
+        console.error(
+          `Ошибка API: ${errorWithStatus.status} - ${
+            errorWithStatus.data?.message || 'Unknown error'
+          }`
+        )
       }
     }
   }
-  console.log(localeData)
 
   return (
     <section className={s.section}>

@@ -1,9 +1,10 @@
 import React from 'react';
-import type {MyPaymentsResponce} from '@/features/edit-profile/ui/AccountManagement/Payment/api/types';
+
 import s from './MobilePayments.module.scss'
+import { MyPaymentsResponse } from '../../AccountManagement/api/types';
 
 type Props = {
-    payments: MyPaymentsResponce[]
+    payments: MyPaymentsResponse[]
 }
 
 const MobilePayments = ({payments}: Props) => {

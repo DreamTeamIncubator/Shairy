@@ -9,89 +9,88 @@ import Post from '@/features/posts/ui/Post'
 import type { Items } from '@/features/posts/api/post.types'
 import { useGetMeQuery } from '@/features/auth/api/auth'
 import Image from 'next/image'
-import { useBoolean } from '@/hooks/useBoolean';
-
+import { useBoolean } from '@/hooks/useBoolean'
 
 const MyProfile = () => {
-    const { value: isOpen, setTrue: setOpen, setFalse: setClosed } = useBoolean()
-    const [endCursorPostId, setEndCursorPostId] = useState<null | number>(null)
-    const { data: userData } = useGetMeQuery()
-    const { id } = useParams()
+  const { value: isOpen, setTrue: setOpen, setFalse: setClosed } = useBoolean()
+  const [endCursorPostId, setEndCursorPostId] = useState<null | number>(null)
+  const { data: userData } = useGetMeQuery()
+  const { id } = useParams()
 
-    const { data: allPosts } = useGetAllUsersPostsQuery({
-        pageSize: 8,
-        endCursorPostId,
-        userId: Number(id),
-    })
+  const { data: allPosts } = useGetAllUsersPostsQuery({
+    pageSize: 8,
+    endCursorPostId,
+    userId: Number(id),
+  })
 
-    const lastPostRef = useRef<HTMLDivElement | null>(null)
-    const [postData, setPostData] = useState<Items>({})
+  const lastPostRef = useRef<HTMLDivElement | null>(null)
+  const [postData, setPostData] = useState<Items>()
 
-    useEffect(() => {
-        if (!lastPostRef.current) return
+  useEffect(() => {
+    if (!lastPostRef.current) return
 
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting && allPosts?.items) {
-                        const lastPostId = allPosts.items[allPosts.items.length - 1]?.id
-                        if (lastPostId && lastPostId !== endCursorPostId) {
-                            setEndCursorPostId(lastPostId)
-                        }
-                    }
-                })
-            },
-            { threshold: 0.1 }
-        )
-
-        observer.observe(lastPostRef.current)
-
-        return () => {
-            observer.disconnect()
-        }
-    }, [allPosts, endCursorPostId])
-
-
-    const onClickHandler = (item: Items) => {
-        if (!userData) return
-        setOpen()
-        setPostData(item)
-    }
-
-    return (
-        <>
-            <ProfileDescription />
-            <div className={s.postsWrapper}>
-                {allPosts?.items.map((item, index) => {
-                    const isLastPost = index === allPosts.items.length - 1
-                    return (
-                        <div
-                            key={item.id}
-                            ref={isLastPost ? lastPostRef : null}
-                            className={s.post}
-                            onClick={() => onClickHandler(item)}>
-                            <Image
-                                src={item?.images[0]?.url}
-                                alt="photo-post"
-                                width={250}
-                                height={250}
-                                className={s.img}
-                            />
-                        </div>
-                    )
-                })}
-            </div>
-            <ModalRadix open={isOpen} onClose={setClosed} modalTitle={''}>
-                <Post
-                    postId={postData.id}
-                    open={isOpen}
-                    onClose={setClosed}
-                    postData={postData}
-                    endCursorPostId={endCursorPostId}
-                />
-            </ModalRadix>
-        </>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && allPosts?.items) {
+            const lastPostId = allPosts.items[allPosts.items.length - 1]?.id
+            if (lastPostId && lastPostId !== endCursorPostId) {
+              setEndCursorPostId(lastPostId)
+            }
+          }
+        })
+      },
+      { threshold: 0.1 }
     )
+
+    observer.observe(lastPostRef.current)
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [allPosts, endCursorPostId])
+
+  const onClickHandler = (item: Items) => {
+    if (!userData) return
+    setOpen()
+    setPostData(item)
+  }
+
+  // if(!postData) return null
+
+  return (
+    <>
+      <ProfileDescription />
+      <div className={s.postsWrapper}>
+        {allPosts?.items.map((item, index) => {
+          const isLastPost = index === allPosts.items.length - 1
+          return (
+            <div
+              key={item.id}
+              ref={isLastPost ? lastPostRef : null}
+              className={s.post}
+              onClick={() => onClickHandler(item)}>
+              <Image
+                src={item?.images[0]?.url}
+                alt="photo-post"
+                width={250}
+                height={250}
+                className={s.img}
+              />
+            </div>
+          )
+        })}
+      </div>
+      <ModalRadix open={isOpen} onClose={setClosed} modalTitle={''}>
+        <Post
+          open={isOpen}
+          onClose={setClosed}
+          postData={postData!}
+          endCursorPostId={endCursorPostId}
+        />
+      </ModalRadix>
+    </>
+  )
 }
 
 export default MyProfile
