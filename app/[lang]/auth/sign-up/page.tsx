@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { RadixCheckbox } from '@/shared/ui/Checkbox/RadixCheckbox'
 import { Button } from '@/shared/ui/Button/Button'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
-import s from './SignUp.module.scss'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -12,6 +11,7 @@ import { Input } from '@/shared/ui/Input/Input'
 import { ModalRadix } from '@/shared/ui/Modal/ModalRadix'
 import { paths, patternsForSignUpForm } from '@/utils/utils'
 import { useRegistrationMutation } from '@/features/auth/api/auth'
+import s from '@/app/[lang]/auth/Sign-up/SignUp.module.scss'
 
 type FormData = {
   userName: string
