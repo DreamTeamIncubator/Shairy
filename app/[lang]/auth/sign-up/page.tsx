@@ -85,7 +85,7 @@ const SignUp = () => {
 
   const handleGitHubLogin = () => {
     const redirectUrl = `${window.location.origin}/auth/callback`
-    const loginUrl = `https://inctagram.work/api/v1/auth/github/login?redirect_url=${encodeURIComponent(
+    const loginUrl = `https://shairy.org/api/v1/auth/github/login?redirect_url=${encodeURIComponent(
       redirectUrl
     )}`
     router.push(loginUrl)

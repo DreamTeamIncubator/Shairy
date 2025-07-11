@@ -11,7 +11,7 @@ interface RefreshResponse {
 }
 
 export const baseQueryWithAccessToken = fetchBaseQuery({
-  baseUrl: 'https://inctagram.work/api/v1',
+  baseUrl: 'https://shairy.org/api/v1',
   prepareHeaders: (headers) => {
     const token = localStorage.getItem('access-token');
     if (token) {

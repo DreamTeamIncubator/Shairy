@@ -1,5 +1,5 @@
 export async function getFourLastPosts() {
-  const url = new URL(`https://inctagram.work/api/v1/public-posts/all`)
+  const url = new URL(`https://shairy.org/api/v1/public-posts/all`)
 
   url.searchParams.append('pageSize', '4')
   url.searchParams.append('sortDirection', 'desc')
